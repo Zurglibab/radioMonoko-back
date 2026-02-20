@@ -7,13 +7,10 @@ if (!process.env.RADIOFRANCE_TOKEN) {
     throw new Error("RADIOFRANCE_TOKEN manquant dans le fichier .env");
 }
 
-const endpoint = process.env.RADIOFRANCE_ENDPOINT || "[https://openapi.radiofrance.fr/v1/graphql](https://openapi.radiofrance.fr/v1/graphql)";
+const endpoint = process.env.RADIOFRANCE_ENDPOINT;
 const token = process.env.RADIOFRANCE_TOKEN;
 
-/**
-
- * Client GraphQL Radio France
- */
+// Connexion API
 class RadioFranceClient {
     private client: AxiosInstance;
 
@@ -29,10 +26,7 @@ class RadioFranceClient {
         });
     }
 
-    /**
-
-     * Envoie une requête GraphQL
-     */
+// Envoie de la requête GraphQL
     async query<T = any>(query: string, variables?: Record<string, any>): Promise<T> {
         try {
             const response = await this.client.post("", {
