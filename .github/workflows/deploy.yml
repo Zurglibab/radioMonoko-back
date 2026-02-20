@@ -27,5 +27,4 @@ jobs:
         with:
           context: .
           push: true
-          # L'image sera nommée : ghcr.io/ton-username/radiomonoko-back:latest
-          tags: ghcr.io/${{ github.repository_lowercased }}:latest
+          tags: ghcr.io/${{ github.event.repository.name }}:latest
