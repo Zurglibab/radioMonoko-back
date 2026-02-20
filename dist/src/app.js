@@ -5,11 +5,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createApp = createApp;
 const express_1 = __importDefault(require("express"));
-const user_routes_1 = __importDefault(require("./modules/user/user.routes"));
 function createApp() {
     const app = (0, express_1.default)();
     app.use(express_1.default.json());
-    app.use("/users", user_routes_1.default);
     app.use((req, res) => {
         res.status(404).json({ message: 'Route not found' });
     });

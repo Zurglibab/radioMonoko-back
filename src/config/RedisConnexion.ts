@@ -58,6 +58,8 @@ export async function testData(session: string, data: dataTest){
 }
 
 
+
+
 export async function getData(session: string){
     try {
         return await client.hGetAll(session);
