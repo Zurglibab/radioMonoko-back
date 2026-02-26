@@ -3,8 +3,9 @@ import {dataTest} from "../interface/RedisInterface";
 
 // URL configurable via la variable d'environnement REDIS_URL
 const redisUrl = process.env.REDIS_URL || 'redis://localhost:6379';
+const redisPassword = process.env.REDIS_PASSWORD;
 
-const client: RedisClientType = createClient({ url: redisUrl });
+const client: RedisClientType = createClient({ url: redisUrl, password: redisPassword});
 
 client.on('error', (err) => console.error('Redis Client Error', err));
 client.on('connect', () => console.log('Redis client connecting...'));
