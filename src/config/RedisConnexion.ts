@@ -39,7 +39,7 @@ export async function disconnect() {
 }
 
 // Exemple de fonction pour stocker et récupérer des données structurées (hash)
-export async function testData(session: string, data: dataTest){
+export async function storeDataTest(session: string, data: dataTest){
     try {
         const payload = {
             ...data,
@@ -57,10 +57,7 @@ export async function testData(session: string, data: dataTest){
     }
 }
 
-
-
-
-export async function getData(session: string){
+export async function getDataTest(session: string){
     try {
         return await client.hGetAll(session);
     }
@@ -68,5 +65,16 @@ export async function getData(session: string){
         console.error('Error retrieving data from Redis:', err);
     }
 }
+
+export async function deleteData(session: string) {
+    try {
+        await client.del(session);
+        console.log(`Deleted data for session ${session}`);
+    }
+    catch (err) {
+        console.error('Error deleting data from Redis:', err);
+    }
+}
+
 
 export default client;

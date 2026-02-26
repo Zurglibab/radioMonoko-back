@@ -27,7 +27,7 @@ export async function storeBrandsInRedis(brands: Brand[]) {
             await client.sAdd("brands:ids", ids);
         }
 
-        // Pour chaque brand, stocker un hash avec des champs plats
+        // Pour chaque brand, stocker un hash avec des champs
         for (const brand of brands) {
             const key = `brand:${brand.id}`;
             const hashPayload: Record<string, string> = {
@@ -50,13 +50,48 @@ export async function storeBrandsInRedis(brands: Brand[]) {
                 await client.hSet(key, { localRadios: JSON.stringify(brand.localRadios) });
             }
         }
-
-        console.log(`Stored ${brands.length} brands to Redis`);
+        // console.log(`Stored ${brands.length} brands to Redis`);
     } catch (err) {
         console.error('Erreur lors du stockage des brands dans Redis:', err);
         throw err;
     }
 }
+
+export async function getBrandsFromRedis(): Promise<Brand[] | null> {
+    try {
+        await ensureConnected();
+        const jsonData = await client.get("brands:all");
+        if (jsonData) {
+            if (typeof jsonData === "string") {
+                const brands: Brand[] = JSON.parse(jsonData);
+                return brands;
+            }
+        } else {
+            console.log("Aucune donnée de brands trouvée dans Redis.");
+            return null;
+        }
+    } catch (err) {
+        console.error('Erreur lors de la récupération des brands depuis Redis:', err);
+    }
+}
+
+export async function deleteBrandsFromRedis() {
+    try {
+        await ensureConnected();
+        await client.del("brands:all");
+        await client.del("brands:ids");
+        // Optionnel: supprimer les hashes individuels
+        const ids = await client.sMembers("brands:ids");
+        for (const id of ids) {
+            await client.del(`brand:${id}`);
+        }
+        console.log("Données de brands supprimées de Redis.");
+    } catch (err) {
+        console.error('Erreur lors de la suppression des brands de Redis:', err);
+    }
+}
+
+
 
 async function ensureConnected() {
     try {
