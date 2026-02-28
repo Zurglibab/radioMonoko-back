@@ -2,6 +2,10 @@ export interface CreateUserDTO {
     id : string;
     email: string;
     password: string;
+    username?: string;
+    avatar?: string;
+    bio?: string;
+    website?: string;
 }
 
 export interface ModifyUserDTO {

@@ -2,7 +2,7 @@ import request from 'supertest';
 import { createApp } from '../app';
 import { UserController } from '../modules/user/user.controller';
 import { UserService } from '../modules/user/user.services';
-import { userBDDRepository } from '../modules/user/user.bdd.repository';
+import { UserBDDRepository } from '../modules/user/user.bdd.repository';
 
 // Mock the UserService
 jest.mock('../modules/user/user.services');
@@ -13,7 +13,7 @@ describe('User Routes', () => {
   let userService: jest.Mocked<UserService>;
 
   beforeAll(() => {
-    const userRepository = new userBDDRepository(); // This will be mocked
+    const userRepository = new UserBDDRepository(); // This will be mocked
     userService = new UserService(userRepository) as jest.Mocked<UserService>;
     new UserController(userService);
   });
