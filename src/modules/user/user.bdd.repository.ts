@@ -5,7 +5,7 @@ import {CreateUserDTO, ModifyUserDTO} from "./user.dto";
 export class UserBDDRepository {
     async findByEmail(email: string) {
         const result = await pool.query(
-            'SELECT id, email, username, display_name, avatar, bio, website, is_banned, created_at, updated_at FROM users WHERE email = $1',
+            'SELECT id, email, username, password, display_name, avatar, bio, website, is_banned, created_at, updated_at FROM users WHERE email = $1',
             [email]
         );
         return result.rows[0] || null;
