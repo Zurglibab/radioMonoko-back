@@ -17,8 +17,6 @@ services:
     command: >
       sh -c "redis-server --requirepass ${REDIS_PASSWORD} --appendonly yes"
     restart: unless-stopped
-    ports:
-      - "6379:6379"
     volumes:
       - redis-data:/data
     networks:
