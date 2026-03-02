@@ -28,8 +28,12 @@ services:
       retries: 5
 
   api:
+    build: .
     image: ghcr.io/${GITHUB_REPOSITORY}:latest
     restart: always
+    environment:
+      - DB_HOST=db
+      - REDIS_HOST=redis
     env_file: .env
     depends_on:
       - db
