@@ -1,6 +1,7 @@
 import { request , response } from 'express';
 import { UserService } from './user.services';
 import {LoginUserDTO} from "./user.dto";
+import logger from "../../config/logger";
 
 export class UserController {
     constructor(
@@ -8,11 +9,11 @@ export class UserController {
 
     createUser = async (req: request, res: response) => {
         try {
-            console.log("req.body :", req.body);
+            logger.info("createUser request body:", req.body);
             const token = await this.userService.createUser(req.body);
             res.status(201).json(token);
         } catch (error: any) {
-            console.error(error);
+            logger.error(error);
             res.status(400).json({ message: error.message });
         }
     }
@@ -25,8 +26,8 @@ export class UserController {
             }
             res.status(200).json(token);
         } catch (error: any) {
+            logger.error(error);
             res.status(500).json({ message: 'Internal server error' });
-            console.error(error);
         }
     }
 
