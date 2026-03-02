@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "npx tsc",
     "start": "npm run build && npm run start:prod",
     "start:prod": "node dist/index.js",
     "dev": "tsx --watch index.ts",
