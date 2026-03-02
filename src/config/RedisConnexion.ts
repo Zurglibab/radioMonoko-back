@@ -2,7 +2,9 @@ import {createClient, RedisClientType} from 'redis';
 import {dataTest} from "../interface/RedisInterface";
 
 // URL configurable via la variable d'environnement REDIS_URL
-const redisUrl = process.env.REDIS_URL || 'redis://localhost:6379';
+const redisHost = process.env.REDIS_HOST || 'localhost';
+const redisPort = process.env.REDIS_PORT || 6379;
+const redisUrl = `redis://${redisHost}:${redisPort}`;
 const redisPassword = process.env.REDIS_PASSWORD;
 
 const client: RedisClientType = createClient({ url: redisUrl, password: redisPassword});
