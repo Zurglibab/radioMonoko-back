@@ -10,29 +10,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const dotenv_1 = require("dotenv");
-const app_1 = require("./source/app");
-const brandsScheduler_1 = require("./source/Schedulers/brandsScheduler");
+const buildBrandModule_1 = require("../application/services/buildBrandModule");
 (0, dotenv_1.config)();
-const PORT = process.env.PORT || 3000;
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            console.log("[App] Initializing RadioMonoko Backend...\n");
-            // Créer l'app Express avec routes
-            const app = (0, app_1.createApp)();
-            // Démarrer le scheduler cron pour refresh auto des brands
-            (0, brandsScheduler_1.startBrandsScheduler)();
-            // Lancer le serveur
-            app.listen(PORT, () => {
-                console.log(`\n[App] ✅ Server is running on http://localhost:${PORT}/`);
-                console.log(`[App] API docs available at http://localhost:${PORT}/\n`);
-            });
+            const brandService = (0, buildBrandModule_1.buildBrandService)();
+            yield brandService.refreshBrandsInRedis();
+            console.log("Brands refresh done.");
+            process.exit(0);
         }
-        catch (error) {
-            console.error("[App] Failed to initialize:", error);
+        catch (err) {
+            console.error("Brands refresh failed:", err);
             process.exit(1);
         }
     });
 }
 main();
-//# sourceMappingURL=index.js.map
+//# sourceMappingURL=refreshBrandsOnce.js.map
