@@ -1,5 +1,7 @@
 import express, { Express, Request, Response } from "express";
+import swaggerUi from "swagger-ui-express";
 import apiRoutes from "./routes/apiRoutes";
+import { swaggerSpec } from "./Config/swagger";
 
 export function createApp(): Express {
     const app = express();
@@ -23,6 +25,13 @@ export function createApp(): Express {
 
     // Routes
     app.use("/api", apiRoutes);
+
+    // Swagger docs
+    app.get("/api/docs.json", (req: Request, res: Response) => {
+        res.setHeader("Content-Type", "application/json");
+        res.send(swaggerSpec);
+    });
+    app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
     // Health check endpoint racine
     app.get("/", (req: Request, res: Response) => {
@@ -58,4 +67,3 @@ export function createApp(): Express {
 
     return app;
 }
-

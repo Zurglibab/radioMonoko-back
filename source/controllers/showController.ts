@@ -9,7 +9,7 @@ import { StationsEnum } from "../Enums/stationsEnum";
  */
 export async function getShowsByStation(req: Request, res: Response) {
     try {
-        const { station } = req.params;
+        const station = Array.isArray(req.params.station) ? req.params.station[0] : req.params.station;
         const { first } = req.query;
 
         console.log(`[showController] GET /api/shows/${station}`);
@@ -48,7 +48,8 @@ export async function getShowsByStation(req: Request, res: Response) {
  */
 export async function getShowById(req: Request, res: Response) {
     try {
-        const { station, id } = req.params;
+        const station = Array.isArray(req.params.station) ? req.params.station[0] : req.params.station;
+        const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
         console.log(`[showController] GET /api/shows/${station}/${id}`);
         if (!Object.values(StationsEnum).includes(station as StationsEnum)) {
             return res.status(400).json({
@@ -85,7 +86,8 @@ export async function getShowById(req: Request, res: Response) {
  */
 export async function searchShowsByTitle(req: Request, res: Response) {
     try {
-        const { station, title } = req.params;
+        const station = Array.isArray(req.params.station) ? req.params.station[0] : req.params.station;
+        const title = Array.isArray(req.params.title) ? req.params.title[0] : req.params.title;
         console.log(`[showController] GET /api/shows/${station}/search/${title}`);
 
         if (!Object.values(StationsEnum).includes(station as StationsEnum)) {
@@ -122,7 +124,7 @@ export async function searchShowsByTitle(req: Request, res: Response) {
  */
 export async function refreshShows(req: Request, res: Response) {
     try {
-        const { station } = req.params;
+        const station = Array.isArray(req.params.station) ? req.params.station[0] : req.params.station;
         const { first } = req.query;
 
         console.log(`[showController] POST /api/shows/${station}/refresh`);
@@ -163,7 +165,7 @@ export async function refreshShows(req: Request, res: Response) {
  */
 export async function getShowsCount(req: Request, res: Response) {
     try {
-        const { station } = req.params;
+        const station = Array.isArray(req.params.station) ? req.params.station[0] : req.params.station;
         console.log(`[showController] GET /api/shows/${station}/stats/count`);
 
 
@@ -199,7 +201,7 @@ export async function getShowsCount(req: Request, res: Response) {
  */
 export async function clearShowsCache(req: Request, res: Response) {
     try {
-        const { station } = req.params;
+        const station = Array.isArray(req.params.station) ? req.params.station[0] : req.params.station;
         console.log(`[showController] DELETE /api/shows/${station}/cache`);
 
         if (!Object.values(StationsEnum).includes(station as StationsEnum)) {
@@ -225,4 +227,3 @@ export async function clearShowsCache(req: Request, res: Response) {
         });
     }
 }
-

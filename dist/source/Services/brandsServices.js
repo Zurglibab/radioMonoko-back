@@ -11,11 +11,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.brandApiService = exports.BrandApiService = void 0;
 const brandsRepository_1 = require("../Repository/brandsRepository");
-const redisDAO_1 = require("../DAO/redisDAO");
+const brandDAO_1 = require("../DAO/brandDAO");
 class BrandApiService {
     constructor() {
         this.apiRepository = new brandsRepository_1.BrandsRepository();
-        this.redisDao = new redisDAO_1.RedisDao();
+        this.redisDao = new brandDAO_1.BrandDAO();
     }
     /**
      * Récupère les brands depuis l'API et les stocke dans Redis

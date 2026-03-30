@@ -5,7 +5,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createApp = createApp;
 const express_1 = __importDefault(require("express"));
+const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
 const apiRoutes_1 = __importDefault(require("./routes/apiRoutes"));
+const swagger_1 = require("./Config/swagger");
 function createApp() {
     const app = (0, express_1.default)();
     // Middleware
@@ -23,6 +25,12 @@ function createApp() {
     });
     // Routes
     app.use("/api", apiRoutes_1.default);
+    // Swagger docs
+    app.get("/api/docs.json", (req, res) => {
+        res.setHeader("Content-Type", "application/json");
+        res.send(swagger_1.swaggerSpec);
+    });
+    app.use("/api/docs", swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swagger_1.swaggerSpec));
     // Health check endpoint racine
     app.get("/", (req, res) => {
         res.status(200).json({

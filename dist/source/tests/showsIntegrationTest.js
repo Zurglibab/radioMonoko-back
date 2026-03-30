@@ -11,7 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const dotenv_1 = require("dotenv");
 const showServices_1 = require("../Services/showServices");
-const redisShowDAO_1 = require("../DAO/redisShowDAO");
+const showDAO_1 = require("../DAO/showDAO");
 const RedisConnexion_1 = require("../Config/RedisConnexion");
 const stationsEnum_1 = require("../Enums/stationsEnum");
 (0, dotenv_1.config)();
@@ -44,7 +44,7 @@ function runShowsIntegrationTest() {
             console.log("[Step 4] Verifying individual show data...");
             let verifiedCount = 0;
             for (const show of refreshedShows) {
-                const redisVersion = yield redisShowDAO_1.redisShowDao.getByIdAndStation(station, show.id);
+                const redisVersion = yield showDAO_1.redisShowDao.getByIdAndStation(station, show.id);
                 if (!redisVersion) {
                     throw new Error(`Show ${show.id} not found in Redis after refresh`);
                 }
@@ -56,13 +56,13 @@ function runShowsIntegrationTest() {
             console.log(`✓ All ${verifiedCount} shows verified in Redis\n`);
             // Step 5: Test count and exists methods
             console.log("[Step 5] Testing DAO methods...");
-            const totalCount = yield redisShowDAO_1.redisShowDao.countByStation(station);
+            const totalCount = yield showDAO_1.redisShowDao.countByStation(station);
             console.log(`✓ Total shows in Redis for ${station}: ${totalCount}`);
             if (refreshedShows.length > 0) {
                 const firstShowId = refreshedShows[0].id;
-                const exists = yield redisShowDAO_1.redisShowDao.existsByIdAndStation(station, firstShowId);
+                const exists = yield showDAO_1.redisShowDao.existsByIdAndStation(station, firstShowId);
                 console.log(`✓ Show ${firstShowId} exists in Redis: ${exists}`);
-                const allIds = yield redisShowDAO_1.redisShowDao.getAllIdsByStation(station);
+                const allIds = yield showDAO_1.redisShowDao.getAllIdsByStation(station);
                 console.log(`✓ Retrieved ${allIds.length} show IDs from Redis\n`);
             }
             // Step 6: Display sample shows

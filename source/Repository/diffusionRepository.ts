@@ -1,0 +1,77 @@
+import { radioFrance } from "../Config/ApiConnexion";
+import { StationsEnum } from "../Enums/stationsEnum";
+import { DiffusionDto, toDiffusionDto } from "../DTO/diffusionDTO";
+
+const GET_DIFFUSIONS_QUERY = `
+query GetDiffusions($station: StationsEnum!, $themes: [String!], $first: Int) {
+  diffusions(station: $station, themes: $themes, first: $first) {
+    edges {
+      cursor
+      node {
+        id
+        title
+        standFirst
+        url
+        published_date
+        taxonomiesConnection {
+          edges {
+            node {
+              id
+              path
+              title
+            }
+          }
+        }
+      }
+    }
+  }
+}
+`;
+
+interface DiffusionsQueryResult {
+    diffusions?: {
+        edges?: Array<{ node?: any }>;
+    };
+}
+
+export class DiffusionRepository {
+    async fetchDiffusionsByStation(
+        station: StationsEnum,
+        themes?: string[],
+        first: number = 20
+    ): Promise<DiffusionDto[]> {
+        try {
+            const variables: Record<string, unknown> = { station };
+
+            if (Array.isArray(themes) && themes.length > 0) {
+                const cleanedThemes = themes.map((t) => t.trim()).filter(Boolean);
+                if (cleanedThemes.length > 0) {
+                    variables.themes = cleanedThemes;
+                }
+            }
+
+            if (Number.isFinite(first) && first > 0) {
+                variables.first = Math.floor(first);
+            }
+
+            const response = await radioFrance.query<any>(
+                GET_DIFFUSIONS_QUERY,
+                variables
+            );
+
+            // Compat: certains appels renvoient { diffusions }, d'autres { data: { diffusions } }
+            const root = response?.diffusions ? response : response?.data;
+            const edges = root?.diffusions?.edges ?? [];
+
+            return edges
+                .map((edge: any) => edge?.node)
+                .filter((node: any) => !!node)
+                .map(toDiffusionDto);
+        } catch (error) {
+            console.error("[DiffusionRepository] Failed to fetch diffusions:", error);
+            throw error;
+        }
+    }
+}
+
+export const diffusionRepository = new DiffusionRepository();

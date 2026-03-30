@@ -17,7 +17,7 @@ exports.getBrandsCount = getBrandsCount;
 exports.clearBrandsCache = clearBrandsCache;
 exports.health = health;
 const brandsServices_1 = require("../Services/brandsServices");
-const redisDAO_1 = require("../DAO/redisDAO");
+const brandDAO_1 = require("../DAO/brandDAO");
 /**
  * GET /api/brands
  * Récupère toutes les brands (Redis en priorité, fallback API)
@@ -49,9 +49,9 @@ function getAllBrands(req, res) {
 function getBrandById(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const { id } = req.params;
+            const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
             console.log(`[apiController] GET /api/brands/${id}`);
-            const brand = yield redisDAO_1.redisDao.getById(id);
+            const brand = yield brandDAO_1.redisDao.getById(id);
             if (!brand) {
                 return res.status(404).json({
                     success: false,
@@ -79,7 +79,7 @@ function getBrandById(req, res) {
 function searchBrands(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const { title } = req.params;
+            const title = Array.isArray(req.params.title) ? req.params.title[0] : req.params.title;
             console.log(`[apiController] GET /api/brands/search/${title}`);
             const allBrands = yield brandsServices_1.brandApiService.getBrandsWithFallback();
             const filtered = allBrands.filter((brand) => brand.title.toLowerCase().includes(title.toLowerCase()));
@@ -133,7 +133,7 @@ function getBrandsCount(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             console.log("[apiController] GET /api/brands/stats/count");
-            const count = yield redisDAO_1.redisDao.count();
+            const count = yield brandDAO_1.redisDao.count();
             res.status(200).json({
                 success: true,
                 data: {
@@ -182,7 +182,7 @@ function clearBrandsCache(req, res) {
 function health(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const count = yield redisDAO_1.redisDao.count();
+            const count = yield brandDAO_1.redisDao.count();
             res.status(200).json({
                 success: true,
                 status: "healthy",

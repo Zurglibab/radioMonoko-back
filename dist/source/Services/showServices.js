@@ -10,12 +10,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.showApiService = exports.ShowApiService = void 0;
-const apiShowRepository_1 = require("../Repository/apiShowRepository");
-const redisShowDAO_1 = require("../DAO/redisShowDAO");
+const showRepository_1 = require("../Repository/showRepository");
+const showDAO_1 = require("../DAO/showDAO");
 class ShowApiService {
     constructor() {
-        this.apiRepository = new apiShowRepository_1.ApiShowRepository();
-        this.redisDao = new redisShowDAO_1.RedisShowDao();
+        this.apiRepository = new showRepository_1.ShowRepository();
+        this.redisDao = new showDAO_1.ShowDAO();
     }
     /**
      * Récupère les shows depuis l'API et les stocke dans Redis
@@ -63,12 +63,10 @@ class ShowApiService {
     getShowsWithFallback(station_1) {
         return __awaiter(this, arguments, void 0, function* (station, first = 10) {
             try {
-                // Essayer Redis d'abord
                 const cachedShows = yield this.getShowsFromRedis(station);
                 if (cachedShows && cachedShows.length > 0) {
                     return cachedShows;
                 }
-                // Fallback sur API
                 console.log(`[ShowApiService] Cache miss, fetching from API...`);
                 return yield this.refreshShowsFromApiToRedis(station, first);
             }
@@ -96,6 +94,5 @@ class ShowApiService {
     }
 }
 exports.ShowApiService = ShowApiService;
-// Export singleton
 exports.showApiService = new ShowApiService();
 //# sourceMappingURL=showServices.js.map

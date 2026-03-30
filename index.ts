@@ -19,7 +19,7 @@ async function main() {
         // Lancer le serveur
         app.listen(PORT, () => {
             console.log(`\n[App] ✅ Server is running on http://localhost:${PORT}/`);
-            console.log(`[App] API docs available at http://localhost:${PORT}/\n`);
+            console.log(`[App] API docs available at http://localhost:${PORT}/api/docs\n`);
         });
     } catch (error) {
         console.error("[App] Failed to initialize:", error);

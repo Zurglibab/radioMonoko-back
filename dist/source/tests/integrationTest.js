@@ -11,7 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const dotenv_1 = require("dotenv");
 const brandsServices_1 = require("../Services/brandsServices");
-const redisDAO_1 = require("../DAO/redisDAO");
+const brandDAO_1 = require("../DAO/brandDAO");
 const RedisConnexion_1 = require("../Config/RedisConnexion");
 (0, dotenv_1.config)();
 function runIntegrationTest() {
@@ -41,7 +41,7 @@ function runIntegrationTest() {
             console.log("[Step 4] Verifying individual brand data...");
             let verifiedCount = 0;
             for (const brand of refreshedBrands) {
-                const redisVersion = yield redisDAO_1.redisDao.getById(brand.id);
+                const redisVersion = yield brandDAO_1.redisDao.getById(brand.id);
                 if (!redisVersion) {
                     throw new Error(`Brand ${brand.id} not found in Redis after refresh`);
                 }
@@ -53,12 +53,12 @@ function runIntegrationTest() {
             console.log(`✓ All ${verifiedCount} brands verified in Redis\n`);
             // Step 5: Test count and exists methods
             console.log("[Step 5] Testing DAO methods...");
-            const totalCount = yield redisDAO_1.redisDao.count();
+            const totalCount = yield brandDAO_1.redisDao.count();
             console.log(`✓ Total brands in Redis: ${totalCount}`);
             const firstBrandId = refreshedBrands[0].id;
-            const exists = yield redisDAO_1.redisDao.exists(firstBrandId);
+            const exists = yield brandDAO_1.redisDao.exists(firstBrandId);
             console.log(`✓ Brand ${firstBrandId} exists in Redis: ${exists}`);
-            const allIds = yield redisDAO_1.redisDao.getAllIds();
+            const allIds = yield brandDAO_1.redisDao.getAllIds();
             console.log(`✓ Retrieved ${allIds.length} brand IDs from Redis\n`);
             // Step 6: Display sample brands
             console.log("[Step 6] Sample brands from Redis:");

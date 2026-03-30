@@ -31,7 +31,7 @@ export async function getAllBrands(req: Request, res: Response) {
  */
 export async function getBrandById(req: Request, res: Response) {
     try {
-        const { id } = req.params;
+        const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
         console.log(`[apiController] GET /api/brands/${id}`);
 
         const brand = await redisDao.getById(id);
@@ -62,7 +62,7 @@ export async function getBrandById(req: Request, res: Response) {
  */
 export async function searchBrands(req: Request, res: Response) {
     try {
-        const { title } = req.params;
+        const title = Array.isArray(req.params.title) ? req.params.title[0] : req.params.title;
         console.log(`[apiController] GET /api/brands/search/${title}`);
 
         const allBrands = await brandApiService.getBrandsWithFallback();
@@ -186,4 +186,3 @@ export async function health(req: Request, res: Response) {
         });
     }
 }
-

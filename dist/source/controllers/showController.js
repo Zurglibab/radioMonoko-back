@@ -16,7 +16,7 @@ exports.refreshShows = refreshShows;
 exports.getShowsCount = getShowsCount;
 exports.clearShowsCache = clearShowsCache;
 const showServices_1 = require("../Services/showServices");
-const redisShowDAO_1 = require("../DAO/redisShowDAO");
+const showDAO_1 = require("../DAO/showDAO");
 const stationsEnum_1 = require("../Enums/stationsEnum");
 /**
  * GET /api/shows/:station
@@ -25,7 +25,7 @@ const stationsEnum_1 = require("../Enums/stationsEnum");
 function getShowsByStation(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const { station } = req.params;
+            const station = Array.isArray(req.params.station) ? req.params.station[0] : req.params.station;
             const { first } = req.query;
             console.log(`[showController] GET /api/shows/${station}`);
             // Vérifier que la station est valide
@@ -59,16 +59,16 @@ function getShowsByStation(req, res) {
 function getShowById(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const { station, id } = req.params;
+            const station = Array.isArray(req.params.station) ? req.params.station[0] : req.params.station;
+            const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
             console.log(`[showController] GET /api/shows/${station}/${id}`);
-            // Vérifier que la station est valide
             if (!Object.values(stationsEnum_1.StationsEnum).includes(station)) {
                 return res.status(400).json({
                     success: false,
                     error: `Invalid station. Valid stations: ${Object.values(stationsEnum_1.StationsEnum).join(", ")}`
                 });
             }
-            const show = yield redisShowDAO_1.redisShowDao.getByIdAndStation(station, id);
+            const show = yield showDAO_1.redisShowDao.getByIdAndStation(station, id);
             if (!show) {
                 return res.status(404).json({
                     success: false,
@@ -96,9 +96,9 @@ function getShowById(req, res) {
 function searchShowsByTitle(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const { station, title } = req.params;
+            const station = Array.isArray(req.params.station) ? req.params.station[0] : req.params.station;
+            const title = Array.isArray(req.params.title) ? req.params.title[0] : req.params.title;
             console.log(`[showController] GET /api/shows/${station}/search/${title}`);
-            // Vérifier que la station est valide
             if (!Object.values(stationsEnum_1.StationsEnum).includes(station)) {
                 return res.status(400).json({
                     success: false,
@@ -131,10 +131,9 @@ function searchShowsByTitle(req, res) {
 function refreshShows(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const { station } = req.params;
+            const station = Array.isArray(req.params.station) ? req.params.station[0] : req.params.station;
             const { first } = req.query;
             console.log(`[showController] POST /api/shows/${station}/refresh`);
-            // Vérifier que la station est valide
             if (!Object.values(stationsEnum_1.StationsEnum).includes(station)) {
                 return res.status(400).json({
                     success: false,
@@ -167,16 +166,15 @@ function refreshShows(req, res) {
 function getShowsCount(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const { station } = req.params;
+            const station = Array.isArray(req.params.station) ? req.params.station[0] : req.params.station;
             console.log(`[showController] GET /api/shows/${station}/stats/count`);
-            // Vérifier que la station est valide
             if (!Object.values(stationsEnum_1.StationsEnum).includes(station)) {
                 return res.status(400).json({
                     success: false,
                     error: `Invalid station. Valid stations: ${Object.values(stationsEnum_1.StationsEnum).join(", ")}`
                 });
             }
-            const count = yield redisShowDAO_1.redisShowDao.countByStation(station);
+            const count = yield showDAO_1.redisShowDao.countByStation(station);
             res.status(200).json({
                 success: true,
                 data: {
@@ -202,9 +200,8 @@ function getShowsCount(req, res) {
 function clearShowsCache(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const { station } = req.params;
+            const station = Array.isArray(req.params.station) ? req.params.station[0] : req.params.station;
             console.log(`[showController] DELETE /api/shows/${station}/cache`);
-            // Vérifier que la station est valide
             if (!Object.values(stationsEnum_1.StationsEnum).includes(station)) {
                 return res.status(400).json({
                     success: false,

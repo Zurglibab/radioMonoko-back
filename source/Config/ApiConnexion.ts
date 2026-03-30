@@ -27,7 +27,10 @@ class RadioFranceClient {
     }
 
 // Envoie de la requête GraphQL avec des variables optionnelles
-    async query<T = any>(query: string, variables?: { station: StationsEnum; first: number }): Promise<T> {
+    async query<T = any, TVariables extends Record<string, unknown> | undefined = Record<string, unknown> | undefined>(
+        query: string,
+        variables?: TVariables
+    ): Promise<T> {
         try {
             console.log("Sending Variables:", JSON.stringify(variables));
             const response = await this.client.post("", {
