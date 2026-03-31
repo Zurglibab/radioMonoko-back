@@ -1,5 +1,7 @@
-import { Pool } from 'pg';
+import {Pool, PoolClient} from 'pg';
 import {config} from 'dotenv';
+import {format} from "logform";
+import logger from '../config/logger';
 
 config();
 
@@ -14,7 +16,19 @@ export const pool = new Pool({
 export const initializeDatabase = async () => {
     const client = await pool.connect();
     try {
-        await client.query(`
+        await createUserTable(client);
+        await createUserRelationTable(client);
+        logger.info('Database initialized successfully.');
+    } catch (error) {
+        logger.warn('Error initializing database:', error);
+        throw error;
+    } finally {
+        client.release();
+    }
+};
+
+async function createUserTable(client: PoolClient) {
+    await client.query(`
             CREATE TABLE IF NOT EXISTS users (
                 id UUID PRIMARY KEY,
                 email VARCHAR(255) UNIQUE NOT NULL,
@@ -24,16 +38,25 @@ export const initializeDatabase = async () => {
                 avatar VARCHAR(255),
                 bio TEXT,
                 website VARCHAR(255),
+                privacy VARCHAR(50) DEFAULT 'public',
                 is_banned BOOLEAN DEFAULT false,
                 created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
                 updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
             )
         `);
-        console.log('La table "users" a été vérifiée/créée avec succès.');
-    } catch (error) {
-        console.error('Erreur lors de l\'initialisation de la table "users":', error);
-        throw error;
-    } finally {
-        client.release();
-    }
-};
+    logger.info("Table 'users' created successfully.")
+}
+
+async function createUserRelationTable(client: PoolClient) {
+    await client.query(`
+            CREATE TABLE IF NOT EXISTS user_relations (
+                followed_id INTEGER NOT NULL,
+                follower_id INTEGER NOT NULL,
+                status VARCHAR(50) NOT NULL DEFAULT 'pending' CHECK (status IN ('pending', 'accepted', 'refused', 'blocked')),
+                created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+                updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+                PRIMARY KEY (followed_id, follower_id)
+            )
+        `);
+    logger.info("Table 'UserRelation' created successfully.")
+}

@@ -1,13 +1,14 @@
 import { UserRepository} from "./user.repository";
 import { User} from "./user.types";
 import { CreateUserDTO, LoginUserDTO, ModifyUserDTO} from "./user.dto";
-import { randomUUID} from "crypto";
+import { randomUUID} from "node:crypto";
 import * as bcrypt from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
 import logger from "../../config/logger";
 
 export class UserService {
-    constructor(private readonly userRepository : UserRepository){}
+    constructor(
+        private readonly userRepository : UserRepository){}
 
     async createUser(dto: CreateUserDTO): Promise <{ token: string }>{
         logger.info(`Creating user with email: ${dto.email}`);
@@ -41,6 +42,7 @@ export class UserService {
             avatar : dto.avatar || '',
             bio : dto.bio || '',
             website : dto.website || '',
+            privacy : "public",
             is_banned : false,
             created_at : new Date(Date.now()),
             updated_at : new Date(Date.now()),
@@ -58,9 +60,9 @@ export class UserService {
         const user = await this.userRepository.findByEmail(dto.email);
         if (!user) {
             logger.warn(`Login failed: User not found with email: ${dto.email}`);
-            return null; // User not found
+            return null;
         }
-
+        console.log("user");
         const isPasswordValid = await bcrypt.compare(dto.password, user.password);
         if (!isPasswordValid) {
             logger.warn(`Login failed: Invalid password for user with email: ${dto.email}`);
@@ -68,7 +70,7 @@ export class UserService {
         }
 
         logger.info(`User logged in successfully with email: ${dto.email}`);
-        const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET!, { expiresIn: '1h' });
+        const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET!, { expiresIn: '8h' });
         return { token };
     }
 

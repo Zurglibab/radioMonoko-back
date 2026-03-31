@@ -7,6 +7,7 @@ export interface User {
     avatar : string;
     bio : string;
     website : string ;
+    privacy : string;
     is_banned : boolean;
     created_at : Date;
     updated_at : Date;

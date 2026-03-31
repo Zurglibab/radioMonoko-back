@@ -5,14 +5,14 @@ import {CreateUserDTO, ModifyUserDTO} from "./user.dto";
 export class UserBDDRepository {
     async findByEmail(email: string) {
         const result = await pool.query(
-            'SELECT id, email, username, password, display_name, avatar, bio, website, is_banned, created_at, updated_at FROM users WHERE email = $1',
+            'SELECT id, email, username, password, display_name, avatar, bio, website, privacy, is_banned, created_at, updated_at FROM users WHERE email = $1',
             [email]
         );
         return result.rows[0] || null;
     }
     async findById(id: string) {
         const result = await pool.query(
-            'SELECT id, email, username, display_name, avatar, bio, website, is_banned, created_at, updated_at FROM users WHERE id = $1',
+            'SELECT id, email, username, display_name, avatar, bio, website, privacy, is_banned, created_at, updated_at FROM users WHERE id = $1',
             [id]
         );
         return result.rows[0] || null;
@@ -35,5 +35,13 @@ export class UserBDDRepository {
 
     async edit(user: ModifyUserDTO) {
         return null;
+    }
+
+    async findByIds(ids: string[]) {
+        const result = await pool.query(
+            'SELECT id, email, username, display_name, avatar, bio, website, privacy, is_banned, created_at, updated_at FROM users WHERE id = ANY($1)',
+            [ids]
+        );
+        return result.rows;
     }
 }

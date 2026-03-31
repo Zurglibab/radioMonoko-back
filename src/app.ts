@@ -2,6 +2,7 @@ import express from 'express';
 import userRouter from './modules/user/user.routes';
 import expressWinston from 'express-winston';
 import logger from './config/logger';
+import userRelationRouter from "./modules/userRelation/userRelation.routes";
 
 export function createApp() {
 
@@ -9,14 +10,16 @@ export function createApp() {
 
     app.use(expressWinston.logger({
         winstonInstance: logger,
-        msg: "HTTP {{req.method}}",
+        msg: "HTTP {{req.method}} : {{req.url}}",
         expressFormat: true,
         colorize: true,
         meta: false,
     }));
 
+    console.log("app.use");
     app.use(express.json());
     app.use('/user', userRouter);
+    app.use('/userRelation', userRelationRouter);
 
     app.use(expressWinston.errorLogger({
         winstonInstance: logger
