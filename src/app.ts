@@ -28,18 +28,20 @@ export function createApp(): Express {
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-    app.use('/api/user', userRouter);
-    app.use('/api/userRelation', userRelationRouter);
 
         if (req.method === "OPTIONS") {
             return res.sendStatus(200);
         }
+        next();
+    });
+
+    app.use('/user', userRouter);
+    app.use('/userRelation', userRelationRouter);
+
     app.use(expressWinston.errorLogger({
         winstonInstance: logger
     }));
 
-        next();
-    });
 
     // Routes
     app.use("/api", apiRoutes);

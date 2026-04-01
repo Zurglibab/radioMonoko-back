@@ -9,10 +9,10 @@ export class UserRelationController {
 
     follow = async (req: Request, res: Response): Promise<void> => {
         try {
-            const followedId = (req as any).user.id;
-            const followerId = (req.params.id);
+            const followerId = req.user?.id; // Supposons auth middleware injects User
+            const followedId = req.params.followedId as string;
 
-            if (followedId === followerId) {
+            if (followerId === followedId) {
                 const message = "You cannot follow yourself";
                 logger.error(`[UserRelationController] Error following user: ${message}`);
                 throw new ApiError(400, message);
@@ -29,10 +29,10 @@ export class UserRelationController {
 
     unfollow = async (req: Request, res: Response): Promise<void> => {
         try {
-            const followedId = (req as any).user.id;
-            const followerId = req.params.id;
+            const followerId = req.user?.id;
+            const followedId = req.params.followedId as string;
 
-            if (followedId === followerId) {
+            if (followerId === followedId) {
                 const message = "You cannot follow yourself";
                 logger.error(`[UserRelationController] Error following user: ${message}`);
                 throw new ApiError(400, message);
@@ -49,8 +49,8 @@ export class UserRelationController {
 
     accept = async (req: Request, res: Response): Promise<void> => {
         try {
-            const userId = (req as any).user.id;
-            const requesterId = req.params.id;
+            const userId = req.user?.id;
+            const requesterId = req.params.requesterId as string;
             logger.info(`[UserRelationController] User ${userId} accepting request from ${requesterId}`);
             const relation = await this.userRelationService.accept(userId, requesterId);
             res.status(200).json(relation);
@@ -62,8 +62,8 @@ export class UserRelationController {
 
     refuse = async (req: Request, res: Response): Promise<void> => {
         try {
-            const userId = (req as any).user.id;
-            const requesterId = req.params.id;
+            const userId = req.user?.id;
+            const requesterId = req.params.requesterId as string;
             logger.info(`[UserRelationController] User ${userId} refusing request from ${requesterId}`);
             const relation = await this.userRelationService.refuse(userId, requesterId);
             res.status(200).json(relation);
@@ -75,8 +75,8 @@ export class UserRelationController {
 
     block = async (req: Request, res: Response): Promise<void> => {
         try {
-            const blockerId = (req as any).user.id;
-            const blockedId = req.params.id;
+            const blockerId = req.user?.id;
+            const blockedId = req.params.blockedId as string;
             logger.info(`[UserRelationController] User ${blockerId} blocking user ${blockedId}`);
             const relation = await this.userRelationService.block(blockerId, blockedId);
             res.status(200).json(relation);
@@ -88,8 +88,8 @@ export class UserRelationController {
 
     getFriends = async (req: Request, res: Response): Promise<void> => {
         try {
-            const userId = (req as any).user.id;
-            const targetUserId = req.params.id;
+            const userId = req.user?.id;
+            const targetUserId = req.params.userId as string;
             logger.info(`[UserRelationController] Getting friends for user ${targetUserId}`);
             const friends = await this.userRelationService.getFriends(userId, targetUserId);
             res.status(200).json(friends);
@@ -101,7 +101,7 @@ export class UserRelationController {
 
     getPendingRequests = async (req: Request, res: Response): Promise<void> => {
         try {
-            const userId = (req as any).user.id;
+            const userId = req.user?.id;
             logger.info(`[UserRelationController] Getting pending requests for user ${userId}`);
             const requests = await this.userRelationService.getPendingRequests(userId);
             res.status(200).json(requests);
