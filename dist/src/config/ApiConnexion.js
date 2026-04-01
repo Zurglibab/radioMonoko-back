@@ -34,22 +34,25 @@ class RadioFranceClient {
             timeout: 10000
         });
     }
-    // Envoie de la requête GraphQL
+    // Envoie de la requête GraphQL avec des variables optionnelles
     query(query, variables) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
+                console.log("Sending Variables:", JSON.stringify(variables));
                 const response = yield this.client.post("", {
                     query,
                     variables
                 });
                 if (response.data.errors) {
-                    console.error("GraphQL errors:", response.data.errors);
+                    console.error("Détails des erreurs GraphQL:", JSON.stringify(response.data.errors, null, 2));
                     throw new Error("Erreur GraphQL Radio France");
                 }
                 return response.data.data;
             }
             catch (error) {
-                console.error("Radio France API Error:", error.message);
+                if (error.response) {
+                    console.error("Server Error Data:", error.response.data);
+                }
                 throw error;
             }
         });

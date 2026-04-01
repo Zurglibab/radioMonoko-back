@@ -11,73 +11,63 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.connect = connect;
 exports.disconnect = disconnect;
-exports.testData = testData;
-exports.getData = getData;
+exports.getClient = getClient;
+exports.isConnected = isConnected;
 const redis_1 = require("redis");
 // URL configurable via la variable d'environnement REDIS_URL
 const redisUrl = process.env.REDIS_URL || 'redis://localhost:6379';
 const client = (0, redis_1.createClient)({ url: redisUrl });
-client.on('error', (err) => console.error('Redis Client Error', err));
-client.on('connect', () => console.log('Redis client connecting...'));
-client.on('ready', () => console.log('Redis client ready'));
-client.on('end', () => console.log('Redis connection closed'));
-// Connexion à Redis
+client.on('error', (err) => console.error('[RedisConnexion] Client Error', err));
+client.on('connect', () => console.log('[RedisConnexion] Client connecting...'));
+client.on('ready', () => console.log('[RedisConnexion] Client ready'));
+client.on('end', () => console.log('[RedisConnexion] Connection closed'));
+/**
+ * Connexion à Redis
+ */
 function connect() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             if (!client.isOpen) {
                 yield client.connect();
-                console.log('Connected to Redis');
+                console.log('[RedisConnexion] Connected to Redis');
             }
             else {
-                console.log('Redis client already connected');
+                console.log('[RedisConnexion] Redis client already connected');
             }
         }
         catch (err) {
-            console.error('Failed to connect to Redis:', err);
+            console.error('[RedisConnexion] Failed to connect to Redis:', err);
             throw err;
         }
     });
 }
-// Déconnexion de Redis
+/**
+ * Déconnexion de Redis
+ */
 function disconnect() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             if (client.isOpen) {
                 yield client.quit();
+                console.log('[RedisConnexion] Disconnected from Redis');
             }
         }
         catch (err) {
-            console.error('Error disconnecting Redis:', err);
+            console.error('[RedisConnexion] Error disconnecting Redis:', err);
         }
     });
 }
-// Exemple de fonction pour stocker et récupérer des données structurées (hash)
-function testData(session, data) {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            const payload = Object.assign({}, data);
-            yield client.hSet(session, payload);
-            // On récupère et renvoie le hash stocké pour validation
-            const result = yield client.hGetAll(session);
-            console.log(`Stored hash for ${session}:`, result);
-            return result;
-        }
-        catch (err) {
-            console.error('Error storing data in Redis:', err);
-            throw err;
-        }
-    });
+/**
+ * Récupère l'instance du client Redis
+ */
+function getClient() {
+    return client;
 }
-function getData(session) {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            return yield client.hGetAll(session);
-        }
-        catch (err) {
-            console.error('Error retrieving data from Redis:', err);
-        }
-    });
+/**
+ * Vérifie si le client est connecté
+ */
+function isConnected() {
+    return client.isOpen;
 }
 exports.default = client;
 //# sourceMappingURL=RedisConnexion.js.map

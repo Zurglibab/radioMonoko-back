@@ -1,6 +1,6 @@
 import { config } from 'dotenv';
-import { createApp } from "./source/app";
-import { startBrandsScheduler } from "./source/Schedulers/brandsScheduler";
+import { createApp } from "./src/app";
+import { startBrandsScheduler } from "./src/scedulers/brandsScheduler";
 
 config();
 

@@ -10,8 +10,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const dotenv_1 = require("dotenv");
-const app_1 = require("./source/app");
-const brandsScheduler_1 = require("./source/Schedulers/brandsScheduler");
+const app_1 = require("./src/app");
+const brandsScheduler_1 = require("./src/scedulers/brandsScheduler");
 (0, dotenv_1.config)();
 const PORT = process.env.PORT || 3000;
 function main() {
@@ -25,7 +25,7 @@ function main() {
             // Lancer le serveur
             app.listen(PORT, () => {
                 console.log(`\n[App] ✅ Server is running on http://localhost:${PORT}/`);
-                console.log(`[App] API docs available at http://localhost:${PORT}/\n`);
+                console.log(`[App] API docs available at http://localhost:${PORT}/api/docs\n`);
             });
         }
         catch (error) {
