@@ -33,6 +33,7 @@ services:
     environment:
       - DB_HOST=db
       - REDIS_HOST=redis
+      - NODE_ENV=production
     env_file: .env
     depends_on:
       - db
