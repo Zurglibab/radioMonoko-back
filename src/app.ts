@@ -6,6 +6,10 @@ import userRouter from './modules/user/user.routes';
 import expressWinston from 'express-winston';
 import logger from './config/logger';
 import userRelationRouter from "./modules/userRelation/userRelation.routes";
+import { createContentRouter } from './modules/content/content.routes';
+import { createCollectionsRouter } from './modules/collections/collections.routes';
+import { createCollectionItemsRouter } from './modules/collectionItems/collectionItems.routes';
+
 
 export function createApp(): Express {
     const app = express();
@@ -37,6 +41,9 @@ export function createApp(): Express {
 
     app.use('/user', userRouter);
     app.use('/userRelation', userRelationRouter);
+    app.use('/content', createContentRouter());
+    app.use('/collections', createCollectionsRouter());
+    app.use('/collectionItems', createCollectionItemsRouter());
 
     app.use(expressWinston.errorLogger({
         winstonInstance: logger

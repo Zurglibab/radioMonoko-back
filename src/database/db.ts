@@ -1,6 +1,5 @@
 import {Pool, PoolClient} from 'pg';
 import {config} from 'dotenv';
-import {format} from "logform";
 import logger from '../config/logger';
 
 config();
@@ -11,13 +10,17 @@ export const pool = new Pool({
     user: process.env.POSTGRES_USER,
     password: process.env.POSTGRES_PASSWORD,
     database: process.env.POSTGRES_DB,
-    });
+});
 
 export const initializeDatabase = async () => {
     const client = await pool.connect();
     try {
+        await client.query(`CREATE EXTENSION IF NOT EXISTS pgcrypto;`);
         await createUserTable(client);
         await createUserRelationTable(client);
+        await createContentTable(client);
+        await createCollectionsTable(client);
+        await createCollectionItemsTable(client);
         logger.info('Database initialized successfully.');
     } catch (error) {
         logger.warn('Error initializing database:', error);
@@ -59,4 +62,50 @@ async function createUserRelationTable(client: PoolClient) {
             )
         `);
     logger.info("Table 'UserRelation' created successfully.")
+}
+
+async function createContentTable(client: PoolClient) {
+    await client.query(`
+        CREATE TABLE IF NOT EXISTS content (
+            id UUID PRIMARY KEY,
+            api_id VARCHAR(255) UNIQUE NOT NULL,
+            title VARCHAR(255) NOT NULL,
+            description TEXT,
+            content_type VARCHAR(50) NOT NULL
+                CHECK (content_type IN ('show', 'diffusion', 'live', 'podcast', 'article', 'other')),
+            created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+        )
+    `);
+    logger.info("Table 'content' created successfully.");
+}
+
+async function createCollectionsTable(client: PoolClient) {
+    await client.query(`
+        CREATE TABLE IF NOT EXISTS collections (
+            id UUID PRIMARY KEY,
+            user_id UUID NOT NULL,
+            name VARCHAR(255) NOT NULL,
+            description TEXT,
+            is_public BOOLEAN DEFAULT true,
+            created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+        )
+    `);
+    logger.info("Table 'collections' created successfully.");
+}
+
+async function createCollectionItemsTable(client: PoolClient) {
+    await client.query(`
+        CREATE TABLE IF NOT EXISTS collection_items (
+            collection_id UUID NOT NULL,
+            content_id UUID NOT NULL,
+            position INTEGER DEFAULT 0,
+            note TEXT,
+            created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY (collection_id, content_id),
+            FOREIGN KEY (collection_id) REFERENCES collections(id) ON DELETE CASCADE,
+            FOREIGN KEY (content_id) REFERENCES content(id) ON DELETE CASCADE
+        )
+    `);
+    logger.info("Table 'collection_items' created successfully.");
 }

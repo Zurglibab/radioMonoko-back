@@ -74,3 +74,531 @@
 {"level":"info","message":"\u001b[90mGET /api/docs/swagger-ui-standalone-preset.js\u001b[39m \u001b[32m200\u001b[39m \u001b[90m5ms\u001b[39m","meta":{},"timestamp":"2026-04-01 19:03:21"}
 {"level":"info","message":"\u001b[90mGET /api/docs/swagger-ui-bundle.js\u001b[39m \u001b[32m200\u001b[39m \u001b[90m11ms\u001b[39m","meta":{},"timestamp":"2026-04-01 19:03:21"}
 {"level":"info","message":"\u001b[90mGET /api/docs/swagger-ui-init.js\u001b[39m \u001b[32m200\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 19:03:21"}
+{"level":"info","message":"Table 'users' created successfully.","timestamp":"2026-04-01 21:10:42"}
+{"level":"info","message":"Table 'UserRelation' created successfully.","timestamp":"2026-04-01 21:10:42"}
+{"code":"42601","file":"scan.l","length":92,"level":"warn","line":"1236","message":"Error initializing database: syntax error at end of input","name":"error","position":"269","routine":"scanner_yyerror","severity":"ERROR","stack":"error: syntax error at end of input\n    at F:\\Cours\\ProjetFinal\\radioMonoko-back\\node_modules\\pg\\lib\\client.js:624:17\n    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at async createContentTable (F:\\Cours\\ProjetFinal\\radioMonoko-back\\src\\database\\db.ts:68:5)\n    at async initializeDatabase (F:\\Cours\\ProjetFinal\\radioMonoko-back\\src\\database\\db.ts:21:9)\n    at async startServer (F:\\Cours\\ProjetFinal\\radioMonoko-back\\index.ts:13:9)","timestamp":"2026-04-01 21:10:42"}
+{"level":"info","message":"Table 'users' created successfully.","timestamp":"2026-04-01 21:10:43"}
+{"level":"info","message":"Table 'UserRelation' created successfully.","timestamp":"2026-04-01 21:10:43"}
+{"code":"42601","file":"scan.l","length":92,"level":"warn","line":"1236","message":"Error initializing database: syntax error at end of input","name":"error","position":"269","routine":"scanner_yyerror","severity":"ERROR","stack":"error: syntax error at end of input\n    at F:\\Cours\\ProjetFinal\\radioMonoko-back\\node_modules\\pg\\lib\\client.js:624:17\n    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at async createContentTable (F:\\Cours\\ProjetFinal\\radioMonoko-back\\src\\database\\db.ts:68:5)\n    at async initializeDatabase (F:\\Cours\\ProjetFinal\\radioMonoko-back\\src\\database\\db.ts:21:9)\n    at async startServer (F:\\Cours\\ProjetFinal\\radioMonoko-back\\index.ts:13:9)","timestamp":"2026-04-01 21:10:43"}
+{"level":"info","message":"Table 'users' created successfully.","timestamp":"2026-04-01 21:13:17"}
+{"level":"info","message":"Table 'UserRelation' created successfully.","timestamp":"2026-04-01 21:13:17"}
+{"level":"info","message":"Table 'content' created successfully.","timestamp":"2026-04-01 21:13:17"}
+{"level":"info","message":"Table 'collections' created successfully.","timestamp":"2026-04-01 21:13:17"}
+{"level":"info","message":"Table 'users' created successfully.","timestamp":"2026-04-01 21:13:45"}
+{"level":"info","message":"Table 'UserRelation' created successfully.","timestamp":"2026-04-01 21:13:45"}
+{"level":"info","message":"Table 'content' created successfully.","timestamp":"2026-04-01 21:13:45"}
+{"level":"info","message":"Table 'collections' created successfully.","timestamp":"2026-04-01 21:13:45"}
+{"level":"info","message":"Table 'collection_items' created successfully.","timestamp":"2026-04-01 21:13:45"}
+{"level":"info","message":"Database initialized successfully.","timestamp":"2026-04-01 21:13:45"}
+{"level":"info","message":"[UserRelationController] User user-id-1 following user undefined","timestamp":"2026-04-01 21:23:04"}
+{"level":"info","message":"\u001b[90mPOST /userRelation/follow/user-id-2\u001b[39m \u001b[32m201\u001b[39m \u001b[90m6ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:23:04"}
+{"level":"info","message":"[UserRelationController] User undefined unfollowing user user-id-1","timestamp":"2026-04-01 21:23:04"}
+{"level":"info","message":"\u001b[90mDELETE /userRelation/unfollow/user-id-2\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:23:04"}
+{"level":"info","message":"[UserRelationController] User user-id-1 accepting request from undefined","timestamp":"2026-04-01 21:23:04"}
+{"level":"info","message":"\u001b[90mPATCH /userRelation/accept/user-id-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:23:04"}
+{"level":"info","message":"[UserRelationController] User user-id-1 refusing request from undefined","timestamp":"2026-04-01 21:23:04"}
+{"level":"info","message":"\u001b[90mPATCH /userRelation/refuse/user-id-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m2ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:23:04"}
+{"level":"info","message":"[UserRelationController] User user-id-1 blocking user undefined","timestamp":"2026-04-01 21:23:04"}
+{"level":"info","message":"\u001b[90mPOST /userRelation/block/user-id-2\u001b[39m \u001b[32m200\u001b[39m \u001b[90m2ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:23:04"}
+{"level":"info","message":"[UserRelationController] Getting friends for user undefined","timestamp":"2026-04-01 21:23:04"}
+{"level":"info","message":"\u001b[90mGET /userRelation/friends/user-id-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m2ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:23:04"}
+{"level":"info","message":"[UserRelationController] Getting pending requests for user user-id-1","timestamp":"2026-04-01 21:23:04"}
+{"level":"info","message":"\u001b[90mGET /userRelation/request\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:23:04"}
+{"email":"integration@test.com","level":"info","message":"createUser request body:","password":"password123","privacy":"public","timestamp":"2026-04-01 21:23:05","username":"testuser"}
+{"level":"info","message":"Creating user with email: integration@test.com","timestamp":"2026-04-01 21:23:05"}
+{"level":"info","message":"User created with id: 6021c14a-1b08-4881-aa3c-5bc8953c637e","timestamp":"2026-04-01 21:23:05"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m86ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:23:05"}
+{"email":"duplicate@test.com","level":"info","message":"createUser request body:","password":"password123","timestamp":"2026-04-01 21:23:05","username":"dupuser"}
+{"level":"info","message":"Creating user with email: duplicate@test.com","timestamp":"2026-04-01 21:23:05"}
+{"level":"info","message":"User created with id: 7efcd147-1a60-4f28-a6b1-dc6159656575","timestamp":"2026-04-01 21:23:05"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m66ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:23:05"}
+{"email":"duplicate@test.com","level":"info","message":"createUser request body:","password":"password123","timestamp":"2026-04-01 21:23:05","username":"dupuser"}
+{"level":"info","message":"Creating user with email: duplicate@test.com","timestamp":"2026-04-01 21:23:05"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-04-01 21:23:05"}
+{"level":"error","timestamp":"2026-04-01 21:23:05"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[33m400\u001b[39m \u001b[90m4ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:23:05"}
+{"email":"login@test.com","level":"info","message":"createUser request body:","password":"password123","timestamp":"2026-04-01 21:23:05","username":"loginuser"}
+{"level":"info","message":"Creating user with email: login@test.com","timestamp":"2026-04-01 21:23:05"}
+{"level":"info","message":"User created with id: a9780f5a-a0d1-49e1-88ad-2672918e7cb8","timestamp":"2026-04-01 21:23:05"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m70ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:23:05"}
+{"level":"info","message":"User login attempt with email: login@test.com","timestamp":"2026-04-01 21:23:05"}
+{"level":"info","message":"User logged in successfully with email: login@test.com","timestamp":"2026-04-01 21:23:05"}
+{"level":"info","message":"\u001b[90mPOST /user/login\u001b[39m \u001b[32m200\u001b[39m \u001b[90m63ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:23:05"}
+{"email":"login-fail@test.com","level":"info","message":"createUser request body:","password":"password123","timestamp":"2026-04-01 21:23:05","username":"loginfail"}
+{"level":"info","message":"Creating user with email: login-fail@test.com","timestamp":"2026-04-01 21:23:05"}
+{"level":"info","message":"User created with id: 0ec355b8-f5b8-4c8f-a203-140759ef4ed6","timestamp":"2026-04-01 21:23:05"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m73ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:23:05"}
+{"level":"info","message":"User login attempt with email: login-fail@test.com","timestamp":"2026-04-01 21:23:05"}
+{"level":"warn","message":"Login failed: Invalid password for user with email: login-fail@test.com","timestamp":"2026-04-01 21:23:05"}
+{"level":"info","message":"\u001b[90mPOST /user/login\u001b[39m \u001b[33m401\u001b[39m \u001b[90m68ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:23:05"}
+{"level":"info","message":"\u001b[90mGET /content\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:26:00"}
+{"level":"info","message":"\u001b[90mGET /content/content-1\u001b[39m \u001b[33m404\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:26:00"}
+{"level":"info","message":"\u001b[90mGET /content/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:26:00"}
+{"level":"info","message":"\u001b[90mPOST /content\u001b[39m \u001b[32m201\u001b[39m \u001b[90m8ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:26:00"}
+{"level":"info","message":"\u001b[90mPOST /content\u001b[39m \u001b[32m201\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:26:00"}
+{"level":"info","message":"\u001b[90mPUT /content/content-1\u001b[39m \u001b[33m404\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:26:00"}
+{"level":"info","message":"\u001b[90mPUT /content/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:26:00"}
+{"level":"info","message":"\u001b[90mDELETE /content/content-1\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:26:00"}
+{"level":"info","message":"\u001b[90mDELETE /content/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:26:00"}
+{"level":"info","message":"[UserRelationController] User user-id-1 following user undefined","timestamp":"2026-04-01 21:26:00"}
+{"level":"info","message":"\u001b[90mPOST /userRelation/follow/user-id-2\u001b[39m \u001b[32m201\u001b[39m \u001b[90m5ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:26:00"}
+{"level":"info","message":"[UserRelationController] User undefined unfollowing user user-id-1","timestamp":"2026-04-01 21:26:00"}
+{"level":"info","message":"\u001b[90mDELETE /userRelation/unfollow/user-id-2\u001b[39m \u001b[32m200\u001b[39m \u001b[90m2ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:26:00"}
+{"level":"info","message":"[UserRelationController] User user-id-1 accepting request from undefined","timestamp":"2026-04-01 21:26:00"}
+{"level":"info","message":"\u001b[90mPATCH /userRelation/accept/user-id-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:26:00"}
+{"level":"info","message":"[UserRelationController] User user-id-1 refusing request from undefined","timestamp":"2026-04-01 21:26:00"}
+{"level":"info","message":"\u001b[90mPATCH /userRelation/refuse/user-id-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:26:00"}
+{"level":"info","message":"[UserRelationController] User user-id-1 blocking user undefined","timestamp":"2026-04-01 21:26:00"}
+{"level":"info","message":"\u001b[90mPOST /userRelation/block/user-id-2\u001b[39m \u001b[32m200\u001b[39m \u001b[90m2ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:26:00"}
+{"level":"info","message":"[UserRelationController] Getting friends for user undefined","timestamp":"2026-04-01 21:26:00"}
+{"level":"info","message":"\u001b[90mGET /userRelation/friends/user-id-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:26:00"}
+{"level":"info","message":"[UserRelationController] Getting pending requests for user user-id-1","timestamp":"2026-04-01 21:26:00"}
+{"level":"info","message":"\u001b[90mGET /userRelation/request\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:26:00"}
+{"email":"integration@test.com","level":"info","message":"createUser request body:","password":"password123","privacy":"public","timestamp":"2026-04-01 21:26:00","username":"testuser"}
+{"level":"info","message":"Creating user with email: integration@test.com","timestamp":"2026-04-01 21:26:00"}
+{"level":"info","message":"User created with id: 32364c2c-45aa-4e23-be5b-2dee98520606","timestamp":"2026-04-01 21:26:01"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m81ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:26:01"}
+{"email":"duplicate@test.com","level":"info","message":"createUser request body:","password":"password123","timestamp":"2026-04-01 21:26:01","username":"dupuser"}
+{"level":"info","message":"Creating user with email: duplicate@test.com","timestamp":"2026-04-01 21:26:01"}
+{"level":"info","message":"User created with id: 6fb368ff-4578-4b2a-a1b6-a00972cde00a","timestamp":"2026-04-01 21:26:01"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m67ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:26:01"}
+{"email":"duplicate@test.com","level":"info","message":"createUser request body:","password":"password123","timestamp":"2026-04-01 21:26:01","username":"dupuser"}
+{"level":"info","message":"Creating user with email: duplicate@test.com","timestamp":"2026-04-01 21:26:01"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-04-01 21:26:01"}
+{"level":"error","timestamp":"2026-04-01 21:26:01"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[33m400\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:26:01"}
+{"email":"login@test.com","level":"info","message":"createUser request body:","password":"password123","timestamp":"2026-04-01 21:26:01","username":"loginuser"}
+{"level":"info","message":"Creating user with email: login@test.com","timestamp":"2026-04-01 21:26:01"}
+{"level":"info","message":"User created with id: e9900375-2826-4b7f-97b3-4ab1318e9a2e","timestamp":"2026-04-01 21:26:01"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m78ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:26:01"}
+{"level":"info","message":"User login attempt with email: login@test.com","timestamp":"2026-04-01 21:26:01"}
+{"level":"info","message":"User logged in successfully with email: login@test.com","timestamp":"2026-04-01 21:26:01"}
+{"level":"info","message":"\u001b[90mPOST /user/login\u001b[39m \u001b[32m200\u001b[39m \u001b[90m63ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:26:01"}
+{"email":"login-fail@test.com","level":"info","message":"createUser request body:","password":"password123","timestamp":"2026-04-01 21:26:01","username":"loginfail"}
+{"level":"info","message":"Creating user with email: login-fail@test.com","timestamp":"2026-04-01 21:26:01"}
+{"level":"info","message":"User created with id: 87464c3d-6d5d-47e6-97d4-b33876e598f1","timestamp":"2026-04-01 21:26:01"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m66ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:26:01"}
+{"level":"info","message":"User login attempt with email: login-fail@test.com","timestamp":"2026-04-01 21:26:01"}
+{"level":"warn","message":"Login failed: Invalid password for user with email: login-fail@test.com","timestamp":"2026-04-01 21:26:01"}
+{"level":"info","message":"\u001b[90mPOST /user/login\u001b[39m \u001b[33m401\u001b[39m \u001b[90m65ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:26:01"}
+{"level":"info","message":"\u001b[90mGET /content\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:26:36"}
+{"level":"info","message":"\u001b[90mGET /content/content-1\u001b[39m \u001b[33m404\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:26:36"}
+{"level":"info","message":"\u001b[90mGET /content/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:26:36"}
+{"level":"info","message":"Creating content with api_id: api-2","timestamp":"2026-04-01 21:26:36"}
+{"level":"info","message":"\u001b[90mPOST /content\u001b[39m \u001b[32m201\u001b[39m \u001b[90m9ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:26:36"}
+{"level":"info","message":"\u001b[90mPOST /content\u001b[39m \u001b[33m400\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:26:36"}
+{"level":"info","message":"\u001b[90mPUT /content/content-1\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:26:36"}
+{"level":"info","message":"\u001b[90mPUT /content/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:26:36"}
+{"level":"info","message":"\u001b[90mDELETE /content/content-1\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:26:36"}
+{"level":"info","message":"\u001b[90mDELETE /content/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:26:36"}
+{"email":"integration@test.com","level":"info","message":"createUser request body:","password":"password123","privacy":"public","timestamp":"2026-04-01 21:26:36","username":"testuser"}
+{"level":"info","message":"Creating user with email: integration@test.com","timestamp":"2026-04-01 21:26:36"}
+{"level":"info","message":"User created with id: b08a23fb-68d3-4775-a544-eb66e3b06797","timestamp":"2026-04-01 21:26:36"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m88ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:26:36"}
+{"email":"duplicate@test.com","level":"info","message":"createUser request body:","password":"password123","timestamp":"2026-04-01 21:26:36","username":"dupuser"}
+{"level":"info","message":"Creating user with email: duplicate@test.com","timestamp":"2026-04-01 21:26:36"}
+{"level":"info","message":"User created with id: a2c56e9a-98fa-4ad1-92ff-ffc33cec8c9d","timestamp":"2026-04-01 21:26:36"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m66ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:26:36"}
+{"email":"duplicate@test.com","level":"info","message":"createUser request body:","password":"password123","timestamp":"2026-04-01 21:26:36","username":"dupuser"}
+{"level":"info","message":"Creating user with email: duplicate@test.com","timestamp":"2026-04-01 21:26:36"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-04-01 21:26:36"}
+{"level":"error","timestamp":"2026-04-01 21:26:36"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[33m400\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:26:36"}
+{"email":"login@test.com","level":"info","message":"createUser request body:","password":"password123","timestamp":"2026-04-01 21:26:36","username":"loginuser"}
+{"level":"info","message":"Creating user with email: login@test.com","timestamp":"2026-04-01 21:26:36"}
+{"level":"info","message":"User created with id: 45b2cd64-14ad-4610-b16a-0046b8d4dc13","timestamp":"2026-04-01 21:26:36"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m67ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:26:36"}
+{"level":"info","message":"User login attempt with email: login@test.com","timestamp":"2026-04-01 21:26:36"}
+{"level":"info","message":"User logged in successfully with email: login@test.com","timestamp":"2026-04-01 21:26:36"}
+{"level":"info","message":"\u001b[90mPOST /user/login\u001b[39m \u001b[32m200\u001b[39m \u001b[90m62ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:26:36"}
+{"email":"login-fail@test.com","level":"info","message":"createUser request body:","password":"password123","timestamp":"2026-04-01 21:26:36","username":"loginfail"}
+{"level":"info","message":"Creating user with email: login-fail@test.com","timestamp":"2026-04-01 21:26:36"}
+{"level":"info","message":"User created with id: e1bb61d7-e304-4d9d-85a0-9c0aa9ec9880","timestamp":"2026-04-01 21:26:36"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m66ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:26:36"}
+{"level":"info","message":"User login attempt with email: login-fail@test.com","timestamp":"2026-04-01 21:26:36"}
+{"level":"warn","message":"Login failed: Invalid password for user with email: login-fail@test.com","timestamp":"2026-04-01 21:26:37"}
+{"level":"info","message":"\u001b[90mPOST /user/login\u001b[39m \u001b[33m401\u001b[39m \u001b[90m63ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:26:37"}
+{"level":"info","message":"[UserRelationController] User user-id-1 following user undefined","timestamp":"2026-04-01 21:26:37"}
+{"level":"info","message":"\u001b[90mPOST /userRelation/follow/user-id-2\u001b[39m \u001b[32m201\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:26:37"}
+{"level":"info","message":"[UserRelationController] User undefined unfollowing user user-id-1","timestamp":"2026-04-01 21:26:37"}
+{"level":"info","message":"\u001b[90mDELETE /userRelation/unfollow/user-id-2\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:26:37"}
+{"level":"info","message":"[UserRelationController] User user-id-1 accepting request from undefined","timestamp":"2026-04-01 21:26:37"}
+{"level":"info","message":"\u001b[90mPATCH /userRelation/accept/user-id-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:26:37"}
+{"level":"info","message":"[UserRelationController] User user-id-1 refusing request from undefined","timestamp":"2026-04-01 21:26:37"}
+{"level":"info","message":"\u001b[90mPATCH /userRelation/refuse/user-id-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:26:37"}
+{"level":"info","message":"[UserRelationController] User user-id-1 blocking user undefined","timestamp":"2026-04-01 21:26:37"}
+{"level":"info","message":"\u001b[90mPOST /userRelation/block/user-id-2\u001b[39m \u001b[32m200\u001b[39m \u001b[90m2ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:26:37"}
+{"level":"info","message":"[UserRelationController] Getting friends for user undefined","timestamp":"2026-04-01 21:26:37"}
+{"level":"info","message":"\u001b[90mGET /userRelation/friends/user-id-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:26:37"}
+{"level":"info","message":"[UserRelationController] Getting pending requests for user user-id-1","timestamp":"2026-04-01 21:26:37"}
+{"level":"info","message":"\u001b[90mGET /userRelation/request\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:26:37"}
+{"level":"info","message":"[UserRelationController] User user-id-1 following user undefined","timestamp":"2026-04-01 21:29:25"}
+{"level":"info","message":"\u001b[90mPOST /userRelation/follow/user-id-2\u001b[39m \u001b[32m201\u001b[39m \u001b[90m7ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:29:25"}
+{"level":"info","message":"[UserRelationController] User undefined unfollowing user user-id-1","timestamp":"2026-04-01 21:29:25"}
+{"level":"info","message":"\u001b[90mDELETE /userRelation/unfollow/user-id-2\u001b[39m \u001b[32m200\u001b[39m \u001b[90m2ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:29:25"}
+{"level":"info","message":"[UserRelationController] User user-id-1 accepting request from undefined","timestamp":"2026-04-01 21:29:25"}
+{"level":"info","message":"\u001b[90mPATCH /userRelation/accept/user-id-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m2ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:29:25"}
+{"level":"info","message":"\u001b[90mGET /content\u001b[39m \u001b[32m200\u001b[39m \u001b[90m2ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:29:25"}
+{"level":"info","message":"[UserRelationController] User user-id-1 refusing request from undefined","timestamp":"2026-04-01 21:29:25"}
+{"level":"info","message":"\u001b[90mPATCH /userRelation/refuse/user-id-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:29:25"}
+{"level":"info","message":"[UserRelationController] User user-id-1 blocking user undefined","timestamp":"2026-04-01 21:29:25"}
+{"level":"info","message":"\u001b[90mPOST /userRelation/block/user-id-2\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:29:25"}
+{"level":"info","message":"[UserRelationController] Getting friends for user undefined","timestamp":"2026-04-01 21:29:25"}
+{"level":"info","message":"\u001b[90mGET /content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:29:25"}
+{"level":"info","message":"\u001b[90mGET /userRelation/friends/user-id-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:29:25"}
+{"level":"info","message":"[UserRelationController] Getting pending requests for user user-id-1","timestamp":"2026-04-01 21:29:25"}
+{"level":"info","message":"\u001b[90mGET /userRelation/request\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:29:25"}
+{"level":"info","message":"\u001b[90mGET /content/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:29:25"}
+{"email":"integration@test.com","level":"info","message":"createUser request body:","password":"password123","privacy":"public","timestamp":"2026-04-01 21:29:25","username":"testuser"}
+{"level":"info","message":"Creating user with email: integration@test.com","timestamp":"2026-04-01 21:29:25"}
+{"level":"info","message":"Creating content with api_id: api-2","timestamp":"2026-04-01 21:29:25"}
+{"level":"info","message":"\u001b[90mPOST /content\u001b[39m \u001b[32m201\u001b[39m \u001b[90m14ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:29:25"}
+{"level":"info","message":"\u001b[90mPOST /content\u001b[39m \u001b[33m400\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:29:25"}
+{"level":"info","message":"\u001b[90mPUT /content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:29:25"}
+{"level":"info","message":"\u001b[90mPUT /content/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:29:26"}
+{"level":"info","message":"\u001b[90mDELETE /content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:29:26"}
+{"level":"info","message":"\u001b[90mDELETE /content/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:29:26"}
+{"level":"info","message":"User created with id: efe81d93-7f34-42c7-8d92-1f03afe3355a","timestamp":"2026-04-01 21:29:26"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m96ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:29:26"}
+{"email":"duplicate@test.com","level":"info","message":"createUser request body:","password":"password123","timestamp":"2026-04-01 21:29:26","username":"dupuser"}
+{"level":"info","message":"Creating user with email: duplicate@test.com","timestamp":"2026-04-01 21:29:26"}
+{"level":"info","message":"User created with id: 5d7d6fe2-cf20-4ca0-b7bb-4f8d83e6a28e","timestamp":"2026-04-01 21:29:26"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m65ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:29:26"}
+{"email":"duplicate@test.com","level":"info","message":"createUser request body:","password":"password123","timestamp":"2026-04-01 21:29:26","username":"dupuser"}
+{"level":"info","message":"Creating user with email: duplicate@test.com","timestamp":"2026-04-01 21:29:26"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-04-01 21:29:26"}
+{"level":"error","timestamp":"2026-04-01 21:29:26"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[33m400\u001b[39m \u001b[90m4ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:29:26"}
+{"email":"login@test.com","level":"info","message":"createUser request body:","password":"password123","timestamp":"2026-04-01 21:29:26","username":"loginuser"}
+{"level":"info","message":"Creating user with email: login@test.com","timestamp":"2026-04-01 21:29:26"}
+{"level":"info","message":"User created with id: b00e8cdf-6615-4a58-a951-273a0a24306b","timestamp":"2026-04-01 21:29:26"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m68ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:29:26"}
+{"level":"info","message":"User login attempt with email: login@test.com","timestamp":"2026-04-01 21:29:26"}
+{"level":"info","message":"User logged in successfully with email: login@test.com","timestamp":"2026-04-01 21:29:26"}
+{"level":"info","message":"\u001b[90mPOST /user/login\u001b[39m \u001b[32m200\u001b[39m \u001b[90m61ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:29:26"}
+{"email":"login-fail@test.com","level":"info","message":"createUser request body:","password":"password123","timestamp":"2026-04-01 21:29:26","username":"loginfail"}
+{"level":"info","message":"Creating user with email: login-fail@test.com","timestamp":"2026-04-01 21:29:26"}
+{"level":"info","message":"User created with id: fd358709-f569-4a46-a9ab-5a9f60e12691","timestamp":"2026-04-01 21:29:26"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m67ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:29:26"}
+{"level":"info","message":"User login attempt with email: login-fail@test.com","timestamp":"2026-04-01 21:29:26"}
+{"level":"warn","message":"Login failed: Invalid password for user with email: login-fail@test.com","timestamp":"2026-04-01 21:29:26"}
+{"level":"info","message":"\u001b[90mPOST /user/login\u001b[39m \u001b[33m401\u001b[39m \u001b[90m64ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:29:26"}
+{"email":"integration@test.com","level":"info","message":"createUser request body:","password":"password123","privacy":"public","timestamp":"2026-04-01 21:38:45","username":"testuser"}
+{"level":"info","message":"Creating user with email: integration@test.com","timestamp":"2026-04-01 21:38:45"}
+{"level":"info","message":"User created with id: 48af4f6e-6c6f-4ceb-a766-9ca3e611bf63","timestamp":"2026-04-01 21:38:45"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m91ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:38:45"}
+{"email":"duplicate@test.com","level":"info","message":"createUser request body:","password":"password123","timestamp":"2026-04-01 21:38:45","username":"dupuser"}
+{"level":"info","message":"Creating user with email: duplicate@test.com","timestamp":"2026-04-01 21:38:45"}
+{"level":"info","message":"User created with id: 3f50cc3e-f8a2-4cb0-96e4-634adf01e258","timestamp":"2026-04-01 21:38:45"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m72ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:38:45"}
+{"email":"duplicate@test.com","level":"info","message":"createUser request body:","password":"password123","timestamp":"2026-04-01 21:38:45","username":"dupuser"}
+{"level":"info","message":"Creating user with email: duplicate@test.com","timestamp":"2026-04-01 21:38:45"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-04-01 21:38:45"}
+{"level":"error","timestamp":"2026-04-01 21:38:45"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[33m400\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:38:45"}
+{"email":"login@test.com","level":"info","message":"createUser request body:","password":"password123","timestamp":"2026-04-01 21:38:45","username":"loginuser"}
+{"level":"info","message":"Creating user with email: login@test.com","timestamp":"2026-04-01 21:38:45"}
+{"level":"info","message":"User created with id: 1f75ab4f-35d0-4996-8c9c-c985a8c71a2b","timestamp":"2026-04-01 21:38:45"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m73ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:38:45"}
+{"level":"info","message":"User login attempt with email: login@test.com","timestamp":"2026-04-01 21:38:45"}
+{"level":"info","message":"User logged in successfully with email: login@test.com","timestamp":"2026-04-01 21:38:45"}
+{"level":"info","message":"\u001b[90mPOST /user/login\u001b[39m \u001b[32m200\u001b[39m \u001b[90m64ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:38:45"}
+{"email":"login-fail@test.com","level":"info","message":"createUser request body:","password":"password123","timestamp":"2026-04-01 21:38:45","username":"loginfail"}
+{"level":"info","message":"Creating user with email: login-fail@test.com","timestamp":"2026-04-01 21:38:45"}
+{"level":"info","message":"User created with id: a0c37e0a-d4b5-4717-af61-ea0349b0cd74","timestamp":"2026-04-01 21:38:45"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m69ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:38:45"}
+{"level":"info","message":"User login attempt with email: login-fail@test.com","timestamp":"2026-04-01 21:38:45"}
+{"level":"warn","message":"Login failed: Invalid password for user with email: login-fail@test.com","timestamp":"2026-04-01 21:38:45"}
+{"level":"info","message":"\u001b[90mPOST /user/login\u001b[39m \u001b[33m401\u001b[39m \u001b[90m63ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:38:45"}
+{"level":"info","message":"[UserRelationController] User user-id-1 following user undefined","timestamp":"2026-04-01 21:38:46"}
+{"level":"info","message":"\u001b[90mPOST /userRelation/follow/user-id-2\u001b[39m \u001b[32m201\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:38:46"}
+{"level":"info","message":"[UserRelationController] User undefined unfollowing user user-id-1","timestamp":"2026-04-01 21:38:46"}
+{"level":"info","message":"\u001b[90mDELETE /userRelation/unfollow/user-id-2\u001b[39m \u001b[32m200\u001b[39m \u001b[90m2ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:38:46"}
+{"level":"info","message":"[UserRelationController] User user-id-1 accepting request from undefined","timestamp":"2026-04-01 21:38:46"}
+{"level":"info","message":"\u001b[90mPATCH /userRelation/accept/user-id-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:38:46"}
+{"level":"info","message":"[UserRelationController] User user-id-1 refusing request from undefined","timestamp":"2026-04-01 21:38:46"}
+{"level":"info","message":"\u001b[90mPATCH /userRelation/refuse/user-id-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m2ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:38:46"}
+{"level":"info","message":"[UserRelationController] User user-id-1 blocking user undefined","timestamp":"2026-04-01 21:38:46"}
+{"level":"info","message":"\u001b[90mPOST /userRelation/block/user-id-2\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:38:46"}
+{"level":"info","message":"[UserRelationController] Getting friends for user undefined","timestamp":"2026-04-01 21:38:46"}
+{"level":"info","message":"\u001b[90mGET /userRelation/friends/user-id-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:38:46"}
+{"level":"info","message":"[UserRelationController] Getting pending requests for user user-id-1","timestamp":"2026-04-01 21:38:46"}
+{"level":"info","message":"\u001b[90mGET /userRelation/request\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:38:46"}
+{"level":"info","message":"\u001b[90mGET /content\u001b[39m \u001b[32m200\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:38:46"}
+{"level":"info","message":"\u001b[90mGET /content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:38:46"}
+{"level":"info","message":"\u001b[90mGET /content/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:38:46"}
+{"level":"info","message":"Creating content with api_id: api-2","timestamp":"2026-04-01 21:38:46"}
+{"level":"info","message":"\u001b[90mPOST /content\u001b[39m \u001b[32m201\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:38:46"}
+{"level":"info","message":"\u001b[90mPOST /content\u001b[39m \u001b[33m400\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:38:46"}
+{"level":"info","message":"\u001b[90mPUT /content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:38:46"}
+{"level":"info","message":"\u001b[90mPUT /content/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:38:46"}
+{"level":"info","message":"\u001b[90mDELETE /content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:38:46"}
+{"level":"info","message":"\u001b[90mDELETE /content/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:38:46"}
+{"level":"info","message":"\u001b[90mGET /collections\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:38:46"}
+{"level":"info","message":"\u001b[90mGET /collections/collection-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:38:46"}
+{"level":"info","message":"\u001b[90mGET /collections/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:38:46"}
+{"level":"info","message":"\u001b[90mPOST /collections\u001b[39m \u001b[32m201\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:38:46"}
+{"level":"info","message":"\u001b[90mPOST /collections\u001b[39m \u001b[33m400\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:38:46"}
+{"level":"info","message":"\u001b[90mPUT /collections/collection-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:38:46"}
+{"level":"info","message":"\u001b[90mPUT /collections/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:38:46"}
+{"level":"info","message":"\u001b[90mDELETE /collections/collection-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:38:46"}
+{"level":"info","message":"\u001b[90mDELETE /collections/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:38:46"}
+{"level":"info","message":"\u001b[90mGET /collectionItems\u001b[39m \u001b[32m200\u001b[39m \u001b[90m2ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:41:08"}
+{"level":"info","message":"\u001b[90mGET /collectionItems/collection/collection-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:41:08"}
+{"level":"info","message":"\u001b[90mGET /collectionItems/collection/collection-1/content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:41:08"}
+{"level":"info","message":"\u001b[90mGET /collectionItems/collection/collection-1/content/missing-content\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:41:08"}
+{"level":"info","message":"\u001b[90mPOST /collectionItems\u001b[39m \u001b[32m201\u001b[39m \u001b[90m6ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:41:08"}
+{"level":"info","message":"\u001b[90mPOST /collectionItems\u001b[39m \u001b[33m400\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:41:08"}
+{"level":"info","message":"\u001b[90mPUT /collectionItems/collection/collection-1/content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:41:08"}
+{"level":"info","message":"\u001b[90mPUT /collectionItems/collection/collection-1/content/missing-content\u001b[39m \u001b[33m404\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:41:08"}
+{"level":"info","message":"\u001b[90mDELETE /collectionItems/collection/collection-1/content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:41:08"}
+{"level":"info","message":"\u001b[90mDELETE /collectionItems/collection/collection-1/content/missing-content\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:41:08"}
+{"email":"integration@test.com","level":"info","message":"createUser request body:","password":"password123","privacy":"public","timestamp":"2026-04-01 21:41:09","username":"testuser"}
+{"level":"info","message":"Creating user with email: integration@test.com","timestamp":"2026-04-01 21:41:09"}
+{"level":"info","message":"User created with id: 60ea3e15-16a3-4e24-9759-a376650f6947","timestamp":"2026-04-01 21:41:09"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m106ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:41:09"}
+{"email":"duplicate@test.com","level":"info","message":"createUser request body:","password":"password123","timestamp":"2026-04-01 21:41:09","username":"dupuser"}
+{"level":"info","message":"Creating user with email: duplicate@test.com","timestamp":"2026-04-01 21:41:09"}
+{"level":"info","message":"User created with id: 689468de-c12c-4701-96eb-d19428e7fbbb","timestamp":"2026-04-01 21:41:09"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m68ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:41:09"}
+{"email":"duplicate@test.com","level":"info","message":"createUser request body:","password":"password123","timestamp":"2026-04-01 21:41:09","username":"dupuser"}
+{"level":"info","message":"Creating user with email: duplicate@test.com","timestamp":"2026-04-01 21:41:09"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-04-01 21:41:09"}
+{"level":"error","timestamp":"2026-04-01 21:41:09"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[33m400\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:41:09"}
+{"email":"login@test.com","level":"info","message":"createUser request body:","password":"password123","timestamp":"2026-04-01 21:41:09","username":"loginuser"}
+{"level":"info","message":"Creating user with email: login@test.com","timestamp":"2026-04-01 21:41:09"}
+{"level":"info","message":"User created with id: dd1e61ae-18b6-4912-b765-ad0d353f3acf","timestamp":"2026-04-01 21:41:09"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m68ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:41:09"}
+{"level":"info","message":"User login attempt with email: login@test.com","timestamp":"2026-04-01 21:41:09"}
+{"level":"info","message":"User logged in successfully with email: login@test.com","timestamp":"2026-04-01 21:41:09"}
+{"level":"info","message":"\u001b[90mPOST /user/login\u001b[39m \u001b[32m200\u001b[39m \u001b[90m68ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:41:09"}
+{"email":"login-fail@test.com","level":"info","message":"createUser request body:","password":"password123","timestamp":"2026-04-01 21:41:09","username":"loginfail"}
+{"level":"info","message":"Creating user with email: login-fail@test.com","timestamp":"2026-04-01 21:41:09"}
+{"level":"info","message":"User created with id: c1e9a664-137b-4c31-a5e3-2ec7060997ed","timestamp":"2026-04-01 21:41:09"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m66ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:41:09"}
+{"level":"info","message":"User login attempt with email: login-fail@test.com","timestamp":"2026-04-01 21:41:09"}
+{"level":"warn","message":"Login failed: Invalid password for user with email: login-fail@test.com","timestamp":"2026-04-01 21:41:09"}
+{"level":"info","message":"\u001b[90mPOST /user/login\u001b[39m \u001b[33m401\u001b[39m \u001b[90m63ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:41:09"}
+{"level":"info","message":"\u001b[90mGET /collections\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:41:10"}
+{"level":"info","message":"\u001b[90mGET /collections/collection-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:41:10"}
+{"level":"info","message":"\u001b[90mGET /collections/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:41:10"}
+{"level":"info","message":"\u001b[90mPOST /collections\u001b[39m \u001b[32m201\u001b[39m \u001b[90m2ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:41:10"}
+{"level":"info","message":"\u001b[90mPOST /collections\u001b[39m \u001b[33m400\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:41:10"}
+{"level":"info","message":"\u001b[90mPUT /collections/collection-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:41:10"}
+{"level":"info","message":"\u001b[90mPUT /collections/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:41:10"}
+{"level":"info","message":"\u001b[90mDELETE /collections/collection-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:41:10"}
+{"level":"info","message":"\u001b[90mDELETE /collections/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:41:10"}
+{"level":"info","message":"[UserRelationController] User user-id-1 following user undefined","timestamp":"2026-04-01 21:41:10"}
+{"level":"info","message":"\u001b[90mPOST /userRelation/follow/user-id-2\u001b[39m \u001b[32m201\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:41:10"}
+{"level":"info","message":"[UserRelationController] User undefined unfollowing user user-id-1","timestamp":"2026-04-01 21:41:10"}
+{"level":"info","message":"\u001b[90mDELETE /userRelation/unfollow/user-id-2\u001b[39m \u001b[32m200\u001b[39m \u001b[90m2ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:41:10"}
+{"level":"info","message":"[UserRelationController] User user-id-1 accepting request from undefined","timestamp":"2026-04-01 21:41:10"}
+{"level":"info","message":"\u001b[90mPATCH /userRelation/accept/user-id-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m2ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:41:10"}
+{"level":"info","message":"[UserRelationController] User user-id-1 refusing request from undefined","timestamp":"2026-04-01 21:41:10"}
+{"level":"info","message":"\u001b[90mPATCH /userRelation/refuse/user-id-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m2ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:41:10"}
+{"level":"info","message":"[UserRelationController] User user-id-1 blocking user undefined","timestamp":"2026-04-01 21:41:10"}
+{"level":"info","message":"\u001b[90mPOST /userRelation/block/user-id-2\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:41:10"}
+{"level":"info","message":"[UserRelationController] Getting friends for user undefined","timestamp":"2026-04-01 21:41:10"}
+{"level":"info","message":"\u001b[90mGET /userRelation/friends/user-id-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:41:10"}
+{"level":"info","message":"[UserRelationController] Getting pending requests for user user-id-1","timestamp":"2026-04-01 21:41:10"}
+{"level":"info","message":"\u001b[90mGET /userRelation/request\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:41:10"}
+{"level":"info","message":"\u001b[90mGET /content\u001b[39m \u001b[32m200\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:41:11"}
+{"level":"info","message":"\u001b[90mGET /content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:41:11"}
+{"level":"info","message":"\u001b[90mGET /content/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:41:11"}
+{"level":"info","message":"Creating content with api_id: api-2","timestamp":"2026-04-01 21:41:11"}
+{"level":"info","message":"\u001b[90mPOST /content\u001b[39m \u001b[32m201\u001b[39m \u001b[90m4ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:41:11"}
+{"level":"info","message":"\u001b[90mPOST /content\u001b[39m \u001b[33m400\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:41:11"}
+{"level":"info","message":"\u001b[90mPUT /content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:41:11"}
+{"level":"info","message":"\u001b[90mPUT /content/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:41:11"}
+{"level":"info","message":"\u001b[90mDELETE /content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:41:11"}
+{"level":"info","message":"\u001b[90mDELETE /content/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:41:11"}
+{"level":"info","message":"\u001b[90mGET /collectionItems\u001b[39m \u001b[32m200\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:40"}
+{"level":"info","message":"\u001b[90mGET /collectionItems/collection/collection-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m2ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:40"}
+{"level":"info","message":"\u001b[90mGET /collectionItems/collection/collection-1/content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:40"}
+{"level":"info","message":"\u001b[90mGET /collectionItems/collection/collection-1/content/missing-content\u001b[39m \u001b[33m404\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:40"}
+{"level":"info","message":"\u001b[90mPOST /collectionItems\u001b[39m \u001b[32m201\u001b[39m \u001b[90m10ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:40"}
+{"level":"info","message":"\u001b[90mPOST /collectionItems\u001b[39m \u001b[33m400\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:40"}
+{"level":"info","message":"\u001b[90mPUT /collectionItems/collection/collection-1/content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:40"}
+{"level":"info","message":"\u001b[90mPUT /collectionItems/collection/collection-1/content/missing-content\u001b[39m \u001b[33m404\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:40"}
+{"level":"info","message":"\u001b[90mDELETE /collectionItems/collection/collection-1/content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:40"}
+{"level":"info","message":"\u001b[90mDELETE /collectionItems/collection/collection-1/content/missing-content\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:40"}
+{"level":"info","message":"\u001b[90mGET /content\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:40"}
+{"level":"info","message":"\u001b[90mGET /content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:40"}
+{"level":"info","message":"\u001b[90mGET /content/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:40"}
+{"level":"info","message":"Creating content with api_id: api-2","timestamp":"2026-04-01 21:45:40"}
+{"level":"info","message":"\u001b[90mPOST /content\u001b[39m \u001b[32m201\u001b[39m \u001b[90m5ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:40"}
+{"level":"info","message":"\u001b[90mPOST /content\u001b[39m \u001b[33m400\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:40"}
+{"level":"info","message":"\u001b[90mPUT /content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:40"}
+{"level":"info","message":"\u001b[90mPUT /content/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:40"}
+{"level":"info","message":"\u001b[90mDELETE /content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:40"}
+{"level":"info","message":"\u001b[90mDELETE /content/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:40"}
+{"level":"info","message":"\u001b[90mGET /collectionItems\u001b[39m \u001b[32m200\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:41"}
+{"level":"info","message":"\u001b[90mGET /collectionItems/collection/collection-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:41"}
+{"level":"info","message":"\u001b[90mGET /collectionItems/collection/collection-1/content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:41"}
+{"level":"info","message":"\u001b[90mGET /collectionItems/collection/collection-1/content/missing-content\u001b[39m \u001b[33m404\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:41"}
+{"level":"info","message":"\u001b[90mPOST /collectionItems\u001b[39m \u001b[32m201\u001b[39m \u001b[90m2ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:41"}
+{"level":"info","message":"\u001b[90mPOST /collectionItems\u001b[39m \u001b[33m400\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:41"}
+{"level":"info","message":"\u001b[90mPUT /collectionItems/collection/collection-1/content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:41"}
+{"level":"info","message":"\u001b[90mPUT /collectionItems/collection/collection-1/content/missing-content\u001b[39m \u001b[33m404\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:41"}
+{"level":"info","message":"\u001b[90mDELETE /collectionItems/collection/collection-1/content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:41"}
+{"level":"info","message":"\u001b[90mDELETE /collectionItems/collection/collection-1/content/missing-content\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:41"}
+{"email":"integration@test.com","level":"info","message":"createUser request body:","password":"password123","privacy":"public","timestamp":"2026-04-01 21:45:41","username":"testuser"}
+{"level":"info","message":"Creating user with email: integration@test.com","timestamp":"2026-04-01 21:45:41"}
+{"level":"info","message":"User created with id: b70ad95a-5445-4d15-915d-2d69ee9ab7b5","timestamp":"2026-04-01 21:45:41"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m79ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:41"}
+{"email":"duplicate@test.com","level":"info","message":"createUser request body:","password":"password123","timestamp":"2026-04-01 21:45:41","username":"dupuser"}
+{"level":"info","message":"Creating user with email: duplicate@test.com","timestamp":"2026-04-01 21:45:41"}
+{"level":"info","message":"User created with id: edf7b51b-e654-45eb-9250-7024056913a9","timestamp":"2026-04-01 21:45:41"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m65ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:41"}
+{"email":"duplicate@test.com","level":"info","message":"createUser request body:","password":"password123","timestamp":"2026-04-01 21:45:41","username":"dupuser"}
+{"level":"info","message":"Creating user with email: duplicate@test.com","timestamp":"2026-04-01 21:45:41"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-04-01 21:45:41"}
+{"level":"error","timestamp":"2026-04-01 21:45:41"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[33m400\u001b[39m \u001b[90m4ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:41"}
+{"email":"login@test.com","level":"info","message":"createUser request body:","password":"password123","timestamp":"2026-04-01 21:45:41","username":"loginuser"}
+{"level":"info","message":"Creating user with email: login@test.com","timestamp":"2026-04-01 21:45:41"}
+{"level":"info","message":"User created with id: 3d635d15-65ce-4672-82a1-a5a3a2683d8d","timestamp":"2026-04-01 21:45:41"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m66ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:41"}
+{"level":"info","message":"User login attempt with email: login@test.com","timestamp":"2026-04-01 21:45:42"}
+{"level":"info","message":"User logged in successfully with email: login@test.com","timestamp":"2026-04-01 21:45:42"}
+{"level":"info","message":"\u001b[90mPOST /user/login\u001b[39m \u001b[32m200\u001b[39m \u001b[90m64ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:42"}
+{"email":"login-fail@test.com","level":"info","message":"createUser request body:","password":"password123","timestamp":"2026-04-01 21:45:42","username":"loginfail"}
+{"level":"info","message":"Creating user with email: login-fail@test.com","timestamp":"2026-04-01 21:45:42"}
+{"level":"info","message":"User created with id: bff90261-a174-45f9-9f8f-63172dc8980a","timestamp":"2026-04-01 21:45:42"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m67ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:42"}
+{"level":"info","message":"User login attempt with email: login-fail@test.com","timestamp":"2026-04-01 21:45:42"}
+{"level":"warn","message":"Login failed: Invalid password for user with email: login-fail@test.com","timestamp":"2026-04-01 21:45:42"}
+{"level":"info","message":"\u001b[90mPOST /user/login\u001b[39m \u001b[33m401\u001b[39m \u001b[90m63ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:42"}
+{"level":"info","message":"\u001b[90mGET /collections\u001b[39m \u001b[32m200\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:42"}
+{"level":"info","message":"\u001b[90mGET /collections/collection-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:42"}
+{"level":"info","message":"\u001b[90mGET /collections/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:42"}
+{"level":"info","message":"\u001b[90mPOST /collections\u001b[39m \u001b[32m201\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:42"}
+{"level":"info","message":"\u001b[90mPOST /collections\u001b[39m \u001b[33m400\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:42"}
+{"level":"info","message":"\u001b[90mPUT /collections/collection-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:42"}
+{"level":"info","message":"\u001b[90mPUT /collections/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:42"}
+{"level":"info","message":"\u001b[90mDELETE /collections/collection-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:42"}
+{"level":"info","message":"\u001b[90mDELETE /collections/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:42"}
+{"level":"info","message":"\u001b[90mGET /content\u001b[39m \u001b[32m200\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:42"}
+{"level":"info","message":"\u001b[90mGET /content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:42"}
+{"level":"info","message":"\u001b[90mGET /content/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:42"}
+{"level":"info","message":"Creating content with api_id: api-2","timestamp":"2026-04-01 21:45:42"}
+{"level":"info","message":"\u001b[90mPOST /content\u001b[39m \u001b[32m201\u001b[39m \u001b[90m2ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:42"}
+{"level":"info","message":"\u001b[90mPOST /content\u001b[39m \u001b[33m400\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:42"}
+{"level":"info","message":"\u001b[90mPUT /content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:42"}
+{"level":"info","message":"\u001b[90mPUT /content/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:42"}
+{"level":"info","message":"\u001b[90mDELETE /content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:42"}
+{"level":"info","message":"\u001b[90mDELETE /content/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:42"}
+{"level":"info","message":"[UserRelationController] User user-id-1 following user undefined","timestamp":"2026-04-01 21:45:43"}
+{"level":"info","message":"\u001b[90mPOST /userRelation/follow/user-id-2\u001b[39m \u001b[32m201\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:43"}
+{"level":"info","message":"[UserRelationController] User undefined unfollowing user user-id-1","timestamp":"2026-04-01 21:45:43"}
+{"level":"info","message":"\u001b[90mDELETE /userRelation/unfollow/user-id-2\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:43"}
+{"level":"info","message":"[UserRelationController] User user-id-1 accepting request from undefined","timestamp":"2026-04-01 21:45:43"}
+{"level":"info","message":"\u001b[90mPATCH /userRelation/accept/user-id-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:43"}
+{"level":"info","message":"[UserRelationController] User user-id-1 refusing request from undefined","timestamp":"2026-04-01 21:45:43"}
+{"level":"info","message":"\u001b[90mPATCH /userRelation/refuse/user-id-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:43"}
+{"level":"info","message":"[UserRelationController] User user-id-1 blocking user undefined","timestamp":"2026-04-01 21:45:43"}
+{"level":"info","message":"\u001b[90mPOST /userRelation/block/user-id-2\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:43"}
+{"level":"info","message":"[UserRelationController] Getting friends for user undefined","timestamp":"2026-04-01 21:45:43"}
+{"level":"info","message":"\u001b[90mGET /userRelation/friends/user-id-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:43"}
+{"level":"info","message":"[UserRelationController] Getting pending requests for user user-id-1","timestamp":"2026-04-01 21:45:43"}
+{"level":"info","message":"\u001b[90mGET /userRelation/request\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:45:43"}
+{"level":"info","message":"\u001b[90mGET /collectionItems\u001b[39m \u001b[32m200\u001b[39m \u001b[90m2ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:11"}
+{"level":"info","message":"\u001b[90mGET /collectionItems/collection/collection-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:11"}
+{"level":"info","message":"\u001b[90mGET /collectionItems/collection/collection-1/content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:11"}
+{"level":"info","message":"\u001b[90mGET /collectionItems/collection/collection-1/content/missing-content\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:11"}
+{"level":"info","message":"\u001b[90mPOST /collectionItems\u001b[39m \u001b[32m201\u001b[39m \u001b[90m7ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:11"}
+{"level":"info","message":"\u001b[90mPOST /collectionItems\u001b[39m \u001b[33m400\u001b[39m \u001b[90m2ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:11"}
+{"level":"info","message":"\u001b[90mPUT /collectionItems/collection/collection-1/content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:11"}
+{"level":"info","message":"\u001b[90mPUT /collectionItems/collection/collection-1/content/missing-content\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:11"}
+{"level":"info","message":"\u001b[90mDELETE /collectionItems/collection/collection-1/content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:11"}
+{"level":"info","message":"\u001b[90mDELETE /collectionItems/collection/collection-1/content/missing-content\u001b[39m \u001b[33m404\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:11"}
+{"email":"integration@test.com","level":"info","message":"createUser request body:","password":"password123","privacy":"public","timestamp":"2026-04-01 21:46:11","username":"testuser"}
+{"level":"info","message":"Creating user with email: integration@test.com","timestamp":"2026-04-01 21:46:11"}
+{"level":"info","message":"User created with id: d7e8135d-c545-470c-adc7-bee6d0f7f447","timestamp":"2026-04-01 21:46:11"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m80ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:11"}
+{"email":"duplicate@test.com","level":"info","message":"createUser request body:","password":"password123","timestamp":"2026-04-01 21:46:11","username":"dupuser"}
+{"level":"info","message":"Creating user with email: duplicate@test.com","timestamp":"2026-04-01 21:46:11"}
+{"level":"info","message":"User created with id: cd394753-d0ba-4fd3-9b50-801e4036b264","timestamp":"2026-04-01 21:46:11"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m75ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:11"}
+{"email":"duplicate@test.com","level":"info","message":"createUser request body:","password":"password123","timestamp":"2026-04-01 21:46:11","username":"dupuser"}
+{"level":"info","message":"Creating user with email: duplicate@test.com","timestamp":"2026-04-01 21:46:11"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-04-01 21:46:11"}
+{"level":"error","timestamp":"2026-04-01 21:46:11"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[33m400\u001b[39m \u001b[90m4ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:11"}
+{"email":"login@test.com","level":"info","message":"createUser request body:","password":"password123","timestamp":"2026-04-01 21:46:11","username":"loginuser"}
+{"level":"info","message":"Creating user with email: login@test.com","timestamp":"2026-04-01 21:46:11"}
+{"level":"info","message":"User created with id: 95eb1383-0b0a-4bb5-975b-58dacbccd392","timestamp":"2026-04-01 21:46:11"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m66ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:11"}
+{"level":"info","message":"User login attempt with email: login@test.com","timestamp":"2026-04-01 21:46:11"}
+{"level":"info","message":"User logged in successfully with email: login@test.com","timestamp":"2026-04-01 21:46:11"}
+{"level":"info","message":"\u001b[90mPOST /user/login\u001b[39m \u001b[32m200\u001b[39m \u001b[90m64ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:11"}
+{"email":"login-fail@test.com","level":"info","message":"createUser request body:","password":"password123","timestamp":"2026-04-01 21:46:11","username":"loginfail"}
+{"level":"info","message":"Creating user with email: login-fail@test.com","timestamp":"2026-04-01 21:46:11"}
+{"level":"info","message":"User created with id: 15b9ba28-8608-4ab1-8533-9b69b2e3e5d6","timestamp":"2026-04-01 21:46:12"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m67ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:12"}
+{"level":"info","message":"User login attempt with email: login-fail@test.com","timestamp":"2026-04-01 21:46:12"}
+{"level":"warn","message":"Login failed: Invalid password for user with email: login-fail@test.com","timestamp":"2026-04-01 21:46:12"}
+{"level":"info","message":"\u001b[90mPOST /user/login\u001b[39m \u001b[33m401\u001b[39m \u001b[90m66ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:12"}
+{"level":"info","message":"\u001b[90mGET /content\u001b[39m \u001b[32m200\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:12"}
+{"level":"info","message":"\u001b[90mGET /content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:12"}
+{"level":"info","message":"\u001b[90mGET /content/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:12"}
+{"level":"info","message":"Creating content with api_id: api-2","timestamp":"2026-04-01 21:46:12"}
+{"level":"info","message":"\u001b[90mPOST /content\u001b[39m \u001b[32m201\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:12"}
+{"level":"info","message":"\u001b[90mPOST /content\u001b[39m \u001b[33m400\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:12"}
+{"level":"info","message":"\u001b[90mPUT /content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:12"}
+{"level":"info","message":"\u001b[90mPUT /content/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:12"}
+{"level":"info","message":"\u001b[90mDELETE /content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:12"}
+{"level":"info","message":"\u001b[90mDELETE /content/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:12"}
+{"level":"info","message":"\u001b[90mGET /content\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:12"}
+{"level":"info","message":"\u001b[90mGET /content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:12"}
+{"level":"info","message":"\u001b[90mGET /content/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:12"}
+{"level":"info","message":"Creating content with api_id: api-2","timestamp":"2026-04-01 21:46:12"}
+{"level":"info","message":"\u001b[90mPOST /content\u001b[39m \u001b[32m201\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:12"}
+{"level":"info","message":"\u001b[90mPOST /content\u001b[39m \u001b[33m400\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:12"}
+{"level":"info","message":"\u001b[90mPUT /content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:12"}
+{"level":"info","message":"\u001b[90mPUT /content/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:12"}
+{"level":"info","message":"\u001b[90mDELETE /content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:12"}
+{"level":"info","message":"\u001b[90mDELETE /content/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:12"}
+{"level":"info","message":"\u001b[90mGET /collections\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:13"}
+{"level":"info","message":"\u001b[90mGET /collections/collection-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:13"}
+{"level":"info","message":"\u001b[90mGET /collections/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:13"}
+{"level":"info","message":"\u001b[90mPOST /collections\u001b[39m \u001b[32m201\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:13"}
+{"level":"info","message":"\u001b[90mPOST /collections\u001b[39m \u001b[33m400\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:13"}
+{"level":"info","message":"\u001b[90mPUT /collections/collection-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:13"}
+{"level":"info","message":"\u001b[90mPUT /collections/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:13"}
+{"level":"info","message":"\u001b[90mDELETE /collections/collection-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:13"}
+{"level":"info","message":"\u001b[90mDELETE /collections/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:13"}
+{"level":"info","message":"\u001b[90mGET /collectionItems\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:13"}
+{"level":"info","message":"\u001b[90mGET /collectionItems/collection/collection-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:13"}
+{"level":"info","message":"\u001b[90mGET /collectionItems/collection/collection-1/content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:13"}
+{"level":"info","message":"\u001b[90mGET /collectionItems/collection/collection-1/content/missing-content\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:13"}
+{"level":"info","message":"\u001b[90mPOST /collectionItems\u001b[39m \u001b[32m201\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:13"}
+{"level":"info","message":"\u001b[90mPOST /collectionItems\u001b[39m \u001b[33m400\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:13"}
+{"level":"info","message":"\u001b[90mPUT /collectionItems/collection/collection-1/content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:13"}
+{"level":"info","message":"\u001b[90mPUT /collectionItems/collection/collection-1/content/missing-content\u001b[39m \u001b[33m404\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:13"}
+{"level":"info","message":"\u001b[90mDELETE /collectionItems/collection/collection-1/content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:13"}
+{"level":"info","message":"\u001b[90mDELETE /collectionItems/collection/collection-1/content/missing-content\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:13"}
+{"level":"info","message":"[UserRelationController] User user-id-1 following user undefined","timestamp":"2026-04-01 21:46:13"}
+{"level":"info","message":"\u001b[90mPOST /userRelation/follow/user-id-2\u001b[39m \u001b[32m201\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:13"}
+{"level":"info","message":"[UserRelationController] User undefined unfollowing user user-id-1","timestamp":"2026-04-01 21:46:13"}
+{"level":"info","message":"\u001b[90mDELETE /userRelation/unfollow/user-id-2\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:13"}
+{"level":"info","message":"[UserRelationController] User user-id-1 accepting request from undefined","timestamp":"2026-04-01 21:46:13"}
+{"level":"info","message":"\u001b[90mPATCH /userRelation/accept/user-id-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:13"}
+{"level":"info","message":"[UserRelationController] User user-id-1 refusing request from undefined","timestamp":"2026-04-01 21:46:13"}
+{"level":"info","message":"\u001b[90mPATCH /userRelation/refuse/user-id-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m2ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:13"}
+{"level":"info","message":"[UserRelationController] User user-id-1 blocking user undefined","timestamp":"2026-04-01 21:46:13"}
+{"level":"info","message":"\u001b[90mPOST /userRelation/block/user-id-2\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:13"}
+{"level":"info","message":"[UserRelationController] Getting friends for user undefined","timestamp":"2026-04-01 21:46:13"}
+{"level":"info","message":"\u001b[90mGET /userRelation/friends/user-id-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m2ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:13"}
+{"level":"info","message":"[UserRelationController] Getting pending requests for user user-id-1","timestamp":"2026-04-01 21:46:13"}
+{"level":"info","message":"\u001b[90mGET /userRelation/request\u001b[39m \u001b[32m200\u001b[39m \u001b[90m2ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:13"}
+{"level":"info","message":"\u001b[90mGET /collections\u001b[39m \u001b[32m200\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:14"}
+{"level":"info","message":"\u001b[90mGET /collections/collection-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:14"}
+{"level":"info","message":"\u001b[90mGET /collections/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:14"}
+{"level":"info","message":"\u001b[90mPOST /collections\u001b[39m \u001b[32m201\u001b[39m \u001b[90m2ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:14"}
+{"level":"info","message":"\u001b[90mPOST /collections\u001b[39m \u001b[33m400\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:14"}
+{"level":"info","message":"\u001b[90mPUT /collections/collection-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:14"}
+{"level":"info","message":"\u001b[90mPUT /collections/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:14"}
+{"level":"info","message":"\u001b[90mDELETE /collections/collection-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:14"}
+{"level":"info","message":"\u001b[90mDELETE /collections/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:14"}
