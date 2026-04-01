@@ -1,5 +1,4 @@
-import {createClient, RedisClientType} from 'redis';
-import {dataTest} from "../interface/RedisInterface";
+import { createClient, RedisClientType } from 'redis';
 
 // URL configurable via la variable d'environnement REDIS_URL
 const redisHost = process.env.REDIS_HOST || 'localhost';
@@ -9,65 +8,55 @@ const redisPassword = process.env.REDIS_PASSWORD;
 
 const client: RedisClientType = createClient({ url: redisUrl, password: redisPassword});
 
-client.on('error', (err) => console.error('Redis Client Error', err));
-client.on('connect', () => console.log('Redis client connecting...'));
-client.on('ready', () => console.log('Redis client ready'));
-client.on('end', () => console.log('Redis connection closed'));
+client.on('error', (err) => console.error('[RedisConnexion] Client Error', err));
+client.on('connect', () => console.log('[RedisConnexion] Client connecting...'));
+client.on('ready', () => console.log('[RedisConnexion] Client ready'));
+client.on('end', () => console.log('[RedisConnexion] Connection closed'));
 
-// Connexion à Redis
+/**
+ * Connexion à Redis
+ */
 export async function connect() {
     try {
         if (!client.isOpen) {
             await client.connect();
-            console.log('Connected to Redis');
+            console.log('[RedisConnexion] Connected to Redis');
         } else {
-            console.log('Redis client already connected');
+            console.log('[RedisConnexion] Redis client already connected');
         }
     } catch (err) {
-        console.error('Failed to connect to Redis:', err);
+        console.error('[RedisConnexion] Failed to connect to Redis:', err);
         throw err;
     }
 }
 
-// Déconnexion de Redis
+/**
+ * Déconnexion de Redis
+ */
 export async function disconnect() {
     try {
         if (client.isOpen) {
             await client.quit();
+            console.log('[RedisConnexion] Disconnected from Redis');
         }
-    }
-    catch (err) {
-        console.error('Error disconnecting Redis:', err);
-    }
-}
-
-// Exemple de fonction pour stocker et récupérer des données structurées (hash)
-export async function testData(session: string, data: dataTest){
-    try {
-        const payload = {
-            ...data,
-        }
-        await client.hSet(session, payload);
-
-        // On récupère et renvoie le hash stocké pour validation
-        const result = await client.hGetAll(session);
-        console.log(`Stored hash for ${session}:`, result);
-        return result;
-    }
-    catch (err) {
-        console.error('Error storing data in Redis:', err);
-        throw err;
+    } catch (err) {
+        console.error('[RedisConnexion] Error disconnecting Redis:', err);
     }
 }
 
-
-export async function getData(session: string){
-    try {
-        return await client.hGetAll(session);
-    }
-    catch (err) {
-        console.error('Error retrieving data from Redis:', err);
-    }
+/**
+ * Récupère l'instance du client Redis
+ */
+export function getClient(): RedisClientType {
+    return client;
 }
+
+/**
+ * Vérifie si le client est connecté
+ */
+export function isConnected(): boolean {
+    return client.isOpen;
+}
+
 
 export default client;
