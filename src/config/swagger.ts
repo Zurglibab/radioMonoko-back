@@ -15,11 +15,20 @@ const swaggerDefinition = {
     ],
     tags: [
         { name: "Health", description: "Etat de l'API" },
+        { name: "Users", description: "Gestion des utilisateurs" },
+        { name: "UserRelations", description: "Gestion des relations entre utilisateurs (amis, abonnements, blocages)" },
         { name: "Brands", description: "Gestion des brands" },
         { name: "Shows", description: "Gestion des shows" },
         { name: "Diffusions", description: "Gestion des diffusions" }
     ],
     components: {
+        securitySchemes: {
+            bearerAuth: {
+                type: "http",
+                scheme: "bearer",
+                bearerFormat: "JWT"
+            }
+        },
         schemas: {
             ErrorResponse: {
                 type: "object",
@@ -46,4 +55,3 @@ export const swaggerSpec = swaggerJSDoc({
         ? ["./dist/src/routes/*.js"]
         : ["./src/routes/*.ts"]
 });
-

@@ -1,7 +1,7 @@
 import request from 'supertest';
 import { createApp } from '../../app';
-import { UserRelationService } from '../../modules/userRelation/userRelation.service';
-import { User } from '../../modules/user/user.types';
+import { UserRelationService } from '../../services/userRelation.service';
+import { User } from '../../types/user.types';
 
 jest.mock('../../middlewares/auth.middleware', () => ({
     authMiddleware: jest.fn((req, res, next) => {
@@ -10,7 +10,7 @@ jest.mock('../../middlewares/auth.middleware', () => ({
     }),
 }));
 
-jest.mock('../../modules/userRelation/userRelation.service');
+jest.mock('../../services/userRelation.service');
 
 const app = createApp();
 

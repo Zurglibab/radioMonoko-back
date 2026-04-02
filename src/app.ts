@@ -2,10 +2,11 @@ import express, { Express, Request, Response } from "express";
 import swaggerUi from "swagger-ui-express";
 import apiRoutes from "./routes/apiRoutes";
 import { swaggerSpec } from "./config/swagger";
-import userRouter from './modules/user/user.routes';
+
 import expressWinston from 'express-winston';
 import logger from './config/logger';
-import userRelationRouter from "./modules/userRelation/userRelation.routes";
+import userRouter from "./routes/user.routes";
+import userRelationRouter from "./routes/userRelation.routes";
 
 export function createApp(): Express {
     const app = express();
