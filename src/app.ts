@@ -24,8 +24,14 @@ export function createApp(): Express {
     }));
 
     console.log("app.use");
-    app.use(express.json());
+    app.use(express.json({ limit: '1mb' }));
     app.use(express.urlencoded({ extended: true }));
+    app.use((req, _res, next) => {
+        if (req.headers['content-type']?.includes('application/json') && typeof req.body === 'string') {
+            try { req.body = JSON.parse(req.body); } catch {}
+        }
+        next();
+    });
 
     // CORS (optionnel, à adapter selon tes besoins)
     app.use((req, res, next) => {

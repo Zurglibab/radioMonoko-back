@@ -602,3 +602,225 @@
 {"level":"info","message":"\u001b[90mPUT /collections/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:14"}
 {"level":"info","message":"\u001b[90mDELETE /collections/collection-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:14"}
 {"level":"info","message":"\u001b[90mDELETE /collections/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-01 21:46:14"}
+{"level":"info","message":"Table 'users' created successfully.","timestamp":"2026-04-02 21:04:14"}
+{"level":"info","message":"Table 'UserRelation' created successfully.","timestamp":"2026-04-02 21:04:14"}
+{"level":"info","message":"Table 'content' created successfully.","timestamp":"2026-04-02 21:04:14"}
+{"level":"info","message":"Table 'collections' created successfully.","timestamp":"2026-04-02 21:04:14"}
+{"level":"info","message":"Table 'collection_items' created successfully.","timestamp":"2026-04-02 21:04:14"}
+{"level":"info","message":"Database initialized successfully.","timestamp":"2026-04-02 21:04:14"}
+{"email":"test@example.com","level":"info","message":"createUser request body:","password":"password123","timestamp":"2026-04-02 21:06:47","username":"testuser"}
+{"level":"info","message":"Creating user with email: test@example.com","timestamp":"2026-04-02 21:06:47"}
+{"level":"info","message":"User created with id: 6896ad38-11e3-436a-adbd-b24dcbb34751","timestamp":"2026-04-02 21:06:47"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m193ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:06:47"}
+{"level":"info","message":"Table 'users' created successfully.","timestamp":"2026-04-02 21:06:49"}
+{"level":"info","message":"Table 'UserRelation' created successfully.","timestamp":"2026-04-02 21:06:49"}
+{"level":"info","message":"Table 'content' created successfully.","timestamp":"2026-04-02 21:06:49"}
+{"level":"info","message":"Table 'collections' created successfully.","timestamp":"2026-04-02 21:06:49"}
+{"level":"info","message":"Table 'collection_items' created successfully.","timestamp":"2026-04-02 21:06:49"}
+{"level":"info","message":"Database initialized successfully.","timestamp":"2026-04-02 21:06:49"}
+{"level":"info","message":"\u001b[90mPOST /collections\u001b[39m \u001b[32m201\u001b[39m \u001b[90m28ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:07:25"}
+{"level":"info","message":"\u001b[90mPOST /api/shows/FRANCEINTER\u001b[39m \u001b[33m404\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:09:01"}
+{"level":"info","message":"\u001b[90mGET /\u001b[39m \u001b[36m304\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:09:17"}
+{"level":"info","message":"\u001b[90mGET /favicon.ico\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:09:17"}
+{"level":"info","message":"\u001b[90mGET /api/docs/\u001b[39m \u001b[36m304\u001b[39m \u001b[90m2ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:09:20"}
+{"level":"info","message":"\u001b[90mGET /api/docs/swagger-ui.css\u001b[39m \u001b[32m200\u001b[39m \u001b[90m16ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:09:20"}
+{"level":"info","message":"\u001b[90mGET /api/docs/swagger-ui-standalone-preset.js\u001b[39m \u001b[32m200\u001b[39m \u001b[90m36ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:09:20"}
+{"level":"info","message":"\u001b[90mGET /api/docs/swagger-ui-init.js\u001b[39m \u001b[36m304\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:09:20"}
+{"level":"info","message":"\u001b[90mGET /api/docs/swagger-ui-bundle.js\u001b[39m \u001b[32m200\u001b[39m \u001b[90m41ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:09:20"}
+{"level":"info","message":"\u001b[90mGET /api/shows/Franceinter\u001b[39m \u001b[33m400\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:09:24"}
+{"level":"info","message":"\u001b[90mPOST /api/shows/FRANCEINTER\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:10:00"}
+{"level":"info","message":"Table 'users' created successfully.","timestamp":"2026-04-02 21:10:32"}
+{"level":"info","message":"Table 'UserRelation' created successfully.","timestamp":"2026-04-02 21:10:32"}
+{"level":"info","message":"Table 'content' created successfully.","timestamp":"2026-04-02 21:10:32"}
+{"level":"info","message":"Table 'collections' created successfully.","timestamp":"2026-04-02 21:10:32"}
+{"level":"info","message":"Table 'collection_items' created successfully.","timestamp":"2026-04-02 21:10:32"}
+{"level":"info","message":"Database initialized successfully.","timestamp":"2026-04-02 21:10:32"}
+{"level":"info","message":"Table 'users' created successfully.","timestamp":"2026-04-02 21:10:44"}
+{"level":"info","message":"Table 'UserRelation' created successfully.","timestamp":"2026-04-02 21:10:44"}
+{"level":"info","message":"Table 'content' created successfully.","timestamp":"2026-04-02 21:10:44"}
+{"level":"info","message":"Table 'collections' created successfully.","timestamp":"2026-04-02 21:10:44"}
+{"level":"info","message":"Table 'collection_items' created successfully.","timestamp":"2026-04-02 21:10:44"}
+{"level":"info","message":"Database initialized successfully.","timestamp":"2026-04-02 21:10:44"}
+{"level":"info","message":"Table 'users' created successfully.","timestamp":"2026-04-02 21:11:11"}
+{"level":"info","message":"Table 'UserRelation' created successfully.","timestamp":"2026-04-02 21:11:11"}
+{"level":"info","message":"Table 'content' created successfully.","timestamp":"2026-04-02 21:11:11"}
+{"level":"info","message":"Table 'collections' created successfully.","timestamp":"2026-04-02 21:11:11"}
+{"level":"info","message":"Table 'collection_items' created successfully.","timestamp":"2026-04-02 21:11:11"}
+{"level":"info","message":"Database initialized successfully.","timestamp":"2026-04-02 21:11:11"}
+{"level":"info","message":"Table 'users' created successfully.","timestamp":"2026-04-02 21:11:23"}
+{"level":"info","message":"Table 'UserRelation' created successfully.","timestamp":"2026-04-02 21:11:23"}
+{"level":"info","message":"Table 'content' created successfully.","timestamp":"2026-04-02 21:11:23"}
+{"level":"info","message":"Table 'collections' created successfully.","timestamp":"2026-04-02 21:11:23"}
+{"level":"info","message":"Table 'collection_items' created successfully.","timestamp":"2026-04-02 21:11:23"}
+{"level":"info","message":"Database initialized successfully.","timestamp":"2026-04-02 21:11:23"}
+{"level":"info","message":"Table 'users' created successfully.","timestamp":"2026-04-02 21:12:24"}
+{"level":"info","message":"Table 'UserRelation' created successfully.","timestamp":"2026-04-02 21:12:24"}
+{"level":"info","message":"Table 'content' created successfully.","timestamp":"2026-04-02 21:12:24"}
+{"level":"info","message":"Table 'collections' created successfully.","timestamp":"2026-04-02 21:12:24"}
+{"level":"info","message":"Table 'collection_items' created successfully.","timestamp":"2026-04-02 21:12:24"}
+{"level":"info","message":"Database initialized successfully.","timestamp":"2026-04-02 21:12:24"}
+{"level":"info","message":"\u001b[90mGET /api/shows/FRANCEINTER\u001b[39m \u001b[32m200\u001b[39m \u001b[90m11ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:12:25"}
+{"level":"info","message":"\u001b[90mPOST /api/shows/FRANCEINTER\u001b[39m \u001b[33m404\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:12:34"}
+{"level":"info","message":"\u001b[90mPOST /api/shows/FRANCEINTER\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:12:39"}
+{"level":"info","message":"\u001b[90mPOST /api/shows/FRANCEINTER\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:12:46"}
+{"level":"info","message":"\u001b[90mPOST /api/shows/FRANCEINTER\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:12:46"}
+{"level":"info","message":"\u001b[90mGET /api/shows/FRANCEINTER\u001b[39m \u001b[32m200\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:13:02"}
+{"level":"info","message":"\u001b[90mPOST /content\u001b[39m \u001b[33m400\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:14:46"}
+{"level":"info","message":"\u001b[90mPOST /content\u001b[39m \u001b[33m400\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:15:05"}
+{"level":"info","message":"\u001b[90mPOST /content\u001b[39m \u001b[33m400\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:15:21"}
+{"level":"info","message":"\u001b[90mPOST /content\u001b[39m \u001b[33m400\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:15:52"}
+{"level":"info","message":"\u001b[90mPOST /content\u001b[39m \u001b[33m400\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:16:14"}
+{"level":"info","message":"\u001b[90mPOST /content\u001b[39m \u001b[33m400\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:16:27"}
+{"level":"info","message":"Table 'users' created successfully.","timestamp":"2026-04-02 21:16:58"}
+{"level":"info","message":"Table 'UserRelation' created successfully.","timestamp":"2026-04-02 21:16:58"}
+{"level":"info","message":"Table 'content' created successfully.","timestamp":"2026-04-02 21:16:58"}
+{"level":"info","message":"Table 'collections' created successfully.","timestamp":"2026-04-02 21:16:58"}
+{"level":"info","message":"Table 'collection_items' created successfully.","timestamp":"2026-04-02 21:16:58"}
+{"level":"info","message":"Database initialized successfully.","timestamp":"2026-04-02 21:16:58"}
+{"level":"info","message":"\u001b[90mPOST /content\u001b[39m \u001b[33m400\u001b[39m \u001b[90m5ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:17:01"}
+{"level":"info","message":"\u001b[90mPOST /content\u001b[39m \u001b[33m400\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:17:05"}
+{"level":"info","message":"\u001b[90mPOST /content\u001b[39m \u001b[33m400\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:12"}
+{"level":"info","message":"\u001b[90mPOST /content\u001b[39m \u001b[33m400\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:17"}
+{"level":"info","message":"\u001b[90mPOST /content\u001b[39m \u001b[33m400\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:26"}
+{"level":"info","message":"[UserRelationController] User user-id-1 following user undefined","timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mGET /content\u001b[39m \u001b[32m200\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mGET /content\u001b[39m \u001b[32m200\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mGET /collections\u001b[39m \u001b[32m200\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mGET /collections\u001b[39m \u001b[32m200\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mPOST /userRelation/follow/user-id-2\u001b[39m \u001b[32m201\u001b[39m \u001b[90m13ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mGET /collectionItems\u001b[39m \u001b[32m200\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"[UserRelationController] User undefined unfollowing user user-id-1","timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mGET /collectionItems\u001b[39m \u001b[32m200\u001b[39m \u001b[90m2ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mDELETE /userRelation/unfollow/user-id-2\u001b[39m \u001b[32m200\u001b[39m \u001b[90m2ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mGET /content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mGET /content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mGET /collections/collection-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mGET /collections/collection-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"[UserRelationController] User user-id-1 accepting request from undefined","timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mGET /collectionItems/collection/collection-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mPATCH /userRelation/accept/user-id-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mGET /content/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mGET /content/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mGET /collections/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mGET /collections/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"[UserRelationController] User user-id-1 refusing request from undefined","timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mGET /collectionItems/collection/collection-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mGET /collectionItems/collection/collection-1/content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mPATCH /userRelation/refuse/user-id-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m2ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mGET /collectionItems/collection/collection-1/content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"[UserRelationController] User user-id-1 blocking user undefined","timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mGET /collectionItems/collection/collection-1/content/missing-content\u001b[39m \u001b[33m404\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mPOST /userRelation/block/user-id-2\u001b[39m \u001b[32m200\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mPOST /collections\u001b[39m \u001b[32m201\u001b[39m \u001b[90m13ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"Creating content with api_id: api-2","timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"Creating content with api_id: api-2","timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"[UserRelationController] Getting friends for user undefined","timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mGET /collectionItems/collection/collection-1/content/missing-content\u001b[39m \u001b[33m404\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mPOST /content\u001b[39m \u001b[32m201\u001b[39m \u001b[90m17ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mPOST /content\u001b[39m \u001b[32m201\u001b[39m \u001b[90m17ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mGET /userRelation/friends/user-id-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"email":"integration@test.com","level":"info","message":"createUser request body:","password":"password123","privacy":"public","timestamp":"2026-04-02 21:18:45","username":"testuser"}
+{"level":"info","message":"\u001b[90mPOST /collections\u001b[39m \u001b[32m201\u001b[39m \u001b[90m13ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mPOST /collections\u001b[39m \u001b[33m400\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"Creating user with email: integration@test.com","timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"[UserRelationController] Getting pending requests for user user-id-1","timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mGET /userRelation/request\u001b[39m \u001b[32m200\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mPOST /content\u001b[39m \u001b[33m400\u001b[39m \u001b[90m2ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mPOST /content\u001b[39m \u001b[33m400\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mPOST /collections\u001b[39m \u001b[33m400\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mPOST /collectionItems\u001b[39m \u001b[32m201\u001b[39m \u001b[90m15ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mPUT /collections/collection-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mPUT /content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mPUT /content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m2ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mPOST /collectionItems\u001b[39m \u001b[32m201\u001b[39m \u001b[90m12ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mPUT /collections/collection-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mPOST /collectionItems\u001b[39m \u001b[33m400\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mPUT /collections/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mPUT /content/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mPOST /collectionItems\u001b[39m \u001b[33m400\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mPUT /collections/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mPUT /content/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mPUT /collectionItems/collection/collection-1/content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mDELETE /collections/collection-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mDELETE /content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mDELETE /collections/collection-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mPUT /collectionItems/collection/collection-1/content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mDELETE /content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mPUT /collectionItems/collection/collection-1/content/missing-content\u001b[39m \u001b[33m404\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mDELETE /collections/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mDELETE /content/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mDELETE /collections/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mPUT /collectionItems/collection/collection-1/content/missing-content\u001b[39m \u001b[33m404\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mDELETE /content/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mDELETE /collectionItems/collection/collection-1/content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mDELETE /collectionItems/collection/collection-1/content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mDELETE /collectionItems/collection/collection-1/content/missing-content\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mDELETE /collectionItems/collection/collection-1/content/missing-content\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"User created with id: 83c34469-43d8-46fa-8dd8-825fb401d626","timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m114ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"email":"duplicate@test.com","level":"info","message":"createUser request body:","password":"password123","timestamp":"2026-04-02 21:18:45","username":"dupuser"}
+{"level":"info","message":"Creating user with email: duplicate@test.com","timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"User created with id: a2f073f8-9089-4842-b625-7f1194331027","timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m75ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"email":"duplicate@test.com","level":"info","message":"createUser request body:","password":"password123","timestamp":"2026-04-02 21:18:45","username":"dupuser"}
+{"level":"info","message":"Creating user with email: duplicate@test.com","timestamp":"2026-04-02 21:18:45"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-04-02 21:18:45"}
+{"level":"error","timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[33m400\u001b[39m \u001b[90m4ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"email":"login@test.com","level":"info","message":"createUser request body:","password":"password123","timestamp":"2026-04-02 21:18:45","username":"loginuser"}
+{"level":"info","message":"Creating user with email: login@test.com","timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"User created with id: fcb9eeb4-dba9-45f0-8bb5-a09dd4d69600","timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m66ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"User login attempt with email: login@test.com","timestamp":"2026-04-02 21:18:45"}
+{"level":"info","message":"User logged in successfully with email: login@test.com","timestamp":"2026-04-02 21:18:46"}
+{"level":"info","message":"\u001b[90mPOST /user/login\u001b[39m \u001b[32m200\u001b[39m \u001b[90m62ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:46"}
+{"email":"login-fail@test.com","level":"info","message":"createUser request body:","password":"password123","timestamp":"2026-04-02 21:18:46","username":"loginfail"}
+{"level":"info","message":"Creating user with email: login-fail@test.com","timestamp":"2026-04-02 21:18:46"}
+{"level":"info","message":"User created with id: 46d3ebe9-a2f7-4ed8-a69e-db78b738a270","timestamp":"2026-04-02 21:18:46"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m66ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:46"}
+{"level":"info","message":"User login attempt with email: login-fail@test.com","timestamp":"2026-04-02 21:18:46"}
+{"level":"warn","message":"Login failed: Invalid password for user with email: login-fail@test.com","timestamp":"2026-04-02 21:18:46"}
+{"level":"info","message":"\u001b[90mPOST /user/login\u001b[39m \u001b[33m401\u001b[39m \u001b[90m66ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:18:46"}
+{"level":"info","message":"Table 'users' created successfully.","timestamp":"2026-04-02 21:20:02"}
+{"level":"info","message":"Table 'UserRelation' created successfully.","timestamp":"2026-04-02 21:20:02"}
+{"level":"info","message":"Table 'content' created successfully.","timestamp":"2026-04-02 21:20:02"}
+{"level":"info","message":"Table 'collections' created successfully.","timestamp":"2026-04-02 21:20:02"}
+{"level":"info","message":"Table 'collection_items' created successfully.","timestamp":"2026-04-02 21:20:02"}
+{"level":"info","message":"Database initialized successfully.","timestamp":"2026-04-02 21:20:02"}
+{"level":"info","message":"\u001b[90mPOST /content\u001b[39m \u001b[33m400\u001b[39m \u001b[90m2ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:20:04"}
+{"level":"info","message":"\u001b[90mPOST /content\u001b[39m \u001b[33m400\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:20:13"}
+{"level":"info","message":"\u001b[90mPOST /content\u001b[39m \u001b[33m400\u001b[39m \u001b[90m10ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:20:32"}
+{"level":"info","message":"Creating content with api_id: 0057e73d-c33a-4eca-81c6-9867a94b4ae8_1","timestamp":"2026-04-02 21:20:36"}
+{"level":"info","message":"\u001b[90mPOST /content\u001b[39m \u001b[32m201\u001b[39m \u001b[90m18ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:20:36"}
+{"level":"info","message":"\u001b[90mPOST /collectionItems\u001b[39m \u001b[33m400\u001b[39m \u001b[90m13ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:22:12"}
+{"level":"info","message":"\u001b[90mGET /api/docs/\u001b[39m \u001b[36m304\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:26:56"}
+{"level":"info","message":"\u001b[90mGET /api/docs/swagger-ui.css\u001b[39m \u001b[36m304\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:26:56"}
+{"level":"info","message":"\u001b[90mGET /api/docs/swagger-ui-bundle.js\u001b[39m \u001b[36m304\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:26:56"}
+{"level":"info","message":"\u001b[90mGET /api/docs/swagger-ui-init.js\u001b[39m \u001b[36m304\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:26:56"}
+{"level":"info","message":"\u001b[90mGET /api/docs/swagger-ui-standalone-preset.js\u001b[39m \u001b[36m304\u001b[39m \u001b[90m2ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:26:56"}
+{"level":"info","message":"\u001b[90mPOST /collectionItems\u001b[39m \u001b[33m400\u001b[39m \u001b[90m11ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:27:39"}
+{"level":"error","message":"middlewareError","meta":{"date":"Thu Apr 02 2026 21:28:00 GMT+0200 (heure d’été d’Europe centrale)","error":{"body":"{\r\n  \"collection_id\": \"2f06652b-38e0-465c-82fa-91a0f3c89a33\",\r\n  \"content_id\": \"368c7d8d-9b9b-46ba-93d3-23ac90e1a688\",\r\n  \"position\" : 2\r\n  \"note\": \"Ajouté à ma collection\"\r\n}\r\n","expose":true,"status":400,"statusCode":400,"type":"entity.parse.failed"},"exception":true,"level":"error","message":"uncaughtException: Expected ',' or '}' after property value in JSON at position 140 (line 5 column 3)\nSyntaxError: Expected ',' or '}' after property value in JSON at position 140 (line 5 column 3)\n    at JSON.parse (<anonymous>)\n    at parse (F:\\Cours\\ProjetFinal\\radioMonoko-back\\node_modules\\body-parser\\lib\\types\\json.js:92:19)\n    at F:\\Cours\\ProjetFinal\\radioMonoko-back\\node_modules\\body-parser\\lib\\read.js:128:18\n    at AsyncResource.runInAsyncScope (node:async_hooks:214:14)\n    at invokeCallback (F:\\Cours\\ProjetFinal\\radioMonoko-back\\node_modules\\raw-body\\index.js:238:16)\n    at done (F:\\Cours\\ProjetFinal\\radioMonoko-back\\node_modules\\raw-body\\index.js:227:7)\n    at IncomingMessage.onEnd (F:\\Cours\\ProjetFinal\\radioMonoko-back\\node_modules\\raw-body\\index.js:287:7)\n    at IncomingMessage.emit (node:events:508:28)\n    at endReadableNT (node:internal/streams/readable:1701:12)\n    at process.processTicksAndRejections (node:internal/process/task_queues:89:21)","os":{"loadavg":[0,0,0],"uptime":15269.453},"process":{"argv":["C:\\Program Files\\nodejs\\node.exe","F:\\Cours\\ProjetFinal\\radioMonoko-back\\index.ts"],"cwd":"F:\\Cours\\ProjetFinal\\radioMonoko-back","execPath":"C:\\Program Files\\nodejs\\node.exe","gid":null,"memoryUsage":{"arrayBuffers":2184166,"external":6410447,"heapTotal":33832960,"heapUsed":31602616,"rss":108445696},"pid":22820,"uid":null,"version":"v24.13.0"},"req":{"headers":{"accept":"*/*","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"179","content-type":"application/json","host":"localhost:3000","postman-token":"3ee9dc4f-815d-463e-a0f1-8dc0be093de3","user-agent":"PostmanRuntime/7.51.1"},"httpVersion":"1.1","method":"POST","originalUrl":"/collectionItems","query":{},"url":"/collectionItems"},"stack":"SyntaxError: Expected ',' or '}' after property value in JSON at position 140 (line 5 column 3)\n    at JSON.parse (<anonymous>)\n    at parse (F:\\Cours\\ProjetFinal\\radioMonoko-back\\node_modules\\body-parser\\lib\\types\\json.js:92:19)\n    at F:\\Cours\\ProjetFinal\\radioMonoko-back\\node_modules\\body-parser\\lib\\read.js:128:18\n    at AsyncResource.runInAsyncScope (node:async_hooks:214:14)\n    at invokeCallback (F:\\Cours\\ProjetFinal\\radioMonoko-back\\node_modules\\raw-body\\index.js:238:16)\n    at done (F:\\Cours\\ProjetFinal\\radioMonoko-back\\node_modules\\raw-body\\index.js:227:7)\n    at IncomingMessage.onEnd (F:\\Cours\\ProjetFinal\\radioMonoko-back\\node_modules\\raw-body\\index.js:287:7)\n    at IncomingMessage.emit (node:events:508:28)\n    at endReadableNT (node:internal/streams/readable:1701:12)\n    at process.processTicksAndRejections (node:internal/process/task_queues:89:21)","trace":[{"column":null,"file":null,"function":"JSON.parse","line":null,"method":"parse","native":false},{"column":19,"file":"F:\\Cours\\ProjetFinal\\radioMonoko-back\\node_modules\\body-parser\\lib\\types\\json.js","function":"parse","line":92,"method":null,"native":false},{"column":18,"file":"F:\\Cours\\ProjetFinal\\radioMonoko-back\\node_modules\\body-parser\\lib\\read.js","function":null,"line":128,"method":null,"native":false},{"column":14,"file":"node:async_hooks","function":"AsyncResource.runInAsyncScope","line":214,"method":"runInAsyncScope","native":false},{"column":16,"file":"F:\\Cours\\ProjetFinal\\radioMonoko-back\\node_modules\\raw-body\\index.js","function":"invokeCallback","line":238,"method":null,"native":false},{"column":7,"file":"F:\\Cours\\ProjetFinal\\radioMonoko-back\\node_modules\\raw-body\\index.js","function":"done","line":227,"method":null,"native":false},{"column":7,"file":"F:\\Cours\\ProjetFinal\\radioMonoko-back\\node_modules\\raw-body\\index.js","function":"IncomingMessage.onEnd","line":287,"method":"onEnd","native":false},{"column":28,"file":"node:events","function":"IncomingMessage.emit","line":508,"method":"emit","native":false},{"column":12,"file":"node:internal/streams/readable","function":"endReadableNT","line":1701,"method":null,"native":false},{"column":21,"file":"node:internal/process/task_queues","function":"process.processTicksAndRejections","line":89,"method":"processTicksAndRejections","native":false}]},"timestamp":"2026-04-02 21:28:00"}
+{"level":"info","message":"\u001b[90mPOST /collectionItems\u001b[39m \u001b[33m400\u001b[39m \u001b[90m5ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:28:00"}
+{"level":"info","message":"\u001b[90mPOST /collectionItems\u001b[39m \u001b[33m400\u001b[39m \u001b[90m13ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:28:05"}
+{"level":"info","message":"\u001b[90mPOST /collectionItems\u001b[39m \u001b[33m400\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:28:09"}
+{"level":"info","message":"\u001b[90mPOST /collectionItems\u001b[39m \u001b[33m400\u001b[39m \u001b[90m11ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:28:13"}
+{"level":"info","message":"\u001b[90mPOST /collectionItems\u001b[39m \u001b[33m400\u001b[39m \u001b[90m13ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:28:55"}
+{"level":"info","message":"\u001b[90mPOST /collectionItems\u001b[39m \u001b[33m400\u001b[39m \u001b[90m15ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:29:39"}
+{"level":"info","message":"\u001b[90mPOST /collectionItems\u001b[39m \u001b[33m400\u001b[39m \u001b[90m16ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:29:43"}
+{"level":"info","message":"Table 'users' created successfully.","timestamp":"2026-04-02 21:30:13"}
+{"level":"info","message":"Table 'UserRelation' created successfully.","timestamp":"2026-04-02 21:30:13"}
+{"level":"info","message":"Table 'content' created successfully.","timestamp":"2026-04-02 21:30:13"}
+{"level":"info","message":"Table 'collections' created successfully.","timestamp":"2026-04-02 21:30:13"}
+{"level":"info","message":"Table 'collection_items' created successfully.","timestamp":"2026-04-02 21:30:13"}
+{"level":"info","message":"Database initialized successfully.","timestamp":"2026-04-02 21:30:13"}
+{"level":"info","message":"\u001b[90mPOST /collectionItems\u001b[39m \u001b[33m400\u001b[39m \u001b[90m38ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:30:23"}
+{"level":"info","message":"\u001b[90mGET /collections/2f06652b-38e0-465c-82fa-91a0f3c89a33\u001b[39m \u001b[33m404\u001b[39m \u001b[90m12ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:31:51"}
+{"level":"info","message":"\u001b[90mPOST /collections\u001b[39m \u001b[33m400\u001b[39m \u001b[90m12ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:32:17"}
+{"level":"info","message":"\u001b[90mPOST /collections\u001b[39m \u001b[33m400\u001b[39m \u001b[90m11ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:32:46"}
+{"level":"info","message":"\u001b[90mPOST /collections\u001b[39m \u001b[33m400\u001b[39m \u001b[90m13ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:33:33"}
+{"email":"test@example.com","level":"info","message":"createUser request body:","password":"password123","timestamp":"2026-04-02 21:34:03","username":"testuser"}
+{"level":"info","message":"Creating user with email: test@example.com","timestamp":"2026-04-02 21:34:03"}
+{"level":"info","message":"User created with id: 43ee8360-93c5-40b8-a250-c71211963d79","timestamp":"2026-04-02 21:34:03"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m88ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:34:03"}
+{"level":"info","message":"\u001b[90mPOST /collections\u001b[39m \u001b[32m201\u001b[39m \u001b[90m13ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:34:16"}
+{"level":"info","message":"\u001b[90mPOST /collectionItems\u001b[39m \u001b[32m201\u001b[39m \u001b[90m15ms\u001b[39m","meta":{},"timestamp":"2026-04-02 21:34:35"}

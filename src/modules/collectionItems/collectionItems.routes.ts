@@ -20,4 +20,3 @@ export const createCollectionItemsRouter = () => {
 };
 
 export default createCollectionItemsRouter;
-

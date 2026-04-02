@@ -17,3 +17,5 @@ userRouter.get('/id/:id', authMiddleware, userController.getUserById);
 userRouter.delete('/delete/:id', authMiddleware, userController.deleteUserById);
 
 export default userRouter;
+
+export {};

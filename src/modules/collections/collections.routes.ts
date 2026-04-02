@@ -19,4 +19,3 @@ export const createCollectionsRouter = () => {
 };
 
 export default createCollectionsRouter;
-
