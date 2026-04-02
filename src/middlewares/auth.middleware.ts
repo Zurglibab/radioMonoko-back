@@ -12,18 +12,18 @@ declare global {
 export const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
     const authHeader = req.headers.authorization;
 
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
-        return res.status(404).json();
+    if (!authHeader?.startsWith('Bearer ')) {
+        return res.status(401).json({ message: "Non autorisé: Token manquant ou invalide." });
     }
 
     const token = authHeader.split(' ')[1];
 
     try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET!) as { id: string; email: string; iat: number; exp: number };
+        const decoded = jwt.verify(token, process.env.JWT_SECRET) as { id: string; email: string; iat: number; exp: number };
         req.user = { id: decoded.id, email: decoded.email };
         next();
     } catch (error) {
         console.error('Error verifying token:', error);
-        return res.status(404).json();
+        return res.status(401).json({ message: "Non autorisé: Token invalide ou expiré." });
     }
 };
