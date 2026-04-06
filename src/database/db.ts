@@ -133,10 +133,12 @@ async function createReviewTable(client: PoolClient) {
             id UUID PRIMARY KEY,
             user_id UUID NOT NULL,
             content_id UUID NOT NULL,
+            parent_review_id UUID,
             comment TEXT,
             created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
             FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-            FOREIGN KEY (content_id) REFERENCES content(id) ON DELETE CASCADE
+            FOREIGN KEY (content_id) REFERENCES content(id) ON DELETE CASCADE,
+            FOREIGN KEY (parent_review_id) REFERENCES reviews(id) ON DELETE CASCADE
         )
     `);
     logger.info("Table 'reviews' created successfully.");

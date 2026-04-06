@@ -29,6 +29,10 @@ export const createReviewRouter = () => {
      *         content_id:
      *           type: string
      *           format: uuid
+     *         parent_review_id:
+     *           type: string
+     *           format: uuid
+     *           nullable: true
      *         comment:
      *           type: string
      *           nullable: true
@@ -47,11 +51,19 @@ export const createReviewRouter = () => {
      *         content_id:
      *           type: string
      *           format: uuid
+     *         parent_review_id:
+     *           type: string
+     *           format: uuid
+     *           nullable: true
      *         comment:
      *           type: string
      *     UpdateReviewDTO:
      *       type: object
      *       properties:
+     *         parent_review_id:
+     *           type: string
+     *           format: uuid
+     *           nullable: true
      *         comment:
      *           type: string
      */
@@ -123,6 +135,32 @@ export const createReviewRouter = () => {
      *                 $ref: '#/components/schemas/Review'
      */
     router.get('/content/:contentId', controller.getByContentId);
+
+    /**
+     * @openapi
+     * /review/parent/{parentReviewId}:
+     *   get:
+     *     tags: [Review]
+     *     summary: Recuperer les reviews associees a un parent_review_id
+     *     parameters:
+     *       - in: path
+     *         name: parentReviewId
+     *         required: true
+     *         schema:
+     *           type: string
+     *           format: uuid
+     *           nullable: true
+     *     responses:
+     *       200:
+     *         description: Liste des reviews associees au parent
+     *         content:
+     *           application/json:
+     *             schema:
+     *               type: array
+     *               items:
+     *                 $ref: '#/components/schemas/Review'
+     */
+    router.get('/parent/:parentReviewId', controller.getByParentReviewId);
 
     /**
      * @openapi
@@ -206,6 +244,3 @@ export const createReviewRouter = () => {
 
     return router;
 };
-
-export default createReviewRouter;
-

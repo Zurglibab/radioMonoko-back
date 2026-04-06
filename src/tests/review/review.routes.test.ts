@@ -41,6 +41,7 @@ describe('Review Routes with Mocks', () => {
                     id: 'review-1',
                     user_id: 'user-1',
                     content_id: 'content-1',
+                    parent_review_id: null,
                     comment: 'Great content',
                     created_at: new Date().toISOString(),
                 },
@@ -60,6 +61,7 @@ describe('Review Routes with Mocks', () => {
                 id: 'review-1',
                 user_id: 'user-1',
                 content_id: 'content-1',
+                parent_review_id: null,
                 comment: 'Great content',
                 created_at: new Date().toISOString(),
             });
@@ -87,6 +89,7 @@ describe('Review Routes with Mocks', () => {
                     id: 'review-1',
                     user_id: 'user-1',
                     content_id: 'content-1',
+                    parent_review_id: null,
                     comment: 'Great content',
                     created_at: new Date().toISOString(),
                 },
@@ -105,16 +108,36 @@ describe('Review Routes with Mocks', () => {
                 id: 'review-2',
                 user_id: 'user-1',
                 content_id: 'content-2',
+                parent_review_id: 'review-1',
                 comment: 'New review',
                 created_at: new Date().toISOString(),
             });
 
             const res = await request(app)
                 .post('/review')
-                .send({ user_id: 'user-1', content_id: 'content-2', comment: 'New review' });
+                .send({ user_id: 'user-1', content_id: 'content-2', parent_review_id: 'review-1', comment: 'New review' });
 
             expect(res.status).toBe(201);
             expect(res.body).toHaveProperty('id', 'review-2');
+        });
+
+        it('should create a root review without parent_review_id and return 201', async () => {
+            mockCreate.mockResolvedValue({
+                id: 'review-root',
+                user_id: 'user-1',
+                content_id: 'content-3',
+                parent_review_id: null,
+                comment: 'Root review',
+                created_at: new Date().toISOString(),
+            });
+
+            const res = await request(app)
+                .post('/review')
+                .send({ user_id: 'user-1', content_id: 'content-3', comment: 'Root review' });
+
+            expect(res.status).toBe(201);
+            expect(res.body).toHaveProperty('id', 'review-root');
+            expect(res.body).toHaveProperty('parent_review_id', null);
         });
 
         it('should return 400 when payload is incomplete', async () => {
@@ -133,13 +156,14 @@ describe('Review Routes with Mocks', () => {
                 id: 'review-1',
                 user_id: 'user-1',
                 content_id: 'content-1',
+                parent_review_id: 'review-parent',
                 comment: 'Updated review',
                 created_at: new Date().toISOString(),
             });
 
             const res = await request(app)
                 .put('/review/review-1')
-                .send({ comment: 'Updated review' });
+                .send({ parent_review_id: 'review-parent', comment: 'Updated review' });
 
             expect(res.status).toBe(200);
             expect(res.body).toHaveProperty('comment', 'Updated review');
@@ -163,6 +187,7 @@ describe('Review Routes with Mocks', () => {
                 id: 'review-1',
                 user_id: 'user-1',
                 content_id: 'content-1',
+                parent_review_id: null,
                 comment: 'To delete',
                 created_at: new Date().toISOString(),
             });

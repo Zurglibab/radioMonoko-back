@@ -18,6 +18,10 @@ export class ReviewService {
         return this.repository.findByContentId(contentId);
     }
 
+    getByParentReviewId(parentReviewId: string | null): Promise<Review[]> {
+        return this.repository.findByParentReviewId(parentReviewId);
+    }
+
     async create(dto: Omit<CreateReviewDTO, 'id'>): Promise<Review> {
         if (!dto.user_id || !dto.content_id) {
             throw new Error('user_id and content_id are required');
@@ -27,6 +31,7 @@ export class ReviewService {
             id: randomUUID(),
             user_id: dto.user_id,
             content_id: dto.content_id,
+            parent_review_id: dto.parent_review_id,
             comment: dto.comment,
         });
     }
@@ -39,4 +44,3 @@ export class ReviewService {
         return this.repository.deleteById(id);
     }
 }
-

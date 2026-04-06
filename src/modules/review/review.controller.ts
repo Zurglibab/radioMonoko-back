@@ -35,6 +35,16 @@ export class ReviewController {
         }
     };
 
+    getByParentReviewId = async (req: Request, res: Response) => {
+        try {
+            const parentReviewId = req.params.parentReviewId === 'null' ? null : (req.params.parentReviewId as string);
+            const reviews = await this.service.getByParentReviewId(parentReviewId);
+            res.status(200).json(reviews);
+        } catch (error: any) {
+            res.status(500).json({ message: error.message });
+        }
+    };
+
     create = async (req: Request, res: Response) => {
         try {
             const created = await this.service.create(req.body);
@@ -68,4 +78,3 @@ export class ReviewController {
         }
     };
 }
-
