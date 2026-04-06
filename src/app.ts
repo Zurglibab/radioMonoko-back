@@ -9,6 +9,9 @@ import userRelationRouter from "./modules/userRelation/userRelation.routes";
 import { createContentRouter } from './modules/content/content.routes';
 import { createCollectionsRouter } from './modules/collections/collections.routes';
 import { createCollectionItemsRouter } from './modules/collectionItems/collectionItems.routes';
+import { createRatingContentRouter } from './modules/ratingContent/ratingContent.routes';
+import { createReviewRouter } from './modules/review/review.routes';
+import { createLikeReviewRouter } from './modules/likeReview/likeReview.routes';
 
 
 export function createApp(): Express {
@@ -50,6 +53,9 @@ export function createApp(): Express {
     app.use('/content', createContentRouter());
     app.use('/collections', createCollectionsRouter());
     app.use('/collectionItems', createCollectionItemsRouter());
+    app.use('/ratingContent', createRatingContentRouter());
+    app.use('/review', createReviewRouter());
+    app.use('/review', createLikeReviewRouter());
 
     app.use(expressWinston.errorLogger({
         winstonInstance: logger
