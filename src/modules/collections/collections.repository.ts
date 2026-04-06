@@ -7,5 +7,6 @@ export interface CollectionsRepository {
     create(collection: CreateCollectionDTO): Promise<Collection>;
     updateById(id: string, collection: UpdateCollectionDTO): Promise<Collection | null>;
     deleteById(id: string): Promise<Collection | null>;
+    findByUserId(userId: string): Promise<Collection[]>;
 }
 

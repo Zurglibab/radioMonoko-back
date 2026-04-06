@@ -58,5 +58,14 @@ export class CollectionsController {
             res.status(500).json({ message: error.message });
         }
     };
+
+    findByUserId = async (req: Request, res: Response) => {
+        try {
+            const data = await this.service.findByUserId(req.params.userId as string);
+            res.status(200).json(data);
+        } catch (error: any) {
+            res.status(500).json({message: error.message});
+        }
+    }
 }
 

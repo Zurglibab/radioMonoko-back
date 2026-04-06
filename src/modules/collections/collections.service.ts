@@ -35,4 +35,8 @@ export class CollectionsService {
     deleteById(id: string): Promise<Collection | null> {
         return this.repository.deleteById(id);
     }
+
+    findByUserId(userId: string): Promise<Collection[]> {
+        return this.repository.findByUserId(userId);
+    }
 }

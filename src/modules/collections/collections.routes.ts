@@ -14,6 +14,7 @@ export const createCollectionsRouter = () => {
     router.post('/', controller.create);
     router.put('/:id', controller.updateById);
     router.delete('/:id', controller.deleteById);
+    router.get('/collection/user/:userId', controller.findByUserId);
 
     return router;
 };

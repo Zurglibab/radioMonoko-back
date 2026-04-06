@@ -53,5 +53,13 @@ export class CollectionsBDDRepository implements CollectionsRepository {
         );
         return result.rowCount ? result.rows[0] : null;
     }
+
+    async findByUserId(userId: string): Promise<Collection[]> {
+        const result = await pool.query(
+            'SELECT id, user_id, name, description, is_public, created_at FROM collections WHERE user_id = $1 ORDER BY created_at DESC',
+            [userId]
+        );
+        return result.rows;
+    }
 }
 
