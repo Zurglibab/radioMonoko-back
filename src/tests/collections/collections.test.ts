@@ -1,9 +1,9 @@
 import request from 'supertest';
 import { Express } from 'express';
 import { createApp } from '../../app';
-import { CollectionsBDDRepository } from '../../modules/collections/collections.bdd.repository';
+import { CollectionsRepository } from '../../repository/collectionsRepository';
 
-jest.mock('../../modules/collections/collections.bdd.repository');
+jest.mock('../../repository/collectionsRepository');
 
 describe('Collections Routes with Mocks', () => {
     let app: Express;
@@ -22,11 +22,11 @@ describe('Collections Routes with Mocks', () => {
         mockUpdateById = jest.fn();
         mockDeleteById = jest.fn();
 
-        CollectionsBDDRepository.prototype.findAll = mockFindAll;
-        CollectionsBDDRepository.prototype.findById = mockFindById;
-        CollectionsBDDRepository.prototype.create = mockCreate;
-        CollectionsBDDRepository.prototype.updateById = mockUpdateById;
-        CollectionsBDDRepository.prototype.deleteById = mockDeleteById;
+        CollectionsRepository.prototype.findAll = mockFindAll;
+        CollectionsRepository.prototype.findById = mockFindById;
+        CollectionsRepository.prototype.create = mockCreate;
+        CollectionsRepository.prototype.updateById = mockUpdateById;
+        CollectionsRepository.prototype.deleteById = mockDeleteById;
 
         app = createApp();
     });

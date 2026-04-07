@@ -2,16 +2,16 @@ import express, { Express, Request, Response } from "express";
 import swaggerUi from "swagger-ui-express";
 import apiRoutes from "./routes/apiRoutes";
 import { swaggerSpec } from "./config/swagger";
-import userRouter from './modules/user/user.routes';
+import userRouter from './routes/userRoutes';
 import expressWinston from 'express-winston';
 import logger from './config/logger';
-import userRelationRouter from "./modules/userRelation/userRelation.routes";
-import { createContentRouter } from './modules/content/content.routes';
-import { createCollectionsRouter } from './modules/collections/collections.routes';
-import { createCollectionItemsRouter } from './modules/collectionItems/collectionItems.routes';
-import { createRatingContentRouter } from './modules/ratingContent/ratingContent.routes';
-import { createReviewRouter } from './modules/review/review.routes';
-import { createLikeReviewRouter } from './modules/likeReview/likeReview.routes';
+import userRelationRouter from "./routes/userRelationRoutes";
+import { createContentRouter } from './routes/contentRoutes';
+import { createCollectionsRouter } from './routes/collectionsRoutes';
+import { createCollectionItemsRouter } from './routes/collectionItemsRoutes';
+import { createRatingContentRouter } from './routes/ratingContentRoutes';
+import { createReviewRouter } from './routes/reviewRoutes';
+import { createLikeReviewRouter } from './routes/likeReviewRoutes';
 
 
 export function createApp(): Express {

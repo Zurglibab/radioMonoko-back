@@ -1,9 +1,9 @@
 import request from 'supertest';
 import { Express } from 'express';
 import { createApp } from '../../app';
-import { ContentBDDRepository } from '../../modules/content/content.bdd.repository';
+import { ContentRepository } from '../../repository/contentRepository';
 
-jest.mock('../../modules/content/content.bdd.repository');
+jest.mock('../../repository/contentRepository');
 
 describe('Content Routes with Mocks', () => {
     let app: Express;
@@ -23,11 +23,11 @@ describe('Content Routes with Mocks', () => {
         mockUpdateById = jest.fn();
         mockDeleteById = jest.fn();
 
-        ContentBDDRepository.prototype.findAll = mockFindAll;
-        ContentBDDRepository.prototype.findById = mockFindById;
-        ContentBDDRepository.prototype.create = mockCreate;
-        ContentBDDRepository.prototype.updateById = mockUpdateById;
-        ContentBDDRepository.prototype.deleteById = mockDeleteById;
+        ContentRepository.prototype.findAll = mockFindAll;
+        ContentRepository.prototype.findById = mockFindById;
+        ContentRepository.prototype.create = mockCreate;
+        ContentRepository.prototype.updateById = mockUpdateById;
+        ContentRepository.prototype.deleteById = mockDeleteById;
 
         app = createApp();
     });

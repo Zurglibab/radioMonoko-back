@@ -1,8 +1,8 @@
 import request from 'supertest';
 import express from 'express';
-import { createLikeReviewRouter } from '../../modules/likeReview/likeReview.routes';
+import { createLikeReviewRouter } from '../../routes/likeReviewRoutes';
 
-jest.mock('../../modules/likeReview/likeReview.bdd.repository', () => {
+jest.mock('../../DAO/likeReviewDAO', () => {
     class MockLikeReviewBDDRepository {
         upsert = jest.fn(async (dto: any) => ({
             review_id: dto.review_id,

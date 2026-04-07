@@ -1,9 +1,9 @@
 import request from 'supertest';
 import { Express } from 'express';
 import { createApp } from '../../app';
-import { RatingContentBDDRepository } from '../../modules/ratingContent/ratingContent.bdd.repository';
+import { RatingContentDAO } from '../../DAO/ratingContentDAO';
 
-jest.mock('../../modules/ratingContent/ratingContent.bdd.repository');
+jest.mock('../../DAO/ratingContentDAO');
 
 describe('RatingContent Routes with Mocks', () => {
     let app: Express;
@@ -23,11 +23,11 @@ describe('RatingContent Routes with Mocks', () => {
         mockUpdateByKeys = jest.fn();
         mockDeleteByKeys = jest.fn();
 
-        RatingContentBDDRepository.prototype.findAll = mockFindAll;
-        RatingContentBDDRepository.prototype.findByKeys = mockFindByKeys;
-        RatingContentBDDRepository.prototype.create = mockCreate;
-        RatingContentBDDRepository.prototype.updateByKeys = mockUpdateByKeys;
-        RatingContentBDDRepository.prototype.deleteByKeys = mockDeleteByKeys;
+        RatingContentDAO.prototype.findAll = mockFindAll;
+        RatingContentDAO.prototype.findByKeys = mockFindByKeys;
+        RatingContentDAO.prototype.create = mockCreate;
+        RatingContentDAO.prototype.updateByKeys = mockUpdateByKeys;
+        RatingContentDAO.prototype.deleteByKeys = mockDeleteByKeys;
 
         app = createApp();
     });

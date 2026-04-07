@@ -1,9 +1,9 @@
 import request from 'supertest';
 import { Express } from 'express';
 import { createApp } from '../../app';
-import { CollectionItemsBDDRepository } from '../../modules/collectionItems/collectionItems.bdd.repository';
+import { CollectionItemsDTO } from '../../DAO/collectionItemsDTO';
 
-jest.mock('../../modules/collectionItems/collectionItems.bdd.repository');
+jest.mock('../../DAO/collectionItemsDTO');
 
 describe('CollectionItems Routes with Mocks', () => {
     let app: Express;
@@ -24,12 +24,12 @@ describe('CollectionItems Routes with Mocks', () => {
         mockUpdateByKeys = jest.fn();
         mockDeleteByKeys = jest.fn();
 
-        CollectionItemsBDDRepository.prototype.findAll = mockFindAll;
-        CollectionItemsBDDRepository.prototype.findByCollectionId = mockFindByCollectionId;
-        CollectionItemsBDDRepository.prototype.findByKeys = mockFindByKeys;
-        CollectionItemsBDDRepository.prototype.create = mockCreate;
-        CollectionItemsBDDRepository.prototype.updateByKeys = mockUpdateByKeys;
-        CollectionItemsBDDRepository.prototype.deleteByKeys = mockDeleteByKeys;
+        CollectionItemsDTO.prototype.findAll = mockFindAll;
+        CollectionItemsDTO.prototype.findByCollectionId = mockFindByCollectionId;
+        CollectionItemsDTO.prototype.findByKeys = mockFindByKeys;
+        CollectionItemsDTO.prototype.create = mockCreate;
+        CollectionItemsDTO.prototype.updateByKeys = mockUpdateByKeys;
+        CollectionItemsDTO.prototype.deleteByKeys = mockDeleteByKeys;
 
         app = createApp();
     });

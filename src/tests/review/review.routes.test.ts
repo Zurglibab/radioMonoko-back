@@ -1,9 +1,9 @@
 import request from 'supertest';
 import { Express } from 'express';
 import { createApp } from '../../app';
-import { ReviewBDDRepository } from '../../modules/review/review.bdd.repository';
+import { ReviewDAO } from '../../DAO/reviewDAO';
 
-jest.mock('../../modules/review/review.bdd.repository');
+jest.mock('../../DAO/reviewDAO');
 
 describe('Review Routes with Mocks', () => {
     let app: Express;
@@ -24,12 +24,12 @@ describe('Review Routes with Mocks', () => {
         mockUpdateById = jest.fn();
         mockDeleteById = jest.fn();
 
-        ReviewBDDRepository.prototype.findAll = mockFindAll;
-        ReviewBDDRepository.prototype.findById = mockFindById;
-        ReviewBDDRepository.prototype.findByContentId = mockFindByContentId;
-        ReviewBDDRepository.prototype.create = mockCreate;
-        ReviewBDDRepository.prototype.updateById = mockUpdateById;
-        ReviewBDDRepository.prototype.deleteById = mockDeleteById;
+        ReviewDAO.prototype.findAll = mockFindAll;
+        ReviewDAO.prototype.findById = mockFindById;
+        ReviewDAO.prototype.findByContentId = mockFindByContentId;
+        ReviewDAO.prototype.create = mockCreate;
+        ReviewDAO.prototype.updateById = mockUpdateById;
+        ReviewDAO.prototype.deleteById = mockDeleteById;
 
         app = createApp();
     });
