@@ -10,7 +10,6 @@ export interface CreateUserDTO {
 
 export interface ModifyUserDTO {
     id: string;
-    password?: string;
     display_name?: string;
     avatar?: string;
     bio?: string;

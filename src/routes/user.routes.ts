@@ -95,29 +95,87 @@ userRouter.post('/login', userController.loginUser);
 
 /**
  * @openapi
- * /user/{email}:
+ * /user/me:
  *   get:
  *     tags:
  *       - Users
- *     summary: Récupère un utilisateur par son email
+ *     summary: Récupérer les informations de l'utilisateur connecté
  *     security:
  *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: email
- *         required: true
- *         schema:
- *           type: string
- *         description: L'email de l'utilisateur
  *     responses:
  *       200:
- *         description: Utilisateur trouvé
+ *         description: Informations de l'utilisateur (sans le mot de passe)
  *       401:
- *         description: Non authentifié
+ *         description: Non autorisé (Token manquant ou invalide)
  *       404:
  *         description: Utilisateur non trouvé
  */
-userRouter.get('/:email', authMiddleware, userController.getUserByEmail);
+userRouter.get('/me', authMiddleware, userController.getMe);
+
+/**
+ * @openapi
+ * /user/me:
+ *   put:
+ *     tags:
+ *       - Users
+ *     summary: Mettre à jour les informations de l'utilisateur connecté
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               display_name:
+ *                 type: string
+ *               avatar:
+ *                 type: string
+ *               bio:
+ *                 type: string
+ *               website:
+ *                 type: string
+ *               privacy:
+ *                 type: string
+ *                 enum: [public, private]
+ *     responses:
+ *       200:
+ *         description: Utilisateur mis à jour avec succès
+ *       401:
+ *         description: Non autorisé
+ *       403:
+ *         description: Modification du mot de passe non autorisée via cette route
+ *       404:
+ *         description: Utilisateur non trouvé
+ */
+userRouter.put('/me', authMiddleware, userController.updateMe);
+
+/**
+ * @openapi
+ * /user/search:
+ *   get:
+ *     tags:
+ *       - Users
+ *     summary: Recherche parmi les utilisateurs publics
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: q
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Mot-clé pour rechercher (nom d'utilisateur ou pseudo)
+ *     responses:
+ *       200:
+ *         description: Liste des utilisateurs publics trouvés
+ *       400:
+ *         description: Paramètre de recherche manquant
+ *       401:
+ *         description: Non autorisé
+ */
+userRouter.get('/search', authMiddleware, userController.searchPublicUsers);
 
 /**
  * @openapi

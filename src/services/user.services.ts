@@ -36,7 +36,7 @@ export class UserService {
         const user: User = {
             id: randomUUID(),
             email : dto.email,
-            username : dto.username || "",
+            username : dto.username || dto.email.split('@')[0],
             password : hashedPassword,
             display_name : dto.username || "",
             avatar : dto.avatar || '',
@@ -82,11 +82,8 @@ export class UserService {
             throw new Error('User not found');
         }
 
-        const hashedPassword = dto.password ? await bcrypt.hash(dto.password, 10) : existingUser.password;
-
         const updatedUser: User = {
             ...existingUser,
-            password : hashedPassword,
             display_name : dto.display_name || existingUser.display_name,
             avatar : dto.avatar || existingUser.avatar,
             bio : dto.bio || existingUser.bio,
@@ -114,7 +111,12 @@ export class UserService {
         return this.userRepository.findByEmail(email);
     }
     async getUserById(id: string): Promise <User | null>{
-        logger.info(`Fetching user by id: ${id}`);
+        logger.info(`Getting user by id: ${id}`);
         return this.userRepository.findById(id);
+    }
+
+    async searchPublicUsers(query: string): Promise<User[]> {
+        logger.info(`Searching public users with query: ${query}`);
+        return this.userRepository.searchPublicUsers(query);
     }
 }
