@@ -23,6 +23,7 @@ const swaggerDefinition = {
         { name: "Collections", description: "Gestion des collections" },
         { name: "CollectionItems", description: "Gestion des elements de collections" },
         { name: "Content", description: "Gestion des contenus" },
+        { name: "Notifications", description: "Gestion des notifications" },
         { name: "Review", description: "Gestion des reviews" },
         { name: "LikeReview", description: "Gestion des likes/dislikes des reviews" }
     ],

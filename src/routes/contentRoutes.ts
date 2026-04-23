@@ -1,11 +1,11 @@
 import { Router } from 'express';
-import { ContentRepository } from '../repository/contentRepository';
+import { ContentDAO } from '../DAO/contentDAO';
 import { ContentService } from '../services/contentService';
 import { ContentController } from '../controllers/content.controller';
 
 export const createContentRouter = () => {
     const contentRouter = Router();
-    const contentRepository = new ContentRepository();
+    const contentRepository = new ContentDAO();
     const contentService = new ContentService(contentRepository);
     const contentController = new ContentController(contentService);
 

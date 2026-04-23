@@ -1,11 +1,12 @@
 import { Router } from 'express';
-import { CollectionsRepository } from '../repository/collectionsRepository';
+import { CollectionDAO } from '../DAO/collectionDAO';
 import { CollectionsService } from '../services/collectionsService';
 import { CollectionsController } from '../controllers/collections.controller';
 
 export const createCollectionsRouter = () => {
     const router = Router();
-    const repository = new CollectionsRepository();
+
+    const repository = new CollectionDAO();
     const service = new CollectionsService(repository);
     const controller = new CollectionsController(service);
 

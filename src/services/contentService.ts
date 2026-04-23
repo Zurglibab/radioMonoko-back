@@ -1,5 +1,5 @@
 import { randomUUID } from 'node:crypto';
-import { ContentRepository } from '../repository/content.repository';
+import { ContentRepository } from '../repository/contentRepository';
 import { Content } from '../interfaces/contentInterface';
 import { CreateContentDTO, UpdateContentDTO } from '../DTO/contentDTO';
 import logger from '../config/logger';
