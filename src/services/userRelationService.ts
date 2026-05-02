@@ -1,12 +1,6 @@
-<<<<<<<< HEAD:src/services/userRelation.service.ts
-import { UserRelationRepository } from '../repository/userRelation.repository';
-import { UserRepository } from '../repository/user.repository';
-import { UserRelation } from '../types/userRelation.types';
-========
 import { UserRelationRepository } from '../repository/userRelationRepository';
 import { UserRepository } from '../repository/userRepository';
 import { UserRelation } from '../interfaces/userRelationInterface';
->>>>>>>> notification:src/services/userRelationService.ts
 import { ApiError } from '../config/ApiError';
 import logger from '../config/logger';
 

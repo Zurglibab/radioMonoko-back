@@ -1,8 +1,4 @@
-<<<<<<<< HEAD:src/repository/user.repository.ts
-import { User} from "../types/user.types";
-========
 import { User} from "../interfaces/userInterface";
->>>>>>>> notification:src/repository/userRepository.ts
 
 export interface  UserRepository {
     findByEmail(email: string): Promise <User | null>;
@@ -12,5 +8,4 @@ export interface  UserRepository {
     edit(updatedUser: User): Promise <User | null>;
     deleteById(id: string): Promise <User | null>;
     findByIds(ids: string[]): Promise<User[]>;
-    searchPublicUsers(query: string): Promise<User[]>;
 }

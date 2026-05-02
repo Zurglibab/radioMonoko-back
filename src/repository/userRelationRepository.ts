@@ -1,12 +1,6 @@
-<<<<<<<< HEAD:src/repository/userRelation.repository.ts
-import { UserRelationBddRepository } from '../bddRepository/userRelation.bdd.repository';
-import { UserRelation } from '../types/userRelation.types';
-import { FollowDTO } from "../DTO/userRelation.dto";
-========
 import { UserRelationDAO } from '../DAO/userRelationDAO';
 import { UserRelation } from '../interfaces/userRelationInterface';
 import { FollowDTO } from "../DTO/userRelationDTO";
->>>>>>>> notification:src/repository/userRelationRepository.ts
 
 export class UserRelationRepository {
     constructor(private readonly userRelationBddRepository: UserRelationDAO) {}
