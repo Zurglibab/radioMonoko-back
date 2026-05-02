@@ -1,5 +1,5 @@
 import {pool} from '../database/db';
-import { User } from '../types/user.types';
+import { User } from '../interfaces/userInterface';
 
 export class UserBDDRepository {
     async findByEmail(email: string) {

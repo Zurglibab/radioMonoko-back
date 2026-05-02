@@ -1,7 +1,6 @@
 import request from 'supertest';
 import { Express } from 'express';
 import { createApp } from '../../app';
-import { ContentRepository } from '../../repository/contentRepository';
 
 jest.mock('../../repository/contentRepository');
 
@@ -23,11 +22,15 @@ describe('Content Routes with Mocks', () => {
         mockUpdateById = jest.fn();
         mockDeleteById = jest.fn();
 
-        ContentRepository.prototype.findAll = mockFindAll;
-        ContentRepository.prototype.findById = mockFindById;
-        ContentRepository.prototype.create = mockCreate;
-        ContentRepository.prototype.updateById = mockUpdateById;
-        ContentRepository.prototype.deleteById = mockDeleteById;
+        jest.doMock('../../repository/contentRepository', () => ({
+            ContentRepository: jest.fn().mockImplementation(() => ({
+                findAll: mockFindAll,
+                findById: mockFindById,
+                create: mockCreate,
+                updateById: mockUpdateById,
+                deleteById: mockDeleteById,
+            }))
+        }), { virtual: true });
 
         app = createApp();
     });

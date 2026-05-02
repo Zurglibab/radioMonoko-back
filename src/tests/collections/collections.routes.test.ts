@@ -1,7 +1,6 @@
 import request from 'supertest';
 import { Express } from 'express';
 import { createApp } from '../../app';
-import { CollectionsRepository } from '../../repository/collectionsRepository';
 
 jest.mock('../../repository/collectionsRepository');
 
@@ -22,11 +21,16 @@ describe('Collections Routes with Mocks', () => {
         mockUpdateById = jest.fn();
         mockDeleteById = jest.fn();
 
-        CollectionsRepository.prototype.findAll = mockFindAll;
-        CollectionsRepository.prototype.findById = mockFindById;
-        CollectionsRepository.prototype.create = mockCreate;
-        CollectionsRepository.prototype.updateById = mockUpdateById;
-        CollectionsRepository.prototype.deleteById = mockDeleteById;
+        // Mock the module instead of the class prototype
+        jest.doMock('../../repository/collectionsRepository', () => ({
+            CollectionsRepository: jest.fn().mockImplementation(() => ({
+                findAll: mockFindAll,
+                findById: mockFindById,
+                create: mockCreate,
+                updateById: mockUpdateById,
+                deleteById: mockDeleteById,
+            }))
+        }), { virtual: true });
 
         app = createApp();
     });
