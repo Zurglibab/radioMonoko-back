@@ -1,9 +1,15 @@
 import { pool } from '../database/db';
+<<<<<<<< HEAD:src/bddRepository/userRelation.bdd.repository.ts
 import { UserRelation } from '../types/userRelation.types';
 import logger  from '../config/logger';
 import {FollowDTO} from "../DTO/userRelation.dto";
+========
+import { UserRelation } from '../interfaces/userRelationInterface';
+import logger  from '../config/logger';
+import {FollowDTO} from "../DTO/userRelationDTO";
+>>>>>>>> notification:src/DAO/userRelationDAO.ts
 
-export class UserRelationBddRepository {
+export class UserRelationDAO {
     async follow(follow : FollowDTO): Promise<void> {
         await pool.query(
             'INSERT INTO user_relation (followed_id, follower_id) VALUES ($1, $2) ON CONFLICT (followed_id, follower_id) DO NOTHING',

@@ -11,6 +11,7 @@ import {
 import showRoutes from "./showRoutes";
 import diffusionRoutes from "./diffusionRoutes";
 import liveRoutes from "./liveRoutes";
+import { createNotificationRouter } from './notificationRoutes';
 
 const router = Router();
 
@@ -114,5 +115,6 @@ router.delete("/brands/cache", clearBrandsCache);
 router.use("/shows", showRoutes);
 router.use("/diffusions", diffusionRoutes);
 router.use("/live", liveRoutes);
+router.use("/notifications", createNotificationRouter());
 
 export default router;

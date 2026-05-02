@@ -1,12 +1,13 @@
 import { createClient, RedisClientType } from 'redis';
 
-// URL configurable via la variable d'environnement REDIS_URL
 const redisHost = process.env.REDIS_HOST || 'localhost';
 const redisPort = process.env.REDIS_PORT || 6379;
 const redisUrl = `redis://${redisHost}:${redisPort}`;
-const redisPassword = process.env.REDIS_PASSWORD;
+const redisPassword = process.env.REDIS_PASSWORD?.trim();
 
-const client: RedisClientType = createClient({ url: redisUrl, password: redisPassword});
+const clientOptions = redisPassword ? { url: redisUrl, password: redisPassword } : { url: redisUrl };
+
+const client: RedisClientType = createClient(clientOptions as any);
 
 client.on('error', (err) => console.error('[RedisConnexion] Client Error', err));
 client.on('connect', () => console.log('[RedisConnexion] Client connecting...'));

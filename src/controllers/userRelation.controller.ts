@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
-import { UserRelationService } from '../services/userRelation.service';
+import { UserRelationService } from '../services/userRelationService';
 import logger from '../config/logger';
-import { FollowDTO } from '../DTO/userRelation.dto';
+import { FollowDTO } from '../DTO/userRelationDTO';
 import {ApiError} from "../config/ApiError";
 
 export class UserRelationController {

@@ -1,6 +1,12 @@
+<<<<<<<< HEAD:src/services/user.services.ts
 import { UserRepository} from "../repository/user.repository";
 import { User} from "../types/user.types";
 import { CreateUserDTO, LoginUserDTO, ModifyUserDTO} from "../DTO/user.dto";
+========
+import { UserRepository} from "../repository/userRepository";
+import { User} from "../interfaces/userInterface";
+import { CreateUserDTO, LoginUserDTO, ModifyUserDTO} from "../DTO/userDTO";
+>>>>>>>> notification:src/services/userService.ts
 import { randomUUID} from "node:crypto";
 import * as bcrypt from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';

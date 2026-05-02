@@ -2,11 +2,17 @@ import express, { Express, Request, Response } from "express";
 import swaggerUi from "swagger-ui-express";
 import apiRoutes from "./routes/apiRoutes";
 import { swaggerSpec } from "./config/swagger";
-
+import userRouter from './routes/userRoutes';
 import expressWinston from 'express-winston';
 import logger from './config/logger';
-import userRouter from "./routes/user.routes";
-import userRelationRouter from "./routes/userRelation.routes";
+import userRelationRouter from "./routes/userRelationRoutes";
+import { createContentRouter } from './routes/contentRoutes';
+import { createCollectionsRouter } from './routes/collectionsRoutes';
+import { createCollectionItemsRouter } from './routes/collectionItemsRoutes';
+import { createRatingContentRouter } from './routes/ratingContentRoutes';
+import { createReviewRouter } from './routes/reviewRoutes';
+import { createLikeReviewRouter } from './routes/likeReviewRoutes';
+
 
 export function createApp(): Express {
     const app = express();
@@ -21,8 +27,14 @@ export function createApp(): Express {
     }));
 
     console.log("app.use");
-    app.use(express.json());
+    app.use(express.json({ limit: '1mb' }));
     app.use(express.urlencoded({ extended: true }));
+    app.use((req, _res, next) => {
+        if (req.headers['content-type']?.includes('application/json') && typeof req.body === 'string') {
+            try { req.body = JSON.parse(req.body); } catch {}
+        }
+        next();
+    });
 
     // CORS (optionnel, à adapter selon tes besoins)
     app.use((req, res, next) => {
@@ -38,6 +50,12 @@ export function createApp(): Express {
 
     app.use('/user', userRouter);
     app.use('/userRelation', userRelationRouter);
+    app.use('/content', createContentRouter());
+    app.use('/collections', createCollectionsRouter());
+    app.use('/collectionItems', createCollectionItemsRouter());
+    app.use('/ratingContent', createRatingContentRouter());
+    app.use('/review', createReviewRouter());
+    app.use('/review', createLikeReviewRouter());
 
     app.use(expressWinston.errorLogger({
         winstonInstance: logger
