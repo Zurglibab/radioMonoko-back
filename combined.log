@@ -4233,3 +4233,230 @@
 {"level":"info","message":"Deleting user with id: 123e4567-e89b-12d3-a456-426614174000","timestamp":"2026-05-03 16:31:29"}
 {"level":"warn","message":"User with id: 123e4567-e89b-12d3-a456-426614174000 not found for deletion","timestamp":"2026-05-03 16:31:29"}
 {"level":"info","message":"\u001b[90mDELETE /user/delete/123e4567-e89b-12d3-a456-426614174000\u001b[39m \u001b[33m404\u001b[39m \u001b[90m2ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:31:29"}
+{"level":"info","message":"Table 'users' created successfully.","timestamp":"2026-05-03 16:32:48"}
+{"level":"info","message":"Table 'UserRelation' created successfully.","timestamp":"2026-05-03 16:32:48"}
+{"level":"info","message":"Table 'content' created successfully.","timestamp":"2026-05-03 16:32:48"}
+{"level":"info","message":"Table 'collections' created successfully.","timestamp":"2026-05-03 16:32:48"}
+{"level":"info","message":"Table 'collection_items' created successfully.","timestamp":"2026-05-03 16:32:48"}
+{"level":"info","message":"Table 'rating_content' created successfully.","timestamp":"2026-05-03 16:32:48"}
+{"level":"info","message":"Table 'reviews' created successfully.","timestamp":"2026-05-03 16:32:48"}
+{"level":"info","message":"Table 'like_review' created successfully.","timestamp":"2026-05-03 16:32:48"}
+{"level":"info","message":"Table 'notifications' created successfully.","timestamp":"2026-05-03 16:32:48"}
+{"level":"info","message":"Database initialized successfully.","timestamp":"2026-05-03 16:32:48"}
+{"level":"info","message":"\u001b[90mGET /api/docs/\u001b[39m \u001b[36m304\u001b[39m \u001b[90m4ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:33:13"}
+{"level":"info","message":"\u001b[90mGET /api/docs/swagger-ui.css\u001b[39m \u001b[36m304\u001b[39m \u001b[90m2ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:33:13"}
+{"level":"info","message":"\u001b[90mGET /api/docs/swagger-ui-bundle.js\u001b[39m \u001b[36m304\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:33:13"}
+{"level":"info","message":"\u001b[90mGET /api/docs/swagger-ui-standalone-preset.js\u001b[39m \u001b[36m304\u001b[39m \u001b[90m2ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:33:13"}
+{"level":"info","message":"\u001b[90mGET /api/docs/swagger-ui-init.js\u001b[39m \u001b[36m304\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:33:13"}
+{"level":"info","message":"\u001b[90mGET /api/docs/favicon-32x32.png\u001b[39m \u001b[36m304\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:33:13"}
+{"level":"info","message":"\u001b[90mGET /collections\u001b[39m \u001b[32m200\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mGET /review\u001b[39m \u001b[32m200\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mGET /collectionItems\u001b[39m \u001b[32m200\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"[UserRelationController] User user-id-1 following user undefined","timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mGET /collectionItems\u001b[39m \u001b[32m200\u001b[39m \u001b[90m4ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mGET /content\u001b[39m \u001b[32m200\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mGET /content\u001b[39m \u001b[32m200\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mPOST /userRelation/follow/user-id-2\u001b[39m \u001b[32m201\u001b[39m \u001b[90m13ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mGET /ratingContent\u001b[39m \u001b[32m200\u001b[39m \u001b[90m4ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mGET /collections\u001b[39m \u001b[32m200\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mGET /auth/google\u001b[39m \u001b[36m302\u001b[39m \u001b[90m6ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mGET /review/review-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mGET /collections/collection-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"[UserRelationController] User undefined unfollowing user user-id-1","timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mGET /collectionItems/collection/collection-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mGET /collectionItems/collection/collection-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mGET /content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mDELETE /userRelation/unfollow/user-id-2\u001b[39m \u001b[32m200\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mGET /content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mGET /review/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mGET /ratingContent/content/content-1/user/user-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mGET /collections/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"[UserRelationController] User user-id-1 accepting request from undefined","timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mGET /collections/collection-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mGET /collectionItems/collection/collection-1/content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mGET /content/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mPATCH /userRelation/accept/user-id-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mGET /collectionItems/collection/collection-1/content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mGET /auth/google/callback\u001b[39m \u001b[32m200\u001b[39m \u001b[90m6ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mGET /review/content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mGET /content/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"[UserRelationController] User user-id-1 refusing request from undefined","timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mPATCH /userRelation/refuse/user-id-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mGET /collections/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mGET /ratingContent/content/content-1/user/user-404\u001b[39m \u001b[33m404\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mGET /collectionItems/collection/collection-1/content/missing-content\u001b[39m \u001b[33m404\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mGET /collectionItems/collection/collection-1/content/missing-content\u001b[39m \u001b[33m404\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"[UserRelationController] User user-id-1 blocking user undefined","timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mPOST /userRelation/block/user-id-2\u001b[39m \u001b[32m200\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mPOST /collections\u001b[39m \u001b[32m201\u001b[39m \u001b[90m15ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"email":"integration@test.com","level":"info","message":"createUser request body:","password":"password123","privacy":"public","timestamp":"2026-05-03 16:44:13","username":"testuser"}
+{"level":"info","message":"[UserRelationController] Getting friends for user undefined","timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"Creating content with api_id: api-2","timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mGET /userRelation/friends/user-id-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m2ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mPOST /content\u001b[39m \u001b[32m201\u001b[39m \u001b[90m17ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"Creating user with email: integration@test.com","timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mPOST /review\u001b[39m \u001b[32m201\u001b[39m \u001b[90m14ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"Creating rating for content content-2 and user user-2","timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"[UserRelationController] Getting pending requests for user user-id-1","timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mPOST /collections\u001b[39m \u001b[32m201\u001b[39m \u001b[90m13ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"Creating content with api_id: api-2","timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mGET /userRelation/request\u001b[39m \u001b[32m200\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mPOST /ratingContent\u001b[39m \u001b[32m201\u001b[39m \u001b[90m15ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mPOST /content\u001b[39m \u001b[32m201\u001b[39m \u001b[90m17ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mPOST /collections\u001b[39m \u001b[33m400\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mPOST /collectionItems\u001b[39m \u001b[32m201\u001b[39m \u001b[90m14ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mPOST /collectionItems\u001b[39m \u001b[32m201\u001b[39m \u001b[90m14ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mPOST /content\u001b[39m \u001b[33m400\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mPOST /review\u001b[39m \u001b[32m201\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mPOST /content\u001b[39m \u001b[33m400\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mPOST /collections\u001b[39m \u001b[33m400\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mPOST /ratingContent\u001b[39m \u001b[33m400\u001b[39m \u001b[90m2ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mPUT /collections/collection-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mPOST /collectionItems\u001b[39m \u001b[33m400\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mPOST /collectionItems\u001b[39m \u001b[33m400\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mPUT /content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mPOST /review\u001b[39m \u001b[33m400\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mPUT /content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mPUT /collections/collection-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mPOST /ratingContent\u001b[39m \u001b[33m400\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mPUT /collections/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mPUT /collectionItems/collection/collection-1/content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mPUT /collectionItems/collection/collection-1/content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mPUT /content/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mPUT /review/review-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mPUT /content/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mPUT /collections/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mDELETE /collections/collection-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mPUT /ratingContent/content/content-1/user/user-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m2ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mPUT /collectionItems/collection/collection-1/content/missing-content\u001b[39m \u001b[33m404\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mDELETE /content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mPUT /collectionItems/collection/collection-1/content/missing-content\u001b[39m \u001b[33m404\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mPUT /review/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mDELETE /content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mDELETE /collections/collection-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mDELETE /collections/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mDELETE /content/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mDELETE /collectionItems/collection/collection-1/content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mPUT /ratingContent/content/content-1/user/user-404\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mDELETE /collectionItems/collection/collection-1/content/content-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mDELETE /content/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mDELETE /review/review-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mDELETE /collections/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mDELETE /collectionItems/collection/collection-1/content/missing-content\u001b[39m \u001b[33m404\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mDELETE /ratingContent/content/content-1/user/user-1\u001b[39m \u001b[32m200\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mDELETE /collectionItems/collection/collection-1/content/missing-content\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mDELETE /review/missing-id\u001b[39m \u001b[33m404\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mDELETE /ratingContent/content/content-404/user/user-404\u001b[39m \u001b[33m404\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"User created with id: 1e79aeef-eba0-43a2-ba09-30f0da077963","timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m118ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"email":"duplicate@test.com","level":"info","message":"createUser request body:","password":"password123","timestamp":"2026-05-03 16:44:13","username":"dupuser"}
+{"level":"info","message":"Creating user with email: duplicate@test.com","timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"User created with id: b8354162-4ab3-44d8-b711-be54decdb347","timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m69ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"email":"duplicate@test.com","level":"info","message":"createUser request body:","password":"password123","timestamp":"2026-05-03 16:44:13","username":"dupuser"}
+{"level":"info","message":"Creating user with email: duplicate@test.com","timestamp":"2026-05-03 16:44:13"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-05-03 16:44:13"}
+{"level":"error","timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[33m400\u001b[39m \u001b[90m4ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:13"}
+{"email":"login@test.com","level":"info","message":"createUser request body:","password":"password123","timestamp":"2026-05-03 16:44:13","username":"loginuser"}
+{"level":"info","message":"Creating user with email: login@test.com","timestamp":"2026-05-03 16:44:13"}
+{"level":"info","message":"User created with id: 4c49a08c-6bb9-4b2f-81b6-bbea567d4532","timestamp":"2026-05-03 16:44:14"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m72ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:14"}
+{"level":"info","message":"User login attempt with email: login@test.com","timestamp":"2026-05-03 16:44:14"}
+{"level":"info","message":"User logged in successfully with email: login@test.com","timestamp":"2026-05-03 16:44:14"}
+{"level":"info","message":"\u001b[90mPOST /user/login\u001b[39m \u001b[32m200\u001b[39m \u001b[90m63ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:14"}
+{"email":"login-fail@test.com","level":"info","message":"createUser request body:","password":"password123","timestamp":"2026-05-03 16:44:14","username":"loginfail"}
+{"level":"info","message":"Creating user with email: login-fail@test.com","timestamp":"2026-05-03 16:44:14"}
+{"level":"info","message":"User created with id: 65d7c86c-7116-4d00-affd-f35b1e97a3de","timestamp":"2026-05-03 16:44:14"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m65ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:14"}
+{"level":"info","message":"User login attempt with email: login-fail@test.com","timestamp":"2026-05-03 16:44:14"}
+{"level":"warn","message":"Login failed: Invalid password for user with email: login-fail@test.com","timestamp":"2026-05-03 16:44:14"}
+{"level":"info","message":"\u001b[90mPOST /user/login\u001b[39m \u001b[33m401\u001b[39m \u001b[90m61ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:14"}
+{"email":"me@test.com","level":"info","message":"createUser request body:","password":"password123","timestamp":"2026-05-03 16:44:14","username":"meuser"}
+{"level":"info","message":"Creating user with email: me@test.com","timestamp":"2026-05-03 16:44:14"}
+{"level":"info","message":"User created with id: 71336116-95aa-4f1b-8ef6-553c15b4ed26","timestamp":"2026-05-03 16:44:14"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m65ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:14"}
+{"level":"info","message":"Fetching user by id: 71336116-95aa-4f1b-8ef6-553c15b4ed26","timestamp":"2026-05-03 16:44:14"}
+{"level":"info","message":"\u001b[90mGET /user/me\u001b[39m \u001b[32m200\u001b[39m \u001b[90m4ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:14"}
+{"level":"info","message":"\u001b[90mGET /user/me\u001b[39m \u001b[33m401\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:14"}
+{"email":"updateme@test.com","level":"info","message":"createUser request body:","password":"password123","timestamp":"2026-05-03 16:44:14","username":"updateuser"}
+{"level":"info","message":"Creating user with email: updateme@test.com","timestamp":"2026-05-03 16:44:14"}
+{"level":"info","message":"User created with id: 44bf09c7-e04d-49cc-82a6-8a03d90f8176","timestamp":"2026-05-03 16:44:14"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m65ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:14"}
+{"level":"info","message":"Modifying user with id: 44bf09c7-e04d-49cc-82a6-8a03d90f8176","timestamp":"2026-05-03 16:44:14"}
+{"level":"info","message":"User with id: 44bf09c7-e04d-49cc-82a6-8a03d90f8176 modified successfully","timestamp":"2026-05-03 16:44:14"}
+{"level":"info","message":"\u001b[90mPUT /user/me\u001b[39m \u001b[32m200\u001b[39m \u001b[90m5ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:14"}
+{"email":"updatepass@test.com","level":"info","message":"createUser request body:","password":"password123","timestamp":"2026-05-03 16:44:14","username":"passuser"}
+{"level":"info","message":"Creating user with email: updatepass@test.com","timestamp":"2026-05-03 16:44:14"}
+{"level":"info","message":"User created with id: b3b21a4b-972f-44d1-9dfe-d4e3143b63f2","timestamp":"2026-05-03 16:44:14"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m65ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:14"}
+{"level":"info","message":"\u001b[90mPUT /user/me\u001b[39m \u001b[33m403\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:14"}
+{"email":"search1@test.com","level":"info","message":"createUser request body:","password":"password123","privacy":"public","timestamp":"2026-05-03 16:44:14","username":"publicuser1"}
+{"level":"info","message":"Creating user with email: search1@test.com","timestamp":"2026-05-03 16:44:14"}
+{"level":"info","message":"User created with id: f7fc795f-1012-44fa-89a3-8b487dfb92ef","timestamp":"2026-05-03 16:44:14"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m67ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:14"}
+{"email":"search2@test.com","level":"info","message":"createUser request body:","password":"password123","privacy":"public","timestamp":"2026-05-03 16:44:14","username":"publicuser2"}
+{"level":"info","message":"Creating user with email: search2@test.com","timestamp":"2026-05-03 16:44:14"}
+{"level":"info","message":"User created with id: 3c4be938-eb10-4dc8-bd50-afc0df6c188c","timestamp":"2026-05-03 16:44:14"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m66ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:14"}
+{"level":"info","message":"Searching public users with query: publicuser","timestamp":"2026-05-03 16:44:14"}
+{"level":"info","message":"\u001b[90mGET /user/search?q=publicuser\u001b[39m \u001b[32m200\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:14"}
+{"email":"noq@test.com","level":"info","message":"createUser request body:","password":"password123","timestamp":"2026-05-03 16:44:14","username":"noq"}
+{"level":"info","message":"Creating user with email: noq@test.com","timestamp":"2026-05-03 16:44:14"}
+{"level":"info","message":"User created with id: dc43ba21-4f09-46e7-9c7b-34916783aa96","timestamp":"2026-05-03 16:44:14"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m69ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:14"}
+{"level":"info","message":"\u001b[90mGET /user/search\u001b[39m \u001b[33m400\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:14"}
+{"email":"getbyid@test.com","level":"info","message":"createUser request body:","password":"password123","timestamp":"2026-05-03 16:44:14","username":"getbyiduser"}
+{"level":"info","message":"Creating user with email: getbyid@test.com","timestamp":"2026-05-03 16:44:14"}
+{"level":"info","message":"User created with id: d6dad9bb-fe1b-4716-8b91-61f9f733ac5e","timestamp":"2026-05-03 16:44:14"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m66ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:14"}
+{"level":"info","message":"Fetching user by id: d6dad9bb-fe1b-4716-8b91-61f9f733ac5e","timestamp":"2026-05-03 16:44:14"}
+{"level":"info","message":"\u001b[90mGET /user/me\u001b[39m \u001b[32m200\u001b[39m \u001b[90m2ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:14"}
+{"level":"info","message":"Fetching user by id: d6dad9bb-fe1b-4716-8b91-61f9f733ac5e","timestamp":"2026-05-03 16:44:14"}
+{"level":"info","message":"\u001b[90mGET /user/id/d6dad9bb-fe1b-4716-8b91-61f9f733ac5e\u001b[39m \u001b[32m200\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:14"}
+{"email":"auth2@test.com","level":"info","message":"createUser request body:","password":"password123","timestamp":"2026-05-03 16:44:14","username":"authuser2"}
+{"level":"info","message":"Creating user with email: auth2@test.com","timestamp":"2026-05-03 16:44:14"}
+{"level":"info","message":"User created with id: 253500fa-7719-4d72-a60e-40c34e59ce27","timestamp":"2026-05-03 16:44:14"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m67ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:14"}
+{"level":"info","message":"Fetching user by id: 123e4567-e89b-12d3-a456-426614174000","timestamp":"2026-05-03 16:44:14"}
+{"level":"info","message":"\u001b[90mGET /user/id/123e4567-e89b-12d3-a456-426614174000\u001b[39m \u001b[33m404\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:14"}
+{"email":"todelete@test.com","level":"info","message":"createUser request body:","password":"password123","timestamp":"2026-05-03 16:44:14","username":"todelete"}
+{"level":"info","message":"Creating user with email: todelete@test.com","timestamp":"2026-05-03 16:44:14"}
+{"level":"info","message":"User created with id: a4912cdb-a741-47bc-8d37-a7d84947b0c6","timestamp":"2026-05-03 16:44:14"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m69ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:14"}
+{"level":"info","message":"Fetching user by id: a4912cdb-a741-47bc-8d37-a7d84947b0c6","timestamp":"2026-05-03 16:44:14"}
+{"level":"info","message":"\u001b[90mGET /user/me\u001b[39m \u001b[32m200\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:14"}
+{"level":"info","message":"Deleting user with id: a4912cdb-a741-47bc-8d37-a7d84947b0c6","timestamp":"2026-05-03 16:44:14"}
+{"level":"info","message":"User with id: a4912cdb-a741-47bc-8d37-a7d84947b0c6 deleted successfully","timestamp":"2026-05-03 16:44:14"}
+{"level":"info","message":"\u001b[90mDELETE /user/delete/a4912cdb-a741-47bc-8d37-a7d84947b0c6\u001b[39m \u001b[32m200\u001b[39m \u001b[90m4ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:14"}
+{"level":"info","message":"Fetching user by id: a4912cdb-a741-47bc-8d37-a7d84947b0c6","timestamp":"2026-05-03 16:44:14"}
+{"level":"info","message":"\u001b[90mGET /user/id/a4912cdb-a741-47bc-8d37-a7d84947b0c6\u001b[39m \u001b[33m404\u001b[39m \u001b[90m2ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:14"}
+{"email":"auth3@test.com","level":"info","message":"createUser request body:","password":"password123","timestamp":"2026-05-03 16:44:14","username":"authuser3"}
+{"level":"info","message":"Creating user with email: auth3@test.com","timestamp":"2026-05-03 16:44:14"}
+{"level":"info","message":"User created with id: db18731c-286a-43c9-8d81-4484b09e972a","timestamp":"2026-05-03 16:44:15"}
+{"level":"info","message":"\u001b[90mPOST /user/register\u001b[39m \u001b[32m201\u001b[39m \u001b[90m66ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:15"}
+{"level":"info","message":"Deleting user with id: 123e4567-e89b-12d3-a456-426614174000","timestamp":"2026-05-03 16:44:15"}
+{"level":"warn","message":"User with id: 123e4567-e89b-12d3-a456-426614174000 not found for deletion","timestamp":"2026-05-03 16:44:15"}
+{"level":"info","message":"\u001b[90mDELETE /user/delete/123e4567-e89b-12d3-a456-426614174000\u001b[39m \u001b[33m404\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:44:15"}
+{"level":"info","message":"Table 'users' created successfully.","timestamp":"2026-05-03 16:46:09"}
+{"level":"info","message":"Table 'UserRelation' created successfully.","timestamp":"2026-05-03 16:46:09"}
+{"level":"info","message":"Table 'content' created successfully.","timestamp":"2026-05-03 16:46:09"}
+{"level":"info","message":"Table 'collections' created successfully.","timestamp":"2026-05-03 16:46:09"}
+{"level":"info","message":"Table 'collection_items' created successfully.","timestamp":"2026-05-03 16:46:09"}
+{"level":"info","message":"Table 'rating_content' created successfully.","timestamp":"2026-05-03 16:46:09"}
+{"level":"info","message":"Table 'reviews' created successfully.","timestamp":"2026-05-03 16:46:09"}
+{"level":"info","message":"Table 'like_review' created successfully.","timestamp":"2026-05-03 16:46:09"}
+{"level":"info","message":"Table 'notifications' created successfully.","timestamp":"2026-05-03 16:46:09"}
+{"level":"info","message":"Database initialized successfully.","timestamp":"2026-05-03 16:46:09"}
+{"level":"info","message":"\u001b[90mGET /api/docs/\u001b[39m \u001b[36m304\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:46:10"}
+{"level":"info","message":"\u001b[90mGET /api/docs/swagger-ui.css\u001b[39m \u001b[36m304\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:46:10"}
+{"level":"info","message":"\u001b[90mGET /api/docs/swagger-ui-bundle.js\u001b[39m \u001b[36m304\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:46:10"}
+{"level":"info","message":"\u001b[90mGET /api/docs/swagger-ui-init.js\u001b[39m \u001b[32m200\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:46:10"}
+{"level":"info","message":"\u001b[90mGET /api/docs/swagger-ui-standalone-preset.js\u001b[39m \u001b[36m304\u001b[39m \u001b[90m4ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:46:10"}
+{"level":"info","message":"\u001b[90mGET /api/docs/favicon-32x32.png\u001b[39m \u001b[36m304\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:46:10"}
+{"level":"info","message":"\u001b[90mGET /api/docs/\u001b[39m \u001b[36m304\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:46:12"}
+{"level":"info","message":"\u001b[90mGET /api/docs/swagger-ui.css\u001b[39m \u001b[36m304\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:46:12"}
+{"level":"info","message":"\u001b[90mGET /api/docs/swagger-ui-bundle.js\u001b[39m \u001b[36m304\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:46:12"}
+{"level":"info","message":"\u001b[90mGET /api/docs/swagger-ui-standalone-preset.js\u001b[39m \u001b[36m304\u001b[39m \u001b[90m2ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:46:12"}
+{"level":"info","message":"\u001b[90mGET /api/docs/swagger-ui-init.js\u001b[39m \u001b[36m304\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:46:12"}
+{"level":"info","message":"\u001b[90mGET /api/docs/favicon-32x32.png\u001b[39m \u001b[36m304\u001b[39m \u001b[90m1ms\u001b[39m","meta":{},"timestamp":"2026-05-03 16:46:12"}

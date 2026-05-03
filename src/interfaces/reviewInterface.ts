@@ -4,5 +4,6 @@ export interface Review {
     content_id: string;
     parent_review_id?: string | null;
     comment?: string | null;
+    is_featured?: boolean;
     created_at: Date;
 }

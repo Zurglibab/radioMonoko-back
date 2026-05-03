@@ -51,7 +51,7 @@ export class UserService {
         const createdUser = await this.userRepository.create(user);
         logger.info(`User created with id: ${createdUser.id}`);
 
-        const token = jwt.sign({ id: createdUser.id, email: createdUser.email }, process.env.JWT_SECRET!, { expiresIn: '1h' });
+        const token = jwt.sign({ id: createdUser.id, email: createdUser.email, role: (createdUser as any).role || 'user' }, process.env.JWT_SECRET!, { expiresIn: '1h' });
         return { token };
     }
 
@@ -70,7 +70,7 @@ export class UserService {
         }
 
         logger.info(`User logged in successfully with email: ${dto.email}`);
-        const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET!, { expiresIn: '8h' });
+        const token = jwt.sign({ id: user.id, email: user.email, role: (user as any).role || 'user' }, process.env.JWT_SECRET!, { expiresIn: '8h' });
         return { token };
     }
 

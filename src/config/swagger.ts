@@ -27,7 +27,9 @@ const swaggerDefinition = {
         { name: "Content", description: "Gestion des contenus" },
         { name: "Notifications", description: "Gestion des notifications" },
         { name: "Review", description: "Gestion des reviews" },
-        { name: "LikeReview", description: "Gestion des likes/dislikes des reviews" }
+        { name: "LikeReview", description: "Gestion des likes/dislikes des reviews" },
+        { name: "Auth", description: "Authentification OAuth2 et JWT" },
+        { name: "Admin", description: "Modération et actions administrateur" }
     ],
     components: {
         securitySchemes: {

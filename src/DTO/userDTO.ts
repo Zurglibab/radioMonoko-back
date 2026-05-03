@@ -6,6 +6,7 @@ export interface CreateUserDTO {
     avatar?: string;
     bio?: string;
     website?: string;
+    role?: string;
 }
 
 export interface ModifyUserDTO {
@@ -15,6 +16,8 @@ export interface ModifyUserDTO {
     avatar?: string;
     bio?: string;
     website?: string;
+    is_banned?: boolean;
+    role?: string;
 }
 
 export class LoginUserDTO {

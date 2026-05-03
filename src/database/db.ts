@@ -46,6 +46,7 @@ async function createUserTable(client: PoolClient) {
                 bio TEXT,
                 website VARCHAR(255),
                 privacy VARCHAR(50) DEFAULT 'public',
+                role VARCHAR(255) DEFAULT 'user',  
                 is_banned BOOLEAN DEFAULT false,
                 created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
                 updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
@@ -136,6 +137,7 @@ async function createReviewTable(client: PoolClient) {
             content_id UUID NOT NULL,
             parent_review_id UUID,
             comment TEXT,
+            is_featured BOOLEAN DEFAULT false,
             created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
             FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
             FOREIGN KEY (content_id) REFERENCES content(id) ON DELETE CASCADE,

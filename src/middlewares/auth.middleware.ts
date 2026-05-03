@@ -20,8 +20,8 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
     const token = authHeader.split(' ')[1];
 
     try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET) as { id: string; email: string; iat: number; exp: number };
-        req.user = { id: decoded.id, email: decoded.email };
+        const decoded = jwt.verify(token, process.env.JWT_SECRET) as { id: string; email: string; role?: string; iat: number; exp: number };
+        req.user = { id: decoded.id, email: decoded.email, ...(decoded.role ? { role: decoded.role } : {}) } as any;
         req.userId = decoded.id;
         next();
     } catch (error) {

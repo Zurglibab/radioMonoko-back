@@ -4,6 +4,20 @@ import * as jwt from 'jsonwebtoken';
 
 const router = Router();
 
+/**
+ * @openapi
+ * /auth/google:
+ *   get:
+ *     tags:
+ *       - Auth
+ *     summary: Démarrer l'authentification Google OAuth2
+ *     responses:
+ *       302:
+ *         description: Redirection vers Google OAuth
+ *       500:
+ *         description: Google OAuth non configuré
+ */
+
 if (isGoogleOAuthConfigured) {
     // Init Google OAuth2 login
     // Note: we build the Google authorization URL and redirect explicitly to ensure
@@ -33,7 +47,21 @@ if (isGoogleOAuthConfigured) {
         return res.redirect(url);
     });
 
-    // Callback endpoint
+    /**
+     * @openapi
+     * /auth/google/callback:
+     *   get:
+     *     tags:
+     *       - Auth
+     *     summary: Callback Google OAuth2
+     *     responses:
+     *       200:
+     *         description: Authentification réussie, JWT renvoyé
+     *       401:
+     *         description: Authentification échouée
+     *       500:
+     *         description: Erreur d'authentification
+     */
     router.get('/google/callback', (req: Request, res: Response, next) => {
         passport.authenticate('google', { session: false }, (err: any, user: any) => {
             if (err) return res.status(500).json({ message: 'Authentication error', error: err.message });
@@ -58,6 +86,18 @@ if (isGoogleOAuthConfigured) {
         res.status(500).json({ message: 'Google OAuth not configured. Set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET.' });
     });
 }
+
+/**
+ * @openapi
+ * /auth/failure:
+ *   get:
+ *     tags:
+ *       - Auth
+ *     summary: Route de fallback en cas d'échec d'authentification
+ *     responses:
+ *       401:
+ *         description: Authentification échouée
+ */
 
 // Simple failure route
 router.get('/failure', (req: Request, res: Response) => {

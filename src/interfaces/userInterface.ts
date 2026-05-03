@@ -9,6 +9,7 @@ export interface User {
     website : string ;
     privacy : string;
     is_banned : boolean;
+    role?: string;
     created_at : Date;
     updated_at : Date;
 }

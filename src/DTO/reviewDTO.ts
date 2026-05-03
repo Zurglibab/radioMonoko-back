@@ -9,4 +9,5 @@ export interface CreateReviewDTO {
 export interface UpdateReviewDTO {
     parent_review_id?: string | null;
     comment?: string | null;
+    is_featured?: boolean;
 }
