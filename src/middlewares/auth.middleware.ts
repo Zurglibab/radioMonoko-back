@@ -5,6 +5,7 @@ declare global {
     namespace Express {
         interface Request {
             user?: { id: string; email: string };
+            userId?: string;
         }
     }
 }
@@ -21,6 +22,7 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET) as { id: string; email: string; iat: number; exp: number };
         req.user = { id: decoded.id, email: decoded.email };
+        req.userId = decoded.id;
         next();
     } catch (error) {
         console.error('Error verifying token:', error);

@@ -3,7 +3,7 @@ import express from 'express';
 import { createLikeReviewRouter } from '../../routes/likeReviewRoutes';
 
 jest.mock('../../DAO/likeReviewDAO', () => {
-    class MockLikeReviewBDDRepository {
+    class MockLikeReviewDAO {
         upsert = jest.fn(async (dto: any) => ({
             review_id: dto.review_id,
             user_id: dto.user_id,
@@ -35,7 +35,7 @@ jest.mock('../../DAO/likeReviewDAO', () => {
         countByReviewId = jest.fn(async () => ({ likes: 1, dislikes: 0, total: 1 }));
     }
 
-    return { LikeReviewBDDRepository: MockLikeReviewBDDRepository };
+    return { LikeReviewDAO: MockLikeReviewDAO };
 });
 
 describe('LikeReview routes', () => {

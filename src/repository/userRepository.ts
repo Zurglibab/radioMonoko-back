@@ -8,4 +8,5 @@ export interface  UserRepository {
     edit(updatedUser: User): Promise <User | null>;
     deleteById(id: string): Promise <User | null>;
     findByIds(ids: string[]): Promise<User[]>;
+    searchPublicUsers(query: string): Promise<Partial<User>[]>;
 }

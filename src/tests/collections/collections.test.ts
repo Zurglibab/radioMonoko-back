@@ -2,34 +2,28 @@ import request from 'supertest';
 import { Express } from 'express';
 import { createApp } from '../../app';
 
-jest.mock('../../repository/collectionsRepository');
+const mockFindAll = jest.fn();
+const mockFindById = jest.fn();
+const mockCreate = jest.fn();
+const mockUpdateById = jest.fn();
+const mockDeleteById = jest.fn();
+
+jest.mock('../../DAO/collectionDAO', () => ({
+    CollectionDAO: jest.fn().mockImplementation(() => ({
+        findAll: mockFindAll,
+        findById: mockFindById,
+        create: mockCreate,
+        updateById: mockUpdateById,
+        deleteById: mockDeleteById,
+        findByUserId: jest.fn().mockResolvedValue([]),
+    })),
+}));
 
 describe('Collections Routes with Mocks', () => {
     let app: Express;
-    let mockFindAll: jest.Mock;
-    let mockFindById: jest.Mock;
-    let mockCreate: jest.Mock;
-    let mockUpdateById: jest.Mock;
-    let mockDeleteById: jest.Mock;
 
     beforeEach(() => {
         jest.clearAllMocks();
-
-        mockFindAll = jest.fn();
-        mockFindById = jest.fn();
-        mockCreate = jest.fn();
-        mockUpdateById = jest.fn();
-        mockDeleteById = jest.fn();
-
-        jest.doMock('../../repository/collectionsRepository', () => ({
-            CollectionsRepository: jest.fn().mockImplementation(() => ({
-                findAll: mockFindAll,
-                findById: mockFindById,
-                create: mockCreate,
-                updateById: mockUpdateById,
-                deleteById: mockDeleteById,
-            }))
-        }), { virtual: true });
 
         app = createApp();
     });

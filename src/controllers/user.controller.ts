@@ -50,6 +50,9 @@ export class UserController {
     updateMe = async (req: Request, res: Response) => {
         try {
             const userId = (req as any).userId;
+            if (typeof req.body?.password !== 'undefined') {
+                return res.status(403).json({ message: 'Modification du mot de passe non autorisée via cette route' });
+            }
             const updateData: ModifyUserDTO = {
                 ...req.body,
                 id: userId
@@ -73,9 +76,8 @@ export class UserController {
             if (!q || typeof q !== 'string') {
                 return res.status(400).json({ message: 'Search query is required' });
             }
-            // This will need to be implemented in the repository
-            // For now, returning empty array
-            res.status(200).json([]);
+            const users = await this.userService.searchPublicUsers(q);
+            return res.status(200).json(users);
         } catch (error: any) {
             logger.error(error);
             res.status(500).json({ message: 'Internal server error' });
@@ -83,26 +85,41 @@ export class UserController {
     }
 
     getUserById = async(req: Request, res: Response) => {
-        const user = await this.userService.getUserById(req.params.id as string);
-        if (!user) {
-            res.status(404).json({ message: 'User not found' });
+        try {
+            const user = await this.userService.getUserById(req.params.id as string);
+            if (!user) {
+                return res.status(404).json({ message: 'User not found' });
+            }
+            return res.status(200).json(user);
+        } catch (error: any) {
+            logger.error(error);
+            return res.status(500).json({ message: 'Internal server error' });
         }
-        res.status(200).json(user);
     }
 
     getUserByEmail = async(req: Request, res: Response) => {
-        const user = await this.userService.getUserByEmail(req.params.email as string);
-        if (!user) {
-            res.status(404).json({ message: 'User not found' });
+        try {
+            const user = await this.userService.getUserByEmail(req.params.email as string);
+            if (!user) {
+                return res.status(404).json({ message: 'User not found' });
+            }
+            return res.status(200).json(user);
+        } catch (error: any) {
+            logger.error(error);
+            return res.status(500).json({ message: 'Internal server error' });
         }
-        res.status(200).json(user);
     };
 
     deleteUserById = async(req: Request, res: Response) => {
-        const user = await this.userService.deleteUserById(req.params.user as string)
-        if (!user) {
-            res.status(404).json({ message: 'User not found' });
+        try {
+            const user = await this.userService.deleteUserById(req.params.id as string)
+            if (!user) {
+                return res.status(404).json({ message: 'User not found' });
+            }
+            return res.status(200).json(user);
+        } catch (error: any) {
+            logger.error(error);
+            return res.status(500).json({ message: 'Internal server error' });
         }
-        res.status(200).json(user);
     }
 }

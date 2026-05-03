@@ -68,7 +68,7 @@ export const createNotificationRouter = () => {
 
     /**
      * @openapi
-     * /api/notifications:
+     * /notifications:
      *   get:
      *     tags: [Notifications]
      *     summary: Recuperer toutes les notifications
@@ -89,7 +89,7 @@ export const createNotificationRouter = () => {
 
     /**
      * @openapi
-     * /api/notifications/user/{userId}:
+     * /notifications/user/{userId}:
      *   get:
      *     tags: [Notifications]
      *     summary: Recuperer les notifications d'un utilisateur
@@ -117,7 +117,7 @@ export const createNotificationRouter = () => {
 
     /**
      * @openapi
-     * /api/notifications/user/{userId}/unread:
+     * /notifications/user/{userId}/unread:
      *   get:
      *     tags: [Notifications]
      *     summary: Recuperer les notifications non lues d'un utilisateur
@@ -145,7 +145,7 @@ export const createNotificationRouter = () => {
 
     /**
      * @openapi
-     * /api/notifications/{id}:
+     * /notifications/{id}:
      *   get:
      *     tags: [Notifications]
      *     summary: Recuperer une notification par id
@@ -173,7 +173,7 @@ export const createNotificationRouter = () => {
 
     /**
      * @openapi
-     * /api/notifications:
+     * /notifications:
      *   post:
      *     tags: [Notifications]
      *     summary: Creer une notification
@@ -198,7 +198,7 @@ export const createNotificationRouter = () => {
 
     /**
      * @openapi
-     * /api/notifications/{id}:
+     * /notifications/{id}:
      *   put:
      *     tags: [Notifications]
      *     summary: Mettre a jour une notification
@@ -232,7 +232,7 @@ export const createNotificationRouter = () => {
 
     /**
      * @openapi
-     * /api/notifications/{id}/read:
+     * /notifications/{id}/read:
      *   patch:
      *     tags: [Notifications]
      *     summary: Marquer une notification comme lue
@@ -260,7 +260,7 @@ export const createNotificationRouter = () => {
 
     /**
      * @openapi
-     * /api/notifications/{id}:
+     * /notifications/{id}:
      *   delete:
      *     tags: [Notifications]
      *     summary: Supprimer une notification

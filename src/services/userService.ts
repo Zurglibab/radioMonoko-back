@@ -117,4 +117,9 @@ export class UserService {
         logger.info(`Fetching user by id: ${id}`);
         return this.userRepository.findById(id);
     }
+
+    async searchPublicUsers(query: string): Promise<Partial<User>[]> {
+        logger.info(`Searching public users with query: ${query}`);
+        return this.userRepository.searchPublicUsers(query);
+    }
 }
