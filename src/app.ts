@@ -3,6 +3,8 @@ import swaggerUi from "swagger-ui-express";
 import apiRoutes from "./routes/apiRoutes";
 import { swaggerSpec } from "./config/swagger";
 import userRouter from './routes/userRoutes';
+import authRouter from './routes/authRoutes';
+import passport from './config/passport';
 import expressWinston from 'express-winston';
 import logger from './config/logger';
 import userRelationRouter from "./routes/userRelationRoutes";
@@ -63,6 +65,12 @@ export function createApp(): Express {
     app.use(expressWinston.errorLogger({
         winstonInstance: logger
     }));
+
+    // Passport (pour OAuth)
+    app.use(passport.initialize());
+
+    // Auth routes (OAuth2)
+    app.use('/auth', authRouter);
 
 
     // Routes: RadioFrance-related endpoints mounted under /api

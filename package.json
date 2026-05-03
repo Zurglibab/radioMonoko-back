@@ -30,6 +30,10 @@
     "@types/swagger-ui-express": "^4.1.8",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3"
+    ,
+    "@types/passport": "^1.0.11",
+    "@types/passport-google-oauth20": "^2.0.11",
+    "@types/uuid": "^9.0.1"
   },
   "dependencies": {
     "axios": "^1.13.5",
@@ -44,5 +48,10 @@
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
     "winston": "^3.19.0"
+    ,
+    "passport": "^0.6.0",
+    "passport-google-oauth20": "^2.0.0"
+    ,
+    "uuid": "^9.0.0"
   }
 }
