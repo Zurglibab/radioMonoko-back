@@ -40,9 +40,10 @@ if (isGoogleOAuthConfigured) {
             if (!user) return res.status(401).json({ message: 'Authentication failed' });
 
             // Create JWT
-            const secret: jwt.Secret = (process.env.JWT_SECRET as jwt.Secret) || 'changeme';
-            const token = jwt.sign({ id: user.id, email: user.email }, secret, {
-                expiresIn: process.env.JWT_EXPIRES_IN || '7d'
+            const secret = process.env.JWT_SECRET || 'changeme';
+            const expiresIn = (process.env.JWT_EXPIRES_IN || '7d') as jwt.SignOptions['expiresIn'];
+            const token = jwt.sign({ id: user.id, email: user.email }, secret as jwt.Secret, {
+                expiresIn
             });
 
             // Return token and user info. Alternatively, redirect to frontend with token
