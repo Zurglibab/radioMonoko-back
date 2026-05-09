@@ -243,4 +243,30 @@ describe('User Routes - Integration Tests', () => {
             expect(response.status).toBe(404);
         });
     });
+
+    describe('Banned user behavior', () => {
+        it('ne devrait plus pouvoir se connecter ni utiliser un token existant après bannissement', async () => {
+            const userData = { email: 'banme@test.com', password: 'password123', username: 'banme' };
+            // create user and login to get token
+            const registerRes = await request(app).post('/user/register').send(userData);
+            expect(registerRes.status).toBe(201);
+            const token = registerRes.body.token;
+
+            // token should work initially
+            const meRes = await request(app).get('/user/me').set('Authorization', `Bearer ${token}`);
+            expect(meRes.status).toBe(200);
+
+            // ban the user directly in DB
+            const userId = meRes.body.id as string;
+            await pool.query('UPDATE users SET is_banned = true WHERE id = $1', [userId]);
+
+            // subsequent requests with the old token must be forbidden
+            const meAfterBan = await request(app).get('/user/me').set('Authorization', `Bearer ${token}`);
+            expect(meAfterBan.status).toBe(403);
+
+            // and login attempts should be rejected
+            const loginRes = await request(app).post('/user/login').send({ email: userData.email, password: userData.password });
+            expect(loginRes.status).toBe(401);
+        });
+    });
 });

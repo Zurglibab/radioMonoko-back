@@ -62,6 +62,11 @@ export class UserService {
             logger.warn(`Login failed: User not found with email: ${dto.email}`);
             return null;
         }
+        // Refuse login if the user is banned
+        if ((user as any).is_banned) {
+            logger.warn(`Login attempt by banned user: ${dto.email}`);
+            return null;
+        }
         console.log("user");
         const isPasswordValid = await bcrypt.compare(dto.password, user.password);
         if (!isPasswordValid) {

@@ -18,6 +18,7 @@ import { createRatingContentRouter } from './routes/ratingContentRoutes';
 import { createReviewRouter } from './routes/reviewRoutes';
 import { createLikeReviewRouter } from './routes/likeReviewRoutes';
 import { createNotificationRouter } from './routes/notificationRoutes';
+import reportUsersRouter from './routes/reportUsersRoutes';
 
 
 export function createApp(): Express {
@@ -64,6 +65,8 @@ export function createApp(): Express {
     app.use('/review', createLikeReviewRouter());
     // Notifications mounted without /api prefix (not RadioFrance-related)
     app.use('/notifications', createNotificationRouter());
+    // Reports (user reporting)
+    app.use('/reports', reportUsersRouter);
 
     app.use(expressWinston.errorLogger({
         winstonInstance: logger

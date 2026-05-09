@@ -32,6 +32,7 @@ export const getAuthToken = async (): Promise<string> => {
 };
 
 export const cleanupDatabase = async () => {
+    await pool.query('DELETE FROM report_users');
     await pool.query('DELETE FROM user_relations');
     await pool.query('DELETE FROM users');
 };
