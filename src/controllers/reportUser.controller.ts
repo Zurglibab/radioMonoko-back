@@ -14,8 +14,14 @@ export class ReportUserController {
 			return res.status(201).json({ success: true, data: created });
 		} catch (err: any) {
 			console.error('[ReportUserController] createReport failed:', err);
-			if (err.message && err.message.includes('not found')) {
+			if (err.message === 'Reporter user not found') {
+				return res.status(401).json({ success: false, error: 'Non autorisé: utilisateur introuvable.' });
+			}
+			if (err.message === 'Reported user not found') {
 				return res.status(404).json({ success: false, error: err.message });
+			}
+			if (err.code === '23503') {
+				return res.status(400).json({ success: false, error: 'Contrainte de clé étrangère invalide.' });
 			}
 			return res.status(500).json({ success: false, error: 'Internal server error' });
 		}

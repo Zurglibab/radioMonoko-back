@@ -2,7 +2,7 @@ import {Pool, PoolClient} from 'pg';
 import {config} from 'dotenv';
 import logger from '../config/logger';
 
-config();
+config({ override: true });
 
 export const pool = new Pool({
     host: process.env.DB_HOST || process.env.POSTGRES_HOST,
@@ -213,4 +213,3 @@ async function createNotificationTable(client: PoolClient) {
 
         logger.info("Table 'report_users' created successfully.");
     }
-

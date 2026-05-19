@@ -1,15 +1,31 @@
 import request from 'supertest';
 import { createApp } from '../app';
-import { pool } from '../database/db';
+import { pool, initializeDatabase } from '../database/db';
 import bcrypt from 'bcryptjs';
 
 const app = createApp();
+
 let authToken: string;
+let dbInitialized = false;
+
+// Initialize database on first access (lazy initialization)
+const ensureDbInitialized = async () => {
+    if (dbInitialized) return;
+    try {
+        await initializeDatabase();
+        dbInitialized = true;
+    } catch (err) {
+        console.error('Failed to initialize database for tests:', err);
+        throw err;
+    }
+};
 
 export const getAuthToken = async (): Promise<string> => {
     if (authToken) {
         return authToken;
     }
+
+    await ensureDbInitialized();
 
     await pool.query('DELETE FROM users');
 
@@ -32,6 +48,7 @@ export const getAuthToken = async (): Promise<string> => {
 };
 
 export const cleanupDatabase = async () => {
+    await ensureDbInitialized();
     await pool.query('DELETE FROM report_users');
     await pool.query('DELETE FROM user_relations');
     await pool.query('DELETE FROM users');

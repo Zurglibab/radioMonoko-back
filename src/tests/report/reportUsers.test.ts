@@ -1,11 +1,15 @@
 import request from 'supertest';
 import { createApp } from '../../app';
 import { cleanupDatabase, closeDatabaseConnection } from '../test-helpers';
-import { pool } from '../../database/db';
+import { pool, initializeDatabase } from '../../database/db';
 
 const app = createApp();
 
 describe('Report Users API', () => {
+    beforeAll(async () => {
+        await initializeDatabase();
+    });
+
     beforeEach(async () => {
         await cleanupDatabase();
     });

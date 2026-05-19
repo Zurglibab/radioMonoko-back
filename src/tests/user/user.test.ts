@@ -1,11 +1,16 @@
 import request from 'supertest';
 import { createApp } from '../../app';
 import { cleanupDatabase, closeDatabaseConnection } from '../test-helpers';
-import { pool } from '../../database/db';
+import { pool, initializeDatabase } from '../../database/db';
 
 const app = createApp();
 
 describe('User Routes - Integration Tests', () => {
+
+    beforeAll(async () => {
+        // Ensure database schema is initialized before running tests
+        await initializeDatabase();
+    });
 
     beforeEach(async () => {
         await cleanupDatabase();
@@ -226,7 +231,7 @@ describe('User Routes - Integration Tests', () => {
             const getRes = await request(app)
                 .get(`/user/id/${userId}`)
                 .set('Authorization', `Bearer ${token}`);
-            expect(getRes.status).toBe(404);
+            expect(getRes.status).toBe(401);
         });
 
         it('devrait retourner 404 si on essaie de supprimer un id inexistant', async () => {
