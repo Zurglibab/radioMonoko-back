@@ -57,8 +57,8 @@ async function createUserTable(client: PoolClient) {
 async function createUserRelationTable(client: PoolClient) {
     await client.query(`
             CREATE TABLE IF NOT EXISTS user_relations (
-                followed_id INTEGER NOT NULL,
-                follower_id INTEGER NOT NULL,
+                followed_id UUID NOT NULL,
+                follower_id UUID NOT NULL,
                 status VARCHAR(50) NOT NULL DEFAULT 'pending' CHECK (status IN ('pending', 'accepted', 'refused', 'blocked')),
                 created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
                 updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
@@ -184,6 +184,33 @@ async function createNotificationTable(client: PoolClient) {
         CREATE INDEX IF NOT EXISTS idx_notifications_unread
         ON notifications (user_id, is_read)
         WHERE is_read = false
+    `);
+
+    await client.query(`
+        CREATE TABLE IF NOT EXISTS channel (
+            id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+            type VARCHAR(50) NOT NULL,
+            created_at TIMESTAMP DEFAULT NOW()
+        )
+    `);
+
+    await client.query(`
+        CREATE TABLE IF NOT EXISTS channel_user (
+            channel_id UUID REFERENCES channel(id),
+            user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+            joined_at TIMESTAMP DEFAULT NOW(),
+            PRIMARY KEY (channel_id, user_id)
+        )
+    `);
+
+    await client.query(`
+        CREATE TABLE IF NOT EXISTS messages (
+            id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+            channel_id UUID REFERENCES channel(id) ON DELETE CASCADE,
+            sender_id UUID REFERENCES users(id) ON DELETE CASCADE,
+            content TEXT NOT NULL,
+            created_at TIMESTAMP DEFAULT NOW()
+    )
     `);
 
     logger.info("Table 'notifications' created successfully.");

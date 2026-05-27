@@ -20,8 +20,8 @@ export class UserRelationRepository {
         await this.userRelationBddRepository.accept(followDto);
     }
 
-    async getFriends(userId: string): Promise<UserRelation[]> {
-        return this.userRelationBddRepository.getFriends(userId);
+    async getFollower(userId: string): Promise<UserRelation[]> {
+        return this.userRelationBddRepository.getFollowers(userId);
     }
 
     async getPendingRequests(userId: string): Promise<UserRelation[]> {
@@ -43,7 +43,7 @@ export class UserRelationRepository {
         await this.userRelationBddRepository.block(followDto);
     }
 
-    async getFriend(userId: string, targetUserId: string): Promise<UserRelation | null> {
-        return this.userRelationBddRepository.findRelation({follower_id: userId, followed_id: targetUserId});
+    async getFollowed(userId: string): Promise<UserRelation[]> {
+        return this.userRelationBddRepository.getFollowed(userId);
     }
 }

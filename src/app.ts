@@ -12,6 +12,8 @@ import { createCollectionItemsRouter } from './routes/collectionItemsRoutes';
 import { createRatingContentRouter } from './routes/ratingContentRoutes';
 import { createReviewRouter } from './routes/reviewRoutes';
 import { createLikeReviewRouter } from './routes/likeReviewRoutes';
+import channelRoutes from './routes/channelRoutes';
+import messageRoutes from './routes/messageRoutes';
 
 
 export function createApp(): Express {
@@ -56,6 +58,8 @@ export function createApp(): Express {
     app.use('/ratingContent', createRatingContentRouter());
     app.use('/review', createReviewRouter());
     app.use('/review', createLikeReviewRouter());
+    app.use('/channels', channelRoutes());
+    app.use('/channels', messageRoutes());
 
     app.use(expressWinston.errorLogger({
         winstonInstance: logger

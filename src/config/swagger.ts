@@ -27,7 +27,11 @@ const swaggerDefinition = {
         { name: "Content", description: "Gestion des contenus" },
         { name: "Notifications", description: "Gestion des notifications" },
         { name: "Review", description: "Gestion des reviews" },
-        { name: "LikeReview", description: "Gestion des likes/dislikes des reviews" }
+        { name: "LikeReview", description: "Gestion des likes/dislikes des reviews" },
+        { name: "Channels", description: "Gestion des channels" },
+        { name: "Members", description: "Gestion des membres de channel" },
+        { name: "Messages", description: "Gestion des messages" },
+        { name: "Config", description: "Configuration front (endpoints, socket, etc.)" }
     ],
     components: {
         securitySchemes: {

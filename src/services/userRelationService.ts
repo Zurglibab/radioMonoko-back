@@ -65,23 +65,57 @@ export class UserRelationService {
         await this.userRelationRepository.block(blockerId, blockedId);
     }
 
-    async getFriends(userId: string, targetUserId: string): Promise<any[]> {
-        logger.info(`[UserRelationService] User ${userId} wants to see friends of ${targetUserId}`);
-        const targetUser = await this.userRepository.findById(targetUserId);
-        if (!targetUser) {
+    async getFriends(userId: string): Promise<any[]> {
+        logger.info(`[UserRelationService] User ${userId} requests their friends (as follower)`);
+        const user = await this.userRepository.findById(userId);
+        if (!user) {
             throw new ApiError(404, 'User not found');
         }
 
-        const areFriends = await this.userRelationRepository.getFriend(userId, targetUserId);
+        const relations = await this.userRelationRepository.getFollowed(userId);
+        const friendIds = relations
+            .filter(r => r.follower_id === userId && r.status === 'accepted')
+            .map(r => r.followed_id);
 
-        if (targetUser.privacy == "public" || (areFriends?.status === 'accepted') || userId === targetUserId) {
-            const relations = await this.userRelationRepository.getFriends(targetUserId);
-            const friendIds = relations.map(r => r.follower_id === targetUserId ? r.follower_id : r.follower_id);
-            const friends = await this.userRepository.findByIds(friendIds);
-            return friends.map(f => ({ id: f.id, username: f.username, isPublic: f.privacy === 'public'}));
-        } else {
-            throw new ApiError(403, 'You are not allowed to see this user\'s friends');
+        if (friendIds.length === 0) {
+            return [];
         }
+
+        const friends = await this.userRepository.findByIds(friendIds);
+        return friends.map(f => ({ id: f.id, username: f.username, isPublic: f.privacy === 'public' }));
+    }
+
+    async getFriendsForOther(userId: string, otherId: string): Promise<any[]> {
+        logger.info(`[UserRelationService] User ${userId} requests friends of ${otherId} (as follower)`);
+        const user = await this.userRepository.findById(userId);
+        if (!user) {
+            throw new ApiError(404, 'User not found');
+        }
+
+        const otherUser = await this.userRepository.findById(otherId);
+        if (!otherUser) {
+            throw new ApiError(404, 'Other user not found');
+        }
+
+        const relations = await this.userRelationRepository.getFollower(otherId);
+        logger.info(`[UserRelationService] User ${relations.length} requests friends of ${relations} (as follower)`);
+
+        let visibleRelations = relations
+            .filter(r => r.follower_id === otherId && r.status === 'accepted');
+
+        // if (user.role !== 'admin') {
+        //     visibleRelations = visibleRelations.filter(r => r.privacy === 'public');
+        // }
+
+        const friendIds = visibleRelations.map(r => r.followed_id);
+        logger.info(`[UserRelationService] User ${friendIds.length} requests friends of ${friendIds} (as follower)`);
+
+        if (friendIds.length === 0) {
+            return [];
+        }
+
+        const friends = await this.userRepository.findByIds(friendIds);
+        return friends.map(f => ({ id: f.id, username: f.username, isPublic: f.privacy === 'public' }));
     }
 
     async getPendingRequests(userId: string): Promise<any[]> {
