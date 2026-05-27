@@ -21,7 +21,14 @@ export const authMiddleware = async (req: Request, res: Response, next: NextFunc
   const token = authHeader.split(' ')[1];
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET) as {id: string;email: string;role?: string;iat: number;exp: number;};
+    // Ensure JWT secret is configured
+    const jwtSecret = process.env.JWT_SECRET;
+    if (!jwtSecret) {
+      console.error('[auth.middleware] JWT_SECRET not configured');
+      return res.status(500).json({ message: 'Server misconfigured' });
+    }
+
+    const decoded = jwt.verify(token, jwtSecret) as {id: string;email: string;role?: string;iat: number;exp: number;};
     const userDAO = new UserDAO();
     const user = await userDAO.findById(decoded.id);
 

@@ -67,12 +67,14 @@ if (isGoogleOAuthConfigured) {
       if (err) return res.status(500).json({ message: 'Authentication error', error: err.message });
       if (!user) return res.status(401).json({ message: 'Authentication failed' });
 
-      // Create JWT
-      const secret = process.env.JWT_SECRET || 'changeme';
+      // Create JWT - require a configured secret
+      const secret = process.env.JWT_SECRET;
+      if (!secret) {
+        console.error('[auth] JWT_SECRET is not configured');
+        return res.status(500).json({ message: 'Server misconfigured: JWT_SECRET missing' });
+      }
       const expiresIn = (process.env.JWT_EXPIRES_IN || '7d') as jwt.SignOptions['expiresIn'];
-      const token = jwt.sign({ id: user.id, email: user.email }, secret as jwt.Secret, {
-        expiresIn
-      });
+      const token = jwt.sign({ id: user.id, email: user.email }, secret as jwt.Secret, { expiresIn });
 
       // Return token and user info. Alternatively, redirect to frontend with token
       return res.status(200).json({ token, user: { id: user.id, email: user.email } });

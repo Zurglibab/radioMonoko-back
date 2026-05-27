@@ -17,7 +17,6 @@ export const initializeDatabase = async () => {
   try {
     await client.query(`CREATE EXTENSION IF NOT EXISTS pgcrypto;`);
     await createUserTable(client);
-    await client.query(`DROP TABLE IF EXISTS user_relations;`);
     await createUserRelationTable(client);
     await createContentTable(client);
     await createCollectionsTable(client);

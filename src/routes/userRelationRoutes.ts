@@ -58,7 +58,33 @@ userRelationRouter.get('/friends', authMiddleware, userRelationController.getFri
  *       404:
  *         description: Utilisateur non trouvé
  */
-userRelationRouter.get('/friends/:id', authMiddleware, userRelationController.getFriends);
+/**
+ * @openapi
+ * /userRelation/friends/{userId}:
+ *   get:
+ *     tags:
+ *       - UserRelations
+ *     summary: Récupère la liste d'amis d'un utilisateur spécifique par son ID
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: userId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: L'ID de l'utilisateur à consulter
+ *     responses:
+ *       200:
+ *         description: Liste d'amis récupérée avec succès
+ *       401:
+ *         description: Non authentifié
+ *       403:
+ *         description: Profil privé ou bloqué
+ *       404:
+ *         description: Utilisateur non trouvé
+ */
+userRelationRouter.get('/friends/:userId', authMiddleware, userRelationController.getFriends);
 
 /**
  * @openapi
@@ -103,7 +129,33 @@ userRelationRouter.get('/request', authMiddleware,  userRelationController.getPe
  *       404:
  *         description: Utilisateur non trouvé
  */
-userRelationRouter.post('/follow/:id', authMiddleware, userRelationController.follow);
+/**
+ * @openapi
+ * /userRelation/follow/{followedId}:
+ *   post:
+ *     tags:
+ *       - UserRelations
+ *     summary: S'abonner ou envoyer une demande d'ami à un utilisateur
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: followedId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: L'ID de l'utilisateur cible (followedId)
+ *     responses:
+ *       201:
+ *         description: Opération réussie (suivis ou demande envoyée)
+ *       400:
+ *         description: Impossible de suivre cet utilisateur (déjà suivi, etc.)
+ *       401:
+ *         description: Non authentifié
+ *       404:
+ *         description: Utilisateur non trouvé
+ */
+userRelationRouter.post('/follow/:followedId', authMiddleware, userRelationController.follow);
 
 /**
  * @openapi
@@ -129,7 +181,31 @@ userRelationRouter.post('/follow/:id', authMiddleware, userRelationController.fo
  *       404:
  *         description: Utilisateur non trouvé ou non suivi
  */
-userRelationRouter.delete('/unfollow/:id', authMiddleware, userRelationController.unfollow);
+/**
+ * @openapi
+ * /userRelation/unfollow/{followedId}:
+ *   delete:
+ *     tags:
+ *       - UserRelations
+ *     summary: Se désabonner d'un utilisateur ou retirer un ami
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: followedId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: L'ID de l'utilisateur cible (followedId)
+ *     responses:
+ *       200:
+ *         description: Utilisateur retiré des amis / désabonnement réussi
+ *       401:
+ *         description: Non authentifié
+ *       404:
+ *         description: Utilisateur non trouvé ou non suivi
+ * */
+userRelationRouter.delete('/unfollow/:followedId', authMiddleware, userRelationController.unfollow);
 
 /**
  * @openapi
@@ -157,7 +233,33 @@ userRelationRouter.delete('/unfollow/:id', authMiddleware, userRelationControlle
  *       404:
  *         description: Utilisateur non trouvé
  */
-userRelationRouter.patch('/accept/:id', authMiddleware, userRelationController.accept);
+/**
+ * @openapi
+ * /userRelation/accept/{requesterId}:
+ *   patch:
+ *     tags:
+ *       - UserRelations
+ *     summary: Accepter une demande d'ami
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: requesterId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: L'ID de l'utilisateur ayant envoyé la demande (requesterId)
+ *     responses:
+ *       200:
+ *         description: Demande d'ami acceptée
+ *       400:
+ *         description: Aucune demande en attente
+ *       401:
+ *         description: Non authentifié
+ *       404:
+ *         description: Utilisateur non trouvé
+ * */
+userRelationRouter.patch('/accept/:requesterId', authMiddleware, userRelationController.accept);
 
 /**
  * @openapi
@@ -185,7 +287,33 @@ userRelationRouter.patch('/accept/:id', authMiddleware, userRelationController.a
  *       404:
  *         description: Utilisateur non trouvé
  */
-userRelationRouter.patch('/refuse/:id', authMiddleware, userRelationController.refuse);
+/**
+ * @openapi
+ * /userRelation/refuse/{requesterId}:
+ *   patch:
+ *     tags:
+ *       - UserRelations
+ *     summary: Refuser une demande d'ami
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: requesterId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: L'ID de l'utilisateur ayant envoyé la demande (requesterId)
+ *     responses:
+ *       200:
+ *         description: Demande d'ami refusée
+ *       400:
+ *         description: Aucune demande en attente
+ *       401:
+ *         description: Non authentifié
+ *       404:
+ *         description: Utilisateur non trouvé
+ * */
+userRelationRouter.patch('/refuse/:requesterId', authMiddleware, userRelationController.refuse);
 
 /**
  * @openapi
@@ -211,6 +339,30 @@ userRelationRouter.patch('/refuse/:id', authMiddleware, userRelationController.r
  *       404:
  *         description: Utilisateur non trouvé
  */
-userRelationRouter.post('/block/:id', authMiddleware, userRelationController.block);
+/**
+ * @openapi
+ * /userRelation/block/{blockedId}:
+ *   post:
+ *     tags:
+ *       - UserRelations
+ *     summary: Bloquer un utilisateur
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: blockedId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: L'ID de l'utilisateur à bloquer (blockedId)
+ *     responses:
+ *       200:
+ *         description: Utilisateur bloqué avec succès
+ *       401:
+ *         description: Non authentifié
+ *       404:
+ *         description: Utilisateur non trouvé
+ * */
+userRelationRouter.post('/block/:blockedId', authMiddleware, userRelationController.block);
 
 export default userRelationRouter;

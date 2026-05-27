@@ -44,12 +44,16 @@ export function createApp(): Express {
   });
 
 
+  // CORS middleware: allow configurable origin via environment variable
   app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    const allowedOrigin = process.env.CORS_ORIGIN || '*';
 
-    if (req.method === "OPTIONS") {
+    // In production, set CORS_ORIGIN to a specific origin (ex: https://yourdomain.tld)
+    res.header('Access-Control-Allow-Origin', allowedOrigin);
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
+
+    if (req.method === 'OPTIONS') {
       return res.sendStatus(200);
     }
     next();

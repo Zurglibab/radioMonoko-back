@@ -89,7 +89,7 @@ export class UserRelationController {
   getFriends = async (req: Request, res: Response): Promise<void> => {
     try {
       const userId = req.user?.id;
-      const targetUserId = req.params.userId as string;
+      const targetUserId = (req.params.userId as string) || userId;
       logger.info(`[UserRelationController] Getting friends for user ${targetUserId}`);
       const friends = await this.userRelationService.getFriends(userId, targetUserId);
       res.status(200).json(friends);
