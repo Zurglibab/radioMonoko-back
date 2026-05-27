@@ -1,7 +1,7 @@
 import { createApp } from "./src/app";
 import { config } from 'dotenv';
 import { initializeDatabase } from './src/database/db';
-import { startBrandsScheduler } from "./src/scedulers/brandsScheduler";
+import { startBrandsScheduler } from "./src/scheduler/brandsScheduler";
 
 config();
 

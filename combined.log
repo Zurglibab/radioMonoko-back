@@ -13576,6 +13576,17 @@
 {"level":"info","message":"Table 'notifications' created successfully.","timestamp":"2026-05-27 20:29:24"}
 {"level":"info","message":"Table 'report_users' created successfully.","timestamp":"2026-05-27 20:29:24"}
 {"level":"info","message":"Database initialized successfully.","timestamp":"2026-05-27 20:29:24"}
+{"level":"info","message":"Table 'users' created successfully.","timestamp":"2026-05-27 20:48:24"}
+{"level":"info","message":"Table 'UserRelation' created successfully.","timestamp":"2026-05-27 20:48:24"}
+{"level":"info","message":"Table 'content' created successfully.","timestamp":"2026-05-27 20:48:24"}
+{"level":"info","message":"Table 'collections' created successfully.","timestamp":"2026-05-27 20:48:24"}
+{"level":"info","message":"Table 'collection_items' created successfully.","timestamp":"2026-05-27 20:48:24"}
+{"level":"info","message":"Table 'rating_content' created successfully.","timestamp":"2026-05-27 20:48:24"}
+{"level":"info","message":"Table 'reviews' created successfully.","timestamp":"2026-05-27 20:48:24"}
+{"level":"info","message":"Table 'like_review' created successfully.","timestamp":"2026-05-27 20:48:24"}
+{"level":"info","message":"Table 'notifications' created successfully.","timestamp":"2026-05-27 20:48:24"}
+{"level":"info","message":"Table 'report_users' created successfully.","timestamp":"2026-05-27 20:48:24"}
+{"level":"info","message":"Database initialized successfully.","timestamp":"2026-05-27 20:48:24"}
 {"level":"info","message":"Table 'users' created successfully.","timestamp":"2026-05-27 20:30:53"}
 {"level":"info","message":"Table 'UserRelation' created successfully.","timestamp":"2026-05-27 20:30:53"}
 {"level":"info","message":"Table 'content' created successfully.","timestamp":"2026-05-27 20:30:53"}
@@ -15014,3 +15025,41 @@
 {"level":"info","message":"\u001b[90mGET /user/me\u001b[39m \u001b[32m200\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-05-27 20:43:22"}
 {"level":"info","message":"[UserRelationBddRepository] Getting following users for user f9b21161-cc93-45d5-88bd-0abb0f599e08","timestamp":"2026-05-27 20:43:22"}
 {"level":"info","message":"\u001b[90mGET /user/me/feed?limit=250\u001b[39m \u001b[32m200\u001b[39m \u001b[90m6ms\u001b[39m","meta":{},"timestamp":"2026-05-27 20:43:22"}
+{"level":"info","message":"Table 'users' created successfully.","timestamp":"2026-05-27 20:49:00"}
+{"level":"info","message":"Table 'UserRelation' created successfully.","timestamp":"2026-05-27 20:49:00"}
+{"level":"info","message":"Table 'content' created successfully.","timestamp":"2026-05-27 20:49:00"}
+{"level":"info","message":"Table 'collections' created successfully.","timestamp":"2026-05-27 20:49:00"}
+{"level":"info","message":"Table 'collection_items' created successfully.","timestamp":"2026-05-27 20:49:00"}
+{"level":"info","message":"Table 'rating_content' created successfully.","timestamp":"2026-05-27 20:49:00"}
+{"level":"info","message":"Table 'reviews' created successfully.","timestamp":"2026-05-27 20:49:00"}
+{"level":"info","message":"Table 'like_review' created successfully.","timestamp":"2026-05-27 20:49:00"}
+{"level":"info","message":"Table 'notifications' created successfully.","timestamp":"2026-05-27 20:49:00"}
+{"level":"info","message":"Table 'report_users' created successfully.","timestamp":"2026-05-27 20:49:00"}
+{"level":"info","message":"Database initialized successfully.","timestamp":"2026-05-27 20:49:00"}
+{"level":"info","message":"Table 'users' created successfully.","timestamp":"2026-05-27 20:49:07"}
+{"level":"info","message":"Table 'UserRelation' created successfully.","timestamp":"2026-05-27 20:49:07"}
+{"level":"info","message":"Table 'content' created successfully.","timestamp":"2026-05-27 20:49:07"}
+{"level":"info","message":"Table 'collections' created successfully.","timestamp":"2026-05-27 20:49:07"}
+{"level":"info","message":"Table 'collection_items' created successfully.","timestamp":"2026-05-27 20:49:07"}
+{"level":"info","message":"Table 'rating_content' created successfully.","timestamp":"2026-05-27 20:49:07"}
+{"level":"info","message":"Table 'reviews' created successfully.","timestamp":"2026-05-27 20:49:07"}
+{"level":"info","message":"Table 'like_review' created successfully.","timestamp":"2026-05-27 20:49:07"}
+{"level":"info","message":"Table 'notifications' created successfully.","timestamp":"2026-05-27 20:49:07"}
+{"level":"info","message":"Table 'report_users' created successfully.","timestamp":"2026-05-27 20:49:07"}
+{"level":"info","message":"Table 'users' created successfully.","timestamp":"2026-05-27 20:49:15"}
+{"level":"info","message":"Table 'UserRelation' created successfully.","timestamp":"2026-05-27 20:49:15"}
+{"level":"info","message":"Table 'content' created successfully.","timestamp":"2026-05-27 20:49:15"}
+{"level":"info","message":"Table 'collections' created successfully.","timestamp":"2026-05-27 20:49:15"}
+{"level":"info","message":"Table 'collection_items' created successfully.","timestamp":"2026-05-27 20:49:15"}
+{"level":"info","message":"Table 'rating_content' created successfully.","timestamp":"2026-05-27 20:49:15"}
+{"level":"info","message":"Table 'reviews' created successfully.","timestamp":"2026-05-27 20:49:15"}
+{"level":"info","message":"Table 'like_review' created successfully.","timestamp":"2026-05-27 20:49:15"}
+{"level":"info","message":"Table 'notifications' created successfully.","timestamp":"2026-05-27 20:49:15"}
+{"level":"info","message":"Table 'report_users' created successfully.","timestamp":"2026-05-27 20:49:15"}
+{"level":"info","message":"Database initialized successfully.","timestamp":"2026-05-27 20:49:15"}
+{"level":"info","message":"\u001b[90mGET /\u001b[39m \u001b[36m304\u001b[39m \u001b[90m2ms\u001b[39m","meta":{},"timestamp":"2026-05-27 20:49:15"}
+{"level":"info","message":"\u001b[90mGET /api/docs/\u001b[39m \u001b[36m304\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-05-27 20:49:19"}
+{"level":"info","message":"\u001b[90mGET /api/docs/swagger-ui.css\u001b[39m \u001b[36m304\u001b[39m \u001b[90m4ms\u001b[39m","meta":{},"timestamp":"2026-05-27 20:49:19"}
+{"level":"info","message":"\u001b[90mGET /api/docs/swagger-ui-bundle.js\u001b[39m \u001b[36m304\u001b[39m \u001b[90m3ms\u001b[39m","meta":{},"timestamp":"2026-05-27 20:49:19"}
+{"level":"info","message":"\u001b[90mGET /api/docs/swagger-ui-standalone-preset.js\u001b[39m \u001b[36m304\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-05-27 20:49:19"}
+{"level":"info","message":"\u001b[90mGET /api/docs/swagger-ui-init.js\u001b[39m \u001b[32m200\u001b[39m \u001b[90m0ms\u001b[39m","meta":{},"timestamp":"2026-05-27 20:49:19"}
