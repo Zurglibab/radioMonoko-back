@@ -3,11 +3,17 @@ import {UserService} from "../services/userService";
 import {UserController} from "../controllers/user.controller";
 import {UserBDDRepository} from "../bddRepository/user.bdd.repository";
 import { authMiddleware } from '../middlewares/auth.middleware';
+import { UserRelationDAO } from '../DAO/userRelationDAO';
+import { UserRelationRepository } from '../repository/userRelationRepository';
+import { FeedService } from '../services/feedService';
+import { FeedController } from '../controllers/feed.controller';
 
 const userRouter = Router();
 const userRepository = new UserBDDRepository();
 const userService = new UserService(userRepository);
 const userController = new UserController(userService);
+const userRelationRepository = new UserRelationRepository(new UserRelationDAO());
+const feedController = new FeedController(new FeedService(userRelationRepository));
 
 /**
  * @openapi
@@ -111,6 +117,35 @@ userRouter.post('/login', userController.loginUser);
  *         description: Utilisateur non trouvé
  */
 userRouter.get('/me', authMiddleware, userController.getMe);
+
+/**
+ * @openapi
+ * /user/me/feed:
+ *   get:
+ *     tags:
+ *       - Users
+ *     summary: Récupérer le fil d'actualité de l'utilisateur connecté
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: limit
+ *         required: false
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *           maximum: 250
+ *           example: 50
+ *         description: Nombre maximal d'éléments à renvoyer dans le feed
+ *     responses:
+ *       200:
+ *         description: Fil d'actualité récupéré avec succès
+ *       401:
+ *         description: Non autorisé
+ *       500:
+ *         description: Erreur interne du serveur
+ */
+userRouter.get('/me/feed', authMiddleware, feedController.getMyFeed);
 
 /**
  * @openapi
@@ -232,4 +267,3 @@ userRouter.get('/id/:id', authMiddleware, userController.getUserById);
 userRouter.delete('/delete/:id', authMiddleware, userController.deleteUserById);
 
 export default userRouter;
-

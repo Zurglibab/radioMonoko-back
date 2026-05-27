@@ -1,11 +1,11 @@
 import { Router } from "express";
 import {
-    getShowsByStation,
-    getShowById,
-    searchShowsByTitle,
-    refreshShows,
-    getShowsCount,
-    clearShowsCache
+  getShowsByStation,
+  getShowById,
+  searchShowsByTitle,
+  refreshShows,
+  getShowsCount,
+  clearShowsCache
 } from "../controllers/showController";
 
 const router = Router();

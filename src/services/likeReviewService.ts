@@ -3,38 +3,37 @@ import { UpsertLikeReviewDTO } from '../DTO/likeReviewDTO';
 import { LikeReview, LikeReviewCount } from '../interfaces/likeReviewInterface';
 
 export class LikeReviewService {
-    constructor(private readonly repository: LikeReviewRepository) {}
+  constructor(private readonly repository: LikeReviewRepository) {}
 
-    async upsert(dto: UpsertLikeReviewDTO): Promise<LikeReview> {
-        if (!dto.review_id || !dto.user_id || typeof dto.is_like !== 'boolean') {
-            throw new Error('review_id, user_id and is_like are required');
-        }
-
-        return this.repository.upsert(dto);
+  async upsert(dto: UpsertLikeReviewDTO): Promise<LikeReview> {
+    if (!dto.review_id || !dto.user_id || typeof dto.is_like !== 'boolean') {
+      throw new Error('review_id, user_id and is_like are required');
     }
 
-    deleteByReviewIdAndUserId(reviewId: string, userId: string): Promise<LikeReview | null> {
-        if (!reviewId || !userId) {
-            throw new Error('reviewId and userId are required');
-        }
+    return this.repository.upsert(dto);
+  }
 
-        return this.repository.deleteByReviewIdAndUserId(reviewId, userId);
+  deleteByReviewIdAndUserId(reviewId: string, userId: string): Promise<LikeReview | null> {
+    if (!reviewId || !userId) {
+      throw new Error('reviewId and userId are required');
     }
 
-    getByReviewId(reviewId: string): Promise<LikeReview[]> {
-        if (!reviewId) {
-            throw new Error('reviewId is required');
-        }
+    return this.repository.deleteByReviewIdAndUserId(reviewId, userId);
+  }
 
-        return this.repository.findByReviewId(reviewId);
+  getByReviewId(reviewId: string): Promise<LikeReview[]> {
+    if (!reviewId) {
+      throw new Error('reviewId is required');
     }
 
-    getCountByReviewId(reviewId: string): Promise<LikeReviewCount> {
-        if (!reviewId) {
-            throw new Error('reviewId is required');
-        }
+    return this.repository.findByReviewId(reviewId);
+  }
 
-        return this.repository.countByReviewId(reviewId);
+  getCountByReviewId(reviewId: string): Promise<LikeReviewCount> {
+    if (!reviewId) {
+      throw new Error('reviewId is required');
     }
+
+    return this.repository.countByReviewId(reviewId);
+  }
 }
-

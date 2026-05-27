@@ -31,50 +31,50 @@ query GetDiffusions($station: StationsEnum!, $themes: [String!], $first: Int) {
 `;
 
 interface DiffusionsQueryResult {
-    diffusions?: {
-        edges?: Array<{ node?: any }>;
-    };
+  diffusions?: {
+    edges?: Array<{node?: any;}>;
+  };
 }
 
 export class DiffusionRepository {
-    async fetchDiffusionsByStation(
-        station: StationsEnum,
-        themes?: string[],
-        first: number = 20
-    ): Promise<DiffusionDto[]> {
-        try {
-            const variables: Record<string, unknown> = { station };
+  async fetchDiffusionsByStation(
+  station: StationsEnum,
+  themes?: string[],
+  first: number = 20)
+  : Promise<DiffusionDto[]> {
+    try {
+      const variables: Record<string, unknown> = { station };
 
-            if (Array.isArray(themes) && themes.length > 0) {
-                const cleanedThemes = themes.map((t) => t.trim()).filter(Boolean);
-                if (cleanedThemes.length > 0) {
-                    variables.themes = cleanedThemes;
-                }
-            }
-
-            if (Number.isFinite(first) && first > 0) {
-                variables.first = Math.floor(first);
-            }
-
-            const response = await radioFrance.query<any>(
-                GET_DIFFUSIONS_QUERY,
-                variables
-            );
-
-            // Compat: certains appels renvoient { diffusions }, d'autres { data: { diffusions } }
-            const root = response?.diffusions ? response : response?.data;
-            const typedRoot = root as DiffusionsQueryResponse | undefined;
-            const edges = typedRoot?.diffusions?.edges ?? [];
-
-            return edges
-                .map((edge) => edge?.node)
-                .filter((node): node is DiffusionApiNode => !!node)
-                .map(toDiffusionDto);
-        } catch (error) {
-            console.error("[DiffusionRepository] Failed to fetch diffusions:", error);
-            throw error;
+      if (Array.isArray(themes) && themes.length > 0) {
+        const cleanedThemes = themes.map((t) => t.trim()).filter(Boolean);
+        if (cleanedThemes.length > 0) {
+          variables.themes = cleanedThemes;
         }
+      }
+
+      if (Number.isFinite(first) && first > 0) {
+        variables.first = Math.floor(first);
+      }
+
+      const response = await radioFrance.query<any>(
+        GET_DIFFUSIONS_QUERY,
+        variables
+      );
+
+
+      const root = response?.diffusions ? response : response?.data;
+      const typedRoot = root as DiffusionsQueryResponse | undefined;
+      const edges = typedRoot?.diffusions?.edges ?? [];
+
+      return edges.
+      map((edge) => edge?.node).
+      filter((node): node is DiffusionApiNode => !!node).
+      map(toDiffusionDto);
+    } catch (error) {
+      console.error("[DiffusionRepository] Failed to fetch diffusions:", error);
+      throw error;
     }
+  }
 }
 
 export const diffusionRepository = new DiffusionRepository();

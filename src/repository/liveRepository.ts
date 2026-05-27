@@ -72,20 +72,19 @@ query GetLive($station: StationsEnum!) {
 `;
 
 interface LiveQueryResult {
-    live?: any;
+  live?: any;
 }
 
 export class LiveRepository {
-    async fetchLiveByStation(station: StationsEnum): Promise<LiveDto> {
-        try {
-            const response = await radioFrance.query<LiveQueryResponse>(GET_LIVE_QUERY, { station });
-            return toLiveDto(response?.live ?? null);
-        } catch (error) {
-            console.error("[LiveRepository] Failed to fetch live:", error);
-            throw error;
-        }
+  async fetchLiveByStation(station: StationsEnum): Promise<LiveDto> {
+    try {
+      const response = await radioFrance.query<LiveQueryResponse>(GET_LIVE_QUERY, { station });
+      return toLiveDto(response?.live ?? null);
+    } catch (error) {
+      console.error("[LiveRepository] Failed to fetch live:", error);
+      throw error;
     }
+  }
 }
 
 export const liveRepository = new LiveRepository();
-

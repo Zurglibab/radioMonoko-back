@@ -1,17 +1,17 @@
 import { Router } from "express";
 import {
-    getAllBrands,
-    getBrandById,
-    searchBrands,
-    refreshBrands,
-    getBrandsCount,
-    clearBrandsCache,
-    health
+  getAllBrands,
+  getBrandById,
+  searchBrands,
+  refreshBrands,
+  getBrandsCount,
+  clearBrandsCache,
+  health
 } from "../controllers/brandController";
 import showRoutes from "./showRoutes";
 import diffusionRoutes from "./diffusionRoutes";
 import liveRoutes from "./liveRoutes";
-import { createNotificationRouter } from './notificationRoutes';
+// Notifications moved out of /api (they are not RadioFrance-related)
 
 const router = Router();
 
@@ -115,6 +115,6 @@ router.delete("/brands/cache", clearBrandsCache);
 router.use("/shows", showRoutes);
 router.use("/diffusions", diffusionRoutes);
 router.use("/live", liveRoutes);
-router.use("/notifications", createNotificationRouter());
+// notifications no longer mounted here
 
 export default router;

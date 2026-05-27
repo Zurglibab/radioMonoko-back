@@ -22,4 +22,3 @@ const router = Router();
 router.get("/:station", getLiveByStation);
 
 export default router;
-

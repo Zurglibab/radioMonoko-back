@@ -1,41 +1,43 @@
-import {Pool, PoolClient} from 'pg';
-import {config} from 'dotenv';
+import { Pool, PoolClient } from 'pg';
+import { config } from 'dotenv';
 import logger from '../config/logger';
 
-config();
+config({ override: true });
 
 export const pool = new Pool({
-    host: process.env.DB_HOST || process.env.POSTGRES_HOST,
-    port: Number(process.env.POSTGRES_PORT),
-    user: process.env.POSTGRES_USER,
-    password: process.env.POSTGRES_PASSWORD,
-    database: process.env.POSTGRES_DB,
+  host: process.env.DB_HOST || process.env.POSTGRES_HOST,
+  port: Number(process.env.POSTGRES_PORT),
+  user: process.env.POSTGRES_USER,
+  password: process.env.POSTGRES_PASSWORD,
+  database: process.env.POSTGRES_DB
 });
 
 export const initializeDatabase = async () => {
-    const client = await pool.connect();
-    try {
-        await client.query(`CREATE EXTENSION IF NOT EXISTS pgcrypto;`);
-        await createUserTable(client);
-        await createUserRelationTable(client);
-        await createContentTable(client);
-        await createCollectionsTable(client);
-        await createCollectionItemsTable(client);
-        await createRatingContentTable(client);
-        await createReviewTable(client);
-        await createLikeReviewTable(client);
-        await createNotificationTable(client);
-        logger.info('Database initialized successfully.');
-    } catch (error) {
-        logger.warn('Error initializing database:', error);
-        throw error;
-    } finally {
-        client.release();
-    }
+  const client = await pool.connect();
+  try {
+    await client.query(`CREATE EXTENSION IF NOT EXISTS pgcrypto;`);
+    await createUserTable(client);
+    await client.query(`DROP TABLE IF EXISTS user_relations;`);
+    await createUserRelationTable(client);
+    await createContentTable(client);
+    await createCollectionsTable(client);
+    await createCollectionItemsTable(client);
+    await createRatingContentTable(client);
+    await createReviewTable(client);
+    await createLikeReviewTable(client);
+    await createNotificationTable(client);
+    await createReportUsersTable(client);
+    logger.info('Database initialized successfully.');
+  } catch (error) {
+    logger.warn('Error initializing database:', error);
+    throw error;
+  } finally {
+    client.release();
+  }
 };
 
 async function createUserTable(client: PoolClient) {
-    await client.query(`
+  await client.query(`
             CREATE TABLE IF NOT EXISTS users (
                 id UUID PRIMARY KEY,
                 email VARCHAR(255) UNIQUE NOT NULL,
@@ -46,16 +48,17 @@ async function createUserTable(client: PoolClient) {
                 bio TEXT,
                 website VARCHAR(255),
                 privacy VARCHAR(50) DEFAULT 'public',
+                role VARCHAR(255) DEFAULT 'user',  
                 is_banned BOOLEAN DEFAULT false,
                 created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
                 updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
             )
         `);
-    logger.info("Table 'users' created successfully.")
+  logger.info("Table 'users' created successfully.");
 }
 
 async function createUserRelationTable(client: PoolClient) {
-    await client.query(`
+  await client.query(`
             CREATE TABLE IF NOT EXISTS user_relations (
                 followed_id UUID NOT NULL,
                 follower_id UUID NOT NULL,
@@ -65,11 +68,11 @@ async function createUserRelationTable(client: PoolClient) {
                 PRIMARY KEY (followed_id, follower_id)
             )
         `);
-    logger.info("Table 'UserRelation' created successfully.")
+  logger.info("Table 'UserRelation' created successfully.");
 }
 
 async function createContentTable(client: PoolClient) {
-    await client.query(`
+  await client.query(`
         CREATE TABLE IF NOT EXISTS content (
             id UUID PRIMARY KEY,
             api_id VARCHAR(255) UNIQUE NOT NULL,
@@ -80,11 +83,11 @@ async function createContentTable(client: PoolClient) {
             created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
         )
     `);
-    logger.info("Table 'content' created successfully.");
+  logger.info("Table 'content' created successfully.");
 }
 
 async function createCollectionsTable(client: PoolClient) {
-    await client.query(`
+  await client.query(`
         CREATE TABLE IF NOT EXISTS collections (
             id UUID PRIMARY KEY,
             user_id UUID NOT NULL,
@@ -95,11 +98,11 @@ async function createCollectionsTable(client: PoolClient) {
             FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
         )
     `);
-    logger.info("Table 'collections' created successfully.");
+  logger.info("Table 'collections' created successfully.");
 }
 
 async function createCollectionItemsTable(client: PoolClient) {
-    await client.query(`
+  await client.query(`
         CREATE TABLE IF NOT EXISTS collection_items (
             collection_id UUID NOT NULL,
             content_id UUID NOT NULL,
@@ -111,11 +114,11 @@ async function createCollectionItemsTable(client: PoolClient) {
             FOREIGN KEY (content_id) REFERENCES content(id) ON DELETE CASCADE
         )
     `);
-    logger.info("Table 'collection_items' created successfully.");
+  logger.info("Table 'collection_items' created successfully.");
 }
 
 async function createRatingContentTable(client: PoolClient) {
-    await client.query(`
+  await client.query(`
         CREATE TABLE IF NOT EXISTS rating_content (
             content_id UUID NOT NULL,
             user_id UUID NOT NULL,
@@ -125,28 +128,29 @@ async function createRatingContentTable(client: PoolClient) {
             PRIMARY KEY (content_id, user_id)
         )
     `);
-    logger.info("Table 'rating_content' created successfully.");
+  logger.info("Table 'rating_content' created successfully.");
 }
 
 async function createReviewTable(client: PoolClient) {
-    await client.query(`
+  await client.query(`
         CREATE TABLE IF NOT EXISTS reviews (
             id UUID PRIMARY KEY,
             user_id UUID NOT NULL,
             content_id UUID NOT NULL,
             parent_review_id UUID,
             comment TEXT,
+            is_featured BOOLEAN DEFAULT false,
             created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
             FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
             FOREIGN KEY (content_id) REFERENCES content(id) ON DELETE CASCADE,
             FOREIGN KEY (parent_review_id) REFERENCES reviews(id) ON DELETE CASCADE
         )
     `);
-    logger.info("Table 'reviews' created successfully.");
+  logger.info("Table 'reviews' created successfully.");
 }
 
 async function createLikeReviewTable(client: PoolClient) {
-    await client.query(`
+  await client.query(`
         CREATE TABLE IF NOT EXISTS like_review (
             review_id UUID NOT NULL,
             user_id UUID NOT NULL,
@@ -157,11 +161,11 @@ async function createLikeReviewTable(client: PoolClient) {
             FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
         )
     `);
-    logger.info("Table 'like_review' created successfully.");
+  logger.info("Table 'like_review' created successfully.");
 }
 
 async function createNotificationTable(client: PoolClient) {
-    await client.query(`
+  await client.query(`
         CREATE TABLE IF NOT EXISTS notifications (
             id UUID PRIMARY KEY,
             user_id UUID NOT NULL,
@@ -175,18 +179,18 @@ async function createNotificationTable(client: PoolClient) {
         )
     `);
 
-    await client.query(`
+  await client.query(`
         CREATE INDEX IF NOT EXISTS idx_notifications_user_created_at
         ON notifications (user_id, created_at DESC)
     `);
 
-    await client.query(`
+  await client.query(`
         CREATE INDEX IF NOT EXISTS idx_notifications_unread
         ON notifications (user_id, is_read)
         WHERE is_read = false
     `);
 
-    await client.query(`
+  await client.query(`
         CREATE TABLE IF NOT EXISTS channel (
             id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
             type VARCHAR(50) NOT NULL,
@@ -214,4 +218,26 @@ async function createNotificationTable(client: PoolClient) {
     `);
 
     logger.info("Table 'notifications' created successfully.");
+}
+
+async function createReportUsersTable(client: PoolClient) {
+  await client.query(`
+            CREATE TABLE IF NOT EXISTS report_users (
+                id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+                reporter_id UUID NOT NULL,
+                reported_user_id UUID NOT NULL,
+                report_type VARCHAR(50) NOT NULL,
+                description TEXT,
+                created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (reporter_id) REFERENCES users(id) ON DELETE CASCADE,
+                FOREIGN KEY (reported_user_id) REFERENCES users(id) ON DELETE CASCADE
+            )
+        `);
+
+  await client.query(`
+            CREATE INDEX IF NOT EXISTS idx_report_users_reported_user
+            ON report_users (reported_user_id)
+        `);
+
+  logger.info("Table 'report_users' created successfully.");
 }

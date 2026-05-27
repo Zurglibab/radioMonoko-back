@@ -31,7 +31,9 @@ const swaggerDefinition = {
         { name: "Channels", description: "Gestion des channels" },
         { name: "Members", description: "Gestion des membres de channel" },
         { name: "Messages", description: "Gestion des messages" },
-        { name: "Config", description: "Configuration front (endpoints, socket, etc.)" }
+        { name: "Config", description: "Configuration front (endpoints, socket, etc.)" },
+        { name: "Auth", description: "Authentification OAuth2 et JWT" },
+        { name: "Admin", description: "Modération et actions administrateur" }
     ],
     components: {
         securitySchemes: {
@@ -64,14 +66,14 @@ const swaggerDefinition = {
 const isProduction = process.env.NODE_ENV === "production";
 
 export const swaggerSpec = swaggerJSDoc({
-    definition: swaggerDefinition,
-    apis: isProduction
-        ? [
-            path.resolve(process.cwd(), "dist/src/routes/*.js"),
-            path.resolve(process.cwd(), "dist/src/modules/**/*.js")
-        ]
-        : [
-            path.resolve(process.cwd(), "src/routes/*.ts"),
-            path.resolve(process.cwd(), "src/modules/**/*.ts")
-        ]
+  definition: swaggerDefinition,
+  apis: isProduction ?
+  [
+  path.resolve(process.cwd(), "dist/src/routes/*.js"),
+  path.resolve(process.cwd(), "dist/src/modules/**/*.js")] :
+
+  [
+  path.resolve(process.cwd(), "src/routes/*.ts"),
+  path.resolve(process.cwd(), "src/modules/**/*.ts")]
+
 });
