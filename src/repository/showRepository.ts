@@ -50,22 +50,22 @@ const GET_SHOWS_QUERY = `
 `;
 
 export class ShowRepository {
-    async fetchShowsByStation(station: StationsEnum, first: number = 10): Promise<ShowDto[]> {
-        try {
-            const variables = { station, first };
-            const data = await radioFrance.query<ShowsQueryResponse>(
-                GET_SHOWS_QUERY,
-                variables as any
-            );
+  async fetchShowsByStation(station: StationsEnum, first: number = 10): Promise<ShowDto[]> {
+    try {
+      const variables = { station, first };
+      const data = await radioFrance.query<ShowsQueryResponse>(
+        GET_SHOWS_QUERY,
+        variables as any
+      );
 
-            const edges = data?.shows?.edges ?? [];
-            return edges
-                .map((edge) => edge?.node)
-                .filter((node) => !!node)
-                .map((node) => toShowDto(node!));
-        } catch (error) {
-            console.error("[ShowRepository] Failed to fetch shows:", error);
-            throw error;
-        }
+      const edges = data?.shows?.edges ?? [];
+      return edges.
+      map((edge) => edge?.node).
+      filter((node) => !!node).
+      map((node) => toShowDto(node!));
+    } catch (error) {
+      console.error("[ShowRepository] Failed to fetch shows:", error);
+      throw error;
     }
+  }
 }

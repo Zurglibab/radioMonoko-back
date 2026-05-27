@@ -4,7 +4,7 @@ import { BrandApiModel } from "../entities/brandApiModel";
 import { toSortedBrandDtos } from "../mappers/brandMapper";
 
 interface BrandsQueryResponse {
-    brands?: BrandApiModel[];
+  brands?: BrandApiModel[];
 }
 
 const GET_ALL_BRANDS_QUERY = `
@@ -36,19 +36,19 @@ const GET_ALL_BRANDS_QUERY = `
 `;
 
 export interface IApiRepository {
-    getBrands(): Promise<BrandDto[]>;
+  getBrands(): Promise<BrandDto[]>;
 }
 
 export class BrandsRepository implements IApiRepository {
-    async getBrands(): Promise<BrandDto[]> {
-        try {
-            const data = await radioFrance.query<BrandsQueryResponse>(GET_ALL_BRANDS_QUERY);
-            const brands = data?.brands ?? [];
+  async getBrands(): Promise<BrandDto[]> {
+    try {
+      const data = await radioFrance.query<BrandsQueryResponse>(GET_ALL_BRANDS_QUERY);
+      const brands = data?.brands ?? [];
 
-            return toSortedBrandDtos(brands);
-        } catch (error) {
-            console.error("[BrandsRepository] Failed to fetch brands:", error);
-            throw error;
-        }
+      return toSortedBrandDtos(brands);
+    } catch (error) {
+      console.error("[BrandsRepository] Failed to fetch brands:", error);
+      throw error;
     }
+  }
 }

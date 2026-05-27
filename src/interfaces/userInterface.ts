@@ -1,15 +1,15 @@
 export interface User {
-    id: string;
-    email: string;
-    password: string;
-    username : string;
-    display_name : string;
-    avatar : string;
-    bio : string;
-    website : string ;
-    privacy : string;
-    is_banned : boolean;
-    role?: string;
-    created_at : Date;
-    updated_at : Date;
+  id: string;
+  email: string;
+  password: string;
+  username: string;
+  display_name: string;
+  avatar: string;
+  bio: string;
+  website: string;
+  privacy: string;
+  is_banned: boolean;
+  role?: string;
+  created_at: Date;
+  updated_at: Date;
 }
