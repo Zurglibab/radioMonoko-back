@@ -4,25 +4,25 @@ import * as jwt from 'jsonwebtoken';
 
 const router = Router();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+/**
+ * @openapi
+ * /auth/google:
+ *   get:
+ *     tags:
+ *       - Auth
+ *     summary: Démarrer l'authentification Google OAuth2
+ *     responses:
+ *       302:
+ *         description: Redirection vers Google OAuth
+ *       500:
+ *         description: Google OAuth non configuré
+ */
 
 if (isGoogleOAuthConfigured) {
-
-
-
-
+  // Init Google OAuth2 login
+  // Note: we build the Google authorization URL and redirect explicitly to ensure
+  // the `scope` and other params are always present (helps when proxies or
+  // browser extensions interfere with redirects).
   router.get('/google', (req: Request, res: Response) => {
     const clientId = process.env.GOOGLE_CLIENT_ID || '';
     const redirectUri = process.env.GOOGLE_CALLBACK_URL || '';
@@ -47,34 +47,34 @@ if (isGoogleOAuthConfigured) {
     return res.redirect(url);
   });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  /**
+   * @openapi
+   * /auth/google/callback:
+   *   get:
+   *     tags:
+   *       - Auth
+   *     summary: Callback Google OAuth2
+   *     responses:
+   *       200:
+   *         description: Authentification réussie, JWT renvoyé
+   *       401:
+   *         description: Authentification échouée
+   *       500:
+   *         description: Erreur d'authentification
+   */
   router.get('/google/callback', (req: Request, res: Response, next) => {
     passport.authenticate('google', { session: false }, (err: any, user: any) => {
       if (err) return res.status(500).json({ message: 'Authentication error', error: err.message });
       if (!user) return res.status(401).json({ message: 'Authentication failed' });
 
-
+      // Create JWT
       const secret = process.env.JWT_SECRET || 'changeme';
       const expiresIn = (process.env.JWT_EXPIRES_IN || '7d') as jwt.SignOptions['expiresIn'];
       const token = jwt.sign({ id: user.id, email: user.email }, secret as jwt.Secret, {
         expiresIn
       });
 
-
+      // Return token and user info. Alternatively, redirect to frontend with token
       return res.status(200).json({ token, user: { id: user.id, email: user.email } });
     })(req, res, next);
   });
@@ -87,19 +87,19 @@ if (isGoogleOAuthConfigured) {
   });
 }
 
+/**
+ * @openapi
+ * /auth/failure:
+ *   get:
+ *     tags:
+ *       - Auth
+ *     summary: Route de fallback en cas d'échec d'authentification
+ *     responses:
+ *       401:
+ *         description: Authentification échouée
+ */
 
-
-
-
-
-
-
-
-
-
-
-
-
+// Simple failure route
 router.get('/failure', (req: Request, res: Response) => {
   res.status(401).json({ message: 'Authentication failed' });
 });
