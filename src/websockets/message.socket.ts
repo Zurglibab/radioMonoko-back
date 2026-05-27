@@ -121,7 +121,7 @@ export async function setupWebSockets(server: any) {
 
                 for (const key of keys) {
                     const removed = await redisClient.sRem(key, memberIdentifier);
-                    if (removed > 0) {
+                    if (Number(removed) > 0) {
                         logger.info(`[Redis] Cleaned up disconnected socket ${socket.id} from ${key}`);
                     }
                 }
