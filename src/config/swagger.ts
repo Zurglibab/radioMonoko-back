@@ -31,7 +31,6 @@ const swaggerDefinition = {
         { name: "Channels", description: "Gestion des channels" },
         { name: "Members", description: "Gestion des membres de channel" },
         { name: "Messages", description: "Gestion des messages" },
-        { name: "Config", description: "Configuration front (endpoints, socket, etc.)" },
         { name: "Auth", description: "Authentification OAuth2 et JWT" },
         { name: "Admin", description: "Modération et actions administrateur" }
     ],
