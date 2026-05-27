@@ -190,7 +190,34 @@ async function createNotificationTable(client: PoolClient) {
         WHERE is_read = false
     `);
 
-  logger.info("Table 'notifications' created successfully.");
+  await client.query(`
+        CREATE TABLE IF NOT EXISTS channel (
+            id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+            type VARCHAR(50) NOT NULL,
+            created_at TIMESTAMP DEFAULT NOW()
+        )
+    `);
+
+    await client.query(`
+        CREATE TABLE IF NOT EXISTS channel_user (
+            channel_id UUID REFERENCES channel(id),
+            user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+            joined_at TIMESTAMP DEFAULT NOW(),
+            PRIMARY KEY (channel_id, user_id)
+        )
+    `);
+
+    await client.query(`
+        CREATE TABLE IF NOT EXISTS messages (
+            id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+            channel_id UUID REFERENCES channel(id) ON DELETE CASCADE,
+            sender_id UUID REFERENCES users(id) ON DELETE CASCADE,
+            content TEXT NOT NULL,
+            created_at TIMESTAMP DEFAULT NOW()
+    )
+    `);
+
+    logger.info("Table 'notifications' created successfully.");
 }
 
 async function createReportUsersTable(client: PoolClient) {

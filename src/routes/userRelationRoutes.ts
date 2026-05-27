@@ -58,7 +58,7 @@ userRelationRouter.get('/friends', authMiddleware, userRelationController.getFri
  *       404:
  *         description: Utilisateur non trouvé
  */
-userRelationRouter.get('/friends/:id', authMiddleware, userRelationController.getFriends);
+userRelationRouter.get('/friends/:id', authMiddleware, userRelationController.getFriendsForOther);
 
 /**
  * @openapi
