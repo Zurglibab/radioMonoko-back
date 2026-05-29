@@ -1,10 +1,10 @@
 import { createApp } from "./src/app";
 import { config } from 'dotenv';
 import { initializeDatabase } from './src/database/db';
-import { startBrandsScheduler } from "./src/scedulers/brandsScheduler";
+import { startBrandsScheduler } from "./src/scheduler/brandsScheduler";
 import { setupWebSockets } from "./src/websockets/message.socket";
 import { setIO } from './src/websockets/socketRegistry';
-import { MessageScheduler } from "./src/scedulers/messageScheduler";
+import { MessageScheduler } from "./src/scheduler/messageScheduler";
 import { connect as connectRedis } from './src/config/RedisConnexion';
 import http from 'http';
 

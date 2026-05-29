@@ -53,7 +53,7 @@ export class UserRelationDAO {
 
     async getFollowed(userId: string): Promise<UserRelation[]> {
         const { rows } = await pool.query<UserRelation>(
-            'SELECT * FROM user_relations WHERE (followed_id = $1 ) AND status = \'accepted\'',
+            'SELECT * FROM user_relations WHERE (follower_id = $1 ) AND status = \'accepted\'',
             [userId]
         );
         logger.info(`[UserRelationBddRepository] Getting friends for user ${userId}`);
