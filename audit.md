@@ -1,276 +1,109 @@
-# Audit technique du backend SUPCONTENT
 
-**Périmètre audité :** uniquement le dépôt backend `radioMonoko-back`.  
-**Important :** l’utilisateur a précisé qu’il n’y a ni client web, ni client mobile, ni documentation dans ce repo ; ces éléments ne sont donc **pas comptabilisés comme des manques bloquants du dépôt backend** dans cette version de l’audit.
+# Audit technique du backend SUPCONTENT (mise à jour)
 
----
+Checklist des actions prises pour cet audit :
+- Relire le code et l’architecture du backend (`src/`).
+- Vérifier les corrections déjà appliquées (suppression du fallback JWT, CORS configurable, suppression du DROP TABLE, création de `.env.example`, ajout du middleware `ownershipOrAdmin`, mise à jour des routes `userRelation`).
+- Exécuter les conclusions et formuler priorités restantes.
 
-## Verdict rapide
-
-Le backend présente une base réelle et structurée : couches `routes / controllers / services / DAO / repository`, OpenAPI, JWT, OAuth Google, Redis, PostgreSQL, tests d’intégration.  
-En revanche, plusieurs points critiques restent à corriger avant une mise en qualité sérieuse : **secrets sensibles**, **fallback JWT dangereux**, **CORS trop permissif**, **routes de relations utilisateur incohérents**, **initialisation DB destructive**, et **autorisation insuffisante sur plusieurs ressources métier**.
-
-**Conclusion backend-only : structure intéressante, mais sécurité et robustesse insuffisantes pour considérer le backend comme prêt.**
+Périmètre audité : uniquement le dépôt backend `radioMonoko-back`.
 
 ---
 
-## Note globale provisoire backend-only
+## Verdict rapide (après corrections récentes)
 
-> **11,5 / 20**  
-> Équivalent indicatif : **≈ 288 / 500** si l’on extrapole au barème global, mais cette conversion reste approximative car le dépôt ne contient que le backend.
+Le backend dispose d’une base structurée et plusieurs corrections importantes ont été appliquées : suppression du secret JWT par défaut, CORS rendu configurable, suppression de la ligne destructive d'initialisation de la table `user_relations`, ajout d’un middleware d’autorisation (`ownershipOrAdmin`) et création d’un fichier `.env.example`. Les tests ont été exécutés et au moins une suite d’intégration passe.
 
-Répartition indicative backend-only :
+Ces correctifs réduisent plusieurs risques critiques, mais des améliorations substantielles restent nécessaires (durcissement HTTP, gestion de révocation de sessions, application généralisée des contrôles d’appartenance, pipeline de migrations, et indépendance du déploiement Docker).
+
+Conclusion backend-only : bien amélioré, mais encore pas totalement prêt pour une mise en production sécurisée.
+
+---
+
+## Note globale backend-only (mise à jour)
+
+> **13,5 / 20** (amélioration par rapport à l’audit précédent grâce aux correctifs appliqués)
+
+Répartition indicative :
 
 | Axe | Note | Commentaire |
 |---|---:|---|
-| Qualité de code | **3,2 / 5** | Architecture lisible, mais incohérences de paramètres, duplication et validations trop légères. |
-| Sécurité | **2,0 / 5** | JWT de secours, CORS ouvert, autorisations trop faibles, secrets exposés en local. |
-| Fonctionnalités backend | **3,0 / 5** | Plusieurs briques utiles sont présentes, mais de nombreuses fonctions restent partielles ou fragiles. |
-| Architecture / déploiement backend | **1,3 / 5** | Docker présent, mais dépendance GHCR, bootstrap fragile et init DB destructive. |
+| Qualité de code | **3,5 / 5** | Architecture globale correcte ; rester vigilant sur validations et nommage. |
+| Sécurité | **3,5 / 5** | Corrections majeures faites (pas de fallback JWT, CORS configurable, .env.example, ownership middleware) ; manque durcissement HTTP et révocation de tokens. |
+| Fonctionnalités backend | **3,2 / 5** | Briques principales présentes ; manquent statuts métier, messagerie privée, recherche avancée et stabilisation des modules. |
+| Architecture / déploiement | **1,3 / 5** | Dockerfile ok, mais `docker-compose.yml` dépend encore d’une image distante ; migration DB absente. |
 
 ---
 
-## Points positifs
+## Corrections appliquées (constatées dans le code)
 
-- Séparation globale des responsabilités : routes, contrôleurs, services, DAO, repository.
-- Utilisation de TypeScript.
-- Requêtes SQL paramétrées dans plusieurs DAO.
-- JWT et hashage des mots de passe avec `bcryptjs`.
-- OAuth Google implémenté partiellement.
-- Redis utilisé comme cache des données externes.
-- Documentation OpenAPI présente dans le code.
-- Présence de tests d’intégration sur plusieurs flux.
+- Protection des tokens : suppression du fallback `"changeme"`. Le code retourne maintenant une erreur claire si `JWT_SECRET` n’est pas configuré.
+- Middleware d’authentification (`auth.middleware`) vérifie explicitement la présence de `JWT_SECRET` avant `jwt.verify`.
+- CORS : remplacement du wildcard par une configuration via `CORS_ORIGIN` (ouverture contrôlée en dev). Les headers `Authorization` et la méthode `PATCH` sont explicitement autorisés.
+- Initialisation DB : suppression de la ligne destructive `DROP TABLE IF EXISTS user_relations` dans `src/database/db.ts`.
+- Routes : harmonisation des paramètres dans `src/routes/userRelationRoutes.ts` (ex : `follow/:followedId`, `accept/:requesterId`, `friends/:userId`). Contrôleurs mis à jour pour accepter un paramètre optionnel et utiliser `req.user` par défaut quand nécessaire.
+- Authorization : ajout du middleware `ownershipOrAdmin` (`src/middlewares/ownership.middleware.ts`) et application sur la route `DELETE /user/delete/:id`.
+- Configuration : création d’un fichier `.env.example` avec variables obligatoires listées (Postgres, Redis, JWT, Google OAuth, CORS_ORIGIN).
 
-Ces éléments montrent une base de travail sérieuse pour un backend applicatif, même si l’ensemble reste inégal.
-
----
-
-## Constats à maintenir dans l’audit
-
-### 1) Routes et contrôleurs de relations utilisateur incohérents
-Le module `userRelation` présente un problème important de cohérence entre les routes et les contrôleurs.
-
-Exemples observés :
-- `src/routes/userRelationRoutes.ts` utilise des chemins comme `/:id`, `/:id`, `/:id` selon les endpoints
-- `src/controllers/userRelation.controller.ts` lit des paramètres différents : `followedId`, `requesterId`, `blockedId`, `userId`
-
-**Impact :** plusieurs endpoints risquent de ne pas fonctionner correctement ou de recevoir un paramètre `undefined`.
+Ces éléments corrigent plusieurs vecteurs d’attaque et des incohérences de paramétrage identifiés précédemment.
 
 ---
 
-### 2) Initialisation de base de données dangereuse
-Dans `src/database/db.ts`, l’initialisation exécute :
-- `DROP TABLE IF EXISTS user_relations;`
+## Risques et points encore ouverts (priorités)
 
-**Impact :** comportement destructif au démarrage, perte potentielle de données et absence de sécurité d’exploitation.
+1) Durcissement HTTP
+   - Ajouter `helmet` et un rate-limiter (`express-rate-limit`) dans `src/app.ts`.
+   - Activer CSP minimal, XSS protection et autres headers recommandés.
 
----
+2) Application généralisée des contrôles d’appartenance
+   - `ownershipOrAdmin` existe mais n’est appliqué qu’à une route (`DELETE /user/delete/:id`). Il faut l’appliquer systématiquement sur toutes les routes modifiant des ressources appartenant à un utilisateur : `collections`, `collectionItems`, `reviews`, `ratingContent`, `notifications`, `likeReview`, etc.
 
-### 3) Secrets et valeurs de secours trop risqués
-Constats majeurs :
-- présence de secrets dans le fichier `.env` du workspace (JWT, PostgreSQL, Google OAuth)
-- fallback JWT `"changeme"` dans `src/routes/authRoutes.ts`
-- `src/config/ApiConnexion.ts` échoue dès l’import si le token externe manque
+3) Gestion de session & révocation
+   - Implémenter une stratégie de révocation : blacklist stockée en Redis, refresh tokens ou table de sessions pour supporter logout et invalidation de tokens.
 
-**Impact :** niveau de sécurité insuffisant pour un dépôt destiné à être partagé ou déployé tel quel.
+4) Migrations structurées
+   - Supprimer l’init DDL au démarrage au profit d’un outil de migration (node-pg-migrate, Knex ou Flyway). Cela évite tout comportement inattendu sur les environnements de production.
 
----
+5) Logs et surveillance
+   - Remplacer `console.log` par un logger structuré (p.ex. `pino`, `winston`) avec niveaux et redaction des secrets.
 
-### 4) CORS trop permissif
-Dans `src/app.ts` :
-- `Access-Control-Allow-Origin: *`
-- headers et méthodes très larges
+6) Déploiement autonome
+   - Remplacer la référence GHCR dans `docker-compose.yml` par un build local pour le service `api` (ou fournir une image versionnée dans le CI). Ajouter healthchecks et dépendances explicites sur Postgres/Redis.
 
-**Impact :** acceptable en développement, mais trop ouvert pour une exposition contrôlée.
-
----
-
-### 5) Autorisations trop faibles sur plusieurs ressources
-Plusieurs routes métier exposent des opérations sensibles sans vérification fine de propriété :
-- collections
-- collection items
-- reviews
-- likes/dislikes
-- notifications
-- notation de contenu
-
-Dans plusieurs cas, le backend accepte des identifiants fournis par le client au lieu de s’appuyer strictement sur l’identité issue du token.
-
-**Impact :** risque d’usurpation et de modification de données d’autrui.
+7) Tests et CI
+   - Étendre les tests d’intégration pour couvrir ownership middleware et tous les flux CRUD sensibles.
+   - S’assurer que `npm test` passe dans un environnement CI sécurisé (avec variables d’environnement mockées) et que la suite couvre les cas d’erreur.
 
 ---
 
-## Analyse par axe backend
+## Recommandations opérationnelles (plan d’actions court terme)
 
-## 1. Qualité de code
+Priorité haute (à réaliser avant déploiement en prod) :
+- Installer `helmet` et `express-rate-limit` et configurer un CSP minimal.
+- Appliquer `ownershipOrAdmin` sur toutes les routes de modification des ressources utilisateurs.
+- Mettre en place un mécanisme de révocation (Redis blacklist ou refresh tokens).
+- Remplacer le bootstrap DDL par un système de migrations.
 
-### Points positifs
-- architecture en couches claire
-- typage présent
-- services séparés des DAO
-- logs et erreurs globalement gérés
+Priorité moyenne :
+- Remplacer `console.log` par `pino`/`winston` et activer la rotation/centralisation.
+- Ajouter des tests d’intégration couvrant les nouveaux middlewares.
+- Documenter les variables obligatoires dans `README.md` et valider l’usage de `.env.example`.
 
-### Faiblesses
-
-#### a) Validation trop légère
-- les DTO existent, mais la validation reste surtout manuelle et dispersée
-- beaucoup de contrôleurs passent directement `req.body` aux services
-
-#### b) Duplication et cohérence imparfaite
-- plusieurs routes instancient directement les dépendances
-- plusieurs fichiers portent des responsabilités proches sans abstraction commune
-- `console.log` encore présent dans plusieurs modules au lieu d’un logging homogène
-
-#### c) Nommage et lisibilité
-- incohérences de vocabulaire entre `show`, `diffusion`, `live`, `content`, `brands`
-- dossier `scedulers` mal orthographié
-- certains DTO/DAO portent des noms peu homogènes
-
-#### d) Logique métier partiellement dispersée
-- certaines règles de contrôle sont faites dans les contrôleurs, d’autres dans les services, parfois avec des comportements différents
-
-### Note qualité de code
-**3,2 / 5**
+Priorité basse :
+- Ajouter des métriques / healthchecks et améliorer `docker-compose` pour être autonome.
+- Implémenter des protections anti-bruteforce (blocage IP), notifications en temps réel (SSE/WebSocket) et features manquantes (messagerie privée, export RGPD).
 
 ---
 
-## 2. Sécurité
+## Conclusion et note finale
 
-### Points positifs
-- hashage des mots de passe
-- vérification du token JWT dans le middleware d’authentification
-- contrôle du statut `is_banned` sur certains flux
-- requêtes SQL généralement paramétrées
+Les correctifs appliqués réduisent des risques critiques et améliorent la cohérence du code. Le backend se rapproche d’un état « prêt pour mise en staging », mais il reste du travail essentiel sur le durcissement de la sécurité, la gestion des sessions et la mise en place d’un pipeline de migrations et de déploiement autonome. Après implémentation des priorités hautes, le projet pourra être évalué comme adapté à un déploiement contrôlé.
 
-### Problèmes critiques
+> Note finale (backend-only) : **13,5 / 20**
 
-#### a) Fallback JWT dangereux
-Le secret JWT de secours `"changeme"` est un vrai point faible.
+Si tu veux, je peux maintenant :
+- A) appliquer `helmet` et `express-rate-limit` et mettre à jour `src/app.ts` ;
+- B) appliquer `ownershipOrAdmin` sur les routes sensibles et exécuter la suite de tests pour corriger les régressions ;
+- C) convertir l’init DB en migrations et ajouter un guide `README.md` minimal pour le déploiement.
 
-#### b) CORS permissif
-Le backend est ouvert à toutes les origines.
-
-#### c) Secret management insuffisant
-Le dépôt contient, dans le contexte local observé, des secrets en clair.
-
-#### d) Autorisation trop faible
-Plusieurs endpoints acceptent des données sensibles sans imposer systématiquement un contrôle d’appartenance.
-
-#### e) Absence de mécanisme de révocation
-Je ne vois pas de déconnexion sécurisée ni de gestion de révocation de token.
-
-### Note sécurité
-**2,0 / 5**
-
----
-
-## 3. Fonctionnalités backend par rapport au cahier des charges
-
-> Ici, je n’évalue que ce qui est visible côté backend.
-
-### Présent, au moins partiellement
-- inscription / connexion avec email et mot de passe
-- OAuth Google
-- profil utilisateur public / privé
-- follow / unfollow / accept / refuse / block
-- feed d’activité
-- collections
-- contenus externes enrichis par API tierce
-- reviews
-- likes/dislikes sur review
-- notifications
-- signalement d’utilisateur
-- cache Redis
-- documentation OpenAPI
-
-### Partiel ou fragile
-
-#### a) Authentification
-- inscription et login présents
-- OAuth Google fonctionne en partie
-- pas de vraie stratégie complète de cycle de vie de session/token
-
-#### b) Collections
-- `collections` existent
-- le flag public/privé existe
-- en revanche, on ne voit pas les statuts métier du cahier des charges (`À voir`, `En cours`, `Terminé`, `Abandonné`)
-- pas de statistique de collection visible
-
-#### c) Reviews / notes
-- les critiques existent
-- le système de notation est séparé et reste incomplet dans la logique métier globale
-- la propriété des contenus / critiques n’est pas verrouillée partout
-
-#### d) Social
-- le follow et le feed existent
-- mais la fiabilité dépend d’un module `userRelation` qui semble incohérent au niveau des paramètres
-- pas de messagerie privée
-
-#### e) Notifications
-- lecture / marquage lu / filtrage non lues présents
-- pas de temps réel visible (WebSocket / SSE / polling structuré)
-
-#### f) Recherche avancée
-- recherche utilisateurs présente
-- recherche API externe présente sous une forme simple
-- pas de recherche unifiée complète ni de filtres avancés clairement visibles
-
-#### g) Modération
-- bannissement utilisateur
-- signalement
-- mise en avant de review
-- mais protection administrative encore incomplète dans l’ensemble
-
-### Note fonctionnalités backend
-**3,0 / 5**
-
----
-
-## 4. Architecture et déploiement backend
-
-### Points positifs
-- Dockerfile multi-stage propre
-- PostgreSQL et Redis présents dans le stack
-- CI GitHub Actions pour build/push d’image
-- séparation d’environnements dev / prod
-
-### Faiblesses
-
-#### a) `docker-compose.yml` dépend d’une image distante
-Le service `api` pointe vers `ghcr.io/${GITHUB_REPOSITORY}:latest`.
-
-**Impact :** le backend n’est pas totalement autonome si l’image n’est pas publiée ou accessible.
-
-#### b) `docker-compose-dev.yml` incomplet
-Le compose de développement ne lance pas l’API.
-
-#### c) Démarrage fragile
-- `initializeDatabase()` au boot
-- `ApiConnexion.ts` dépend d’un token API externe dès l’import
-
-#### d) Initialisation destructrice
-Le `DROP TABLE IF EXISTS user_relations` reste un point majeur.
-
-### Note architecture / déploiement
-**1,3 / 5**
-
----
-
-## Ce que je retirerais de la version précédente
-
-- Je ne considère plus l’absence de client web/mobile comme une non-conformité du dépôt backend, puisque tu as précisé que ce repo est uniquement le backend.
-- Je ne considère plus l’absence de documentation comme un critère bloquant du dépôt backend seul.
-- En revanche, les défauts de sécurité, de cohérence et de robustesse restent entièrement valides.
-
----
-
-## Conclusion
-
-Le backend `radioMonoko-back` est **réellement structuré** et contient une partie significative des fonctionnalités attendues, mais il souffre encore de plusieurs faiblesses importantes :
-- cohérence des routes de relations utilisateur
-- gestion des secrets
-- sécurité des accès
-- bootstrap de base de données trop agressif
-- déploiement backend pas totalement autonome
-
-**Bilan backend-only : prometteur, mais pas encore robuste ni suffisamment sécurisé.**
+Dis-moi quelle option tu veux que j’exécute en priorité et je m’en occupe.

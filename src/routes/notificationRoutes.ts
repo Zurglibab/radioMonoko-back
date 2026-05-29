@@ -1,4 +1,6 @@
 import { Router } from 'express';
+import { authMiddleware } from '../middlewares/auth.middleware';
+import { ownershipOrAdmin, ownershipOrAdminBody, ownershipOrAdminResource } from '../middlewares/ownership.middleware';
 import { NotificationDAO } from '../DAO/notificationDAO';
 import { NotificationService } from '../services/notificationService';
 import { NotificationController } from '../controllers/notification.controller';
@@ -113,7 +115,7 @@ export const createNotificationRouter = () => {
    *         description: Erreur serveur
    */
 
-  router.get('/user/:userId', controller.getByUserId);
+  router.get('/user/:userId', authMiddleware, ownershipOrAdmin('userId'), controller.getByUserId);
 
   /**
    * @openapi
@@ -141,7 +143,35 @@ export const createNotificationRouter = () => {
    *         description: Erreur serveur
    */
 
-  router.get('/user/:userId/unread', controller.getUnreadByUserId);
+  router.get('/user/:userId/unread', authMiddleware, ownershipOrAdmin('userId'), controller.getUnreadByUserId);
+
+  /**
+   * @openapi
+   * /notifications/user/{userId}/read-all:
+   *   patch:
+   *     tags: [Notifications]
+   *     summary: Marquer toutes les notifications d'un utilisateur comme lues
+   *     parameters:
+   *       - in: path
+   *         name: userId
+   *         required: true
+   *         schema:
+   *           type: string
+   *           format: uuid
+   *     responses:
+   *       200:
+   *         description: Notifications marquees comme lues
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: array
+   *               items:
+   *                 $ref: '#/components/schemas/Notification'
+   *       500:
+   *         description: Erreur serveur
+   */
+
+  router.patch('/user/:userId/read-all', authMiddleware, ownershipOrAdmin('userId'), controller.markAllAsReadByUserId);
 
   /**
    * @openapi
@@ -194,7 +224,7 @@ export const createNotificationRouter = () => {
    *         description: Requete invalide
    */
 
-  router.post('/', controller.create);
+  router.post('/', authMiddleware, ownershipOrAdminBody('user_id'), controller.create);
 
   /**
    * @openapi
@@ -228,7 +258,7 @@ export const createNotificationRouter = () => {
    *         description: Requete invalide
    */
 
-  router.put('/:id', controller.updateById);
+  router.put('/:id', authMiddleware, ownershipOrAdminResource('notifications', 'id', 'user_id'), controller.updateById);
 
   /**
    * @openapi
@@ -256,7 +286,7 @@ export const createNotificationRouter = () => {
    *         description: Requete invalide
    */
 
-  router.patch('/:id/read', controller.markAsRead);
+  router.patch('/:id/read', authMiddleware, ownershipOrAdminResource('notifications', 'id', 'user_id'), controller.markAsRead);
 
   /**
    * @openapi
@@ -284,7 +314,7 @@ export const createNotificationRouter = () => {
    *         description: Erreur serveur
    */
 
-  router.delete('/:id', controller.deleteById);
+  router.delete('/:id', authMiddleware, ownershipOrAdminResource('notifications', 'id', 'user_id'), controller.deleteById);
 
   return router;
 };

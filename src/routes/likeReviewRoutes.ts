@@ -1,7 +1,10 @@
 import { Router } from 'express';
+import { ownershipOrAdmin, ownershipOrAdminBody } from '../middlewares/ownership.middleware';
+import { authMiddleware } from '../middlewares/auth.middleware';
 import { LikeReviewDAO } from '../DAO/likeReviewDAO';
 import { LikeReviewService } from '../services/likeReviewService';
 import { LikeReviewController } from '../controllers/likeReview.controller';
+// (ownershipOrAdmin already imported as named export)
 
 export const createLikeReviewRouter = () => {
   const router = Router();
@@ -88,7 +91,7 @@ export const createLikeReviewRouter = () => {
    *             schema:
    *               $ref: '#/components/schemas/LikeReview'
    */
-  router.post('/:reviewId/likes', controller.upsert);
+  router.post('/:reviewId/likes', authMiddleware, ownershipOrAdminBody('user_id'), controller.upsert);
 
   /**
    * @openapi
@@ -115,7 +118,11 @@ export const createLikeReviewRouter = () => {
    *       404:
    *         description: LikeReview non trouve
    */
-  router.delete('/:reviewId/likes', controller.deleteByReviewIdAndUserId);
+  // Support both forms for backward compatibility with tests/clients:
+  // - DELETE /review/:reviewId/likes with { user_id } in body
+  // - DELETE /review/:reviewId/likes/:userId with userId as path param (protected by ownership)
+  router.delete('/:reviewId/likes', authMiddleware, ownershipOrAdminBody('user_id'), controller.deleteByReviewIdAndUserId);
+  router.delete('/:reviewId/likes/:userId', authMiddleware, ownershipOrAdmin('userId'), controller.deleteByReviewIdAndUserId);
 
   /**
    * @openapi
@@ -167,5 +174,3 @@ export const createLikeReviewRouter = () => {
 
   return router;
 };
-
-export default createLikeReviewRouter;

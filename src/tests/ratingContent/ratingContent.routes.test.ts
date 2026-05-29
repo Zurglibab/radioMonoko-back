@@ -3,6 +3,14 @@ import { Express } from 'express';
 import { createApp } from '../../app';
 import { RatingContentDAO } from '../../DAO/ratingContentDAO';
 
+jest.mock('../../middlewares/auth.middleware', () => ({
+  authMiddleware: jest.fn((req, res, next) => {
+    req.user = { id: 'user-1', email: 'test@test.com' };
+    req.userId = 'user-1';
+    next();
+  })
+}));
+
 jest.mock('../../DAO/ratingContentDAO');
 
 describe('RatingContent Routes with Mocks', () => {

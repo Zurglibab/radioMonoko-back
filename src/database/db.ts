@@ -1,6 +1,7 @@
 import { Pool, PoolClient } from 'pg';
 import { config } from 'dotenv';
 import logger from '../config/logger';
+import { DEFAULT_COLLECTION_STATUS } from '../enums/collectionStatusEnum';
 
 config({ override: true });
 
@@ -16,17 +17,22 @@ export const initializeDatabase = async () => {
   const client = await pool.connect();
   try {
     await client.query(`CREATE EXTENSION IF NOT EXISTS pgcrypto;`);
-    await createUserTable(client);
-    await createUserRelationTable(client);
-    await createContentTable(client);
-    await createCollectionsTable(client);
-    await createCollectionItemsTable(client);
-    await createRatingContentTable(client);
-    await createReviewTable(client);
-    await createLikeReviewTable(client);
-    await createNotificationTable(client);
-    await createReportUsersTable(client);
-    logger.info('Database initialized successfully.');
+    const isTestEnvironment = process.env.NODE_ENV === 'test' || !!process.env.JEST_WORKER_ID;
+    if (isTestEnvironment) {
+      await createUserTable(client);
+      await createUserRelationTable(client);
+      await createContentTable(client);
+      await createCollectionsTable(client);
+      await createCollectionItemsTable(client);
+      await createRatingContentTable(client);
+      await createReviewTable(client);
+      await createLikeReviewTable(client);
+      await createNotificationTable(client);
+      await createReportUsersTable(client);
+      logger.info('Database initialized successfully (test mode).');
+    } else {
+      logger.info('Skipping inline DDL on startup. Run migrations found in /migrations (recommended tool: node-pg-migrate or similar).');
+    }
   } catch (error) {
     logger.warn('Error initializing database:', error);
     throw error;
@@ -86,6 +92,9 @@ async function createContentTable(client: PoolClient) {
 }
 
 async function createCollectionsTable(client: PoolClient) {
+  const collectionStatusColumn = `status VARCHAR(50) NOT NULL DEFAULT '${DEFAULT_COLLECTION_STATUS}'`;
+  const collectionStatusCheck = `CHECK (status IN ('à voir', 'en cours', 'terminé', 'abandonné'))`;
+
   await client.query(`
         CREATE TABLE IF NOT EXISTS collections (
             id UUID PRIMARY KEY,
@@ -93,11 +102,36 @@ async function createCollectionsTable(client: PoolClient) {
             name VARCHAR(255) NOT NULL,
             description TEXT,
             is_public BOOLEAN DEFAULT true,
+            ${collectionStatusColumn} ${collectionStatusCheck},
             created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
             FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
         )
     `);
+
+  await ensureCollectionStatusColumn(client, collectionStatusColumn, collectionStatusCheck);
+
   logger.info("Table 'collections' created successfully.");
+}
+
+async function ensureCollectionStatusColumn(client: PoolClient, columnDefinition: string, checkConstraint: string) {
+  await client.query(`
+        ALTER TABLE collections
+        ADD COLUMN IF NOT EXISTS ${columnDefinition}
+    `);
+
+  await client.query(`
+        DO $$
+        BEGIN
+            IF NOT EXISTS (
+                SELECT 1
+                FROM pg_constraint
+                WHERE conname = 'collections_status_check'
+            ) THEN
+                ALTER TABLE collections
+                ADD CONSTRAINT collections_status_check ${checkConstraint};
+            END IF;
+        END $$;
+    `);
 }
 
 async function createCollectionItemsTable(client: PoolClient) {

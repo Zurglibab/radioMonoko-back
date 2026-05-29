@@ -2,16 +2,23 @@ import request from 'supertest';
 import express from 'express';
 import { createLikeReviewRouter } from '../../routes/likeReviewRoutes';
 
+jest.mock('../../middlewares/auth.middleware', () => ({
+  authMiddleware: jest.fn((req, res, next) => {
+    req.user = { id: 'user-1', email: 'test@test.com' };
+    req.userId = 'user-1';
+    next();
+  })
+}));
+
 jest.mock('../../DAO/likeReviewDAO', () => {
-  class MockLikeReviewDAO {
-    upsert = jest.fn(async (dto: any) => ({
+  const LikeReviewDAO = jest.fn().mockImplementation(() => ({
+    upsert: jest.fn(async (dto: any) => ({
       review_id: dto.review_id,
       user_id: dto.user_id,
       is_like: dto.is_like,
       created_at: new Date('2026-01-01T00:00:00.000Z')
-    }));
-
-    deleteByReviewIdAndUserId = jest.fn(async (reviewId: string, userId: string) => {
+    })),
+    deleteByReviewIdAndUserId: jest.fn(async (reviewId: string, userId: string) => {
       if (reviewId === 'missing') {
         return null;
       }
@@ -21,21 +28,19 @@ jest.mock('../../DAO/likeReviewDAO', () => {
         is_like: true,
         created_at: new Date('2026-01-01T00:00:00.000Z')
       };
-    });
+    }),
+    findByReviewId: jest.fn(async (reviewId: string) => [
+      {
+        review_id: reviewId,
+        user_id: 'user-1',
+        is_like: true,
+        created_at: new Date('2026-01-01T00:00:00.000Z')
+      }
+    ]),
+    countByReviewId: jest.fn(async () => ({ likes: 1, dislikes: 0, total: 1 }))
+  }));
 
-    findByReviewId = jest.fn(async (reviewId: string) => [
-    {
-      review_id: reviewId,
-      user_id: 'user-1',
-      is_like: true,
-      created_at: new Date('2026-01-01T00:00:00.000Z')
-    }]
-    );
-
-    countByReviewId = jest.fn(async () => ({ likes: 1, dislikes: 0, total: 1 }));
-  }
-
-  return { LikeReviewDAO: MockLikeReviewDAO };
+  return { LikeReviewDAO };
 });
 
 describe('LikeReview routes', () => {

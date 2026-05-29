@@ -2,6 +2,14 @@ import request from 'supertest';
 import { Express } from 'express';
 import { createApp } from '../../app';
 
+jest.mock('../../middlewares/auth.middleware', () => ({
+  authMiddleware: jest.fn((req, res, next) => {
+    req.user = { id: 'user-1', email: 'test@test.com' };
+    req.userId = 'user-1';
+    next();
+  })
+}));
+
 const mockFindAll = jest.fn();
 const mockFindById = jest.fn();
 const mockCreate = jest.fn();
@@ -37,6 +45,7 @@ describe('Collections Routes with Mocks', () => {
         name: 'Ma collection',
         description: 'Description',
         is_public: true,
+        status: 'à voir',
         created_at: new Date().toISOString()
       }]
       );
@@ -56,6 +65,7 @@ describe('Collections Routes with Mocks', () => {
         name: 'Ma collection',
         description: 'Description',
         is_public: true,
+        status: 'en cours',
         created_at: new Date().toISOString()
       });
 
@@ -81,15 +91,17 @@ describe('Collections Routes with Mocks', () => {
         name: 'Nouvelle collection',
         description: 'Desc',
         is_public: true,
+        status: 'à voir',
         created_at: new Date().toISOString()
       });
 
       const res = await request(app).
       post('/collections').
-      send({ user_id: 'user-1', name: 'Nouvelle collection', description: 'Desc', is_public: true });
+      send({ user_id: 'user-1', name: 'Nouvelle collection', description: 'Desc', is_public: true, status: 'à voir' });
 
       expect(res.status).toBe(201);
       expect(res.body).toHaveProperty('id', 'collection-2');
+      expect(res.body).toHaveProperty('status', 'à voir');
     });
 
     it('should return 400 when payload is incomplete', async () => {
@@ -110,15 +122,17 @@ describe('Collections Routes with Mocks', () => {
         name: 'Collection modifiée',
         description: 'Modifiée',
         is_public: false,
+        status: 'terminé',
         created_at: new Date().toISOString()
       });
 
       const res = await request(app).
       put('/collections/collection-1').
-      send({ name: 'Collection modifiée', is_public: false });
+      send({ name: 'Collection modifiée', is_public: false, status: 'terminé' });
 
       expect(res.status).toBe(200);
       expect(res.body).toHaveProperty('name', 'Collection modifiée');
+      expect(res.body).toHaveProperty('status', 'terminé');
     });
 
     it('should return 404 when updating unknown collection', async () => {
@@ -141,6 +155,7 @@ describe('Collections Routes with Mocks', () => {
         name: 'A supprimer',
         description: 'Desc',
         is_public: true,
+        status: 'abandonné',
         created_at: new Date().toISOString()
       });
 

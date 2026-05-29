@@ -65,6 +65,18 @@ export class NotificationDAO implements NotificationRepository {
     return result.rows[0] ?? null;
   }
 
+  async markAllAsReadByUserId(userId: string): Promise<Notification[]> {
+    const result = await pool.query(
+      `UPDATE notifications
+             SET is_read = true,
+                 updated_at = CURRENT_TIMESTAMP
+             WHERE user_id = $1 AND is_read = false
+             RETURNING *`,
+      [userId]
+    );
+    return result.rows;
+  }
+
   async deleteById(id: string): Promise<Notification | null> {
     const result = await pool.query('DELETE FROM notifications WHERE id = $1 RETURNING *', [id]);
     return result.rows[0] ?? null;

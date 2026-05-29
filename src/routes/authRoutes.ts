@@ -1,6 +1,8 @@
 import { Router, Request, Response } from 'express';
 import passport, { isGoogleOAuthConfigured } from '../config/passport';
 import * as jwt from 'jsonwebtoken';
+import { authMiddleware } from '../middlewares/auth.middleware';
+import { getClient } from '../config/RedisConnexion';
 
 const router = Router();
 
@@ -43,7 +45,8 @@ if (isGoogleOAuthConfigured) {
     });
 
     const url = `https://accounts.google.com/o/oauth2/v2/auth?${params.toString()}`;
-    console.log('[auth] redirecting to Google auth URL:', url);
+    // Use structured logger
+    try { const logger = require('../config/logger').default; logger.info('[auth] redirecting to Google auth URL: ' + url); } catch {}
     return res.redirect(url);
   });
 
@@ -106,4 +109,33 @@ router.get('/failure', (req: Request, res: Response) => {
   res.status(401).json({ message: 'Authentication failed' });
 });
 
+// Logout: revoke the current token by adding it to Redis blacklist
+router.post('/logout', authMiddleware, async (req: Request, res: Response) => {
+  const authHeader = req.headers.authorization;
+  if (!authHeader?.startsWith('Bearer ')) {
+    return res.status(400).json({ message: 'Token required' });
+  }
+  const token = authHeader.split(' ')[1];
+
+  try {
+    const decoded = jwt.decode(token) as any;
+    const redis = getClient();
+    let ttlSeconds = 60 * 60 * 24; // default 24h
+    if (decoded?.exp) {
+      const now = Math.floor(Date.now() / 1000);
+      ttlSeconds = Math.max(1, decoded.exp - now);
+    }
+    if (redis?.isOpen) {
+      await redis.set(`blacklist:${token}`, '1', { EX: ttlSeconds });
+    }
+    return res.status(200).json({ message: 'Logged out' });
+  } catch (err) {
+    console.error('[auth/logout] Error revoking token', err);
+    return res.status(500).json({ message: 'Server error' });
+  }
+});
+
 export default router;
+
+
+
