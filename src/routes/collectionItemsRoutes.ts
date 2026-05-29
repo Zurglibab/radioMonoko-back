@@ -1,4 +1,6 @@
 import { Router } from 'express';
+import { ownershipOrAdminResource, ownershipOrAdminBody } from '../middlewares/ownership.middleware';
+import { authMiddleware } from '../middlewares/auth.middleware';
 import { CollectionItemsDTO } from '../DAO/collectionItemsDTO';
 import { CollectionItemsService } from '../services/collectionItemsService';
 import { CollectionItemsController } from '../controllers/collectionItems.controller';
@@ -154,7 +156,8 @@ export const createCollectionItemsRouter = () => {
    *       400:
    *         description: Requete invalide
    */
-  router.post('/', controller.create);
+  // Ensure the collection being modified belongs to the authenticated user
+  router.post('/', authMiddleware, ownershipOrAdminBody('collection_id'), controller.create);
 
   /**
    * @openapi
@@ -191,7 +194,7 @@ export const createCollectionItemsRouter = () => {
    *       404:
    *         description: Element non trouve
    */
-  router.put('/collection/:collectionId/content/:contentId', controller.updateByKeys);
+  router.put('/collection/:collectionId/content/:contentId', authMiddleware, ownershipOrAdminResource('collections', 'collectionId', 'user_id'), controller.updateByKeys);
 
   /**
    * @openapi
@@ -222,7 +225,7 @@ export const createCollectionItemsRouter = () => {
    *       404:
    *         description: Element non trouve
    */
-  router.delete('/collection/:collectionId/content/:contentId', controller.deleteByKeys);
+  router.delete('/collection/:collectionId/content/:contentId', authMiddleware, ownershipOrAdminResource('collections', 'collectionId', 'user_id'), controller.deleteByKeys);
 
   return router;
 };

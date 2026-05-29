@@ -117,3 +117,76 @@
 {"level":"error","timestamp":"2026-05-27 20:27:04"}
 {"level":"error","message":"User with this email already exists","timestamp":"2026-05-27 20:30:59"}
 {"level":"error","timestamp":"2026-05-27 20:30:59"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-05-27 21:23:34"}
+{"level":"error","timestamp":"2026-05-27 21:23:34"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-05-27 21:26:11"}
+{"level":"error","timestamp":"2026-05-27 21:26:11"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-05-27 21:29:45"}
+{"level":"error","timestamp":"2026-05-27 21:29:45"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-05-27 22:33:54"}
+{"level":"error","timestamp":"2026-05-27 22:33:54"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-05-27 22:34:35"}
+{"level":"error","timestamp":"2026-05-27 22:34:35"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-05-27 22:35:21"}
+{"level":"error","timestamp":"2026-05-27 22:35:21"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-05-27 22:39:28"}
+{"level":"error","timestamp":"2026-05-27 22:39:28"}
+{"code":"22P02","file":"uuid.c","length":141,"level":"error","line":"133","name":"error","routine":"string_to_uuid","severity":"ERROR","timestamp":"2026-05-27 22:39:57","where":"unnamed portal parameter $1 = '...'"}
+{"code":"22P02","file":"uuid.c","length":141,"level":"error","line":"133","name":"error","routine":"string_to_uuid","severity":"ERROR","timestamp":"2026-05-27 22:39:57","where":"unnamed portal parameter $1 = '...'"}
+{"code":"22P02","file":"uuid.c","length":141,"level":"error","line":"133","message":"[FeedController] getMyFeed failed: invalid input syntax for type uuid: \"test-user\"","name":"error","routine":"string_to_uuid","severity":"ERROR","stack":"error: invalid input syntax for type uuid: \"test-user\"\n    at F:\\Cours\\ProjetFinal\\radioMonoko-back\\node_modules\\pg-pool\\index.js:45:11\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at UserRelationDAO.getFollowing (F:\\Cours\\ProjetFinal\\radioMonoko-back\\src\\DAO\\userRelationDAO.ts:64:22)\n    at FeedService.getFeed (F:\\Cours\\ProjetFinal\\radioMonoko-back\\src\\services\\feedService.ts:14:22)\n    at FeedController.getMyFeed (F:\\Cours\\ProjetFinal\\radioMonoko-back\\src\\controllers\\feed.controller.ts:15:20)","timestamp":"2026-05-27 22:39:57","where":"unnamed portal parameter $1 = '...'"}
+{"code":"22P02","file":"uuid.c","length":141,"level":"error","line":"133","name":"error","routine":"string_to_uuid","severity":"ERROR","timestamp":"2026-05-27 22:39:57","where":"unnamed portal parameter $1 = '...'"}
+{"code":"22P02","file":"uuid.c","length":141,"level":"error","line":"133","name":"error","routine":"string_to_uuid","severity":"ERROR","timestamp":"2026-05-27 22:39:57","where":"unnamed portal parameter $1 = '...'"}
+{"code":"22P02","file":"uuid.c","length":141,"level":"error","line":"133","name":"error","routine":"string_to_uuid","severity":"ERROR","timestamp":"2026-05-27 22:39:57","where":"unnamed portal parameter $1 = '...'"}
+{"code":"22P02","file":"uuid.c","length":141,"level":"error","line":"133","name":"error","routine":"string_to_uuid","severity":"ERROR","timestamp":"2026-05-27 22:39:57","where":"unnamed portal parameter $1 = '...'"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-05-27 22:39:58"}
+{"level":"error","timestamp":"2026-05-27 22:39:58"}
+{"code":"22P02","file":"uuid.c","length":141,"level":"error","line":"133","name":"error","routine":"string_to_uuid","severity":"ERROR","timestamp":"2026-05-27 22:39:59","where":"unnamed portal parameter $1 = '...'"}
+{"code":"22P02","file":"uuid.c","length":141,"level":"error","line":"133","name":"error","routine":"string_to_uuid","severity":"ERROR","timestamp":"2026-05-27 22:39:59","where":"unnamed portal parameter $1 = '...'"}
+{"code":"22P02","file":"uuid.c","length":141,"level":"error","line":"133","name":"error","routine":"string_to_uuid","severity":"ERROR","timestamp":"2026-05-27 22:39:59","where":"unnamed portal parameter $1 = '...'"}
+{"code":"22P02","file":"uuid.c","length":141,"level":"error","line":"133","name":"error","routine":"string_to_uuid","severity":"ERROR","timestamp":"2026-05-27 22:39:59","where":"unnamed portal parameter $1 = '...'"}
+{"code":"22P02","file":"uuid.c","length":141,"level":"error","line":"133","name":"error","routine":"string_to_uuid","severity":"ERROR","timestamp":"2026-05-27 22:39:59","where":"unnamed portal parameter $1 = '...'"}
+{"code":"22P02","file":"uuid.c","length":141,"level":"error","line":"133","name":"error","routine":"string_to_uuid","severity":"ERROR","timestamp":"2026-05-27 22:39:59","where":"unnamed portal parameter $1 = '...'"}
+{"code":"22P02","file":"uuid.c","length":141,"level":"error","line":"133","name":"error","routine":"string_to_uuid","severity":"ERROR","timestamp":"2026-05-27 22:39:59","where":"unnamed portal parameter $1 = '...'"}
+{"code":"22P02","file":"uuid.c","length":141,"level":"error","line":"133","name":"error","routine":"string_to_uuid","severity":"ERROR","timestamp":"2026-05-27 22:39:59","where":"unnamed portal parameter $1 = '...'"}
+{"code":"22P02","file":"uuid.c","length":141,"level":"error","line":"133","name":"error","routine":"string_to_uuid","severity":"ERROR","timestamp":"2026-05-27 22:40:00","where":"unnamed portal parameter $1 = '...'"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-05-27 22:43:18"}
+{"level":"error","timestamp":"2026-05-27 22:43:18"}
+{"code":"22P02","file":"uuid.c","length":141,"level":"error","line":"133","name":"error","routine":"string_to_uuid","severity":"ERROR","timestamp":"2026-05-27 22:43:18","where":"unnamed portal parameter $1 = '...'"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-05-27 22:50:32"}
+{"level":"error","timestamp":"2026-05-27 22:50:32"}
+{"code":"22P02","file":"uuid.c","length":141,"level":"error","line":"133","name":"error","routine":"string_to_uuid","severity":"ERROR","timestamp":"2026-05-27 22:50:33","where":"unnamed portal parameter $1 = '...'"}
+{"level":"error","timestamp":"2026-05-27 22:50:41"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-05-27 22:51:32"}
+{"level":"error","timestamp":"2026-05-27 22:51:32"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-05-27 22:51:49"}
+{"level":"error","timestamp":"2026-05-27 22:51:49"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-05-27 22:52:25"}
+{"level":"error","timestamp":"2026-05-27 22:52:25"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-05-27 22:52:58"}
+{"level":"error","timestamp":"2026-05-27 22:52:58"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-05-27 22:54:00"}
+{"level":"error","timestamp":"2026-05-27 22:54:00"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-05-27 22:54:25"}
+{"level":"error","timestamp":"2026-05-27 22:54:25"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-05-27 22:56:45"}
+{"level":"error","timestamp":"2026-05-27 22:56:45"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-05-27 22:57:30"}
+{"level":"error","timestamp":"2026-05-27 22:57:30"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-05-27 22:59:37"}
+{"level":"error","timestamp":"2026-05-27 22:59:37"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-05-27 23:01:54"}
+{"level":"error","timestamp":"2026-05-27 23:01:54"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-05-27 23:02:53"}
+{"level":"error","timestamp":"2026-05-27 23:02:53"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-05-27 23:04:47"}
+{"level":"error","timestamp":"2026-05-27 23:04:47"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-05-27 23:05:08"}
+{"level":"error","timestamp":"2026-05-27 23:05:08"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-05-29 14:26:32"}
+{"level":"error","timestamp":"2026-05-29 14:26:32"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-05-29 14:37:57"}
+{"level":"error","timestamp":"2026-05-29 14:37:57"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-05-29 14:49:03"}
+{"level":"error","timestamp":"2026-05-29 14:49:03"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-05-29 14:58:42"}
+{"level":"error","timestamp":"2026-05-29 14:58:42"}

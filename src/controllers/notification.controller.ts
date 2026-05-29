@@ -77,6 +77,15 @@ export class NotificationController {
     }
   };
 
+  markAllAsReadByUserId = async (req: Request, res: Response) => {
+    try {
+      const notifications = await this.service.markAllAsReadByUserId(req.params.userId as string);
+      res.status(200).json(notifications);
+    } catch (error: any) {
+      res.status(400).json({ message: error.message });
+    }
+  };
+
   deleteById = async (req: Request, res: Response) => {
     try {
       const deleted = await this.service.deleteById(req.params.id as string);

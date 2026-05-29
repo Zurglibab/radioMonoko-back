@@ -1,4 +1,6 @@
 import { Router } from 'express';
+import { authMiddleware } from '../middlewares/auth.middleware';
+import { ownershipOrAdminBody, ownershipOrAdminResource } from '../middlewares/ownership.middleware';
 import { ReviewDAO } from '../DAO/reviewDAO';
 import { ReviewService } from '../services/reviewService';
 import { ReviewController } from '../controllers/review.controller';
@@ -184,7 +186,7 @@ export const createReviewRouter = () => {
    *       400:
    *         description: Requete invalide
    */
-  router.post('/', controller.create);
+  router.post('/', authMiddleware, ownershipOrAdminBody('user_id'), controller.create);
 
   /**
    * @openapi
@@ -215,7 +217,8 @@ export const createReviewRouter = () => {
    *       404:
    *         description: Review non trouvee
    */
-  router.put('/:id', controller.updateById);
+  // Use resource ownership check: the review resource has a user_id owner
+  router.put('/:id', authMiddleware, ownershipOrAdminResource('reviews', 'id', 'user_id'), controller.updateById);
 
   /**
    * @openapi
@@ -240,7 +243,7 @@ export const createReviewRouter = () => {
    *       404:
    *         description: Review non trouvee
    */
-  router.delete('/:id', controller.deleteById);
+  router.delete('/:id', authMiddleware, ownershipOrAdminResource('reviews', 'id', 'user_id'), controller.deleteById);
 
   return router;
 };

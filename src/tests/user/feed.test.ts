@@ -55,8 +55,8 @@ describe('User feed API', () => {
 
     );
     await pool.query(
-      'INSERT INTO collections (id, user_id, name, description, is_public) VALUES ($1, $2, $3, $4, $5)',
-      [collectionId, followedId, 'Followed collection', 'A collection to test feed', true]
+      'INSERT INTO collections (id, user_id, name, description, is_public, status) VALUES ($1, $2, $3, $4, $5, $6)',
+      [collectionId, followedId, 'Followed collection', 'A collection to test feed', true, 'à voir']
     );
     await pool.query(
       'INSERT INTO reviews (id, user_id, content_id, parent_review_id, comment, is_featured, created_at) VALUES ($1, $2, $3, $4, $5, $6, $7)',

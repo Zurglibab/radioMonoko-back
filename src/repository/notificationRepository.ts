@@ -9,5 +9,6 @@ export interface NotificationRepository {
   create(notification: CreateNotificationDTO): Promise<Notification>;
   updateById(id: string, notification: UpdateNotificationDTO): Promise<Notification | null>;
   markAsRead(id: string): Promise<Notification | null>;
+  markAllAsReadByUserId(userId: string): Promise<Notification[]>;
   deleteById(id: string): Promise<Notification | null>;
 }

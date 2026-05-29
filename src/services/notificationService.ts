@@ -44,6 +44,10 @@ export class NotificationService {
     return this.repository.markAsRead(id);
   }
 
+  markAllAsReadByUserId(userId: string): Promise<Notification[]> {
+    return this.repository.markAllAsReadByUserId(userId);
+  }
+
   deleteById(id: string): Promise<Notification | null> {
     return this.repository.deleteById(id);
   }

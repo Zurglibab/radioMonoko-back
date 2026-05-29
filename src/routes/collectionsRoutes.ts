@@ -1,4 +1,6 @@
 import { Router } from 'express';
+import { authMiddleware } from '../middlewares/auth.middleware';
+import { ownershipOrAdminBody, ownershipOrAdminResource } from '../middlewares/ownership.middleware';
 import { CollectionDAO } from '../DAO/collectionDAO';
 import { CollectionsService } from '../services/collectionsService';
 import { CollectionsController } from '../controllers/collections.controller';
@@ -20,6 +22,7 @@ export const createCollectionsRouter = () => {
    *         - id
    *         - user_id
    *         - name
+   *         - status
    *       properties:
    *         id:
    *           type: string
@@ -34,6 +37,9 @@ export const createCollectionsRouter = () => {
    *           nullable: true
    *         is_public:
    *           type: boolean
+   *         status:
+   *           type: string
+   *           enum: ['à voir', 'en cours', 'terminé', 'abandonné']
    *         created_at:
    *           type: string
    *           format: date-time
@@ -52,6 +58,9 @@ export const createCollectionsRouter = () => {
    *           type: string
    *         is_public:
    *           type: boolean
+   *         status:
+   *           type: string
+   *           enum: ['à voir', 'en cours', 'terminé', 'abandonné']
    *     UpdateCollectionDTO:
    *       type: object
    *       properties:
@@ -61,6 +70,9 @@ export const createCollectionsRouter = () => {
    *           type: string
    *         is_public:
    *           type: boolean
+   *         status:
+   *           type: string
+   *           enum: ['à voir', 'en cours', 'terminé', 'abandonné']
    */
 
   /**
@@ -128,7 +140,7 @@ export const createCollectionsRouter = () => {
    *       400:
    *         description: Requete invalide
    */
-  router.post('/', controller.create);
+  router.post('/', authMiddleware, ownershipOrAdminBody('user_id'), controller.create);
 
   /**
    * @openapi
@@ -159,7 +171,7 @@ export const createCollectionsRouter = () => {
    *       404:
    *         description: Collection non trouvee
    */
-  router.put('/:id', controller.updateById);
+  router.put('/:id', authMiddleware, ownershipOrAdminResource('collections', 'id', 'user_id'), controller.updateById);
 
   /**
    * @openapi
@@ -184,7 +196,7 @@ export const createCollectionsRouter = () => {
    *       404:
    *         description: Collection non trouvee
    */
-  router.delete('/:id', controller.deleteById);
+  router.delete('/:id', authMiddleware, ownershipOrAdminResource('collections', 'id', 'user_id'), controller.deleteById);
 
   /**
    * @openapi
@@ -213,5 +225,3 @@ export const createCollectionsRouter = () => {
 
   return router;
 };
-
-export default createCollectionsRouter;

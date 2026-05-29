@@ -3,6 +3,7 @@ import {UserService} from "../services/userService";
 import {UserController} from "../controllers/user.controller";
 import {UserBDDRepository} from "../bddRepository/user.bdd.repository";
 import { authMiddleware } from '../middlewares/auth.middleware';
+import { ownershipOrAdmin } from '../middlewares/ownership.middleware';
 import { UserRelationDAO } from '../DAO/userRelationDAO';
 import { UserRelationRepository } from '../repository/userRelationRepository';
 import { FeedService } from '../services/feedService';
@@ -264,6 +265,6 @@ userRouter.get('/id/:id', authMiddleware, userController.getUserById);
  *       404:
  *         description: Utilisateur non trouvé
  */
-userRouter.delete('/delete/:id', authMiddleware, userController.deleteUserById);
+userRouter.delete('/delete/:id', authMiddleware, ownershipOrAdmin('id'), userController.deleteUserById);
 
 export default userRouter;

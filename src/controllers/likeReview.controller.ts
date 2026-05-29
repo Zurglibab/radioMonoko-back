@@ -6,9 +6,10 @@ export class LikeReviewController {
 
   upsert = async (req: Request, res: Response) => {
     try {
+      const userId = req.body.user_id || (req as any).userId;
       const created = await this.service.upsert({
         review_id: req.params.reviewId as string,
-        user_id: req.body.user_id,
+        user_id: userId,
         is_like: req.body.is_like
       });
       res.status(201).json(created);
@@ -19,9 +20,10 @@ export class LikeReviewController {
 
   deleteByReviewIdAndUserId = async (req: Request, res: Response) => {
     try {
+      const userId = (req.params.userId as string) || req.body.user_id as string;
       const deleted = await this.service.deleteByReviewIdAndUserId(
         req.params.reviewId as string,
-        req.body.user_id as string
+        userId
       );
 
       if (!deleted) {

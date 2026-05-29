@@ -1,4 +1,6 @@
-import express, {Express, Request, Response} from "express";
+import express, { Express, Request, Response } from "express";
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
 import swaggerUi from "swagger-ui-express";
 import apiRoutes from "./routes/apiRoutes";
 import {swaggerSpec} from "./config/swagger";
@@ -35,30 +37,47 @@ export function createApp(): Express {
         meta: false
     }));
 
-    console.log("app.use");
-    app.use(express.json({limit: '1mb'}));
-    app.use(express.urlencoded({extended: true}));
-    app.use((req, _res, next) => {
-        if (req.headers['content-type']?.includes('application/json') && typeof req.body === 'string') {
-            try {
-                req.body = JSON.parse(req.body);
-            } catch {
-            }
-        }
-        next();
-    });
+  app.use(express.json({ limit: '1mb' }));
+  app.use(express.urlencoded({ extended: true }));
+  app.use((req, _res, next) => {
+    if (req.headers['content-type']?.includes('application/json') && typeof req.body === 'string') {
+      try {req.body = JSON.parse(req.body);} catch {}
+    }
+    next();
+  });
 
 
-    app.use((req, res, next) => {
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-        res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  // CORS middleware: allow configurable origin via environment variable
+  // Security headers
+  app.use(helmet({ contentSecurityPolicy: false }));
 
-        if (req.method === "OPTIONS") {
-            return res.sendStatus(200);
-        }
-        next();
-    });
+  // Basic rate limiting to mitigate brute-force and scraping
+  const limiter = rateLimit({
+    windowMs: Number(process.env.RATE_LIMIT_WINDOW_MS) || 15 * 60 * 1000, // 15 minutes
+    max: Number(process.env.RATE_LIMIT_MAX) || 100, // limit each IP to 100 requests per windowMs
+    standardHeaders: true,
+    legacyHeaders: false,
+  });
+  // Do not apply rate limiting in tests or when explicitly disabled to avoid flakiness
+  // Skip rate limiting when running tests or when DISABLE_RATE_LIMIT is set to 'true'
+  const disableRateLimit = process.env.DISABLE_RATE_LIMIT === 'true';
+  if (!process.env.JEST_WORKER_ID && process.env.NODE_ENV !== 'test' && !disableRateLimit) {
+    app.use(limiter);
+  }
+
+  app.use((req, res, next) => {
+    const allowedOrigin = process.env.CORS_ORIGIN || '*';
+
+    // In production, set CORS_ORIGIN to a specific origin (ex: https://yourdomain.tld)
+    res.header('Access-Control-Allow-Origin', allowedOrigin);
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
+
+    if (req.method === 'OPTIONS') {
+      return res.sendStatus(200);
+    }
+    next();
+  });
 
     app.use('/user', userRouter);
     app.use('/userRelation', userRelationRouter);

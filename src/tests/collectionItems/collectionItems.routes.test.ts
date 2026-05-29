@@ -3,6 +3,14 @@ import { Express } from 'express';
 import { createApp } from '../../app';
 import { CollectionItemsDTO } from '../../DAO/collectionItemsDTO';
 
+jest.mock('../../middlewares/auth.middleware', () => ({
+  authMiddleware: jest.fn((req, res, next) => {
+    req.user = { id: 'user-1', email: 'test@test.com' };
+    req.userId = 'user-1';
+    next();
+  })
+}));
+
 jest.mock('../../DAO/collectionItemsDTO');
 
 describe('CollectionItems Routes with Mocks', () => {

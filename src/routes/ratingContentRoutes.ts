@@ -1,4 +1,6 @@
 import { Router } from 'express';
+import { ownershipOrAdmin, ownershipOrAdminBody } from '../middlewares/ownership.middleware';
+import { authMiddleware } from '../middlewares/auth.middleware';
 import { RatingContentDAO } from '../DAO/ratingContentDAO';
 import { RatingContentService } from '../services/ratingContentService';
 import { RatingContentController } from '../controllers/ratingContent.controller';
@@ -132,7 +134,7 @@ export const createRatingContentRouter = () => {
    *       400:
    *         description: Requete invalide
    */
-  router.post('/', controller.create);
+  router.post('/', authMiddleware, ownershipOrAdminBody('user_id'), controller.create);
 
   /**
    * @openapi
@@ -171,7 +173,7 @@ export const createRatingContentRouter = () => {
    *       404:
    *         description: Notation non trouvee
    */
-  router.put('/content/:contentId/user/:userId', controller.updateByKeys);
+  router.put('/content/:contentId/user/:userId', authMiddleware, ownershipOrAdmin('userId'), controller.updateByKeys);
 
   /**
    * @openapi
@@ -202,7 +204,7 @@ export const createRatingContentRouter = () => {
    *       404:
    *         description: Notation non trouvee
    */
-  router.delete('/content/:contentId/user/:userId', controller.deleteByKeys);
+  router.delete('/content/:contentId/user/:userId', authMiddleware, ownershipOrAdmin('userId'), controller.deleteByKeys);
 
   return router;
 };
