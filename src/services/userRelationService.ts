@@ -82,7 +82,13 @@ export class UserRelationService {
         }
 
         const friends = await this.userRepository.findByIds(friendIds);
-        return friends.map(f => ({ id: f.id, username: f.username, isPublic: f.privacy === 'public' }));
+        return friends.map(f => ({
+            id: f.id,
+            username: f.username,
+            isPublic: f.privacy === 'public',
+            avatar: f.avatar ?? null,
+            bio: f.bio ?? null
+        }));
     }
 
     async getFriendsForOther(userId: string, otherId: string): Promise<any[]> {
@@ -103,9 +109,6 @@ export class UserRelationService {
         let visibleRelations = relations
             .filter(r => r.follower_id === otherId && r.status === 'accepted');
 
-        // if (user.role !== 'admin') {
-        //     visibleRelations = visibleRelations.filter(r => r.privacy === 'public');
-        // }
 
         const friendIds = visibleRelations.map(r => r.followed_id);
         logger.info(`[UserRelationService] User ${friendIds.length} requests friends of ${friendIds} (as follower)`);
@@ -115,7 +118,14 @@ export class UserRelationService {
         }
 
         const friends = await this.userRepository.findByIds(friendIds);
-        return friends.map(f => ({ id: f.id, username: f.username, isPublic: f.privacy === 'public' }));
+        return friends.map(f => ({
+            id: f.id,
+            username: f.username,
+            isPublic: f.privacy === 'public',
+            avatar: f.avatar ?? null,
+            bio: f.bio ?? null
+        }));
+
     }
 
     async getPendingRequests(userId: string): Promise<any[]> {
