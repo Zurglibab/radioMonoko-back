@@ -10,6 +10,12 @@ export const toDiffusionDto = (raw: DiffusionApiNode): DiffusionDto => {
     standFirst: raw?.standFirst ?? undefined,
     url: raw?.url ?? undefined,
     publishedDate: raw?.published_date ?? undefined,
+    podcastEpisode: raw?.podcastEpisode ? {
+      id: raw.podcastEpisode?.id ?? "",
+      title: raw.podcastEpisode?.title ?? "",
+      url: raw.podcastEpisode?.url ?? undefined,
+      playerUrl: raw.podcastEpisode?.playerUrl ?? undefined
+    } : undefined,
     taxonomies: taxonomyEdges.
     map((edge) => edge?.node).
     filter((node) => !!node).

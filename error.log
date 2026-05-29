@@ -198,3 +198,7 @@
 {"level":"error","timestamp":"2026-05-29 15:21:34"}
 {"level":"error","message":"User with this email already exists","timestamp":"2026-05-29 15:22:49"}
 {"level":"error","timestamp":"2026-05-29 15:22:49"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-05-29 15:49:01"}
+{"level":"error","timestamp":"2026-05-29 15:49:01"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-05-29 15:52:01"}
+{"level":"error","timestamp":"2026-05-29 15:52:01"}

@@ -64,3 +64,45 @@ export async function getDiffusionsByStation(req: Request, res: Response) {
     });
   }
 }
+
+export async function getDiffusionsOfShowByUrl(req: Request, res: Response) {
+  try {
+    const { url, first } = req.query as {
+      url?: string;
+      first?: string;
+    };
+
+    if (!url || typeof url !== "string" || !url.trim()) {
+      return res.status(400).json({
+        success: false,
+        error: "Missing required query param: url"
+      });
+    }
+
+    const parsedFirstRaw = typeof first === "string" ? parseInt(first, 10) : NaN;
+    const parsedFirst = Number.isFinite(parsedFirstRaw) && parsedFirstRaw > 0 ?
+    parsedFirstRaw :
+    10;
+
+    const diffusions = await diffusionApiService.getDiffusionsOfShowByUrl(
+      url.trim(),
+      parsedFirst
+    );
+
+    return res.status(200).json({
+      success: true,
+      url: url.trim(),
+      count: diffusions.length,
+      data: diffusions
+    });
+  } catch (error: any) {
+    console.error("[diffusionController] getDiffusionsOfShowByUrl failed:", error);
+    return res.status(error?.response?.status ?? 500).json({
+      success: false,
+      error: error?.message ?? "Failed to fetch show diffusions",
+      details: error?.response?.data ?? null
+    });
+  }
+}
+
+
