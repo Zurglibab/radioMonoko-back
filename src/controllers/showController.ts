@@ -3,10 +3,6 @@ import { showApiService } from "../services/showServices";
 import { redisShowDao } from "../DAO/showDAO";
 import { StationsEnum } from "../enums/stationsEnum";
 
-
-
-
-
 export async function getShowsByStation(req: Request, res: Response) {
   try {
     const station = Array.isArray(req.params.station) ? req.params.station[0] : req.params.station;
@@ -42,10 +38,6 @@ export async function getShowsByStation(req: Request, res: Response) {
   }
 }
 
-
-
-
-
 export async function getShowById(req: Request, res: Response) {
   try {
     const station = Array.isArray(req.params.station) ? req.params.station[0] : req.params.station;
@@ -80,10 +72,6 @@ export async function getShowById(req: Request, res: Response) {
   }
 }
 
-
-
-
-
 export async function searchShowsByTitle(req: Request, res: Response) {
   try {
     const station = Array.isArray(req.params.station) ? req.params.station[0] : req.params.station;
@@ -117,9 +105,6 @@ export async function searchShowsByTitle(req: Request, res: Response) {
     });
   }
 }
-
-
-
 
 
 export async function refreshShows(req: Request, res: Response) {
@@ -159,10 +144,6 @@ export async function refreshShows(req: Request, res: Response) {
   }
 }
 
-
-
-
-
 export async function getShowsCount(req: Request, res: Response) {
   try {
     const station = Array.isArray(req.params.station) ? req.params.station[0] : req.params.station;
@@ -195,10 +176,6 @@ export async function getShowsCount(req: Request, res: Response) {
   }
 }
 
-
-
-
-
 export async function clearShowsCache(req: Request, res: Response) {
   try {
     const station = Array.isArray(req.params.station) ? req.params.station[0] : req.params.station;
@@ -225,5 +202,29 @@ export async function clearShowsCache(req: Request, res: Response) {
       success: false,
       error: error instanceof Error ? error.message : "Failed to clear cache"
     });
+  }
+}
+
+export async function getShowByUrl(req: Request, res: Response) {
+  try {
+    const rawUrl = Array.isArray(req.query.url) ? req.query.url[0] : req.query.url;
+    const url = rawUrl ? String(rawUrl) : undefined;
+    const { first } = req.query;
+
+    console.log(`[showController] GET /api/shows/show-by-url?url=${url}`);
+
+    if (!url) {
+      return res.status(400).json({ success: false, error: 'Missing required query param: url' });
+    }
+
+    const show = await showApiService.getShowByUrl(url);
+    if (!show) {
+      return res.status(404).json({ success: false, error: `Show with url "${url}" not found` });
+    }
+
+    return res.status(200).json({ success: true, data: show });
+  } catch (error) {
+    console.error("[showController] getShowByUrl failed:", error);
+    res.status(500).json({ success: false, error: error instanceof Error ? error.message : "Failed to fetch show by url" });
   }
 }

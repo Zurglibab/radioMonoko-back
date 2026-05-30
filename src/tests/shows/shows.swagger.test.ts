@@ -19,6 +19,13 @@ describe('Shows + Swagger integration', () => {
     expect(hasShows).toBe(true);
   });
 
+  it('should expose show-by-url path in swagger JSON', async () => {
+    const res = await request(app).get('/api/docs.json');
+    expect(res.status).toBe(200);
+    const paths = Object.keys(res.body.paths || {});
+    expect(paths).toContain('/api/shows/show-by-url');
+  });
+
   it('should respond to GET /api/shows/:station', async () => {
     const station = StationsEnum.FRANCEINTER;
     const res = await request(app).get(`/api/shows/${station}`);
