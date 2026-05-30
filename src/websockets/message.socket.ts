@@ -1,32 +1,17 @@
 import { Server } from 'socket.io';
-import { createClient } from 'redis';
 import logger from '../config/logger';
+import { getClient as getRedisClient } from '../config/RedisConnexion';
 import { ChannelDAO } from '../DAO/channelDAO';
 import { ChannelService } from '../services/channelService';
 import { MessageDAO } from '../DAO/messageDAO';
 import { MessageService } from '../services/messageService';
 
-// Initialisation du client Redis (ajustez l'URL selon votre configuration si nécessaire)
-const redisClient = createClient({
-    url: process.env.REDIS_URL || 'redis://localhost:6379'
-});
-
-redisClient.on('error', (err) => logger.error('[Redis] Error', err));
+const redisClient = getRedisClient();
 
 // Note: do not connect the Redis client at top-level to avoid opening sockets during tests
 // The client will be connected when `setupWebSockets` is called by the server startup.
 
 export async function setupWebSockets(server: any) {
-    // ensure Redis client is connected for socket-room operations
-    try {
-        if (!redisClient.isOpen) {
-            await redisClient.connect();
-            logger.info('[Redis] Connected successfully');
-        }
-    } catch (err) {
-        logger.error('[Redis] Connection failed', err);
-    }
-
     const io = new Server(server, { cors: { origin: '*' } });
 
     // Permet de simuler ou de récupérer l'instance globale de IO si nécessaire ailleurs
