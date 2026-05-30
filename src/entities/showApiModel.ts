@@ -4,10 +4,20 @@ export interface ShowApiPersonalityNode {
 }
 
 export interface ShowApiDiffusionNode {
+  id?: string;
   title?: string;
   url?: string;
+  published_date?: string;
+  podcastEpisode?: {
+    id?: string;
+    title?: string;
+    url?: string;
+    playerUrl?: string;
+  };
   personalitiesConnection?: {
     edges?: Array<{
+      relation?: string;
+      info?: string;
       node?: ShowApiPersonalityNode;
     }>;
   };
@@ -24,6 +34,8 @@ export interface ShowApiTaxonomyNode {
 export interface ShowApiNode {
   id?: string;
   title?: string;
+  url?: string;
+  standFirst?: string;
   diffusionsConnection?: {
     edges?: Array<{
       node?: ShowApiDiffusionNode;

@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
   getShowsByStation,
   getShowById,
+  getShowByUrl,
   searchShowsByTitle,
   refreshShows,
   getShowsCount,
@@ -54,6 +55,29 @@ router.delete("/:station/cache", clearShowsCache);
  *     summary: Recuperer un show par ID
  */
 router.get("/:station/:id", getShowById);
+
+/**
+ * @openapi
+ * /api/shows/show-by-url:
+ *   get:
+ *     tags: [Shows]
+ *     summary: Recuperer un show par son URL (ne nécessite pas la station)
+ *     parameters:
+ *       - in: query
+ *         name: url
+ *         required: true
+ *         schema:
+ *           type: string
+ *       - in: query
+ *         name: first
+ *         required: false
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Show correspondant à l'URL
+ */
+router.get("/show-by-url", getShowByUrl);
 
 /**
  * @openapi

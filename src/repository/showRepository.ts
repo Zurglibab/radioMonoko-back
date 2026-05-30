@@ -12,11 +12,21 @@ const GET_SHOWS_QUERY = `
           node {
             id
             title
+            url
+            standFirst
             diffusionsConnection {
               edges {
                 node {
+                  id
                   title
                   url
+                  published_date
+                  podcastEpisode {
+                    id
+                    title
+                    url
+                    playerUrl
+                  }
                   personalitiesConnection {
                     edges {
                       relation
@@ -49,7 +59,83 @@ const GET_SHOWS_QUERY = `
     }
 `;
 
+const GET_SHOW_BY_URL_QUERY = `
+  query GetShowByUrl($url: String!) {
+    showByUrl(url: $url) {
+      id
+      title
+      url
+      standFirst
+      diffusionsConnection {
+        edges {
+          node {
+            id
+            title
+            url
+            published_date
+            podcastEpisode {
+              id
+              title
+              url
+              playerUrl
+            }
+            personalitiesConnection {
+              edges {
+                relation
+                info
+                node {
+                  id
+                  name
+                }
+              }
+            }
+            taxonomiesConnection {
+              edges {
+                relation
+                info
+                node {
+                  id
+                  path
+                  type
+                  title
+                  standFirst
+                }
+              }
+            }
+          }
+        }
+      }
+      taxonomiesConnection {
+        edges {
+          relation
+          info
+          node {
+            id
+            path
+            type
+            title
+            standFirst
+          }
+        }
+      }
+    }
+  }
+`;
+
 export class ShowRepository {
+  async fetchShowByUrl(url: string): Promise<ShowDto | null> {
+    try {
+      const variables = { url };
+      const data = await radioFrance.query<any>(GET_SHOW_BY_URL_QUERY, variables as any);
+      const node = data?.showByUrl ?? null;
+      if (!node) return null;
+      return toShowDto(node);
+    } catch (error) {
+      console.error("[ShowRepository] Failed to fetch show by url:", error);
+      throw error;
+    }
+  }
+
   async fetchShowsByStation(station: StationsEnum, first: number = 10): Promise<ShowDto[]> {
     try {
       const variables = { station, first };

@@ -13,14 +13,20 @@ const redisClient = createClient({
 
 redisClient.on('error', (err) => logger.error('[Redis] Error', err));
 
-// Connexion asynchrone à Redis au démarrage
-redisClient.connect().then(() => {
-    logger.info('[Redis] Connected successfully');
-}).catch((err) => {
-    logger.error('[Redis] Connection failed', err);
-});
+// Note: do not connect the Redis client at top-level to avoid opening sockets during tests
+// The client will be connected when `setupWebSockets` is called by the server startup.
 
 export async function setupWebSockets(server: any) {
+    // ensure Redis client is connected for socket-room operations
+    try {
+        if (!redisClient.isOpen) {
+            await redisClient.connect();
+            logger.info('[Redis] Connected successfully');
+        }
+    } catch (err) {
+        logger.error('[Redis] Connection failed', err);
+    }
+
     const io = new Server(server, { cors: { origin: '*' } });
 
     // Permet de simuler ou de récupérer l'instance globale de IO si nécessaire ailleurs
