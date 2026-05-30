@@ -222,3 +222,5 @@
 {"level":"error","timestamp":"2026-05-30 10:41:28"}
 {"level":"error","message":"User with this email already exists","timestamp":"2026-05-30 10:42:03"}
 {"level":"error","timestamp":"2026-05-30 10:42:03"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-05-30 10:52:09"}
+{"level":"error","timestamp":"2026-05-30 10:52:09"}
