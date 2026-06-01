@@ -2,14 +2,18 @@ import { pool } from "../database/db";
 import { Collection } from "../interfaces/collectionsInterface";
 import { CollectionsRepository } from "../repository/collectionsRepository";
 import { CreateCollectionDTO, UpdateCollectionDTO } from "../DTO/collectionsDTO";
-import { DEFAULT_COLLECTION_STATUS } from '../enums/collectionStatusEnum';
+import { PaginationOptions } from "../utils/pagination";
 
 type CollectionCreateInput = CreateCollectionDTO;
 type CollectionUpdateInput = Partial<CollectionCreateInput>;
 
 export class CollectionDAO implements CollectionsRepository {
-  async findAll(): Promise<Collection[]> {
-    const result = await pool.query("SELECT * FROM collections ORDER BY id ASC");
+  async findAll(pagination?: PaginationOptions): Promise<Collection[]> {
+    const query = pagination
+      ? "SELECT * FROM collections ORDER BY id ASC LIMIT $1 OFFSET $2"
+      : "SELECT * FROM collections ORDER BY id ASC";
+    const params = pagination ? [pagination.limit, pagination.offset] : [];
+    const result = await pool.query(query, params);
     return result.rows as Collection[];
   }
 
@@ -27,7 +31,7 @@ export class CollectionDAO implements CollectionsRepository {
             VALUES (gen_random_uuid(), $1, $2, $3, $4, $5)
             RETURNING *
             `,
-      [user_id, name, description, is_public ?? true, status ?? DEFAULT_COLLECTION_STATUS]
+      [user_id, name, description, is_public ?? true, status ?? 'à voir']
     );
 
     return result.rows[0] as Collection;
@@ -73,8 +77,12 @@ export class CollectionDAO implements CollectionsRepository {
     return deleted ? current : null;
   }
 
-  async findByUserId(userId: string): Promise<Collection[]> {
-    const result = await pool.query("SELECT * FROM collections WHERE user_id = $1 ORDER BY id ASC", [userId]);
+  async findByUserId(userId: string, pagination?: PaginationOptions): Promise<Collection[]> {
+    const query = pagination
+      ? "SELECT * FROM collections WHERE user_id = $1 ORDER BY id ASC LIMIT $2 OFFSET $3"
+      : "SELECT * FROM collections WHERE user_id = $1 ORDER BY id ASC";
+    const params = pagination ? [userId, pagination.limit, pagination.offset] : [userId];
+    const result = await pool.query(query, params);
     return result.rows as Collection[];
   }
 }

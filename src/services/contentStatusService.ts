@@ -1,10 +1,14 @@
 import { ContentStatusRepository } from '../repository/contentStatusRepository';
 import { ContentStatusRecord } from '../interfaces/contentStatusInterface';
 import { UpsertContentStatusDTO } from '../DTO/contentStatusDTO';
-import { ContentStatus, isContentStatus } from '../enums/contentStatusEnum';
+import { CONTENT_STATUS_VALUES, ContentStatus, isContentStatus } from '../enums/contentStatusEnum';
 
 export class ContentStatusService {
   constructor(private readonly repository: ContentStatusRepository) {}
+
+  getAllStatuses(): ContentStatus[] {
+    return [...CONTENT_STATUS_VALUES];
+  }
 
   async getByKeys(contentId: string, userId: string): Promise<ContentStatusRecord | null> {
     return this.repository.findByKeys(contentId, userId);

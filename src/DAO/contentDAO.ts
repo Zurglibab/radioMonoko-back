@@ -2,10 +2,15 @@ import { pool } from "../database/db";
 import { Content } from "../interfaces/contentInterface";
 import { ContentRepository } from "../repository/contentRepository";
 import { CreateContentDTO, UpdateContentDTO } from "../DTO/contentDTO";
+import { PaginationOptions } from "../utils/pagination";
 
 export class ContentDAO implements ContentRepository {
-  async findAll(): Promise<Content[]> {
-    const result = await pool.query("SELECT * FROM content ORDER BY created_at DESC");
+  async findAll(pagination?: PaginationOptions): Promise<Content[]> {
+    const query = pagination
+      ? "SELECT * FROM content ORDER BY created_at DESC LIMIT $1 OFFSET $2"
+      : "SELECT * FROM content ORDER BY created_at DESC";
+    const params = pagination ? [pagination.limit, pagination.offset] : [];
+    const result = await pool.query(query, params);
     return result.rows as Content[];
   }
 

@@ -1,13 +1,16 @@
 import { Request, Response } from 'express';
 import { ReviewService } from '../services/reviewService';
 import { UpdateReviewDTO } from '../DTO/reviewDTO';
+import { applyPaginationHeaders, parsePagination } from '../utils/pagination';
 
 export class ReviewController {
   constructor(private readonly service: ReviewService) {}
 
-  getAll = async (_req: Request, res: Response) => {
+  getAll = async (req: Request, res: Response) => {
     try {
-      const reviews = await this.service.getAll();
+      const pagination = parsePagination(req.query);
+      const reviews = await this.service.getAll(pagination);
+      applyPaginationHeaders(res, pagination, reviews);
       res.status(200).json(reviews);
     } catch (error: any) {
       res.status(500).json({ message: error.message });
@@ -28,7 +31,9 @@ export class ReviewController {
 
   getByContentId = async (req: Request, res: Response) => {
     try {
-      const reviews = await this.service.getByContentId(req.params.contentId as string);
+      const pagination = parsePagination(req.query);
+      const reviews = await this.service.getByContentId(req.params.contentId as string, pagination);
+      applyPaginationHeaders(res, pagination, reviews);
       res.status(200).json(reviews);
     } catch (error: any) {
       res.status(500).json({ message: error.message });
@@ -38,7 +43,9 @@ export class ReviewController {
   getByParentReviewId = async (req: Request, res: Response) => {
     try {
       const parentReviewId = req.params.parentReviewId === 'null' ? null : req.params.parentReviewId as string;
-      const reviews = await this.service.getByParentReviewId(parentReviewId);
+      const pagination = parsePagination(req.query);
+      const reviews = await this.service.getByParentReviewId(parentReviewId, pagination);
+      applyPaginationHeaders(res, pagination, reviews);
       res.status(200).json(reviews);
     } catch (error: any) {
       res.status(500).json({ message: error.message });

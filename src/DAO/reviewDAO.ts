@@ -2,12 +2,15 @@ import { pool } from '../database/db';
 import { ReviewRepository } from '../repository/reviewRepository';
 import { Review } from '../interfaces/reviewInterface';
 import { CreateReviewDTO, UpdateReviewDTO } from '../DTO/reviewDTO';
+import { PaginationOptions } from '../utils/pagination';
 
 export class ReviewDAO implements ReviewRepository {
-  async findAll(): Promise<Review[]> {
-    const result = await pool.query(
-      'SELECT id, user_id, content_id, parent_review_id, comment, is_featured, created_at FROM reviews ORDER BY created_at DESC'
-    );
+  async findAll(pagination?: PaginationOptions): Promise<Review[]> {
+    const query = pagination
+      ? 'SELECT id, user_id, content_id, parent_review_id, comment, is_featured, created_at FROM reviews ORDER BY created_at DESC LIMIT $1 OFFSET $2'
+      : 'SELECT id, user_id, content_id, parent_review_id, comment, is_featured, created_at FROM reviews ORDER BY created_at DESC';
+    const params = pagination ? [pagination.limit, pagination.offset] : [];
+    const result = await pool.query(query, params);
     return result.rows;
   }
 
@@ -19,19 +22,21 @@ export class ReviewDAO implements ReviewRepository {
     return result.rows[0] || null;
   }
 
-  async findByContentId(contentId: string): Promise<Review[]> {
-    const result = await pool.query(
-      'SELECT id, user_id, content_id, parent_review_id, comment, is_featured, created_at FROM reviews WHERE content_id = $1 ORDER BY created_at DESC',
-      [contentId]
-    );
+  async findByContentId(contentId: string, pagination?: PaginationOptions): Promise<Review[]> {
+    const query = pagination
+      ? 'SELECT id, user_id, content_id, parent_review_id, comment, is_featured, created_at FROM reviews WHERE content_id = $1 ORDER BY created_at DESC LIMIT $2 OFFSET $3'
+      : 'SELECT id, user_id, content_id, parent_review_id, comment, is_featured, created_at FROM reviews WHERE content_id = $1 ORDER BY created_at DESC';
+    const params = pagination ? [contentId, pagination.limit, pagination.offset] : [contentId];
+    const result = await pool.query(query, params);
     return result.rows;
   }
 
-  async findByParentReviewId(parentReviewId: string | null): Promise<Review[]> {
-    const result = await pool.query(
-      'SELECT id, user_id, content_id, parent_review_id, comment, is_featured, created_at FROM reviews WHERE parent_review_id IS NOT DISTINCT FROM $1 ORDER BY created_at ASC',
-      [parentReviewId]
-    );
+  async findByParentReviewId(parentReviewId: string | null, pagination?: PaginationOptions): Promise<Review[]> {
+    const query = pagination
+      ? 'SELECT id, user_id, content_id, parent_review_id, comment, is_featured, created_at FROM reviews WHERE parent_review_id IS NOT DISTINCT FROM $1 ORDER BY created_at ASC LIMIT $2 OFFSET $3'
+      : 'SELECT id, user_id, content_id, parent_review_id, comment, is_featured, created_at FROM reviews WHERE parent_review_id IS NOT DISTINCT FROM $1 ORDER BY created_at ASC';
+    const params = pagination ? [parentReviewId, pagination.limit, pagination.offset] : [parentReviewId];
+    const result = await pool.query(query, params);
     return result.rows;
   }
 

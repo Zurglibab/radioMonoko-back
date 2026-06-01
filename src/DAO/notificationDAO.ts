@@ -2,10 +2,15 @@ import { pool } from '../database/db';
 import { NotificationRepository } from '../repository/notificationRepository';
 import { Notification } from '../interfaces/notificationInterface';
 import { CreateNotificationDTO, UpdateNotificationDTO } from '../DTO/notificationDTO';
+import { PaginationOptions } from '../utils/pagination';
 
 export class NotificationDAO implements NotificationRepository {
-  async findAll(): Promise<Notification[]> {
-    const result = await pool.query('SELECT * FROM notifications ORDER BY created_at DESC');
+  async findAll(pagination?: PaginationOptions): Promise<Notification[]> {
+    const query = pagination
+      ? 'SELECT * FROM notifications ORDER BY created_at DESC LIMIT $1 OFFSET $2'
+      : 'SELECT * FROM notifications ORDER BY created_at DESC';
+    const params = pagination ? [pagination.limit, pagination.offset] : [];
+    const result = await pool.query(query, params);
     return result.rows;
   }
 
@@ -14,13 +19,21 @@ export class NotificationDAO implements NotificationRepository {
     return result.rows[0] ?? null;
   }
 
-  async findByUserId(userId: string): Promise<Notification[]> {
-    const result = await pool.query('SELECT * FROM notifications WHERE user_id = $1 ORDER BY created_at DESC', [userId]);
+  async findByUserId(userId: string, pagination?: PaginationOptions): Promise<Notification[]> {
+    const query = pagination
+      ? 'SELECT * FROM notifications WHERE user_id = $1 ORDER BY created_at DESC LIMIT $2 OFFSET $3'
+      : 'SELECT * FROM notifications WHERE user_id = $1 ORDER BY created_at DESC';
+    const params = pagination ? [userId, pagination.limit, pagination.offset] : [userId];
+    const result = await pool.query(query, params);
     return result.rows;
   }
 
-  async findUnreadByUserId(userId: string): Promise<Notification[]> {
-    const result = await pool.query('SELECT * FROM notifications WHERE user_id = $1 AND is_read = false ORDER BY created_at DESC', [userId]);
+  async findUnreadByUserId(userId: string, pagination?: PaginationOptions): Promise<Notification[]> {
+    const query = pagination
+      ? 'SELECT * FROM notifications WHERE user_id = $1 AND is_read = false ORDER BY created_at DESC LIMIT $2 OFFSET $3'
+      : 'SELECT * FROM notifications WHERE user_id = $1 AND is_read = false ORDER BY created_at DESC';
+    const params = pagination ? [userId, pagination.limit, pagination.offset] : [userId];
+    const result = await pool.query(query, params);
     return result.rows;
   }
 

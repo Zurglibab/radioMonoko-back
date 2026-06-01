@@ -2,12 +2,13 @@ import { RatingContentRepository } from '../repository/ratingContentRepository';
 import { RatingContent, RatingContentSummary } from '../interfaces/ratingContentInterface';
 import { CreateRatingContentDTO, UpdateRatingContentDTO } from '../DTO/ratingContentDTO';
 import logger from '../config/logger';
+import { PaginationOptions } from '../utils/pagination';
 
 export class RatingContentService {
   constructor(private readonly repository: RatingContentRepository) {}
 
-  async getAll(): Promise<RatingContent[]> {
-    return this.repository.findAll();
+  async getAll(pagination?: PaginationOptions): Promise<RatingContent[]> {
+    return this.repository.findAll(pagination);
   }
 
   async getByKeys(contentId: string, userId: string): Promise<RatingContent | null> {

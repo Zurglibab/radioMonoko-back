@@ -50,6 +50,7 @@ export const getAuthToken = async (): Promise<string> => {
 export const cleanupDatabase = async () => {
   await ensureDbInitialized();
   await pool.query('DELETE FROM content_status');
+  await pool.query('DELETE FROM content_favorites');
   await pool.query('DELETE FROM like_review');
   await pool.query('DELETE FROM reviews');
   await pool.query('DELETE FROM collection_items');

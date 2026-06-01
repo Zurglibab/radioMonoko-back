@@ -4,6 +4,15 @@ import { ContentStatusService } from '../services/contentStatusService';
 export class ContentStatusController {
   constructor(private readonly service: ContentStatusService) {}
 
+  getAllStatuses = async (_req: Request, res: Response) => {
+    try {
+      const statuses = this.service.getAllStatuses();
+      res.status(200).json(statuses);
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
+    }
+  };
+
   getByKeys = async (req: Request, res: Response) => {
     try {
       const status = await this.service.getByKeys(req.params.contentId as string, req.params.userId as string);

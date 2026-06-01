@@ -1,7 +1,6 @@
 import { Pool, PoolClient } from 'pg';
 import { config } from 'dotenv';
 import logger from '../config/logger';
-import { DEFAULT_COLLECTION_STATUS } from '../enums/collectionStatusEnum';
 import { CONTENT_STATUS_VALUES } from '../enums/contentStatusEnum';
 
 config({ override: true });
@@ -22,6 +21,7 @@ export const initializeDatabase = async () => {
     await createUserRelationTable(client);
     await createContentTable(client);
     await createContentStatusTable(client);
+    await createContentFavoritesTable(client);
     await createCollectionsTable(client);
     await createCollectionItemsTable(client);
     await createRatingContentTable(client);
@@ -107,10 +107,21 @@ async function createContentStatusTable(client: PoolClient) {
   logger.info("Table 'content_status' created successfully.");
 }
 
-async function createCollectionsTable(client: PoolClient) {
-  const collectionStatusColumn = `status VARCHAR(50) NOT NULL DEFAULT '${DEFAULT_COLLECTION_STATUS}'`;
-  const collectionStatusCheck = `CHECK (status IN ('à voir', 'en cours', 'terminé', 'abandonné'))`;
+async function createContentFavoritesTable(client: PoolClient) {
+  await client.query(`
+        CREATE TABLE IF NOT EXISTS content_favorites (
+            content_id UUID NOT NULL,
+            user_id UUID NOT NULL,
+            created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY (content_id, user_id),
+            FOREIGN KEY (content_id) REFERENCES content(id) ON DELETE CASCADE,
+            FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+        )
+    `);
+  logger.info("Table 'content_favorites' created successfully.");
+}
 
+async function createCollectionsTable(client: PoolClient) {
   await client.query(`
         CREATE TABLE IF NOT EXISTS collections (
             id UUID PRIMARY KEY,
@@ -118,35 +129,21 @@ async function createCollectionsTable(client: PoolClient) {
             name VARCHAR(255) NOT NULL,
             description TEXT,
             is_public BOOLEAN DEFAULT true,
-            ${collectionStatusColumn} ${collectionStatusCheck},
+            status TEXT NOT NULL DEFAULT 'à voir',
             created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
             FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
         )
     `);
 
-  await ensureCollectionStatusColumn(client, collectionStatusColumn, collectionStatusCheck);
+  await ensureCollectionStatusColumn(client);
 
   logger.info("Table 'collections' created successfully.");
 }
 
-async function ensureCollectionStatusColumn(client: PoolClient, columnDefinition: string, checkConstraint: string) {
+async function ensureCollectionStatusColumn(client: PoolClient) {
   await client.query(`
         ALTER TABLE collections
-        ADD COLUMN IF NOT EXISTS ${columnDefinition}
-    `);
-
-  await client.query(`
-        DO $$
-        BEGIN
-            IF NOT EXISTS (
-                SELECT 1
-                FROM pg_constraint
-                WHERE conname = 'collections_status_check'
-            ) THEN
-                ALTER TABLE collections
-                ADD CONSTRAINT collections_status_check ${checkConstraint};
-            END IF;
-        END $$;
+        ADD COLUMN IF NOT EXISTS status TEXT NOT NULL DEFAULT 'à voir'
     `);
 }
 

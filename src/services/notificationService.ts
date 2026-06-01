@@ -2,24 +2,25 @@ import { randomUUID } from 'node:crypto';
 import { NotificationRepository } from '../repository/notificationRepository';
 import { Notification } from '../interfaces/notificationInterface';
 import { CreateNotificationDTO, UpdateNotificationDTO } from '../DTO/notificationDTO';
+import { PaginationOptions } from '../utils/pagination';
 
 export class NotificationService {
   constructor(private readonly repository: NotificationRepository) {}
 
-  getAll(): Promise<Notification[]> {
-    return this.repository.findAll();
+  getAll(pagination?: PaginationOptions): Promise<Notification[]> {
+    return this.repository.findAll(pagination);
   }
 
   getById(id: string): Promise<Notification | null> {
     return this.repository.findById(id);
   }
 
-  getByUserId(userId: string): Promise<Notification[]> {
-    return this.repository.findByUserId(userId);
+  getByUserId(userId: string, pagination?: PaginationOptions): Promise<Notification[]> {
+    return this.repository.findByUserId(userId, pagination);
   }
 
-  getUnreadByUserId(userId: string): Promise<Notification[]> {
-    return this.repository.findUnreadByUserId(userId);
+  getUnreadByUserId(userId: string, pagination?: PaginationOptions): Promise<Notification[]> {
+    return this.repository.findUnreadByUserId(userId, pagination);
   }
 
   async create(dto: Omit<CreateNotificationDTO, 'id'>): Promise<Notification> {

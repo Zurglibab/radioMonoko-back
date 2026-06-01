@@ -41,6 +41,18 @@ export const createContentStatusRouter = () => {
 
   /**
    * @openapi
+   * /content/status/list:
+   *   get:
+   *     tags: [Content]
+   *     summary: Recuperer la liste des statuts disponibles pour un contenu
+   *     responses:
+   *       200:
+   *         description: Liste des statuts disponibles
+   */
+  router.get('/list', controller.getAllStatuses);
+
+  /**
+   * @openapi
    * /content/status/{contentId}/user/{userId}:
    *   get:
    *     tags: [Content]

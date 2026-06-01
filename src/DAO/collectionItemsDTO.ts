@@ -2,20 +2,24 @@ import { pool } from '../database/db';
 import { CollectionItemsRepository } from '../repository/collectionItemsRepository';
 import { CollectionItem } from '../interfaces/collectionItemsInterface';
 import { CreateCollectionItemDTO, UpdateCollectionItemDTO } from '../DTO/collectionItemsDTO';
+import { PaginationOptions } from '../utils/pagination';
 
 export class CollectionItemsDTO implements CollectionItemsRepository {
-  async findAll(): Promise<CollectionItem[]> {
-    const result = await pool.query(
-      'SELECT collection_id, content_id, position, note, created_at FROM collection_items ORDER BY created_at DESC'
-    );
+  async findAll(pagination?: PaginationOptions): Promise<CollectionItem[]> {
+    const query = pagination
+      ? 'SELECT collection_id, content_id, position, note, created_at FROM collection_items ORDER BY created_at DESC LIMIT $1 OFFSET $2'
+      : 'SELECT collection_id, content_id, position, note, created_at FROM collection_items ORDER BY created_at DESC';
+    const params = pagination ? [pagination.limit, pagination.offset] : [];
+    const result = await pool.query(query, params);
     return result.rows;
   }
 
-  async findByCollectionId(collectionId: string): Promise<CollectionItem[]> {
-    const result = await pool.query(
-      'SELECT collection_id, content_id, position, note, created_at FROM collection_items WHERE collection_id = $1 ORDER BY position ASC, created_at ASC',
-      [collectionId]
-    );
+  async findByCollectionId(collectionId: string, pagination?: PaginationOptions): Promise<CollectionItem[]> {
+    const query = pagination
+      ? 'SELECT collection_id, content_id, position, note, created_at FROM collection_items WHERE collection_id = $1 ORDER BY position ASC, created_at ASC LIMIT $2 OFFSET $3'
+      : 'SELECT collection_id, content_id, position, note, created_at FROM collection_items WHERE collection_id = $1 ORDER BY position ASC, created_at ASC';
+    const params = pagination ? [collectionId, pagination.limit, pagination.offset] : [collectionId];
+    const result = await pool.query(query, params);
     return result.rows;
   }
 

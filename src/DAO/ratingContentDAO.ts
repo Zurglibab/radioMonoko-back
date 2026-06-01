@@ -2,12 +2,15 @@ import { pool } from '../database/db';
 import { RatingContentRepository } from '../repository/ratingContentRepository';
 import { RatingContent, RatingContentSummary } from '../interfaces/ratingContentInterface';
 import { CreateRatingContentDTO, UpdateRatingContentDTO } from '../DTO/ratingContentDTO';
+import { PaginationOptions } from '../utils/pagination';
 
 export class RatingContentDAO implements RatingContentRepository {
-  async findAll(): Promise<RatingContent[]> {
-    const result = await pool.query(
-      'SELECT content_id, user_id, average_rating FROM rating_content ORDER BY content_id, user_id'
-    );
+  async findAll(pagination?: PaginationOptions): Promise<RatingContent[]> {
+    const query = pagination
+      ? 'SELECT content_id, user_id, average_rating FROM rating_content ORDER BY content_id, user_id LIMIT $1 OFFSET $2'
+      : 'SELECT content_id, user_id, average_rating FROM rating_content ORDER BY content_id, user_id';
+    const params = pagination ? [pagination.limit, pagination.offset] : [];
+    const result = await pool.query(query, params);
     return result.rows;
   }
 

@@ -1,13 +1,16 @@
 import { Request, Response } from 'express';
 import { CollectionsService } from '../services/collectionsService';
 import { UpdateCollectionDTO } from '../DTO/collectionsDTO';
+import { applyPaginationHeaders, parsePagination } from '../utils/pagination';
 
 export class CollectionsController {
   constructor(private readonly service: CollectionsService) {}
 
-  getAll = async (_req: Request, res: Response) => {
+  getAll = async (req: Request, res: Response) => {
     try {
-      const data = await this.service.getAll();
+      const pagination = parsePagination(req.query);
+      const data = await this.service.getAll(pagination);
+      applyPaginationHeaders(res, pagination, data);
       res.status(200).json(data);
     } catch (error: any) {
       res.status(500).json({ message: error.message });
@@ -61,7 +64,9 @@ export class CollectionsController {
 
   findByUserId = async (req: Request, res: Response) => {
     try {
-      const data = await this.service.findByUserId(req.params.userId as string);
+      const pagination = parsePagination(req.query);
+      const data = await this.service.findByUserId(req.params.userId as string, pagination);
+      applyPaginationHeaders(res, pagination, data);
       res.status(200).json(data);
     } catch (error: any) {
       res.status(500).json({ message: error.message });

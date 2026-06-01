@@ -1,13 +1,16 @@
 import { Request, Response } from 'express';
 import { RatingContentService } from '../services/ratingContentService';
 import { UpdateRatingContentDTO } from '../DTO/ratingContentDTO';
+import { applyPaginationHeaders, parsePagination } from '../utils/pagination';
 
 export class RatingContentController {
   constructor(private readonly service: RatingContentService) {}
 
-  getAll = async (_req: Request, res: Response) => {
+  getAll = async (req: Request, res: Response) => {
     try {
-      const ratings = await this.service.getAll();
+      const pagination = parsePagination(req.query);
+      const ratings = await this.service.getAll(pagination);
+      applyPaginationHeaders(res, pagination, ratings);
       res.status(200).json(ratings);
     } catch (error: any) {
       res.status(500).json({ message: error.message });

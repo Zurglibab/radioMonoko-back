@@ -104,5 +104,60 @@ describe('Notification Routes with Mocks', () => {
       expect(mockMarkAsRead).toHaveBeenCalledWith('notification-1');
     });
   });
+
+  describe('GET /notifications (with pagination)', () => {
+    it('should return all notifications with pagination headers disabled by default if no query params', async () => {
+      mockFindAll.mockResolvedValue([
+        { id: 'notification-1', user_id: 'user-1', type: 'like', message: 'Test 1', is_read: false }
+      ]);
+
+      const res = await request(app).get('/notifications');
+
+      expect(res.status).toBe(200);
+      expect(res.headers['x-pagination-enabled']).toBe('false');
+      expect(res.headers['x-pagination-count']).toBe('1');
+      expect(mockFindAll).toHaveBeenCalledWith(undefined);
+    });
+
+    it('should parse page and limit and pass them to the service', async () => {
+      mockFindAll.mockResolvedValue([
+        { id: 'notification-1', user_id: 'user-1', type: 'like', message: 'Test 1', is_read: false }
+      ]);
+
+      const res = await request(app).get('/notifications?page=2&limit=5');
+
+      expect(res.status).toBe(200);
+      expect(res.headers['x-pagination-enabled']).toBe('true');
+      expect(res.headers['x-pagination-page']).toBe('2');
+      expect(res.headers['x-pagination-limit']).toBe('5');
+      expect(res.headers['x-pagination-offset']).toBe('5');
+      expect(res.headers['x-pagination-count']).toBe('1');
+      expect(mockFindAll).toHaveBeenCalledWith({
+        page: 2,
+        limit: 5,
+        offset: 5
+      });
+    });
+  });
+
+  describe('GET /notifications/user/:userId (with pagination)', () => {
+    it('should return user notifications and pass parsed pagination options', async () => {
+      mockFindByUserId.mockResolvedValue([]);
+
+      const res = await request(app).get('/notifications/user/user-1?page=3&limit=10');
+
+      expect(res.status).toBe(200);
+      expect(res.headers['x-pagination-enabled']).toBe('true');
+      expect(res.headers['x-pagination-page']).toBe('3');
+      expect(res.headers['x-pagination-limit']).toBe('10');
+      expect(res.headers['x-pagination-offset']).toBe('20');
+      expect(res.headers['x-pagination-count']).toBe('0');
+      expect(mockFindByUserId).toHaveBeenCalledWith('user-1', {
+        page: 3,
+        limit: 10,
+        offset: 20
+      });
+    });
+  });
 });
 

@@ -3,6 +3,7 @@ import { ContentDAO } from '../DAO/contentDAO';
 import { ContentService } from '../services/contentService';
 import { ContentController } from '../controllers/content.controller';
 import { createContentStatusRouter } from './contentStatusRoutes';
+import { createContentFavoriteRouter } from './contentFavoriteRoutes';
 
 export const createContentRouter = () => {
   const contentRouter = Router();
@@ -85,6 +86,7 @@ export const createContentRouter = () => {
   contentRouter.get('/', contentController.getAll);
 
   contentRouter.use('/status', createContentStatusRouter());
+  contentRouter.use('/', createContentFavoriteRouter());
 
   /**
    * @openapi
@@ -194,5 +196,3 @@ export const createContentRouter = () => {
 
   return contentRouter;
 };
-
-export default createContentRouter;

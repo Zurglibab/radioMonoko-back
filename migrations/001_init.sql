@@ -47,13 +47,22 @@ CREATE TABLE IF NOT EXISTS content_status (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
+CREATE TABLE IF NOT EXISTS content_favorites (
+    content_id UUID NOT NULL,
+    user_id UUID NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (content_id, user_id),
+    FOREIGN KEY (content_id) REFERENCES content(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
 CREATE TABLE IF NOT EXISTS collections (
     id UUID PRIMARY KEY,
     user_id UUID NOT NULL,
     name VARCHAR(255) NOT NULL,
     description TEXT,
     is_public BOOLEAN DEFAULT true,
-    status VARCHAR(50) NOT NULL DEFAULT 'à voir' CHECK (status IN ('à voir', 'en cours', 'terminé', 'abandonné')),
+    status TEXT NOT NULL DEFAULT 'à voir',
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );

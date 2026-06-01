@@ -1,13 +1,16 @@
 import { Request, Response } from 'express';
 import { NotificationService } from '../services/notificationService';
 import { UpdateNotificationDTO } from '../DTO/notificationDTO';
+import { applyPaginationHeaders, parsePagination } from '../utils/pagination';
 
 export class NotificationController {
   constructor(private readonly service: NotificationService) {}
 
-  getAll = async (_req: Request, res: Response) => {
+  getAll = async (req: Request, res: Response) => {
     try {
-      const notifications = await this.service.getAll();
+      const pagination = parsePagination(req.query);
+      const notifications = await this.service.getAll(pagination);
+      applyPaginationHeaders(res, pagination, notifications);
       res.status(200).json(notifications);
     } catch (error: any) {
       res.status(500).json({ message: error.message });
@@ -28,7 +31,9 @@ export class NotificationController {
 
   getByUserId = async (req: Request, res: Response) => {
     try {
-      const notifications = await this.service.getByUserId(req.params.userId as string);
+      const pagination = parsePagination(req.query);
+      const notifications = await this.service.getByUserId(req.params.userId as string, pagination);
+      applyPaginationHeaders(res, pagination, notifications);
       res.status(200).json(notifications);
     } catch (error: any) {
       res.status(500).json({ message: error.message });
@@ -37,7 +42,9 @@ export class NotificationController {
 
   getUnreadByUserId = async (req: Request, res: Response) => {
     try {
-      const notifications = await this.service.getUnreadByUserId(req.params.userId as string);
+      const pagination = parsePagination(req.query);
+      const notifications = await this.service.getUnreadByUserId(req.params.userId as string, pagination);
+      applyPaginationHeaders(res, pagination, notifications);
       res.status(200).json(notifications);
     } catch (error: any) {
       res.status(500).json({ message: error.message });

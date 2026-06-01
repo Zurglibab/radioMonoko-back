@@ -3,12 +3,13 @@ import { ContentRepository } from '../repository/contentRepository';
 import { Content } from '../interfaces/contentInterface';
 import { CreateContentDTO, UpdateContentDTO } from '../DTO/contentDTO';
 import logger from '../config/logger';
+import { PaginationOptions } from '../utils/pagination';
 
 export class ContentService {
   constructor(private readonly contentRepository: ContentRepository) {}
 
-  async getAll(): Promise<Content[]> {
-    return this.contentRepository.findAll();
+  async getAll(pagination?: PaginationOptions): Promise<Content[]> {
+    return this.contentRepository.findAll(pagination);
   }
 
   async getById(id: string): Promise<Content | null> {

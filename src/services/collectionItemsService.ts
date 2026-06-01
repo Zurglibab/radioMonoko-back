@@ -1,16 +1,17 @@
 import { CollectionItemsRepository } from '../repository/collectionItemsRepository';
 import { CollectionItem } from '../interfaces/collectionItemsInterface';
 import { CreateCollectionItemDTO, UpdateCollectionItemDTO } from '../DTO/collectionItemsDTO';
+import { PaginationOptions } from '../utils/pagination';
 
 export class CollectionItemsService {
   constructor(private readonly repository: CollectionItemsRepository) {}
 
-  getAll(): Promise<CollectionItem[]> {
-    return this.repository.findAll();
+  getAll(pagination?: PaginationOptions): Promise<CollectionItem[]> {
+    return this.repository.findAll(pagination);
   }
 
-  getByCollectionId(collectionId: string): Promise<CollectionItem[]> {
-    return this.repository.findByCollectionId(collectionId);
+  getByCollectionId(collectionId: string, pagination?: PaginationOptions): Promise<CollectionItem[]> {
+    return this.repository.findByCollectionId(collectionId, pagination);
   }
 
   getByKeys(collectionId: string, contentId: string): Promise<CollectionItem | null> {

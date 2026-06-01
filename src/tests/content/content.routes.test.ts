@@ -17,6 +17,10 @@ const mockUpdateById = jest.fn();
 const mockDeleteById = jest.fn();
 const mockFindContentStatusByKeys = jest.fn();
 const mockUpsertContentStatus = jest.fn();
+const mockFindContentFavoriteByKeys = jest.fn();
+const mockFindContentFavoritesByUserId = jest.fn();
+const mockCreateContentFavorite = jest.fn();
+const mockDeleteContentFavoriteByKeys = jest.fn();
 
 jest.mock('../../DAO/contentDAO', () => ({
   ContentDAO: jest.fn().mockImplementation(() => ({
@@ -32,6 +36,15 @@ jest.mock('../../DAO/contentStatusDAO', () => ({
   ContentStatusDAO: jest.fn().mockImplementation(() => ({
     findByKeys: mockFindContentStatusByKeys,
     upsert: mockUpsertContentStatus
+  }))
+}));
+
+jest.mock('../../DAO/contentFavoriteDAO', () => ({
+  ContentFavoriteDAO: jest.fn().mockImplementation(() => ({
+    findByKeys: mockFindContentFavoriteByKeys,
+    findByUserId: mockFindContentFavoritesByUserId,
+    create: mockCreateContentFavorite,
+    deleteByKeys: mockDeleteContentFavoriteByKeys
   }))
 }));
 
@@ -213,6 +226,15 @@ describe('Content Routes with Mocks', () => {
     });
   });
 
+  describe('GET /content/status/list', () => {
+    it('should return the list of content statuses with status 200', async () => {
+      const res = await request(app).get('/content/status/list');
+
+      expect(res.status).toBe(200);
+      expect(res.body).toEqual(['à voir', 'commencer', 'fini']);
+    });
+  });
+
   describe('PUT /content/status', () => {
     it('should upsert content status and return 200', async () => {
       mockUpsertContentStatus.mockResolvedValue({
@@ -242,6 +264,81 @@ describe('Content Routes with Mocks', () => {
 
       expect(res.status).toBe(400);
       expect(res.body).toHaveProperty('message');
+    });
+  });
+
+  describe('GET /content/favorites/user/:userId', () => {
+    it('should return all favorites for a user with status 200', async () => {
+      mockFindContentFavoritesByUserId.mockResolvedValue([
+        {
+          content_id: 'content-1',
+          user_id: 'user-1',
+          created_at: new Date().toISOString()
+        }
+      ]);
+
+      const res = await request(app).get('/content/favorites/user/user-1');
+
+      expect(res.status).toBe(200);
+      expect(Array.isArray(res.body)).toBe(true);
+      expect(res.body[0]).toHaveProperty('content_id', 'content-1');
+    });
+  });
+
+  describe('GET /content/favorites/:contentId/user/:userId', () => {
+    it('should return one favorite with status 200', async () => {
+      mockFindContentFavoriteByKeys.mockResolvedValue({
+        content_id: 'content-1',
+        user_id: 'user-1',
+        created_at: new Date().toISOString()
+      });
+
+      const res = await request(app).get('/content/favorites/content-1/user/user-1');
+
+      expect(res.status).toBe(200);
+      expect(res.body).toHaveProperty('content_id', 'content-1');
+    });
+
+    it('should return 404 when favorite does not exist', async () => {
+      mockFindContentFavoriteByKeys.mockResolvedValue(null);
+
+      const res = await request(app).get('/content/favorites/missing-content/user/user-1');
+
+      expect(res.status).toBe(404);
+      expect(res.body).toHaveProperty('message', 'Content favorite not found');
+    });
+  });
+
+  describe('POST /content/favorites', () => {
+    it('should create a favorite and return 201', async () => {
+      mockCreateContentFavorite.mockResolvedValue({
+        content_id: 'content-1',
+        user_id: 'user-1',
+        created_at: new Date().toISOString()
+      });
+
+      const res = await request(app).post('/content/favorites').send({
+        content_id: 'content-1',
+        user_id: 'user-1'
+      });
+
+      expect(res.status).toBe(201);
+      expect(res.body).toHaveProperty('content_id', 'content-1');
+    });
+  });
+
+  describe('DELETE /content/favorites/:contentId/user/:userId', () => {
+    it('should delete a favorite and return 200', async () => {
+      mockDeleteContentFavoriteByKeys.mockResolvedValue({
+        content_id: 'content-1',
+        user_id: 'user-1',
+        created_at: new Date().toISOString()
+      });
+
+      const res = await request(app).delete('/content/favorites/content-1/user/user-1');
+
+      expect(res.status).toBe(200);
+      expect(res.body).toHaveProperty('content_id', 'content-1');
     });
   });
 });

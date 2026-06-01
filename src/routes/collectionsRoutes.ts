@@ -39,7 +39,7 @@ export const createCollectionsRouter = () => {
    *           type: boolean
    *         status:
    *           type: string
-   *           enum: ['à voir', 'en cours', 'terminé', 'abandonné']
+   *           description: Statut libre saisi comme texte
    *         created_at:
    *           type: string
    *           format: date-time
@@ -60,7 +60,7 @@ export const createCollectionsRouter = () => {
    *           type: boolean
    *         status:
    *           type: string
-   *           enum: ['à voir', 'en cours', 'terminé', 'abandonné']
+   *           description: Statut libre saisi comme texte
    *     UpdateCollectionDTO:
    *       type: object
    *       properties:
@@ -72,7 +72,7 @@ export const createCollectionsRouter = () => {
    *           type: boolean
    *         status:
    *           type: string
-   *           enum: ['à voir', 'en cours', 'terminé', 'abandonné']
+   *           description: Statut libre saisi comme texte
    */
 
   /**

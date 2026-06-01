@@ -2,24 +2,25 @@ import { randomUUID } from 'node:crypto';
 import { ReviewRepository } from '../repository/reviewRepository';
 import { Review } from '../interfaces/reviewInterface';
 import { CreateReviewDTO, UpdateReviewDTO } from '../DTO/reviewDTO';
+import { PaginationOptions } from '../utils/pagination';
 
 export class ReviewService {
   constructor(private readonly repository: ReviewRepository) {}
 
-  getAll(): Promise<Review[]> {
-    return this.repository.findAll();
+  getAll(pagination?: PaginationOptions): Promise<Review[]> {
+    return this.repository.findAll(pagination);
   }
 
   getById(id: string): Promise<Review | null> {
     return this.repository.findById(id);
   }
 
-  getByContentId(contentId: string): Promise<Review[]> {
-    return this.repository.findByContentId(contentId);
+  getByContentId(contentId: string, pagination?: PaginationOptions): Promise<Review[]> {
+    return this.repository.findByContentId(contentId, pagination);
   }
 
-  getByParentReviewId(parentReviewId: string | null): Promise<Review[]> {
-    return this.repository.findByParentReviewId(parentReviewId);
+  getByParentReviewId(parentReviewId: string | null, pagination?: PaginationOptions): Promise<Review[]> {
+    return this.repository.findByParentReviewId(parentReviewId, pagination);
   }
 
   async create(dto: Omit<CreateReviewDTO, 'id'>): Promise<Review> {
