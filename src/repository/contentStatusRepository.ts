@@ -1,4 +1,4 @@
-simport { ContentStatusRecord } from '../interfaces/contentStatusInterface';
+import { ContentStatusRecord } from '../interfaces/contentStatusInterface';
 import { UpsertContentStatusDTO } from '../DTO/contentStatusDTO';
 
 export interface ContentStatusRepository {
