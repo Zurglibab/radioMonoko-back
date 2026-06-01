@@ -233,3 +233,5 @@
 {"level":"error","message":"[RedisConnexion] Client Error AggregateError","timestamp":"2026-05-30 17:08:03"}
 {"level":"error","message":"[RedisConnexion] Client Error AggregateError","timestamp":"2026-05-30 17:08:04"}
 {"level":"error","message":"[RedisConnexion] Client Error AggregateError","timestamp":"2026-05-30 17:08:05"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-06-01 09:06:54"}
+{"level":"error","timestamp":"2026-06-01 09:06:54"}

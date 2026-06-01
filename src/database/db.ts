@@ -17,22 +17,17 @@ export const initializeDatabase = async () => {
   const client = await pool.connect();
   try {
     await client.query(`CREATE EXTENSION IF NOT EXISTS pgcrypto;`);
-    const isTestEnvironment = process.env.NODE_ENV === 'test' || !!process.env.JEST_WORKER_ID;
-    if (isTestEnvironment) {
-      await createUserTable(client);
-      await createUserRelationTable(client);
-      await createContentTable(client);
-      await createCollectionsTable(client);
-      await createCollectionItemsTable(client);
-      await createRatingContentTable(client);
-      await createReviewTable(client);
-      await createLikeReviewTable(client);
-      await createNotificationTable(client);
-      await createReportUsersTable(client);
-      logger.info('Database initialized successfully (test mode).');
-    } else {
-      logger.info('Skipping inline DDL on startup. Run migrations found in /migrations (recommended tool: node-pg-migrate or similar).');
-    }
+    await createUserTable(client);
+    await createUserRelationTable(client);
+    await createContentTable(client);
+    await createCollectionsTable(client);
+    await createCollectionItemsTable(client);
+    await createRatingContentTable(client);
+    await createReviewTable(client);
+    await createLikeReviewTable(client);
+    await createNotificationTable(client);
+    await createReportUsersTable(client);
+    logger.info('Database initialized successfully.');
   } catch (error) {
     logger.warn('Error initializing database:', error);
     throw error;
