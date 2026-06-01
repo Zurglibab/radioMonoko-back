@@ -1,6 +1,7 @@
 import { reportUsersDAO } from '../DAO/reportUsersDAO';
 import { CreateReportUserDTO, ReportUser } from '../DTO/reportUserDTO';
 import { UserDAO } from '../DAO/userDAO';
+import { PaginationOptions } from '../utils/pagination';
 
 export class ReportUserService {
   private userDAO = new UserDAO();
@@ -20,6 +21,14 @@ export class ReportUserService {
     };
 
     return await reportUsersDAO.create(toCreate);
+  }
+
+  async getAllReports(pagination?: PaginationOptions): Promise<ReportUser[]> {
+    return await reportUsersDAO.findAll(pagination);
+  }
+
+  async getReportsByReportedUserId(reportedUserId: string, pagination?: PaginationOptions): Promise<ReportUser[]> {
+    return await reportUsersDAO.findByReportedUserId(reportedUserId, pagination);
   }
 }
 

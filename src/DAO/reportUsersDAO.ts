@@ -1,5 +1,6 @@
 import { pool } from '../database/db';
 import { CreateReportUserDTO, ReportUser } from '../DTO/reportUserDTO';
+import { PaginationOptions } from '../utils/pagination';
 
 export class ReportUsersDAO {
   async create(dto: CreateReportUserDTO): Promise<ReportUser> {
@@ -17,8 +18,21 @@ export class ReportUsersDAO {
     return Number(result.rows[0].c || 0);
   }
 
-  async findByReportedUserId(reportedUserId: string) {
-    const result = await pool.query('SELECT * FROM report_users WHERE reported_user_id = $1 ORDER BY created_at DESC', [reportedUserId]);
+  async findByReportedUserId(reportedUserId: string, pagination?: PaginationOptions) {
+    const query = pagination
+      ? 'SELECT * FROM report_users WHERE reported_user_id = $1 ORDER BY created_at DESC LIMIT $2 OFFSET $3'
+      : 'SELECT * FROM report_users WHERE reported_user_id = $1 ORDER BY created_at DESC';
+    const params = pagination ? [reportedUserId, pagination.limit, pagination.offset] : [reportedUserId];
+    const result = await pool.query(query, params);
+    return result.rows;
+  }
+
+  async findAll(pagination?: PaginationOptions): Promise<ReportUser[]> {
+    const query = pagination
+      ? 'SELECT * FROM report_users ORDER BY created_at DESC LIMIT $1 OFFSET $2'
+      : 'SELECT * FROM report_users ORDER BY created_at DESC';
+    const params = pagination ? [pagination.limit, pagination.offset] : [];
+    const result = await pool.query(query, params);
     return result.rows;
   }
 }

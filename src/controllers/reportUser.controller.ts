@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { reportUserService } from '../services/reportUserService';
+import { applyPaginationHeaders, parsePagination } from '../utils/pagination';
 
 export class ReportUserController {
   async createReport(req: Request, res: Response) {
@@ -23,6 +24,34 @@ export class ReportUserController {
       if (err.code === '23503') {
         return res.status(400).json({ success: false, error: 'Contrainte de clé étrangère invalide.' });
       }
+      return res.status(500).json({ success: false, error: 'Internal server error' });
+    }
+  }
+
+  async getAllReports(req: Request, res: Response) {
+    try {
+      const pagination = parsePagination(req.query);
+      const reports = await reportUserService.getAllReports(pagination);
+      applyPaginationHeaders(res, pagination, reports);
+      return res.status(200).json({ success: true, data: reports });
+    } catch (err: any) {
+      console.error('[ReportUserController] getAllReports failed:', err);
+      return res.status(500).json({ success: false, error: 'Internal server error' });
+    }
+  }
+
+  async getReportsByReportedUserId(req: Request, res: Response) {
+    try {
+      const reportedUserId = req.params.reportedUserId as string;
+      if (!reportedUserId) {
+        return res.status(400).json({ message: 'reportedUserId parameter is required' });
+      }
+      const pagination = parsePagination(req.query);
+      const reports = await reportUserService.getReportsByReportedUserId(reportedUserId, pagination);
+      applyPaginationHeaders(res, pagination, reports);
+      return res.status(200).json({ success: true, data: reports });
+    } catch (err: any) {
+      console.error('[ReportUserController] getReportsByReportedUserId failed:', err);
       return res.status(500).json({ success: false, error: 'Internal server error' });
     }
   }
