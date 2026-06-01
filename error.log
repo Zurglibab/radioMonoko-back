@@ -235,3 +235,9 @@
 {"level":"error","message":"[RedisConnexion] Client Error AggregateError","timestamp":"2026-05-30 17:08:05"}
 {"level":"error","message":"User with this email already exists","timestamp":"2026-06-01 09:06:54"}
 {"level":"error","timestamp":"2026-06-01 09:06:54"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-06-01 16:20:58"}
+{"level":"error","timestamp":"2026-06-01 16:20:58"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-06-01 16:31:10"}
+{"level":"error","timestamp":"2026-06-01 16:31:10"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-06-01 16:33:44"}
+{"level":"error","timestamp":"2026-06-01 16:33:44"}

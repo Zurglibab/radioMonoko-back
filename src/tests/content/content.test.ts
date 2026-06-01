@@ -2,11 +2,21 @@ import request from 'supertest';
 import { Express } from 'express';
 import { createApp } from '../../app';
 
+jest.mock('../../middlewares/auth.middleware', () => ({
+  authMiddleware: jest.fn((req, res, next) => {
+    req.user = { id: 'user-1', email: 'test@test.com' };
+    req.userId = 'user-1';
+    next();
+  })
+}));
+
 const mockFindAll = jest.fn();
 const mockFindById = jest.fn();
 const mockCreate = jest.fn();
 const mockUpdateById = jest.fn();
 const mockDeleteById = jest.fn();
+const mockFindContentStatusByKeys = jest.fn();
+const mockUpsertContentStatus = jest.fn();
 
 jest.mock('../../DAO/contentDAO', () => ({
   ContentDAO: jest.fn().mockImplementation(() => ({
@@ -15,6 +25,13 @@ jest.mock('../../DAO/contentDAO', () => ({
     create: mockCreate,
     updateById: mockUpdateById,
     deleteById: mockDeleteById
+  }))
+}));
+
+jest.mock('../../DAO/contentStatusDAO', () => ({
+  ContentStatusDAO: jest.fn().mockImplementation(() => ({
+    findByKeys: mockFindContentStatusByKeys,
+    upsert: mockUpsertContentStatus
   }))
 }));
 
@@ -165,6 +182,65 @@ describe('Content Routes with Mocks', () => {
 
       expect(res.status).toBe(404);
       expect(res.body).toHaveProperty('message', 'Content not found');
+    });
+  });
+
+  describe('GET /content/status/:contentId/user/:userId', () => {
+    it('should return one content status with status 200', async () => {
+      mockFindContentStatusByKeys.mockResolvedValue({
+        content_id: 'content-1',
+        user_id: 'user-1',
+        status: 'commencer',
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
+      });
+
+      const res = await request(app).get('/content/status/content-1/user/user-1');
+
+      expect(res.status).toBe(200);
+      expect(res.body).toHaveProperty('content_id', 'content-1');
+      expect(res.body).toHaveProperty('status', 'commencer');
+    });
+
+    it('should return 404 when content status does not exist', async () => {
+      mockFindContentStatusByKeys.mockResolvedValue(null);
+
+      const res = await request(app).get('/content/status/missing-content/user/user-1');
+
+      expect(res.status).toBe(404);
+      expect(res.body).toHaveProperty('message', 'Content status not found');
+    });
+  });
+
+  describe('PUT /content/status', () => {
+    it('should upsert content status and return 200', async () => {
+      mockUpsertContentStatus.mockResolvedValue({
+        content_id: 'content-1',
+        user_id: 'user-1',
+        status: 'fini',
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
+      });
+
+      const res = await request(app).put('/content/status').send({
+        content_id: 'content-1',
+        user_id: 'user-1',
+        status: 'fini'
+      });
+
+      expect(res.status).toBe(200);
+      expect(res.body).toHaveProperty('status', 'fini');
+    });
+
+    it('should return 400 when payload is invalid', async () => {
+      const res = await request(app).put('/content/status').send({
+        content_id: 'content-1',
+        user_id: 'user-1',
+        status: 'invalid'
+      });
+
+      expect(res.status).toBe(400);
+      expect(res.body).toHaveProperty('message');
     });
   });
 });

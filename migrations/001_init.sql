@@ -36,6 +36,17 @@ CREATE TABLE IF NOT EXISTS content (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE IF NOT EXISTS content_status (
+    content_id UUID NOT NULL,
+    user_id UUID NOT NULL,
+    status VARCHAR(50) NOT NULL DEFAULT 'à voir' CHECK (status IN ('à voir', 'commencer', 'fini')),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (content_id, user_id),
+    FOREIGN KEY (content_id) REFERENCES content(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
 CREATE TABLE IF NOT EXISTS collections (
     id UUID PRIMARY KEY,
     user_id UUID NOT NULL,

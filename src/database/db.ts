@@ -2,6 +2,7 @@ import { Pool, PoolClient } from 'pg';
 import { config } from 'dotenv';
 import logger from '../config/logger';
 import { DEFAULT_COLLECTION_STATUS } from '../enums/collectionStatusEnum';
+import { CONTENT_STATUS_VALUES } from '../enums/contentStatusEnum';
 
 config({ override: true });
 
@@ -20,6 +21,7 @@ export const initializeDatabase = async () => {
     await createUserTable(client);
     await createUserRelationTable(client);
     await createContentTable(client);
+    await createContentStatusTable(client);
     await createCollectionsTable(client);
     await createCollectionItemsTable(client);
     await createRatingContentTable(client);
@@ -84,6 +86,25 @@ async function createContentTable(client: PoolClient) {
         )
     `);
   logger.info("Table 'content' created successfully.");
+}
+
+async function createContentStatusTable(client: PoolClient) {
+  const statusCheck = `CHECK (status IN ('${CONTENT_STATUS_VALUES.join("', '")}'))`;
+
+  await client.query(`
+        CREATE TABLE IF NOT EXISTS content_status (
+            content_id UUID NOT NULL,
+            user_id UUID NOT NULL,
+            status VARCHAR(50) NOT NULL DEFAULT 'à voir',
+            created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+            updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY (content_id, user_id),
+            FOREIGN KEY (content_id) REFERENCES content(id) ON DELETE CASCADE,
+            FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+            ${statusCheck}
+        )
+    `);
+  logger.info("Table 'content_status' created successfully.");
 }
 
 async function createCollectionsTable(client: PoolClient) {

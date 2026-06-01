@@ -18,6 +18,7 @@ describe('RatingContent Routes with Mocks', () => {
 
   let mockFindAll: jest.Mock;
   let mockFindByKeys: jest.Mock;
+  let mockFindSummaryByContentId: jest.Mock;
   let mockCreate: jest.Mock;
   let mockUpdateByKeys: jest.Mock;
   let mockDeleteByKeys: jest.Mock;
@@ -27,12 +28,14 @@ describe('RatingContent Routes with Mocks', () => {
 
     mockFindAll = jest.fn();
     mockFindByKeys = jest.fn();
+    mockFindSummaryByContentId = jest.fn();
     mockCreate = jest.fn();
     mockUpdateByKeys = jest.fn();
     mockDeleteByKeys = jest.fn();
 
     RatingContentDAO.prototype.findAll = mockFindAll;
     RatingContentDAO.prototype.findByKeys = mockFindByKeys;
+    RatingContentDAO.prototype.findSummaryByContentId = mockFindSummaryByContentId;
     RatingContentDAO.prototype.create = mockCreate;
     RatingContentDAO.prototype.updateByKeys = mockUpdateByKeys;
     RatingContentDAO.prototype.deleteByKeys = mockDeleteByKeys;
@@ -76,6 +79,30 @@ describe('RatingContent Routes with Mocks', () => {
 
       expect(res.status).toBe(404);
       expect(res.body).toHaveProperty('message', 'Rating not found');
+    });
+  });
+
+  describe('GET /ratingContent/content/:contentId/summary', () => {
+    it('should return the average rating summary with status 200', async () => {
+      mockFindSummaryByContentId.mockResolvedValue({
+        content_id: 'content-1',
+        average_rating: 4.25
+      });
+
+      const res = await request(app).get('/ratingContent/content/content-1/summary');
+
+      expect(res.status).toBe(200);
+      expect(res.body).toHaveProperty('content_id', 'content-1');
+      expect(res.body).toHaveProperty('average_rating', 4.25);
+    });
+
+    it('should return 404 when no rating exists for the content', async () => {
+      mockFindSummaryByContentId.mockResolvedValue(null);
+
+      const res = await request(app).get('/ratingContent/content/content-404/summary');
+
+      expect(res.status).toBe(404);
+      expect(res.body).toHaveProperty('message', 'No ratings found for this content');
     });
   });
 

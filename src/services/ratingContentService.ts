@@ -1,5 +1,5 @@
 import { RatingContentRepository } from '../repository/ratingContentRepository';
-import { RatingContent } from '../interfaces/ratingContentInterface';
+import { RatingContent, RatingContentSummary } from '../interfaces/ratingContentInterface';
 import { CreateRatingContentDTO, UpdateRatingContentDTO } from '../DTO/ratingContentDTO';
 import logger from '../config/logger';
 
@@ -12,6 +12,10 @@ export class RatingContentService {
 
   async getByKeys(contentId: string, userId: string): Promise<RatingContent | null> {
     return this.repository.findByKeys(contentId, userId);
+  }
+
+  async getSummaryByContentId(contentId: string): Promise<RatingContentSummary | null> {
+    return this.repository.findSummaryByContentId(contentId);
   }
 
   async create(dto: CreateRatingContentDTO): Promise<RatingContent> {

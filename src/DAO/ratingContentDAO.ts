@@ -1,6 +1,6 @@
 import { pool } from '../database/db';
 import { RatingContentRepository } from '../repository/ratingContentRepository';
-import { RatingContent } from '../interfaces/ratingContentInterface';
+import { RatingContent, RatingContentSummary } from '../interfaces/ratingContentInterface';
 import { CreateRatingContentDTO, UpdateRatingContentDTO } from '../DTO/ratingContentDTO';
 
 export class RatingContentDAO implements RatingContentRepository {
@@ -16,6 +16,20 @@ export class RatingContentDAO implements RatingContentRepository {
       'SELECT content_id, user_id, average_rating FROM rating_content WHERE content_id = $1 AND user_id = $2',
       [contentId, userId]
     );
+    return result.rows[0] || null;
+  }
+
+  async findSummaryByContentId(contentId: string): Promise<RatingContentSummary | null> {
+    const result = await pool.query(
+      `SELECT
+         content_id,
+         ROUND(AVG(average_rating)::numeric, 2)::float8 AS average_rating
+       FROM rating_content
+       WHERE content_id = $1
+       GROUP BY content_id`,
+      [contentId]
+    );
+
     return result.rows[0] || null;
   }
 

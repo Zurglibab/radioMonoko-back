@@ -26,6 +26,19 @@ export class RatingContentController {
     }
   };
 
+  getSummaryByContentId = async (req: Request, res: Response) => {
+    try {
+      const summary = await this.service.getSummaryByContentId(req.params.contentId as string);
+      if (!summary) {
+        return res.status(404).json({ message: 'No ratings found for this content' });
+      }
+
+      res.status(200).json(summary);
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
+    }
+  };
+
   create = async (req: Request, res: Response) => {
     try {
       const created = await this.service.create(req.body);

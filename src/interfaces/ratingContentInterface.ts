@@ -3,3 +3,8 @@ export interface RatingContent {
   user_id: string;
   average_rating: number;
 }
+
+export interface RatingContentSummary {
+  content_id: string;
+  average_rating: number;
+}

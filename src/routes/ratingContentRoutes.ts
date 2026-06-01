@@ -83,6 +83,39 @@ export const createRatingContentRouter = () => {
 
   /**
    * @openapi
+   * /ratingContent/content/{contentId}/summary:
+   *   get:
+   *     tags: [RatingContent]
+   *     summary: Recuperer la moyenne des notes d'un contenu
+   *     parameters:
+   *       - in: path
+   *         name: contentId
+   *         required: true
+   *         schema:
+   *           type: string
+   *           format: uuid
+   *     responses:
+   *       200:
+   *         description: Moyenne des notes du contenu
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 content_id:
+   *                   type: string
+   *                   format: uuid
+   *                 average_rating:
+   *                   type: number
+   *                   format: float
+   *                   nullable: true
+   *       404:
+   *         description: Aucune note trouvee pour ce contenu
+   */
+  router.get('/content/:contentId/summary', controller.getSummaryByContentId);
+
+  /**
+   * @openapi
    * /ratingContent/content/{contentId}/user/{userId}:
    *   get:
    *     tags: [RatingContent]

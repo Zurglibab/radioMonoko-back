@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { ContentDAO } from '../DAO/contentDAO';
 import { ContentService } from '../services/contentService';
 import { ContentController } from '../controllers/content.controller';
+import { createContentStatusRouter } from './contentStatusRoutes';
 
 export const createContentRouter = () => {
   const contentRouter = Router();
@@ -82,6 +83,8 @@ export const createContentRouter = () => {
    *                 $ref: '#/components/schemas/Content'
    */
   contentRouter.get('/', contentController.getAll);
+
+  contentRouter.use('/status', createContentStatusRouter());
 
   /**
    * @openapi
@@ -187,6 +190,7 @@ export const createContentRouter = () => {
    *         description: Contenu non trouve
    */
   contentRouter.delete('/:id', contentController.deleteById);
+
 
   return contentRouter;
 };
