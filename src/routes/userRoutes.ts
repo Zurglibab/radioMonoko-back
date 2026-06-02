@@ -102,6 +102,41 @@ userRouter.post('/login', userController.loginUser);
 
 /**
  * @openapi
+ * /user/refresh:
+ *   get:
+ *     tags:
+ *       - Users
+ *     summary: Renouveler le token d'accès à l'aide d'un refresh token
+ *     description: >
+ *       Renvoie un nouveau access token (et optionnellement un nouveau refresh token).
+ *       Le refresh token doit être fourni soit dans un cookie httpOnly nommé `refreshToken`
+ *       (recommandé), soit en header `Authorization: Bearer <refresh-token>`.
+ *     security:
+ *       - cookieAuth: []
+ *       - bearerAuth: []
+ *     responses:
+ *       '200':
+ *         description: Nouveau token généré avec succès
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 accessToken:
+ *                   type: string
+ *                 refreshToken:
+ *                   type: string
+ *       '401':
+ *         description: Token absent ou invalide
+ *       '403':
+ *         description: Refresh token révoqué ou non autorisé
+ *       '500':
+ *         description: Erreur interne serveur
+ */
+userRouter.get('/refresh', authMiddleware, userController.refreshToken);
+
+/**
+ * @openapi
  * /user/me:
  *   get:
  *     tags:
