@@ -55,6 +55,37 @@ export class ReportUserController {
       return res.status(500).json({ success: false, error: 'Internal server error' });
     }
   }
+
+  async deleteReportsByReportedUserId(req: Request, res: Response) {
+    try {
+      const reportedUserId = req.params.reportedUserId as string;
+      if (!reportedUserId) {
+        return res.status(400).json({ success: false, error: 'reportedUserId parameter is required' });
+      }
+      const deletedCount = await reportUserService.deleteReportsByReportedUserId(reportedUserId);
+      return res.status(200).json({ success: true, message: `${deletedCount} reports deleted for user ${reportedUserId}` });
+    } catch (err: any) {
+      console.error('[ReportUserController] deleteReportsByReportedUserId failed:', err);
+      return res.status(500).json({ success: false, error: 'Internal server error' });
+    }
+  }
+
+  async deleteReportById(req: Request, res: Response) {
+    try {
+      const id = req.params.id as string;
+      if (!id) {
+        return res.status(400).json({ success: false, error: 'id parameter is required' });
+      }
+      const success = await reportUserService.deleteReportById(id);
+      if (!success) {
+        return res.status(404).json({ success: false, error: `Report with id "${id}" not found` });
+      }
+      return res.status(200).json({ success: true, message: `Report with id "${id}" successfully deleted` });
+    } catch (err: any) {
+      console.error('[ReportUserController] deleteReportById failed:', err);
+      return res.status(500).json({ success: false, error: 'Internal server error' });
+    }
+  }
 }
 
 export const reportUserController = new ReportUserController();

@@ -35,6 +35,22 @@ export class ReportUsersDAO {
     const result = await pool.query(query, params);
     return result.rows;
   }
+
+  async deleteByReportedUserId(reportedUserId: string): Promise<number> {
+    const result = await pool.query(
+      'DELETE FROM report_users WHERE reported_user_id = $1',
+      [reportedUserId]
+    );
+    return result.rowCount ?? 0;
+  }
+
+  async deleteById(id: string): Promise<boolean> {
+    const result = await pool.query(
+      'DELETE FROM report_users WHERE id = $1',
+      [id]
+    );
+    return (result.rowCount ?? 0) > 0;
+  }
 }
 
 export const reportUsersDAO = new ReportUsersDAO();

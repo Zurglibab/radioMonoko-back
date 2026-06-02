@@ -3,6 +3,11 @@ import passport, { isGoogleOAuthConfigured } from '../config/passport';
 import * as jwt from 'jsonwebtoken';
 import { authMiddleware } from '../middlewares/auth.middleware';
 import { getClient } from '../config/RedisConnexion';
+import { UserDAO } from '../DAO/userDAO';
+import { v4 as uuidv4 } from 'uuid';
+import axios from 'axios';
+
+const userDAO = new UserDAO();
 
 const router = Router();
 
@@ -132,6 +137,94 @@ router.post('/logout', authMiddleware, async (req: Request, res: Response) => {
   } catch (err) {
     console.error('[auth/logout] Error revoking token', err);
     return res.status(500).json({ message: 'Server error' });
+  }
+});
+
+/**
+ * @openapi
+ * /auth/google-mobile:
+ *   post:
+ *     tags:
+ *       - Auth
+ *     summary: Connexion Google OAuth2 pour application mobile
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - googleToken
+ *             properties:
+ *               googleToken:
+ *                 type: string
+ *                 description: Token Google (ID token ou Access token) récupéré par l'application mobile
+ *     responses:
+ *       200:
+ *         description: Authentification réussie, JWT renvoyé
+ *       400:
+ *         description: googleToken manquant ou invalide
+ *       401:
+ *         description: Authentification Google échouée
+ *       500:
+ *         description: Erreur serveur
+ */
+router.post('/google-mobile', async (req: Request, res: Response) => {
+  const { googleToken } = req.body;
+  if (!googleToken) {
+    return res.status(400).json({ success: false, error: 'googleToken is required' });
+  }
+
+  let email: string | undefined;
+
+  // 1) Essayer de vérifier en tant qu'id_token
+  try {
+    const response = await axios.get(`https://oauth2.googleapis.com/tokeninfo?id_token=${googleToken}`);
+    email = response.data.email;
+  } catch (idTokenError) {
+    // 2) Fallback: essayer de récupérer les infos de l'utilisateur avec l'access_token
+    try {
+      const response = await axios.get('https://www.googleapis.com/oauth2/v3/userinfo', {
+        headers: { Authorization: `Bearer ${googleToken}` }
+      });
+      email = response.data.email;
+    } catch (accessTokenError) {
+      console.error('[auth] Google token verification failed:', idTokenError, accessTokenError);
+      return res.status(401).json({ success: false, error: 'Invalid Google token' });
+    }
+  }
+
+  if (!email) {
+    return res.status(400).json({ success: false, error: 'No email associated with this Google token' });
+  }
+
+  try {
+    let user = await userDAO.findByEmail(email);
+    if (!user) {
+      const newUser = {
+        id: uuidv4(),
+        email,
+        password: '' // Mot de passe vide pour l'authentification OAuth
+      };
+      user = await userDAO.create(newUser as any);
+    }
+
+    const secret = process.env.JWT_SECRET;
+    if (!secret) {
+      console.error('[auth] JWT_SECRET is not configured');
+      return res.status(500).json({ success: false, error: 'Server misconfigured: JWT_SECRET missing' });
+    }
+    const expiresIn = (process.env.JWT_EXPIRES_IN || '7d') as jwt.SignOptions['expiresIn'];
+    const token = jwt.sign({ id: user.id, email: user.email }, secret, { expiresIn });
+
+    return res.status(200).json({
+      success: true,
+      token,
+      user: { id: user.id, email: user.email }
+    });
+  } catch (dbError: any) {
+    console.error('[auth] Database operation failed during Google mobile login:', dbError);
+    return res.status(500).json({ success: false, error: 'Internal server error' });
   }
 });
 

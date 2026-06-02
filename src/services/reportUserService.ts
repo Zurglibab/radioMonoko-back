@@ -30,6 +30,14 @@ export class ReportUserService {
   async getReportsByReportedUserId(reportedUserId: string, pagination?: PaginationOptions): Promise<ReportUser[]> {
     return await reportUsersDAO.findByReportedUserId(reportedUserId, pagination);
   }
+
+  async deleteReportsByReportedUserId(reportedUserId: string): Promise<number> {
+    return await reportUsersDAO.deleteByReportedUserId(reportedUserId);
+  }
+
+  async deleteReportById(id: string): Promise<boolean> {
+    return await reportUsersDAO.deleteById(id);
+  }
 }
 
 export const reportUserService = new ReportUserService();

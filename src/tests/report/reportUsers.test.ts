@@ -94,4 +94,72 @@ describe('Report Users API', () => {
     expect(res2.headers['x-pagination-count']).toBe('2');
     expect(res2.body.data).toHaveLength(2);
   });
+
+  it('devrait permettre de supprimer tous les reports d\'un utilisateur', async () => {
+    const reporter = { email: 'repdel1@test.com', password: 'password123', username: 'repdel1' };
+    const reported = { email: 'repdel2@test.com', password: 'password123', username: 'repdel2' };
+
+    const reg1 = await request(app).post('/user/register').send(reporter);
+    const token = reg1.body.token;
+    const reg2 = await request(app).post('/user/register').send(reported);
+    const meRes = await request(app).get('/user/me').set('Authorization', `Bearer ${reg2.body.token}`);
+    const reportedId = meRes.body.id;
+
+    await request(app).post('/reports/users').set('Authorization', `Bearer ${token}`).send({
+      reported_user_id: reportedId,
+      report_type: 'spam',
+      description: 'Spam 1'
+    });
+    await request(app).post('/reports/users').set('Authorization', `Bearer ${token}`).send({
+      reported_user_id: reportedId,
+      report_type: 'harassment',
+      description: 'Harassment 2'
+    });
+
+    const checkCount1 = await pool.query('SELECT COUNT(*) as c FROM report_users WHERE reported_user_id = $1', [reportedId]);
+    expect(Number(checkCount1.rows[0].c)).toBe(2);
+
+    const delRes = await request(app).delete(`/reports/users/by-reported-user/${reportedId}`).set('Authorization', `Bearer ${token}`);
+    expect(delRes.status).toBe(200);
+    expect(delRes.body.success).toBe(true);
+
+    const checkCount2 = await pool.query('SELECT COUNT(*) as c FROM report_users WHERE reported_user_id = $1', [reportedId]);
+    expect(Number(checkCount2.rows[0].c)).toBe(0);
+  });
+
+  it('devrait permettre de supprimer un seul report par son ID', async () => {
+    const reporter = { email: 'repdel3@test.com', password: 'password123', username: 'repdel3' };
+    const reported = { email: 'repdel4@test.com', password: 'password123', username: 'repdel4' };
+
+    const reg1 = await request(app).post('/user/register').send(reporter);
+    const token = reg1.body.token;
+    const reg2 = await request(app).post('/user/register').send(reported);
+    const meRes = await request(app).get('/user/me').set('Authorization', `Bearer ${reg2.body.token}`);
+    const reportedId = meRes.body.id;
+
+    const repRes = await request(app).post('/reports/users').set('Authorization', `Bearer ${token}`).send({
+      reported_user_id: reportedId,
+      report_type: 'spam',
+      description: 'To delete'
+    });
+    const reportId = repRes.body.data.id;
+
+    const delRes = await request(app).delete(`/reports/users/${reportId}`).set('Authorization', `Bearer ${token}`);
+    expect(delRes.status).toBe(200);
+    expect(delRes.body.success).toBe(true);
+
+    const checkCount = await pool.query('SELECT COUNT(*) as c FROM report_users WHERE id = $1', [reportId]);
+    expect(Number(checkCount.rows[0].c)).toBe(0);
+  });
+
+  it('devrait retourner 404 lors de la suppression d\'un report inexistant', async () => {
+    const user = { email: 'repdel5@test.com', password: 'password123', username: 'repdel5' };
+    const reg = await request(app).post('/user/register').send(user);
+    const token = reg.body.token;
+    const fakeUuid = '00000000-0000-0000-0000-000000000000';
+
+    const delRes = await request(app).delete(`/reports/users/${fakeUuid}`).set('Authorization', `Bearer ${token}`);
+    expect(delRes.status).toBe(404);
+    expect(delRes.body.success).toBe(false);
+  });
 });

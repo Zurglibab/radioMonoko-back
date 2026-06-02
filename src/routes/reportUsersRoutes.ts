@@ -98,4 +98,58 @@ router.get('/users', authMiddleware, (req, res) => reportUserController.getAllRe
  */
 router.get('/users/:reportedUserId', authMiddleware, (req, res) => reportUserController.getReportsByReportedUserId(req, res));
 
+/**
+ * @openapi
+ * /reports/users/by-reported-user/{reportedUserId}:
+ *   delete:
+ *     tags:
+ *       - Reports
+ *     summary: Retirer tous les signalements d'un utilisateur signalé
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: reportedUserId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID de l'utilisateur signalé dont on veut supprimer tous les signalements
+ *     responses:
+ *       200:
+ *         description: Tous les signalements ont été supprimés
+ *       400:
+ *         description: Paramètre manquant
+ *       401:
+ *         description: Non authentifié
+ */
+router.delete('/users/by-reported-user/:reportedUserId', authMiddleware, (req, res) => reportUserController.deleteReportsByReportedUserId(req, res));
+
+/**
+ * @openapi
+ * /reports/users/{id}:
+ *   delete:
+ *     tags:
+ *       - Reports
+ *     summary: Retirer un seul signalement par son ID
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID du signalement à supprimer
+ *     responses:
+ *       200:
+ *         description: Le signalement a été supprimé
+ *       400:
+ *         description: Paramètre manquant
+ *       401:
+ *         description: Non authentifié
+ *       404:
+ *         description: Signalement non trouvé
+ */
+router.delete('/users/:id', authMiddleware, (req, res) => reportUserController.deleteReportById(req, res));
+
 export default router;
