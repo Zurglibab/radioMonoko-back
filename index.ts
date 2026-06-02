@@ -19,16 +19,16 @@ const startServer = async () => {
     await initializeDatabase();
     await connectRedis();
 
-        const io = await setupWebSockets(server);
-        setIO(io);
+    const io = await setupWebSockets(server);
+    setIO(io);
 
-        startBrandsScheduler();
+    startBrandsScheduler();
 
-        // Lancer le scheduler des messages
-        const messageScheduler = new MessageScheduler();
-        messageScheduler.start();
+    // Lancer le scheduler des messages
+    const messageScheduler = new MessageScheduler();
+    messageScheduler.start();
 
-        server.listen(PORT, () => {
+    server.listen(PORT, () => {
       console.log(`Server is running on port 'http://localhost:${PORT}/`);
     });
   } catch (error) {

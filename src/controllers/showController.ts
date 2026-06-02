@@ -1,11 +1,10 @@
 import { Request, Response } from "express";
 import { showApiService } from "../services/showServices";
-import { redisShowDao } from "../DAO/showDAO";
 import { StationsEnum } from "../enums/stationsEnum";
 
 export async function getShowsByStation(req: Request, res: Response) {
   try {
-    const station = Array.isArray(req.params.station) ? req.params.station[0] : req.params.station;
+    const station = (req.params.station as string) || (req.query.station as string);
     const { first } = req.query;
 
     console.log(`[showController] GET /api/shows/${station}`);
@@ -50,7 +49,9 @@ export async function getShowById(req: Request, res: Response) {
       });
     }
 
-    const show = await redisShowDao.getByIdAndStation(station as StationsEnum, id);
+    // Try full show list (Redis bulk JSON + API fallback) and find by ID
+    const allShows = await showApiService.getShowsWithFallback(station as StationsEnum);
+    const show = allShows.find((s) => s.id === id);
 
     if (!show) {
       return res.status(404).json({
@@ -78,6 +79,13 @@ export async function searchShowsByTitle(req: Request, res: Response) {
     const title = Array.isArray(req.params.title) ? req.params.title[0] : req.params.title;
     console.log(`[showController] GET /api/shows/${station}/search/${title}`);
 
+    if (!station) {
+      return res.status(400).json({
+        success: false,
+        error: "Missing required path parameter: station"
+      });
+    }
+
     if (!Object.values(StationsEnum).includes(station as StationsEnum)) {
       return res.status(400).json({
         success: false,
@@ -85,9 +93,17 @@ export async function searchShowsByTitle(req: Request, res: Response) {
       });
     }
 
+    if (!title) {
+      return res.status(400).json({
+        success: false,
+        error: "Missing required path parameter: title"
+      });
+    }
+
     const allShows = await showApiService.getShowsWithFallback(station as StationsEnum);
     const filtered = allShows.filter((show) =>
-    show.title.toLowerCase().includes(title.toLowerCase())
+      show && typeof show.title === "string" &&
+      show.title.toLowerCase().includes(title.toLowerCase())
     );
 
     res.status(200).json({
@@ -157,7 +173,8 @@ export async function getShowsCount(req: Request, res: Response) {
       });
     }
 
-    const count = await redisShowDao.countByStation(station as StationsEnum);
+    const shows = await showApiService.getShowsFromRedis(station as StationsEnum);
+    const count = shows ? shows.length : 0;
 
     res.status(200).json({
       success: true,
