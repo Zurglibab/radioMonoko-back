@@ -14,6 +14,10 @@ export class ContentStatusService {
     return this.repository.findByKeys(contentId, userId);
   }
 
+  async getUserLibrary(userId: string): Promise<any[]> {
+    return this.repository.findLibraryByUserId(userId);
+  }
+
   async upsert(dto: UpsertContentStatusDTO): Promise<ContentStatusRecord> {
     if (!dto.content_id || !dto.user_id || !dto.status) {
       throw new Error('content_id, user_id and status are required');

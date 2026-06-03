@@ -34,8 +34,9 @@ jest.mock('../../DAO/contentDAO', () => ({
 
 jest.mock('../../DAO/contentStatusDAO', () => ({
   ContentStatusDAO: jest.fn().mockImplementation(() => ({
-    findByKeys: mockFindContentStatusByKeys,
-    upsert: mockUpsertContentStatus
+    findByKeys: (...args: any[]) => mockFindContentStatusByKeys(...args),
+    findLibraryByUserId: (...args: any[]) => jest.fn()(...args),
+    upsert: (...args: any[]) => mockUpsertContentStatus(...args)
   }))
 }));
 

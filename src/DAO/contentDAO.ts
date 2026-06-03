@@ -19,6 +19,11 @@ export class ContentDAO implements ContentRepository {
     return result.rows[0] as Content || null;
   }
 
+  async findByApiId(apiId: string): Promise<Content | null> {
+    const result = await pool.query("SELECT * FROM content WHERE api_id = $1", [apiId]);
+    return result.rows[0] as Content || null;
+  }
+
   async create(content: CreateContentDTO): Promise<Content> {
     const result = await pool.query(
       `

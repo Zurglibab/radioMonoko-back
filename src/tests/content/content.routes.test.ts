@@ -1,6 +1,8 @@
 import request from 'supertest';
 import { Express } from 'express';
 import { createApp } from '../../app';
+import { brandApiService } from '../../services/brandsServices';
+import { showApiService } from '../../services/showServices';
 
 jest.mock('../../middlewares/auth.middleware', () => ({
   authMiddleware: jest.fn((req, res, next) => {
@@ -8,6 +10,18 @@ jest.mock('../../middlewares/auth.middleware', () => ({
     req.userId = 'user-1';
     next();
   })
+}));
+
+jest.mock('../../services/showServices', () => ({
+  showApiService: {
+    getShowsFromRedis: jest.fn()
+  }
+}));
+
+jest.mock('../../services/brandsServices', () => ({
+  brandApiService: {
+    getBrandsFromRedis: jest.fn()
+  }
 }));
 
 const mockFindAll = jest.fn();
@@ -22,10 +36,13 @@ const mockFindContentFavoritesByUserId = jest.fn();
 const mockCreateContentFavorite = jest.fn();
 const mockDeleteContentFavoriteByKeys = jest.fn();
 
+const mockFindByApiId = jest.fn();
+
 jest.mock('../../DAO/contentDAO', () => ({
   ContentDAO: jest.fn().mockImplementation(() => ({
     findAll: mockFindAll,
     findById: mockFindById,
+    findByApiId: mockFindByApiId,
     create: mockCreate,
     updateById: mockUpdateById,
     deleteById: mockDeleteById
@@ -34,8 +51,9 @@ jest.mock('../../DAO/contentDAO', () => ({
 
 jest.mock('../../DAO/contentStatusDAO', () => ({
   ContentStatusDAO: jest.fn().mockImplementation(() => ({
-    findByKeys: mockFindContentStatusByKeys,
-    upsert: mockUpsertContentStatus
+    findByKeys: (...args: any[]) => mockFindContentStatusByKeys(...args),
+    findLibraryByUserId: (...args: any[]) => jest.fn()(...args),
+    upsert: (...args: any[]) => mockUpsertContentStatus(...args)
   }))
 }));
 
@@ -102,6 +120,65 @@ describe('Content Routes with Mocks', () => {
 
       expect(res.status).toBe(404);
       expect(res.body).toHaveProperty('message', 'Content not found');
+    });
+  });
+
+  describe('GET /content/api/:apiId', () => {
+    it('should return content from DB if it exists', async () => {
+      mockFindByApiId.mockResolvedValue({
+        id: 'content-1',
+        api_id: 'cf2f690e-5def-49a9-ba02-9f0e427e2be4_1',
+        title: 'Existing Content',
+        content_type: 'diffusion',
+        created_at: new Date().toISOString()
+      });
+
+      const res = await request(app).get('/content/api/cf2f690e-5def-49a9-ba02-9f0e427e2be4_1');
+
+      expect(res.status).toBe(200);
+      expect(res.body).toHaveProperty('api_id', 'cf2f690e-5def-49a9-ba02-9f0e427e2be4_1');
+      expect(mockFindByApiId).toHaveBeenCalledWith('cf2f690e-5def-49a9-ba02-9f0e427e2be4_1');
+    });
+
+    it('should fallback to Redis and create if not in DB', async () => {
+      mockFindByApiId.mockResolvedValue(null);
+      (showApiService.getShowsFromRedis as jest.Mock).mockResolvedValue([
+        {
+          id: 'show-1',
+          title: 'A show',
+          diffusions: [
+            {
+              id: 'cf2f690e-5def-49a9-ba02-9f0e427e2be4_1',
+              title: 'A diffusion'
+            }
+          ]
+        }
+      ]);
+      mockCreate.mockResolvedValue({
+        id: 'new-content-id',
+        api_id: 'cf2f690e-5def-49a9-ba02-9f0e427e2be4_1',
+        title: 'A diffusion',
+        content_type: 'diffusion',
+        created_at: new Date().toISOString()
+      });
+
+      const res = await request(app).get('/content/api/cf2f690e-5def-49a9-ba02-9f0e427e2be4_1');
+
+      expect(res.status).toBe(200);
+      expect(res.body).toHaveProperty('api_id', 'cf2f690e-5def-49a9-ba02-9f0e427e2be4_1');
+      expect(res.body).toHaveProperty('title', 'A diffusion');
+      expect(mockCreate).toHaveBeenCalled();
+    });
+
+    it('should return 404 if not found anywhere', async () => {
+      mockFindByApiId.mockResolvedValue(null);
+      (showApiService.getShowsFromRedis as jest.Mock).mockResolvedValue([]);
+      (brandApiService.getBrandsFromRedis as jest.Mock).mockResolvedValue([]);
+
+      const res = await request(app).get('/content/api/unknown-id');
+
+      expect(res.status).toBe(404);
+      expect(res.body).toHaveProperty('message', 'Content not found for api_id: unknown-id');
     });
   });
 
