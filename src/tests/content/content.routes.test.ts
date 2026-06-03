@@ -308,7 +308,8 @@ describe('Content Routes with Mocks', () => {
       const res = await request(app).get('/content/status/list');
 
       expect(res.status).toBe(200);
-      expect(res.body).toEqual(['à voir', 'commencer', 'fini']);
+      expect(res.body).toEqual(expect.arrayContaining(['abandonné', 'à voir', 'en cours', 'commencer', 'fini']));
+      expect(res.body.length).toBe(5);
     });
   });
 

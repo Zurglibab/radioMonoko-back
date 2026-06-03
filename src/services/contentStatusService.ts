@@ -24,7 +24,7 @@ export class ContentStatusService {
     }
 
     if (!isContentStatus(dto.status)) {
-      throw new Error('status must be one of: à voir, commencer, fini');
+      throw new Error(`status must be one of: ${CONTENT_STATUS_VALUES.join(', ')}`);
     }
 
     return this.repository.upsert({

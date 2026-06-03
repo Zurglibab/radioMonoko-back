@@ -30,7 +30,7 @@ export const createContentStatusRouter = () => {
    *           format: uuid
    *         status:
    *           type: string
-   *           enum: ['à voir', 'commencer', 'fini']
+   *           enum: ['abandonné', 'à voir', 'en cours', 'commencer', 'fini']
    *         created_at:
    *           type: string
    *           format: date-time
