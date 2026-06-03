@@ -98,16 +98,11 @@ export function createApp(): Express {
     winstonInstance: logger
   }));
 
-
   app.use(passport.initialize());
-
 
   app.use('/auth', authRouter);
 
-
   app.use('/admin', authMiddleware, adminMiddleware, adminRouter);
-
-
 
   app.use("/api", apiRoutes);
 

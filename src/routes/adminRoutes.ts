@@ -15,6 +15,9 @@ const userDAO = new UserDAO();
  *     tags:
  *       - Admin
  *     summary: Supprimer une critique en tant qu'administrateur
+ *     security:
+ *       - cookieAuth: []
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -46,6 +49,9 @@ router.delete('/reviews/:id', async (req: Request, res: Response) => {
  *     tags:
  *       - Admin
  *     summary: Mettre une critique en avant ou la retirer des coups de cœur
+ *     security:
+ *       - cookieAuth: []
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -87,6 +93,9 @@ router.patch('/reviews/:id/feature', async (req: Request, res: Response) => {
  *     tags:
  *       - Admin
  *     summary: Bannir ou débannir un utilisateur
+ *     security:
+ *       - cookieAuth: []
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -117,6 +126,73 @@ router.patch('/users/:id/ban', async (req: Request, res: Response) => {
     if (!user) return res.status(404).json({ message: 'User not found' });
     const updated = await userDAO.edit({ id: userId, is_banned: ban === true });
     return res.status(200).json(updated);
+  } catch (err: any) {
+    return res.status(500).json({ message: err.message });
+  }
+});
+
+/**
+ * @openapi
+ * /admin/users:
+ *   get:
+ *     tags:
+ *       - Admin
+ *     summary: Récupérer la liste des utilisateurs avec pagination
+ *     security:
+ *       - cookieAuth: []
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *         description: Numéro de page (par défaut 1)
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *           maximum: 100
+ *         description: Nombre d'utilisateurs par page (par défaut 50)
+ *     responses:
+ *       200:
+ *         description: Liste paginée d'utilisateurs
+ *       500:
+ *         description: Erreur serveur
+ */
+router.get('/users', async (req: Request, res: Response) => {
+  try {
+    const page = Math.max(1, parseInt(String(req.query.page || '1'), 10));
+    const limit = Math.min(100, Math.max(1, parseInt(String(req.query.limit || '50'), 10)));
+    const offset = (page - 1) * limit;
+
+    let users: any[] = [];
+    let total = 0;
+
+    try {
+      const result = await (userDAO as any).findAll({ limit, offset });
+      if (result && Array.isArray(result.rows)) {
+        users = result.rows;
+        total = typeof result.count === 'number' ? result.count : users.length;
+      } else if (Array.isArray(result)) {
+        const all = result as any[];
+        total = all.length;
+        users = all.slice(offset, offset + limit);
+      } else {
+        users = [];
+        total = 0;
+      }
+    } catch {
+      const all = await userDAO.findAll();
+      total = Array.isArray(all) ? all.length : 0;
+      users = Array.isArray(all) ? all.slice(offset, offset + limit) : [];
+    }
+
+    return res.status(200).json({
+      data: users,
+      meta: { page, limit, total },
+    });
   } catch (err: any) {
     return res.status(500).json({ message: err.message });
   }

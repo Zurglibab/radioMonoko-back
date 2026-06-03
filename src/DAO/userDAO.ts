@@ -57,4 +57,15 @@ export class UserDAO {
     );
     return result.rows;
   }
+
+    async findAll(page: number = 1, limit: number = 20) {
+        const p = Math.max(1, Math.floor(Number(page) || 1));
+        const l = Math.max(1, Math.min(100, Math.floor(Number(limit) || 20))); // cap à 100 pour éviter abus
+        const offset = (p - 1) * l;
+        const result = await pool.query(
+            'SELECT id, email, username, display_name, avatar, bio, website, privacy, is_banned, created_at, updated_at FROM users ORDER BY created_at DESC LIMIT $1 OFFSET $2',
+            [l, offset]
+        );
+        return result.rows;
+    }
 }
