@@ -29,6 +29,22 @@ export class ContentController {
     }
   };
 
+  getByApiId = async (req: Request, res: Response) => {
+    try {
+      const apiId = req.params.apiId as string;
+      if (!apiId) {
+        return res.status(400).json({ message: 'apiId parameter is required' });
+      }
+      const content = await this.contentService.resolveByApiId(apiId);
+      if (!content) {
+        return res.status(404).json({ message: `Content not found for api_id: ${apiId}` });
+      }
+      res.status(200).json(content);
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
+    }
+  };
+
   create = async (req: Request, res: Response) => {
     try {
       const created = await this.contentService.create(req.body);

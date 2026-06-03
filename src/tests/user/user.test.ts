@@ -249,6 +249,65 @@ describe('User Routes - Integration Tests', () => {
     });
   });
 
+  describe('GET /user/me/library', () => {
+    it('devrait retourner un tableau vide si l\'utilisateur n\'a pas de bibliothèque', async () => {
+      const userData = { email: 'library1@test.com', password: 'password123', username: 'libuser1' };
+      const registerRes = await request(app).post('/user/register').send(userData);
+      const token = registerRes.body.token;
+
+      const response = await request(app)
+        .get('/user/me/library')
+        .set('Authorization', `Bearer ${token}`);
+
+      expect(response.status).toBe(200);
+      expect(Array.isArray(response.body)).toBe(true);
+      expect(response.body.length).toBe(0);
+    });
+
+    it('devrait retourner les éléments avec la structure content imbriquée', async () => {
+      const userData = { email: 'library2@test.com', password: 'password123', username: 'libuser2' };
+      const registerRes = await request(app).post('/user/register').send(userData);
+      const token = registerRes.body.token;
+      
+      const userRes = await request(app).get('/user/me').set('Authorization', `Bearer ${token}`);
+      const userId = userRes.body.id;
+
+      // Create a content in DB
+      const contentId = '123e4567-e89b-12d3-a456-426614174000';
+      await pool.query(
+        `INSERT INTO content (id, api_id, title, description, content_type, created_at) 
+         VALUES ($1, $2, $3, $4, $5, NOW())`,
+        [contentId, 'API_TEST_123', 'Test Title', 'Test Description', 'show']
+      );
+
+      // Create a status for the user
+      await pool.query(
+        `INSERT INTO content_status (content_id, user_id, status, created_at, updated_at)
+         VALUES ($1, $2, $3, NOW(), NOW())`,
+        [contentId, userId, 'commencer']
+      );
+
+      const response = await request(app)
+        .get('/user/me/library')
+        .set('Authorization', `Bearer ${token}`);
+
+      expect(response.status).toBe(200);
+      expect(Array.isArray(response.body)).toBe(true);
+      expect(response.body.length).toBe(1);
+
+      const item = response.body[0];
+      expect(item).toHaveProperty('status', 'commencer');
+      expect(item).toHaveProperty('user_id', userId);
+      expect(item).toHaveProperty('content_id', contentId);
+      
+      expect(item).toHaveProperty('content');
+      expect(item.content).toHaveProperty('id', contentId);
+      expect(item.content).toHaveProperty('api_id', 'API_TEST_123');
+      expect(item.content).toHaveProperty('title', 'Test Title');
+      expect(item.content).toHaveProperty('content_type', 'show');
+    });
+  });
+
   describe('Banned user behavior', () => {
     it('ne devrait plus pouvoir se connecter ni utiliser un token existant après bannissement', async () => {
       const userData = { email: 'banme@test.com', password: 'password123', username: 'banme' };

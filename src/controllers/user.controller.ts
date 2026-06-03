@@ -1,5 +1,6 @@
 import {Request, Response} from 'express';
 import {UserService} from '../services/userService';
+import {ContentStatusService} from '../services/contentStatusService';
 import {LoginUserDTO, ModifyUserDTO} from "../DTO/userDTO";
 import logger from "../config/logger";
 import * as jwt from "jsonwebtoken";
@@ -7,8 +8,20 @@ import {getClient} from "../config/RedisConnexion";
 
 export class UserController {
     constructor(
-        private readonly userService: UserService) {
-    }
+        private readonly userService: UserService,
+        private readonly contentStatusService: ContentStatusService
+    ) {}
+
+    getMyLibrary = async (req: Request, res: Response) => {
+        try {
+            const userId = (req as any).userId;
+            const library = await this.contentStatusService.getUserLibrary(userId);
+            res.status(200).json(library);
+        } catch (error: any) {
+            logger.error("Error in getMyLibrary:", error);
+            res.status(500).json({message: 'Internal server error'});
+        }
+    };
 
     createUser = async (req: Request, res: Response) => {
         try {

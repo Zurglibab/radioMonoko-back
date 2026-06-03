@@ -7,12 +7,15 @@ import { ownershipOrAdmin } from '../middlewares/ownership.middleware';
 import { UserRelationDAO } from '../DAO/userRelationDAO';
 import { UserRelationRepository } from '../repository/userRelationRepository';
 import { FeedService } from '../services/feedService';
+import { ContentStatusDAO } from '../DAO/contentStatusDAO';
+import { ContentStatusService } from '../services/contentStatusService';
 import { FeedController } from '../controllers/feed.controller';
 
 const userRouter = Router();
 const userRepository = new UserBDDRepository();
 const userService = new UserService(userRepository);
-const userController = new UserController(userService);
+const contentStatusService = new ContentStatusService(new ContentStatusDAO());
+const userController = new UserController(userService, contentStatusService);
 const userRelationRepository = new UserRelationRepository(new UserRelationDAO());
 const feedController = new FeedController(new FeedService(userRelationRepository));
 
@@ -153,6 +156,57 @@ userRouter.get('/refresh', authMiddleware, userController.refreshToken);
  *         description: Utilisateur non trouvé
  */
 userRouter.get('/me', authMiddleware, userController.getMe);
+
+/**
+ * @openapi
+ * /user/me/library:
+ *   get:
+ *     tags:
+ *       - Users
+ *     summary: Récupérer la bibliothèque complète de l'utilisateur
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Bibliothèque de l'utilisateur avec le statut associé pour chaque contenu
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   content_id:
+ *                     type: string
+ *                   user_id:
+ *                     type: string
+ *                   status:
+ *                     type: string
+ *                   created_at:
+ *                     type: string
+ *                   updated_at:
+ *                     type: string
+ *                   content:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: string
+ *                       api_id:
+ *                         type: string
+ *                       title:
+ *                         type: string
+ *                       description:
+ *                         type: string
+ *                       content_type:
+ *                         type: string
+ *                       created_at:
+ *                         type: string
+ *       401:
+ *         description: Non autorisé
+ *       500:
+ *         description: Erreur interne
+ */
+userRouter.get('/me/library', authMiddleware, userController.getMyLibrary);
 
 /**
  * @openapi

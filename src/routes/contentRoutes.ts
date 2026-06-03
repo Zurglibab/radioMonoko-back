@@ -90,6 +90,37 @@ export const createContentRouter = () => {
 
   /**
    * @openapi
+   * /content/api/{apiId}:
+   *   get:
+   *     tags: [Content]
+   *     summary: Resoudre un identifiant externe (Radio France, etc.) en contenu
+   *     description: >
+   *       Recherche un contenu par son identifiant API externe (api_id).
+   *       Si le contenu n'existe pas en base de donnees, il est cree a la volee
+   *       en interrogeant l'API Radio France (diffusion puis show).
+   *     parameters:
+   *       - in: path
+   *         name: apiId
+   *         required: true
+   *         schema:
+   *           type: string
+   *         description: Identifiant externe (ex. ID Radio France)
+   *     responses:
+   *       200:
+   *         description: Contenu trouve ou cree
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/Content'
+   *       404:
+   *         description: Contenu introuvable dans toutes les sources
+   *       500:
+   *         description: Erreur serveur
+   */
+  contentRouter.get('/api/:apiId', contentController.getByApiId);
+
+  /**
+   * @openapi
    * /content/{id}:
    *   get:
    *     tags: [Content]
