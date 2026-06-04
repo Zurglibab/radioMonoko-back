@@ -7,7 +7,7 @@ const userDAO = new UserDAO();
 
 const googleClientId = process.env.GOOGLE_CLIENT_ID;
 const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET;
-const googleCallback = process.env.GOOGLE_CALLBACK_URL || '/auth/google/callback';
+const defaultCallback = '/auth/google/callback';
 
 export const isGoogleOAuthConfigured = Boolean(googleClientId && googleClientSecret);
 
@@ -15,7 +15,7 @@ if (isGoogleOAuthConfigured) {
   passport.use(new GoogleStrategy({
     clientID: googleClientId as string,
     clientSecret: googleClientSecret as string,
-    callbackURL: googleCallback
+    callbackURL: defaultCallback
   }, async (accessToken, refreshToken, profile, done) => {
     try {
       const email = profile.emails && profile.emails[0] && profile.emails[0].value;

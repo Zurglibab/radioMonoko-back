@@ -67,7 +67,9 @@ async function createUserRelationTable(client: PoolClient) {
                 status VARCHAR(50) NOT NULL DEFAULT 'pending' CHECK (status IN ('pending', 'accepted', 'refused', 'blocked')),
                 created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
                 updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-                PRIMARY KEY (followed_id, follower_id)
+                PRIMARY KEY (followed_id, follower_id),
+                FOREIGN KEY (followed_id) REFERENCES users(id) ON DELETE CASCADE,
+                FOREIGN KEY (follower_id) REFERENCES users(id) ON DELETE CASCADE
             )
         `);
   logger.info("Table 'UserRelation' created successfully.");
