@@ -1,6 +1,5 @@
 import { UserRelationRepository } from '../repository/userRelationRepository';
 import { UserRepository } from '../repository/userRepository';
-import { UserRelation } from '../interfaces/userRelationInterface';
 import { ApiError } from '../config/ApiError';
 import logger from '../config/logger';
 
@@ -134,5 +133,41 @@ export class UserRelationService {
         const requesterIds = relations.map(r => r.follower_id);
         const requesters = await this.userRepository.findByIds(requesterIds);
         return requesters.map(r => ({ id: r.id, username: r.username }));
+    }
+
+    async getFollowers(userId: string): Promise<any[]> {
+        logger.info(`[UserRelationService] User ${userId} wants to see their followers`);
+        const relations = await this.userRelationRepository.getFollower(userId);
+        const followerIds = relations.map(r => r.follower_id);
+        const followers = await this.userRepository.findByIds(followerIds);
+        return followers.map(f => ({ id: f.id, username: f.username }));
+    }
+
+    async getFollowing(userId: string): Promise<any[]> {
+        logger.info(`[UserRelationService] User ${userId} wants to see who they are following (accepted or pending)`);
+        const user = await this.userRepository.findById(userId);
+        if (!user) {
+            throw new ApiError(404, 'User not found');
+        }
+
+        const relations = await this.userRelationRepository.getAllFollowedsBy(userId);
+
+        if (relations.length === 0) {
+            return [];
+        }
+
+        const followedIds = relations.map(r => r.followed_id);
+        const followedUsers = await this.userRepository.findByIds(followedIds);
+
+        const statusById = new Map<string, string>(relations.map(r => [r.followed_id, r.status]));
+
+        return followedUsers.map(f => ({
+            id: f.id,
+            username: f.username,
+            isPublic: f.privacy === 'public',
+            avatar: f.avatar ?? null,
+            bio: f.bio ?? null,
+            status: statusById.get(f.id) ?? null
+        }));
     }
 }

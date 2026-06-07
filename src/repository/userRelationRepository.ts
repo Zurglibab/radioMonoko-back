@@ -24,6 +24,10 @@ export class UserRelationRepository {
         return this.userRelationBddRepository.getFollowers(userId);
     }
 
+    async getAllFollowedsBy(userId: string): Promise<UserRelation[]> {
+        return this.userRelationBddRepository.getAllFollowedsBy(userId);
+    }
+
     async getPendingRequests(userId: string): Promise<UserRelation[]> {
         return this.userRelationBddRepository.getPendingRequests(userId);
     }

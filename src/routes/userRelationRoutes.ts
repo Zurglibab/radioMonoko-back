@@ -34,6 +34,23 @@ userRelationRouter.get('/friends', authMiddleware, userRelationController.getFri
 
 /**
  * @openapi
+ * /userRelation/followers:
+ *   get:
+ *     tags:
+ *       - UserRelations
+ *     summary: Récupère la liste des followers de l'utilisateur connecté
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Liste de followers récupérée avec succès
+ *       401:
+ *         description: Non authentifié
+ */
+userRelationRouter.get('/followers', authMiddleware, userRelationController.getFollowers);
+
+/**
+ * @openapi
  * /userRelation/friends/{id}:
  *   get:
  *     tags:
@@ -212,5 +229,22 @@ userRelationRouter.patch('/refuse/:id', authMiddleware, userRelationController.r
  *         description: Utilisateur non trouvé
  */
 userRelationRouter.post('/block/:id', authMiddleware, userRelationController.block);
+
+/**
+ * @openapi
+ * /userRelation/following:
+ *   get:
+ *     tags:
+ *       - UserRelations
+ *     summary: Récupère la liste des utilisateurs que l'utilisateur connecté suit (acceptés ou en attente)
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Liste des utilisateurs suivis récupérée avec succès
+ *       401:
+ *         description: Non authentifié
+ */
+userRelationRouter.get('/following', authMiddleware, userRelationController.getFollowing);
 
 export default userRelationRouter;

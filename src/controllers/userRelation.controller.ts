@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import { UserRelationService } from '../services/userRelationService';
 import logger from '../config/logger';
-import { FollowDTO } from '../DTO/userRelationDTO';
 import { ApiError } from "../config/ApiError";
 
 export class UserRelationController {
@@ -119,6 +118,30 @@ export class UserRelationController {
             res.status(200).json(requests);
         } catch (error: any) {
             logger.error(`[UserRelationController] Error getting pending requests: ${error.message}`);
+            res.status(error.statusCode || 500).json({ message: error.message });
+        }
+    };
+
+    getFollowers = async (req: Request, res: Response): Promise<void> => {
+        try {
+            const userId = req.user?.id;
+            logger.info(`[UserRelationController] Getting followers of user ${userId}`);
+            const requests = await this.userRelationService.getFollowers(userId);
+            res.status(200).json(requests);
+        } catch (error: any) {
+            logger.error(`[UserRelationController] Error getting followers: ${error.message}`);
+            res.status(error.statusCode || 500).json({ message: error.message });
+        }
+    };
+
+    getFollowing = async (req: Request, res: Response): Promise<void> => {
+        try {
+            const userId = req.user?.id;
+            logger.info(`[UserRelationController] Getting following for user ${userId}`);
+            const following = await this.userRelationService.getFollowing(userId);
+            res.status(200).json(following);
+        } catch (error: any) {
+            logger.error(`[UserRelationController] Error getting following: ${error.message}`);
             res.status(error.statusCode || 500).json({ message: error.message });
         }
     };

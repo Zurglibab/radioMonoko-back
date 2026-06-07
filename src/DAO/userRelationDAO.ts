@@ -69,6 +69,15 @@ export class UserRelationDAO {
         return rows;
     }
 
+    async getAllFollowedsBy(userId: string): Promise<UserRelation[]> {
+        const { rows } = await pool.query<UserRelation>(
+            'SELECT * FROM user_relations WHERE (follower_id = $1 )',
+            [userId]
+        );
+        logger.info(`[UserRelationBddRepository] Getting all followers for user ${userId}`);
+        return rows;
+    }
+
     async getPendingRequests(userId: string): Promise<UserRelation[]> {
         const { rows } = await pool.query<UserRelation>(
             'SELECT * FROM user_relations WHERE followed_id = $1 AND status = \'pending\'',
