@@ -27,6 +27,7 @@ export const authMiddleware = async (req: Request, res: Response, next: NextFunc
       const userDAO = new UserDAO();
       const testUser = await userDAO.findById(process.env.TEST_AUTH_USER_ID as string);
       if (!testUser) {
+        logger.warn('[auth.middleware] test user not found: ' + process.env.TEST_AUTH_USER_ID);
         return res.status(401).json({ message: "Non autorisé: Token manquant ou invalide." });
       }
       (req as any).userId = process.env.TEST_AUTH_USER_ID;
@@ -41,7 +42,7 @@ export const authMiddleware = async (req: Request, res: Response, next: NextFunc
   const authHeader = req.headers.authorization;
 
   if (!authHeader?.startsWith('Bearer ')) {
-    return res.status(401).json({ message: "Non autorisé: Token manquant ou invalide." });
+    return res.status(401).json({ message: "Non autorisé: Token manquant" });
   }
 
   const token = authHeader.split(' ')[1];

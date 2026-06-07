@@ -140,6 +140,8 @@ export const createCollectionItemsRouter = () => {
    *   post:
    *     tags: [CollectionItems]
    *     summary: Ajouter un element a une collection
+   *     security:
+   *       - bearerAuth: []
    *     requestBody:
    *       required: true
    *       content:
@@ -157,7 +159,7 @@ export const createCollectionItemsRouter = () => {
    *         description: Requete invalide
    */
   // Ensure the collection being modified belongs to the authenticated user
-  router.post('/', authMiddleware, ownershipOrAdminBody('collection_id'), controller.create);
+  router.post('/', authMiddleware, ownershipOrAdminResource('collections','collection_id', 'user_id'), controller.create);
 
   /**
    * @openapi
@@ -202,6 +204,8 @@ export const createCollectionItemsRouter = () => {
    *   delete:
    *     tags: [CollectionItems]
    *     summary: Supprimer un element de collection
+   *     security:
+   *       - bearerAuth: []
    *     parameters:
    *       - in: path
    *         name: collectionId

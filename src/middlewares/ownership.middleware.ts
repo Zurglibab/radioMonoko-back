@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { pool } from '../database/db';
+import {logger} from "bs-logger";
 
 // Basic ownership check: path parameter indicates a user id
 export const ownershipOrAdmin = (paramName: string) => {
@@ -99,9 +100,12 @@ export const ownershipOrAdminResource = (tableName: string, idParamName: string,
         return next();
       }
 
-      const id = req.params[idParamName];
+      let id = req.body[idParamName];
       if (!id) {
-        return res.status(400).json({ message: 'Missing resource identifier' });
+        id = req.params[idParamName];
+        if (!id) {
+            return res.status(400).json({ message: 'Missing resource identifier (id) ' + id });
+        }
       }
 
       try {
@@ -110,6 +114,7 @@ export const ownershipOrAdminResource = (tableName: string, idParamName: string,
         if (result.rowCount === 0) {
           return res.status(404).json({ message: 'Resource not found' });
         }
+
         const ownerId = result.rows[0][ownerField];
         if (ownerId === authUser.id) {
           return next();

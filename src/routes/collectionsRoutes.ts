@@ -124,6 +124,8 @@ export const createCollectionsRouter = () => {
    *   post:
    *     tags: [Collections]
    *     summary: Creer une collection
+   *     security:
+   *       - bearerAuth: []
    *     requestBody:
    *       required: true
    *       content:
