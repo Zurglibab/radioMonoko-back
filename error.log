@@ -283,3 +283,16 @@
 {"level":"error","timestamp":"2026-06-03 19:01:42"}
 {"level":"error","message":"User with this email already exists","timestamp":"2026-06-03 19:40:44"}
 {"level":"error","timestamp":"2026-06-03 19:40:44"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-06-07 13:58:36"}
+{"level":"error","timestamp":"2026-06-07 13:58:36"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-06-07 15:00:00"}
+{"level":"error","timestamp":"2026-06-07 15:00:00"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-06-07 15:03:48"}
+{"level":"error","timestamp":"2026-06-07 15:03:48"}
+{"level":"error","message":"[RedisConnexion] Client Error AggregateError","timestamp":"2026-06-08 18:35:30"}
+{"level":"error","message":"[RedisConnexion] Client Error AggregateError","timestamp":"2026-06-08 18:35:30"}
+{"level":"error","message":"[RedisConnexion] Client Error AggregateError","timestamp":"2026-06-08 18:35:30"}
+{"level":"error","message":"[RedisConnexion] Client Error AggregateError","timestamp":"2026-06-08 18:35:31"}
+{"level":"error","message":"[RedisConnexion] Client Error AggregateError","timestamp":"2026-06-08 18:35:31"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-06-08 18:35:43"}
+{"level":"error","timestamp":"2026-06-08 18:35:43"}
