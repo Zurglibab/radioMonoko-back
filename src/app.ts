@@ -49,15 +49,14 @@ export function createApp(): Express {
 
   app.use(helmet({ contentSecurityPolicy: false }));
 
-  // Basic rate limiting to mitigate brute-force and scraping
+
   const limiter = rateLimit({
-    windowMs: Number(process.env.RATE_LIMIT_WINDOW_MS) || 15 * 60 * 1000, // 15 minutes
-    max: Number(process.env.RATE_LIMIT_MAX) || 100, // limit each IP to 100 requests per windowMs
+    windowMs: Number(process.env.RATE_LIMIT_WINDOW_MS) || 15 * 60 * 1000,
+    max: Number(process.env.RATE_LIMIT_MAX) || 200,
     standardHeaders: true,
     legacyHeaders: false,
   });
-  // Do not apply rate limiting in tests or when explicitly disabled to avoid flakiness
-  // Skip rate limiting when running tests or when DISABLE_RATE_LIMIT is set to 'true'
+
   const disableRateLimit = process.env.DISABLE_RATE_LIMIT === 'true';
   if (!process.env.JEST_WORKER_ID && process.env.NODE_ENV !== 'test' && !disableRateLimit) {
     app.use(limiter);
@@ -66,7 +65,6 @@ export function createApp(): Express {
   app.use((req, res, next) => {
     const allowedOrigin = process.env.CORS_ORIGIN || '*';
 
-    // In production, set CORS_ORIGIN to a specific origin (ex: https://yourdomain.tld)
     res.header('Access-Control-Allow-Origin', allowedOrigin);
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
