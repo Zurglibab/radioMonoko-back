@@ -47,7 +47,7 @@ async function createUserTable(client: PoolClient) {
                 password VARCHAR(255) NOT NULL,
                 username VARCHAR(255) UNIQUE,
                 display_name VARCHAR(255),
-                avatar VARCHAR(255),
+                avatar TEXT,
                 bio TEXT,
                 website VARCHAR(255),
                 privacy VARCHAR(50) DEFAULT 'public',
@@ -242,7 +242,7 @@ async function createNotificationTable(client: PoolClient) {
   await client.query(`
         CREATE TABLE IF NOT EXISTS channel (
             id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-            type VARCHAR(50) NOT NULL,
+            type VARCHAR(255) NOT NULL,
             created_at TIMESTAMP DEFAULT NOW()
         )
     `);

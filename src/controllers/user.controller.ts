@@ -172,4 +172,37 @@ export class UserController {
             return res.status(500).json({message: 'Internal server error'});
         }
     };
+
+    uploadAvatarBase64 = async (req: Request, res: Response) => {
+        try {
+            const userId = (req as any).userId ?? (req as any).user?.id;
+            if (!userId) return res.status(401).json({ message: 'Authentication required' });
+
+            const { avatar } = req.body as { avatar?: string };
+            if (!avatar || typeof avatar !== 'string') {
+                return res.status(400).json({ message: 'avatar (base64 data URL) is required' });
+            }
+
+            // Validate Data URL (mime + base64)
+            const matches = /^data:(image\/(png|jpe?g|webp));base64,([A-Za-z0-9+/=]+)$/.exec(avatar);
+            if (!matches) return res.status(400).json({ message: 'Invalid image data URL or unsupported mime type' });
+
+            // Compute approximate byte size from base64 length to protect memory
+            const base64 = matches[3];
+            const padding = (base64.endsWith('==') ? 2 : base64.endsWith('=') ? 1 : 0);
+            const bytes = Math.floor((base64.length * 3) / 4) - padding;
+            const MAX_BYTES = 2 * 1024 * 1024; // 2MB
+            if (bytes > MAX_BYTES) return res.status(413).json({ message: 'File too large' });
+
+            // Persist directly in DB: the `avatar` column is TEXT and will hold the data URL
+            const updated = await this.userService.modifyUser({ id: userId, avatar });
+            if (!updated) return res.status(404).json({ message: 'User not found' });
+
+            const { password, ...userWithoutPassword } = updated as any;
+            return res.status(200).json(userWithoutPassword);
+        } catch (error: any) {
+            logger.error('uploadAvatarBase64 error', error);
+            return res.status(500).json({ message: 'Internal server error' });
+        }
+    }
 }

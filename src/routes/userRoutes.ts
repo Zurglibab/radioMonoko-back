@@ -278,6 +278,36 @@ userRouter.put('/me', authMiddleware, userController.updateMe);
 
 /**
  * @openapi
+ * /user/me/avatar-base64:
+ *   post:
+ *     tags:
+ *       - Users
+ *     summary: Upload avatar via Base64 data URL
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [avatar]
+ *             properties:
+ *               avatar:
+ *                 type: string
+ *                 description: data URL (e.g. data:image/png;base64,...)
+ *     responses:
+ *       200:
+ *         description: Avatar mis à jour
+ *       400:
+ *         description: Données invalides
+ *       401:
+ *         description: Non autorisé
+ */
+userRouter.post('/me/avatar-base64', authMiddleware, userController.uploadAvatarBase64);
+
+/**
+ * @openapi
  * /user/search:
  *   get:
  *     tags:

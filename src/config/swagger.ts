@@ -58,6 +58,31 @@ const swaggerDefinition = {
                     success: { type: "boolean", example: true },
                     message: { type: "string", example: "API is healthy" }
                 }
+            },
+            // Minimal Channel schema to satisfy $ref in route comments
+            Channel: {
+                type: "object",
+                properties: {
+                    id: { type: "string", format: "uuid" },
+                    type: { type: "string" },
+                    created_at: { type: "string", format: "date-time", nullable: true }
+                },
+                required: ["id", "type"]
+            },
+            CreateChannelDTO: {
+                type: "object",
+                properties: {
+                    type: { type: "string" }
+                },
+                required: ["type"]
+            },
+            ChannelMember: {
+                type: "object",
+                properties: {
+                    channel_id: { type: "string", format: "uuid" },
+                    user_id: { type: "string", format: "uuid" },
+                    status: { type: "string", example: "accepted" }
+                }
             }
         }
     }

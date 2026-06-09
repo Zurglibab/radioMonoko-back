@@ -12,4 +12,6 @@ export interface ChannelRepository {
     listMembers(channelId: string): Promise<ChannelMember[]>;
     removeMember(channelId: string, userId: string): Promise<ChannelMember | null>;
     isMember(channelId: string, userId: string): Promise<boolean>;
+
+    findByUserId(userId: string): Promise<Channel[]>;
 }

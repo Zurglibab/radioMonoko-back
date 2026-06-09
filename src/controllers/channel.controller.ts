@@ -1,12 +1,15 @@
 import { Request, Response } from 'express';
 import { ChannelService } from '../services/channelService';
+import logger from "../config/logger";
 
 export class ChannelController {
     constructor(private readonly service: ChannelService) {}
 
-    listChannels = async (_req: Request, res: Response) => {
+    listChannels = async (req: Request, res: Response) => {
         try {
-            const data = await this.service.findAll();
+            const userId = (req as any).user?.id as string | undefined;
+            const data = await this.service.findByUser(userId);
+            if (!data || data.length === 0) return res.status(200).json([]);
             res.status(200).json(data);
         } catch (error: any) {
             res.status(500).json({ message: error.message });

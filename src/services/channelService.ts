@@ -13,6 +13,10 @@ export class ChannelService {
         return this.repository.findById(id);
     }
 
+    findByUser(userId: string): Promise<Channel[]> {
+        return this.repository.findByUserId(userId);
+    }
+
     async create(dto: { type?: string }): Promise<Channel> {
         const type = dto.type?.trim();
         if (!type) {

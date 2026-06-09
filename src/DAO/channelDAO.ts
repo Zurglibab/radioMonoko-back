@@ -77,4 +77,16 @@ export class ChannelDAO implements ChannelRepository {
         );
         return (result.rowCount ?? 0) > 0;
     }
+
+    async findByUserId(userId: string): Promise<Channel[]> {
+        const result = await pool.query(
+            `SELECT c.*
+             FROM channel c
+             JOIN channel_user cu ON c.id = cu.channel_id
+             WHERE cu.user_id = $1
+             ORDER BY c.created_at DESC`,
+            [userId],
+        );
+        return result.rows;
+    }
 }

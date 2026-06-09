@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { ChannelDAO } from '../DAO/channelDAO';
 import { ChannelService } from '../services/channelService';
 import { ChannelController } from '../controllers/channel.controller';
+import {authMiddleware} from "../middlewares/auth.middleware";
 
 const channelRoutes = () => {
     const router = Router();
@@ -11,52 +12,12 @@ const channelRoutes = () => {
 
     /**
      * @openapi
-     * components:
-     *   schemas:
-     *     Channel:
-     *       type: object
-     *       required:
-     *         - id
-     *         - type
-     *         - created_at
-     *       properties:
-     *         id:
-     *           type: string
-     *           format: uuid
-     *         type:
-     *           type: string
-     *           example: general
-     *         created_at:
-     *           type: string
-     *           format: date-time
-     *     CreateChannelDTO:
-     *       type: object
-     *       required: [type]
-     *       properties:
-     *         type:
-     *           type: string
-     *           example: general
-     *     ChannelMember:
-     *       type: object
-     *       required: [channel_id, user_id, joined_at]
-     *       properties:
-     *         channel_id:
-     *           type: string
-     *           format: uuid
-     *         user_id:
-     *           type: string
-     *           format: uuid
-     *         joined_at:
-     *           type: string
-     *           format: date-time
-     */
-
-    /**
-     * @openapi
      * /channels:
      *   post:
      *     summary: Créer un channel
      *     tags: [Channels]
+     *     security:
+     *       - bearerAuth: []
      *     requestBody:
      *       required: true
      *       content:
@@ -73,7 +34,7 @@ const channelRoutes = () => {
      *       400:
      *         description: Validation error
      */
-    router.post('/', controller.createChannel);
+    router.post('/', authMiddleware, controller.createChannel);
 
     /**
      * @openapi
@@ -81,6 +42,8 @@ const channelRoutes = () => {
      *   get:
      *     summary: Lister les channels
      *     tags: [Channels]
+     *     security:
+     *       - bearerAuth: []
      *     responses:
      *       200:
      *         description: Liste des channels
@@ -91,7 +54,7 @@ const channelRoutes = () => {
      *               items:
      *                 $ref: '#/components/schemas/Channel'
      */
-    router.get('/', controller.listChannels);
+    router.get('/', authMiddleware,  controller.listChannels);
 
     /**
      * @openapi
