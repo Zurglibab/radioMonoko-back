@@ -326,3 +326,5 @@
 {"level":"error","timestamp":"2026-06-09 10:32:38"}
 {"level":"error","message":"User with this email already exists","timestamp":"2026-06-09 10:35:30"}
 {"level":"error","timestamp":"2026-06-09 10:35:30"}
+{"level":"error","message":"Password must be at least 6 characters long","timestamp":"2026-06-09 13:47:16"}
+{"level":"error","timestamp":"2026-06-09 13:47:16"}

@@ -281,3 +281,50 @@ L'interaction est encapsulée dans une classe `RadioFranceClient` exportée sous
 4. **Extraction** : En cas de succès, elle extrait et renvoie directement la donnée utile (`response.data.data`), masquant la complexité du wrapper réseau.
 
 Grâce à cette abstraction, nos *Services* (tels que la synchronisation des émissions) peuvent invoquer l'API externe de manière transparente, sans se soucier des headers ou du traitement brut des erreurs GraphQL.
+
+---
+
+## 12. Guide d'installation (Tutoriel)
+
+Ce tutoriel explique comment récupérer, configurer et démarrer l'API localement.
+
+### Étape 1 : Récupérer le projet
+Clonez le dépôt Git officiel et installez les dépendances :
+```bash
+git clone https://github.com/Zurglibab/radioMonoko-back.git
+cd radioMonoko-back
+npm install
+```
+
+### Étape 2 : Démarrer l'infrastructure (PostgreSQL & Redis)
+Le projet nécessite une base de données PostgreSQL et un serveur Redis pour le cache. Un fichier `docker-compose.yml` est fourni pour lancer ces services facilement.
+Assurez-vous que Docker est installé et exécutez :
+```bash
+docker-compose up -d
+```
+*Note : Cette commande va télécharger les images nécessaires et démarrer les conteneurs en arrière-plan. PostgreSQL tournera sur le port par défaut 5432 et Redis sur le port 6379.*
+
+### Étape 3 : Configurer l'environnement (.env)
+
+**⚠️ Règle d'or pour le rendu et le partage du projet :** Ne commitez **jamais** de mots de passe, de clés d'API ou de secrets en clair dans votre dépôt Git. 
+
+Pour configurer le projet localement :
+1. Copiez le fichier `.env.example` fourni à la racine et renommez-le en `.env` (ce fichier `.env` sera ignoré par Git) :
+   ```bash
+   cp .env.example .env
+   ```
+2. Ouvrez le fichier `.env` nouvellement créé et complétez les variables sensibles (`POSTGRES_PASSWORD`, `JWT_SECRET`, etc.) avec vos propres valeurs (uniquement sur votre machine).
+3. Il faut ensuite configurer l'accès à l'API de Radio France :
+   - **Création de compte** : Rendez-vous sur le portail développeur : [https://developers.radiofrance.fr/signup](https://developers.radiofrance.fr/signup)
+   - **Génération du Token** : Créez un nouveau projet pour générer votre jeton d'accès (token).
+   - **Configuration Locale** : Ajoutez ce jeton dans votre fichier `.env` à la variable `RADIOFRANCE_TOKEN`.
+
+En procédant ainsi avec un `.env.example` (qui contient juste la structure des variables sans les vrais mots de passe), le correcteur saura quelles clés il doit configurer de son côté pour tester le projet, tout en gardant vos mots de passe sécurisés !
+
+### Étape 4 : Démarrer l'API
+Une fois les services démarrés et le fichier `.env` configuré, lancez le serveur de développement avec Hot-Reloading :
+```bash
+npm run dev
+```
+Le serveur démarrera (par défaut sur le port 3000) et se connectera à la base de données.
+Vous pourrez alors consulter et tester l'API via son interface Swagger : [http://localhost:3000/api/docs](http://localhost:3000/api/docs).
