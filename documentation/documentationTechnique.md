@@ -36,39 +36,39 @@ L'objectif de cette architecture est de séparer clairement les responsabilités
 
 L'API est structurée autour de plusieurs ressources métier. Voici les grands groupes d'endpoints disponibles et leurs fonctions principales :
 
-### 🔐 Authentification (`/auth`)
+### Authentification (`/auth`)
 - **Fonction** : Gère la connexion, la création de tokens JWT, et la déconnexion.
 - **Points d'entrée clés** :
   - `GET /auth/google` : Initie la connexion via Google OAuth.
   - `POST /auth/google-mobile` : Connexion Google pour l'application mobile (prend `googleToken` en Body).
   - `POST /auth/logout` : Révoque le token actuel.
 
-### 📚 Collections (`/collections`, `/collectionItems`)
+### Collections (`/collections`, `/collectionItems`)
 - **Fonction** : Permet aux utilisateurs de créer et gérer des listes de contenus (ex: "À écouter plus tard", "Favoris").
 - **Points d'entrée clés** :
   - `POST /collections` : Création d'une collection. Paramètres requis dans le Body : `name` (string), et optionnellement `description` (string), `is_public` (boolean).
   - `POST /collectionItems` : Ajoute une émission spécifique à une collection. Paramètres requis : `collection_id` et `content_id`.
   - `GET /collections/user/:userId` : Récupère toutes les collections d'un utilisateur.
 
-### 👤 Utilisateurs & Relations (`/user`, `/userRelation`)
+### Utilisateurs & Relations (`/user`, `/userRelation`)
 - **Fonction** : Gestion des profils utilisateurs et des interactions sociales (système de Follow).
 - **Points d'entrée clés** :
   - `GET /user/:id` : Récupère les informations d'un utilisateur spécifique.
   - `POST /userRelation` : Permet de s'abonner à un autre utilisateur. Paramètre requis : `followed_id`.
 
-### 📻 Contenus & Notes (`/content`, `/ratingContent`)
+### Contenus & Notes (`/content`, `/ratingContent`)
 - **Fonction** : Catalogue principal des émissions, diffusions et gestion de leurs notations.
 - **Points d'entrée clés** :
   - `GET /content` : Liste et recherche de contenus (filtres possibles via Query Parameters).
   - `POST /ratingContent` : Laisser une note sur une émission. Paramètres requis : `content_id` et `rating` (nombre).
 
-### 💬 Avis et Commentaires (`/review`)
+### Avis et Commentaires (`/review`)
 - **Fonction** : Permet aux utilisateurs de débattre et donner leur avis textuel sur un contenu.
 - **Points d'entrée clés** :
   - `POST /review` : Créer un nouvel avis. Paramètres requis : `content_id` et `comment`.
   - `POST /review/like` : Aimer ou ne plus aimer un avis existant (prend `review_id` en paramètre).
 
-### ✉️ Messagerie & Notifications (`/channels`, `/notifications`)
+### Messagerie & Notifications (`/channels`, `/notifications`)
 - **Fonction** : Écosystème social et alertes en temps réel.
 - **Points d'entrée clés** :
   - `POST /channels` : Créer un nouveau salon de discussion (paramètre : `type`).
@@ -80,11 +80,11 @@ L'API est structurée autour de plusieurs ressources métier. Voici les grands g
 
 Les choix technologiques ont été motivés par le besoin de performance, de sécurité et de scalabilité :
 
-- **TypeScript** : Apporte un typage fort statique. Cela réduit considérablement les erreurs d'exécution, fiabilise les refactorisations et améliore l'auto-complétion (via les Interfaces et DTOs).
-- **Express.js** : Un framework web léger et performant. Il permet d'intégrer facilement des middlewares de sécurité et de performance (Helmet pour les headers HTTP, Rate Limit contre les attaques de type DoS ou brute-force, Winston pour la journalisation des logs).
-- **PostgreSQL via requêtes natives (`pg`)** : Contrairement à l'utilisation d'un ORM lourd (comme TypeORM ou Prisma) qui peut masquer la complexité et générer des requêtes sous-optimales, le choix du driver natif permet un contrôle total sur le SQL. La structure est garantie au démarrage par le fichier `src/database/db.ts` qui initialise le schéma.
-- **Architecture en Couches (Routes -> Controllers -> Services -> Repositories/DAOs)** : Permet d'isoler la logique métier de la mécanique HTTP ou des spécificités de la base de données.
-- **Swagger/OpenAPI** : Auto-documentation interactive exposée sur `/api/docs`. C'est un atout majeur pour la communication entre les développeurs backend et frontend.
+- **TypeScript** 
+- **Express.js** 
+- **PostgreSQL via requêtes natives (`pg`)** 
+- **Architecture en Couches (Routes -> Controllers -> Services -> Repositories/DAOs)** 
+- **Swagger/OpenAPI** 
 
 ---
 
