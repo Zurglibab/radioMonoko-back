@@ -224,7 +224,7 @@ export const createNotificationRouter = () => {
    *         description: Requete invalide
    */
 
-  router.post('/', authMiddleware, ownershipOrAdminBody('user_id'), controller.create);
+  router.post('/', authMiddleware, controller.create);
 
   /**
    * @openapi

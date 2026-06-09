@@ -105,6 +105,38 @@ describe('Notification Routes with Mocks', () => {
     });
   });
 
+  describe('POST /notifications', () => {
+    it('should allow a logged-in user to create a notification for another user', async () => {
+      mockCreate.mockResolvedValue({
+        id: 'notification-123',
+        user_id: 'user-2',
+        type: 'like',
+        message: 'User A liked your post',
+        is_read: false,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
+      });
+
+      // The mocked authMiddleware always authenticates as 'user-1'
+      const res = await request(app)
+        .post('/notifications')
+        .send({
+          user_id: 'user-2',
+          type: 'like',
+          message: 'User A liked your post'
+        });
+
+      expect(res.status).toBe(201);
+      expect(res.body).toHaveProperty('id', 'notification-123');
+      expect(res.body).toHaveProperty('user_id', 'user-2');
+      expect(mockCreate).toHaveBeenCalledWith(expect.objectContaining({
+        user_id: 'user-2',
+        type: 'like',
+        message: 'User A liked your post'
+      }));
+    });
+  });
+
   describe('GET /notifications (with pagination)', () => {
     it('should return all notifications with pagination headers disabled by default if no query params', async () => {
       mockFindAll.mockResolvedValue([

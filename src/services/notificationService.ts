@@ -5,7 +5,7 @@ import { CreateNotificationDTO, UpdateNotificationDTO } from '../DTO/notificatio
 import { PaginationOptions } from '../utils/pagination';
 
 export class NotificationService {
-  constructor(private readonly repository: NotificationRepository) {}
+  constructor(private readonly repository: NotificationRepository) { }
 
   getAll(pagination?: PaginationOptions): Promise<Notification[]> {
     return this.repository.findAll(pagination);

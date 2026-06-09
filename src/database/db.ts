@@ -246,7 +246,7 @@ async function createNotificationTable(client: PoolClient) {
         )
     `);
 
-    await client.query(`
+  await client.query(`
         CREATE TABLE IF NOT EXISTS channel_user (
             channel_id UUID REFERENCES channel(id),
             user_id UUID REFERENCES users(id) ON DELETE CASCADE,
@@ -255,7 +255,7 @@ async function createNotificationTable(client: PoolClient) {
         )
     `);
 
-    await client.query(`
+  await client.query(`
         CREATE TABLE IF NOT EXISTS messages (
             id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
             channel_id UUID REFERENCES channel(id) ON DELETE CASCADE,
@@ -265,7 +265,7 @@ async function createNotificationTable(client: PoolClient) {
     )
     `);
 
-    logger.info("Table 'notifications' created successfully.");
+  logger.info("Table 'notifications' created successfully.");
 }
 
 async function createReportUsersTable(client: PoolClient) {

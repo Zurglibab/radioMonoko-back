@@ -4,7 +4,7 @@ import { UpdateNotificationDTO } from '../DTO/notificationDTO';
 import { applyPaginationHeaders, parsePagination } from '../utils/pagination';
 
 export class NotificationController {
-  constructor(private readonly service: NotificationService) {}
+  constructor(private readonly service: NotificationService) { }
 
   getAll = async (req: Request, res: Response) => {
     try {

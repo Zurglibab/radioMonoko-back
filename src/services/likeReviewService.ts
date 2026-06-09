@@ -3,7 +3,7 @@ import { UpsertLikeReviewDTO } from '../DTO/likeReviewDTO';
 import { LikeReview, LikeReviewCount } from '../interfaces/likeReviewInterface';
 
 export class LikeReviewService {
-  constructor(private readonly repository: LikeReviewRepository) {}
+  constructor(private readonly repository: LikeReviewRepository) { }
 
   async upsert(dto: UpsertLikeReviewDTO): Promise<LikeReview> {
     if (!dto.review_id || !dto.user_id || typeof dto.is_like !== 'boolean') {
