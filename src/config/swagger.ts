@@ -32,7 +32,8 @@ const swaggerDefinition = {
         { name: "Members", description: "Gestion des membres de channel" },
         { name: "Messages", description: "Gestion des messages" },
         { name: "Auth", description: "Authentification OAuth2 et JWT" },
-        { name: "Admin", description: "Modération et actions administrateur" }
+        { name: "Admin", description: "Modération et actions administrateur" },
+        { name: "Reports", description: "Gestion des signalements (utilisateurs, reviews, etc.)" }
     ],
     components: {
         securitySchemes: {

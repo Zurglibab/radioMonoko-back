@@ -29,6 +29,7 @@ export const initializeDatabase = async () => {
     await createLikeReviewTable(client);
     await createNotificationTable(client);
     await createReportUsersTable(client);
+    await createReportReviewsTable(client);
     logger.info('Database initialized successfully.');
   } catch (error) {
     logger.warn('Error initializing database:', error);
@@ -288,4 +289,26 @@ async function createReportUsersTable(client: PoolClient) {
         `);
 
   logger.info("Table 'report_users' created successfully.");
+}
+
+async function createReportReviewsTable(client: PoolClient) {
+  await client.query(`
+            CREATE TABLE IF NOT EXISTS report_reviews (
+                id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+                reporter_id UUID NOT NULL,
+                review_id UUID NOT NULL,
+                report_type VARCHAR(50) NOT NULL,
+                description TEXT,
+                created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (reporter_id) REFERENCES users(id) ON DELETE CASCADE,
+                FOREIGN KEY (review_id) REFERENCES reviews(id) ON DELETE CASCADE
+            )
+        `);
+
+  await client.query(`
+            CREATE INDEX IF NOT EXISTS idx_report_reviews_review_id
+            ON report_reviews (review_id)
+        `);
+
+  logger.info("Table 'report_reviews' created successfully.");
 }

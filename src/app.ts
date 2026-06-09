@@ -23,7 +23,7 @@ import channelRoutes from './routes/channelRoutes';
 import messageRoutes from './routes/messageRoutes';
 import { createNotificationRouter } from './routes/notificationRoutes';
 import reportUsersRouter from './routes/reportUsersRoutes';
-
+import reportReviewRouter from './routes/reportReviewRoutes';
 
 export function createApp(): Express {
   const app = express();
@@ -89,6 +89,7 @@ export function createApp(): Express {
   app.use('/notifications', createNotificationRouter());
 
   app.use('/reports', reportUsersRouter);
+  app.use('/reports', reportReviewRouter);
 
   app.use(expressWinston.errorLogger({
     winstonInstance: logger

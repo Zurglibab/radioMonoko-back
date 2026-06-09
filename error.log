@@ -306,3 +306,23 @@
 {"level":"error","timestamp":"2026-06-09 09:33:52"}
 {"level":"error","message":"User with this email already exists","timestamp":"2026-06-09 09:35:01"}
 {"level":"error","timestamp":"2026-06-09 09:35:01"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-06-09 10:17:30"}
+{"level":"error","timestamp":"2026-06-09 10:17:30"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-06-09 10:29:13"}
+{"level":"error","timestamp":"2026-06-09 10:29:13"}
+{"level":"error","message":"Error verifying token: jwt malformed","timestamp":"2026-06-09 10:29:21"}
+{"level":"error","message":"Error verifying token: jwt malformed","timestamp":"2026-06-09 10:29:21"}
+{"level":"error","message":"Error verifying token: jwt malformed","timestamp":"2026-06-09 10:29:21"}
+{"level":"error","message":"Error verifying token: jwt malformed","timestamp":"2026-06-09 10:29:21"}
+{"level":"error","message":"[auth.middleware] test user check failed: invalid input syntax for type uuid: \"test-user-id\"","timestamp":"2026-06-09 10:30:08"}
+{"level":"error","message":"[auth.middleware] test user check failed: invalid input syntax for type uuid: \"test-user-id\"","timestamp":"2026-06-09 10:30:08"}
+{"level":"error","message":"[auth.middleware] test user check failed: invalid input syntax for type uuid: \"test-user-id\"","timestamp":"2026-06-09 10:30:08"}
+{"level":"error","message":"[auth.middleware] test user check failed: invalid input syntax for type uuid: \"test-user-id\"","timestamp":"2026-06-09 10:30:08"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-06-09 10:30:14"}
+{"level":"error","timestamp":"2026-06-09 10:30:14"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-06-09 10:32:02"}
+{"level":"error","timestamp":"2026-06-09 10:32:02"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-06-09 10:32:38"}
+{"level":"error","timestamp":"2026-06-09 10:32:38"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-06-09 10:35:30"}
+{"level":"error","timestamp":"2026-06-09 10:35:30"}
