@@ -145,4 +145,18 @@ export class UserRelationController {
             res.status(error.statusCode || 500).json({ message: error.message });
         }
     };
+
+    checkIsFriend = async (req: Request, res: Response): Promise<void> => {
+        try {
+            const userId = req.user?.id;
+            const targetId = req.params.id as string;
+            logger.info(`[UserRelationController] Checking if user ${userId} is friend with ${targetId}`);
+            
+            const isFriend = await this.userRelationService.isFriend(userId, targetId);
+            res.status(200).json({ isFriend });
+        } catch (error: any) {
+            logger.error(`[UserRelationController] Error checking friend status: ${error.message}`);
+            res.status(error.statusCode || 500).json({ message: error.message });
+        }
+    };
 }

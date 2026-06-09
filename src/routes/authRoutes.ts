@@ -203,8 +203,11 @@ router.post('/google-mobile', async (req: Request, res: Response) => {
     return res.status(400).json({ success: false, error: 'No email associated with this Google token' });
   }
 
-  try {
+    try {
     let user = await userDAO.findByEmail(email);
+    if (user && (user as any).is_banned) {
+      return res.status(403).json({ success: false, error: 'Votre compte a été banni.' });
+    }
     if (!user) {
       const newUser = {
         id: uuidv4(),

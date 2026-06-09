@@ -246,5 +246,30 @@ userRelationRouter.post('/block/:id', authMiddleware, userRelationController.blo
  *         description: Non authentifié
  */
 userRelationRouter.get('/following', authMiddleware, userRelationController.getFollowing);
+/**
+ * @openapi
+ * /userRelation/is-friend/{id}:
+ *   get:
+ *     tags:
+ *       - UserRelations
+ *     summary: Vérifie si deux utilisateurs sont amis (si l'un suit l'autre et que c'est accepté)
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: L'ID de l'utilisateur à vérifier
+ *     responses:
+ *       200:
+ *         description: Booléen indiquant si les utilisateurs sont amis
+ *       401:
+ *         description: Non authentifié
+ *       404:
+ *         description: Utilisateur non trouvé
+ */
+userRelationRouter.get('/is-friend/:id', authMiddleware, userRelationController.checkIsFriend);
 
 export default userRelationRouter;

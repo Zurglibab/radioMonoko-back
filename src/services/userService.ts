@@ -73,7 +73,7 @@ export class UserService {
 
         if ((user as any).is_banned) {
             logger.warn(`Login attempt by banned user: ${dto.email}`);
-            return null;
+            throw new Error("USER_BANNED");
         }
         console.log("user");
         const isPasswordValid = await bcrypt.compare(dto.password, user.password);
