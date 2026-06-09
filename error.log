@@ -328,3 +328,6 @@
 {"level":"error","timestamp":"2026-06-09 10:35:30"}
 {"level":"error","message":"Password must be at least 6 characters long","timestamp":"2026-06-09 13:47:16"}
 {"level":"error","timestamp":"2026-06-09 13:47:16"}
+{"code":"23505","constraint":"users_username_key","detail":"Key (username)=(test) already exists.","file":"nbtinsert.c","length":205,"level":"error","line":"666","name":"error","routine":"_bt_check_unique","schema":"public","severity":"ERROR","table":"users","timestamp":"2026-06-09 14:33:35"}
+{"level":"error","message":"Password must be at least 6 characters long","timestamp":"2026-06-09 14:53:47"}
+{"level":"error","timestamp":"2026-06-09 14:53:47"}

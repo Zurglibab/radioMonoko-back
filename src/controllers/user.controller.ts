@@ -42,6 +42,9 @@ export class UserController {
             }
             res.status(200).json(token);
         } catch (error: any) {
+            if (error.message === 'USER_BANNED') {
+                return res.status(403).json({message: 'Votre compte a été banni.'});
+            }
             logger.error(error);
             res.status(500).json({message: 'Internal server error'});
         }

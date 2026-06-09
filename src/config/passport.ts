@@ -24,6 +24,9 @@ if (isGoogleOAuthConfigured) {
       }
 
       let user = await userDAO.findByEmail(email);
+      if (user && (user as any).is_banned) {
+        return done(new Error('Votre compte a été banni.'));
+      }
       if (!user) {
 
         const newUser = {

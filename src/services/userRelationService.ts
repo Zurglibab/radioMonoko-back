@@ -170,4 +170,17 @@ export class UserRelationService {
             status: statusById.get(f.id) ?? null
         }));
     }
+
+    async isFriend(userId: string, targetId: string): Promise<boolean> {
+        logger.info(`[UserRelationService] Checking if user ${userId} and ${targetId} are friends`);
+        if (userId === targetId) return false;
+
+        const relation1 = await this.userRelationRepository.findRelation(userId, targetId);
+        if (relation1?.status === 'accepted') return true;
+
+        const relation2 = await this.userRelationRepository.findRelation(targetId, userId);
+        if (relation2?.status === 'accepted') return true;
+
+        return false;
+    }
 }
