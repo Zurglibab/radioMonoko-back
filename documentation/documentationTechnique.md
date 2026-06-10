@@ -268,6 +268,12 @@ npm run test
 
 RadioMonoko enrichit son catalogue en consommant directement les données publiques fournies par l'**Open API de Radio France**. 
 
+### Obtenir une clé
+
+Avant tout, il faut obtenir une clé API. Il faut d'abord créer un compte développeur, qui respecte les conditions d'utilisation, directement sur le site de [RadioFrance](https://developers.radiofrance.fr/signup).
+Une fois votre compte créé, allez dans votre espace ([Compte](https://developers.radiofrance.fr/account)), puis procédez à la demande en cliquant sur le bouton "Générer une clé" et en remplissant les champs demandés.
+Il suffira ensuite d'attendre la clé, qui arrivera quelques jours plus tard dans votre boîte mail.
+
 ### Fonctionnement Technique (GraphQL)
 Contrairement à une API REST classique, l'API de Radio France est exposée via **GraphQL**. L'intégration au sein de notre backend est centralisée dans le fichier `src/config/ApiConnexion.ts`, qui agit comme un client unique :
 - **Client HTTP** : La bibliothèque `Axios` est utilisée pour créer une instance configurée (`axios.create`) pointant vers le domaine de Radio France.
