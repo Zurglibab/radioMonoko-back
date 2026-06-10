@@ -151,6 +151,8 @@ export const createRatingContentRouter = () => {
    *   post:
    *     tags: [RatingContent]
    *     summary: Creer une notation pour un contenu
+   *     security:
+   *       - bearerAuth: []
    *     requestBody:
    *       required: true
    *       content:
@@ -175,6 +177,8 @@ export const createRatingContentRouter = () => {
    *   put:
    *     tags: [RatingContent]
    *     summary: Mettre a jour une notation
+   *     security:
+   *       - bearerAuth: []
    *     parameters:
    *       - in: path
    *         name: contentId
@@ -214,6 +218,8 @@ export const createRatingContentRouter = () => {
    *   delete:
    *     tags: [RatingContent]
    *     summary: Supprimer une notation
+   *     security:
+   *       - bearerAuth: []
    *     parameters:
    *       - in: path
    *         name: contentId

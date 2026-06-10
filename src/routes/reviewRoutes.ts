@@ -170,6 +170,8 @@ export const createReviewRouter = () => {
    *   post:
    *     tags: [Review]
    *     summary: Creer une review
+   *     security:
+   *       - bearerAuth: []
    *     requestBody:
    *       required: true
    *       content:
@@ -194,6 +196,8 @@ export const createReviewRouter = () => {
    *   put:
    *     tags: [Review]
    *     summary: Mettre a jour une review
+   *     security:
+   *       - bearerAuth: []
    *     parameters:
    *       - in: path
    *         name: id
@@ -226,6 +230,8 @@ export const createReviewRouter = () => {
    *   delete:
    *     tags: [Review]
    *     summary: Supprimer une review
+   *     security:
+   *       - bearerAuth: []
    *     parameters:
    *       - in: path
    *         name: id

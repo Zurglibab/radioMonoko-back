@@ -18,6 +18,7 @@ export interface ModifyUserDTO {
   website?: string;
   is_banned?: boolean;
   role?: string;
+  notifications_email?: boolean;
 }
 
 export class LoginUserDTO {

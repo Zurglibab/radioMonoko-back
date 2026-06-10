@@ -308,6 +308,37 @@ userRouter.post('/me/avatar-base64', authMiddleware, userController.uploadAvatar
 
 /**
  * @openapi
+ * /user/me/notifications-email:
+ *   patch:
+ *     tags:
+ *       - Users
+ *     summary: Basculer ou définir la préférence notifications_email pour l'utilisateur connecté
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: false
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               value:
+ *                 type: boolean
+ *                 description: "(optionnel) définir explicitement la valeur. Si absent, la valeur sera basculée."
+ *     responses:
+ *       200:
+ *         description: Utilisateur mis à jour avec succès
+ *       400:
+ *         description: Requête invalide
+ *       401:
+ *         description: Non autorisé
+ *       500:
+ *         description: Erreur interne
+ */
+userRouter.patch('/me/notifications-email', authMiddleware, userController.toggleNotifications);
+
+/**
+ * @openapi
  * /user/search:
  *   get:
  *     tags:

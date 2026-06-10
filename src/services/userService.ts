@@ -108,10 +108,21 @@ export class UserService {
             avatar: dto.avatar || existingUser.avatar,
             bio: dto.bio || existingUser.bio,
             website: dto.website || existingUser.website,
+            notifications_email: typeof dto.notifications_email !== 'undefined' ? dto.notifications_email : (existingUser as any).notifications_email,
             updated_at: new Date(Date.now())
         };
         const result = await this.userDAO.edit(updatedUser);
         logger.info(`User with id: ${dto.id} modified successfully`);
+        return result;
+    }
+
+    async toggleNotificationsEmail(userId: string, value?: boolean): Promise<User | null> {
+        const existingUser = await this.userDAO.findById(userId);
+        if (!existingUser) {
+            throw new Error('User not found');
+        }
+        const newValue = typeof value !== 'undefined' ? value : !((existingUser as any).notifications_email ?? false);
+        const result = await this.userDAO.edit({ id: userId, notifications_email: newValue } as any);
         return result;
     }
 

@@ -53,6 +53,7 @@ async function createUserTable(client: PoolClient) {
                 privacy VARCHAR(50) DEFAULT 'public',
                 role VARCHAR(255) DEFAULT 'user',  
                 is_banned BOOLEAN DEFAULT false,
+                notifications_email BOOLEAN DEFAULT false,
                 created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
                 updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
             )

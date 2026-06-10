@@ -128,6 +128,23 @@ export class UserController {
         }
     };
 
+    toggleNotifications = async (req: Request, res: Response) => {
+        try {
+            const userId = (req as any).userId ?? (req as any).user?.id;
+            if (!userId) return res.status(401).json({ message: 'Authentication required' });
+
+            const body = req.body as { value?: boolean } | undefined;
+            const value = body?.value;
+            const updated = await this.userService.toggleNotificationsEmail(userId, value);
+            if (!updated) return res.status(404).json({ message: 'User not found' });
+            const { password, ...userWithoutPassword } = updated as any;
+            return res.status(200).json(userWithoutPassword);
+        } catch (error: any) {
+            logger.error('toggleNotifications error', error);
+            return res.status(500).json({ message: 'Internal server error' });
+        }
+    };
+
     searchPublicUsers = async (req: Request, res: Response) => {
         try {
             const {q} = req.query;

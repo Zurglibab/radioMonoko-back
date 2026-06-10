@@ -5,22 +5,22 @@ import { CreateUserDTO, ModifyUserDTO } from "../DTO/userDTO";
 export class UserDAO {
   async findByEmail(email: string) {
     const result = await pool.query(
-      'SELECT id, email, username, password, display_name, avatar, bio, website, privacy, is_banned, role, created_at, updated_at FROM users WHERE email = $1',
+      'SELECT id, email, username, password, display_name, avatar, bio, website, privacy, is_banned, role, notifications_email, created_at, updated_at FROM users WHERE email = $1',
       [email]
     );
     return result.rows[0] || null;
   }
   async findById(id: string) {
     const result = await pool.query(
-      'SELECT id, email, username, display_name, avatar, bio, website, privacy, is_banned, role, created_at, updated_at FROM users WHERE id = $1',
+      'SELECT id, email, username, display_name, avatar, bio, website, privacy, is_banned, role, notifications_email, created_at, updated_at FROM users WHERE id = $1',
       [id]
     );
     return result.rows[0] || null;
   }
   async create(user: CreateUserDTO): Promise<User> {
     const result = await pool.query(
-      'INSERT INTO users (id, email, password, username, display_name, avatar, bio, website, role) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *',
-      [user.id, user.email, user.password, user.username || null, user.username || null, user.avatar || null, user.bio || null, user.website || null, user.role || 'user']
+      'INSERT INTO users (id, email, password, username, display_name, avatar, bio, website, role, notifications_email) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *',
+      [user.id, user.email, user.password, user.username || null, user.username || null, user.avatar || null, user.bio || null, user.website || null, user.role || 'user', (user as any).notifications_email ?? false]
     );
     return result.rows[0];
   }
@@ -43,9 +43,10 @@ export class UserDAO {
                 website = COALESCE($6, website),
                 is_banned = COALESCE($7, is_banned),
                 role = COALESCE($8, role),
+                notifications_email = COALESCE($9, notifications_email),
                 updated_at = CURRENT_TIMESTAMP
-             WHERE id = $1 RETURNING id, email, username, display_name, avatar, bio, website, privacy, is_banned, role, created_at, updated_at`,
-      [user.id, (user as any).password || null, user.display_name || null, user.avatar || null, user.bio || null, user.website || null, (user as any).is_banned ?? null, (user as any).role || null]
+             WHERE id = $1 RETURNING id, email, username, display_name, avatar, bio, website, privacy, is_banned, role, notifications_email, created_at, updated_at`,
+      [user.id, (user as any).password || null, user.display_name || null, user.avatar || null, user.bio || null, user.website || null, (user as any).is_banned ?? null, (user as any).role || null, (user as any).notifications_email ?? null]
     );
     return result.rowCount ? result.rows[0] : null;
   }

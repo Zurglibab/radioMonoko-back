@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { authMiddleware } from '../middlewares/auth.middleware';
-import { ownershipOrAdmin, ownershipOrAdminBody, ownershipOrAdminResource } from '../middlewares/ownership.middleware';
+import { ownershipOrAdmin, ownershipOrAdminResource } from '../middlewares/ownership.middleware';
 import { NotificationDAO } from '../DAO/notificationDAO';
 import { NotificationService } from '../services/notificationService';
 import { NotificationController } from '../controllers/notification.controller';
@@ -95,6 +95,8 @@ export const createNotificationRouter = () => {
    *   get:
    *     tags: [Notifications]
    *     summary: Recuperer les notifications d'un utilisateur
+   *     security:
+   *       - bearerAuth: []
    *     parameters:
    *       - in: path
    *         name: userId
@@ -123,6 +125,8 @@ export const createNotificationRouter = () => {
    *   get:
    *     tags: [Notifications]
    *     summary: Recuperer les notifications non lues d'un utilisateur
+   *     security:
+   *       - bearerAuth: []
    *     parameters:
    *       - in: path
    *         name: userId
@@ -151,6 +155,8 @@ export const createNotificationRouter = () => {
    *   patch:
    *     tags: [Notifications]
    *     summary: Marquer toutes les notifications d'un utilisateur comme lues
+   *     security:
+   *       - bearerAuth: []
    *     parameters:
    *       - in: path
    *         name: userId
@@ -207,6 +213,8 @@ export const createNotificationRouter = () => {
    *   post:
    *     tags: [Notifications]
    *     summary: Creer une notification
+   *     security:
+   *       - bearerAuth: []
    *     requestBody:
    *       required: true
    *       content:
@@ -232,6 +240,8 @@ export const createNotificationRouter = () => {
    *   put:
    *     tags: [Notifications]
    *     summary: Mettre a jour une notification
+   *     security:
+   *       - bearerAuth: []
    *     parameters:
    *       - in: path
    *         name: id
@@ -266,6 +276,8 @@ export const createNotificationRouter = () => {
    *   patch:
    *     tags: [Notifications]
    *     summary: Marquer une notification comme lue
+   *     security:
+   *       - bearerAuth: []
    *     parameters:
    *       - in: path
    *         name: id
@@ -294,6 +306,8 @@ export const createNotificationRouter = () => {
    *   delete:
    *     tags: [Notifications]
    *     summary: Supprimer une notification
+   *     security:
+   *       - bearerAuth: []
    *     parameters:
    *       - in: path
    *         name: id

@@ -10,6 +10,7 @@ export interface User {
   privacy: string;
   is_banned: boolean;
   role?: string;
+  notifications_email?: boolean;
   created_at: Date;
   updated_at: Date;
 }

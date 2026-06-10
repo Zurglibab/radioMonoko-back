@@ -70,6 +70,8 @@ export const createLikeReviewRouter = () => {
    *   post:
    *     tags: [LikeReview]
    *     summary: Ajouter ou mettre a jour un like/dislike sur une review
+   *     security:
+   *       - bearerAuth: []
    *     parameters:
    *       - in: path
    *         name: reviewId
@@ -99,6 +101,8 @@ export const createLikeReviewRouter = () => {
    *   delete:
    *     tags: [LikeReview]
    *     summary: Supprimer mon like/dislike d'une review
+   *     security:
+   *       - bearerAuth: []
    *     parameters:
    *       - in: path
    *         name: reviewId
@@ -174,4 +178,3 @@ export const createLikeReviewRouter = () => {
 
   return router;
 };
-
