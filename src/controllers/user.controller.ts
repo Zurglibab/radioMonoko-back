@@ -5,6 +5,11 @@ import {LoginUserDTO, ModifyUserDTO} from "../DTO/userDTO";
 import logger from "../config/logger";
 import * as jwt from "jsonwebtoken";
 import {getClient} from "../config/RedisConnexion";
+import { RatingContentDAO } from '../DAO/ratingContentDAO';
+import { ContentFavoriteDAO } from '../DAO/contentFavoriteDAO';
+import { CollectionDAO } from '../DAO/collectionDAO';
+import { CollectionItemsDTO } from '../DAO/collectionItemsDTO';
+import { ReviewDAO } from '../DAO/reviewDAO';
 
 export class UserController {
     constructor(
@@ -205,6 +210,100 @@ export class UserController {
             return res.status(200).json(userWithoutPassword);
         } catch (error: any) {
             logger.error('uploadAvatarBase64 error', error);
+            return res.status(500).json({ message: 'Internal server error' });
+        }
+    }
+
+    // Export all user data for RGPD (profile, favorites, statuses, collections+items, ratings)
+    exportUserData = async (req: Request, res: Response) => {
+        try {
+            const targetUserId = req.params.id as string;
+            // basic validation
+            if (!targetUserId) return res.status(400).json({ message: 'User id is required' });
+
+            // profile
+            let profile;
+            try {
+                profile = await this.userService.getUserById(targetUserId);
+                if (!profile) return res.status(404).json({ message: 'User not found' });
+            } catch (err) {
+                logger.error('exportUserData: error fetching profile', { userId: targetUserId, err });
+                return res.status(500).json({ message: 'Error fetching user profile' });
+            }
+            const { password, ...profileSafe } = profile as any;
+
+            // favorites
+            let favorites;
+            try {
+                const favDao = new ContentFavoriteDAO();
+                favorites = await favDao.findByUserId(targetUserId);
+            } catch (err: any) {
+                logger.error('exportUserData: error fetching favorites', { userId: targetUserId, err });
+                return res.status(500).json({ message: 'Error fetching favorites', error: err?.message || String(err) });
+            }
+
+            // content statuses (library) - use injected service
+            let statuses;
+            try {
+                statuses = await this.contentStatusService.getUserLibrary(targetUserId);
+            } catch (err: any) {
+                logger.error('exportUserData: error fetching statuses', { userId: targetUserId, err });
+                return res.status(500).json({ message: 'Error fetching content statuses', error: err?.message || String(err) });
+            }
+
+            // collections and items
+            let collectionsWithItems;
+            try {
+                const collectionDao = new CollectionDAO();
+                const collections = await collectionDao.findByUserId(targetUserId);
+                const collectionItemsDao = new CollectionItemsDTO();
+                collectionsWithItems = await Promise.all(collections.map(async (col: any) => {
+                    const items = await collectionItemsDao.findByCollectionId(col.id);
+                    return {
+                        ...col,
+                        items
+                    };
+                }));
+            } catch (err: any) {
+                logger.error('exportUserData: error fetching collections/items', { userId: targetUserId, err });
+                return res.status(500).json({ message: 'Error fetching collections or collection items', error: err?.message || String(err) });
+            }
+
+            // ratings (notes)
+            let ratings;
+            try {
+                const ratingDao = new RatingContentDAO();
+                const allRatings = await ratingDao.findAll();
+                ratings = allRatings.filter((r: any) => r.user_id === targetUserId);
+            } catch (err: any) {
+                logger.error('exportUserData: error fetching ratings', { userId: targetUserId, err });
+                return res.status(500).json({ message: 'Error fetching ratings', error: err?.message || String(err) });
+            }
+
+            // reviews (user's own reviews)
+            let reviews;
+            try {
+                const reviewDao = new ReviewDAO();
+                const allReviews = await reviewDao.findAll();
+                reviews = allReviews.filter((r: any) => r.user_id === targetUserId);
+            } catch (err: any) {
+                logger.error('exportUserData: error fetching reviews', { userId: targetUserId, err });
+                return res.status(500).json({ message: 'Error fetching reviews', error: err?.message || String(err) });
+            }
+
+            // Compose export
+            const exportData = {
+                profile: profileSafe,
+                favorites,
+                statuses,
+                collections: collectionsWithItems,
+                ratings,
+                reviews
+            };
+
+            return res.status(200).json(exportData);
+        } catch (error: any) {
+            logger.error('exportUserData error', error);
             return res.status(500).json({ message: 'Internal server error' });
         }
     }

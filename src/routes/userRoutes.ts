@@ -386,4 +386,38 @@ userRouter.get('/id/:id', authMiddleware, userController.getUserById);
  */
 userRouter.delete('/delete/:id', authMiddleware, ownershipOrAdmin('id'), userController.deleteUserById);
 
+/**
+ * @openapi
+ * /user/{id}/export:
+ *   get:
+ *     tags:
+ *       - Users
+ *     summary: Exporter toutes les données d'un utilisateur (RGPD)
+ *     description: Récupère le profil, favoris, statuts (bibliothèque), collections (avec items) et notes rattachées à l'utilisateur.
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *           format: uuid
+ *         description: ID de l'utilisateur à exporter
+ *     responses:
+ *       200:
+ *         description: Export des données utilisateur
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *       401:
+ *         description: Non autorisé
+ *       403:
+ *         description: Accès refusé (non propriétaire ou non admin)
+ *       404:
+ *         description: Utilisateur non trouvé
+ */
+userRouter.get('/:id/export', authMiddleware, ownershipOrAdmin('id'), userController.exportUserData);
+
 export default userRouter;
