@@ -331,3 +331,100 @@
 {"code":"23505","constraint":"users_username_key","detail":"Key (username)=(test) already exists.","file":"nbtinsert.c","length":205,"level":"error","line":"666","name":"error","routine":"_bt_check_unique","schema":"public","severity":"ERROR","table":"users","timestamp":"2026-06-09 14:33:35"}
 {"level":"error","message":"Password must be at least 6 characters long","timestamp":"2026-06-09 14:53:47"}
 {"level":"error","timestamp":"2026-06-09 14:53:47"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 19:42:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 19:43:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 19:44:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 19:45:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 19:46:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 19:47:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 19:48:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 19:49:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 19:50:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 19:51:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 19:52:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 19:53:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 19:54:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 19:55:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 19:56:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 19:57:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 19:58:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 19:59:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:00:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:01:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:02:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:03:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:04:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:05:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:06:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:07:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:08:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:09:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:10:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:11:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:12:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:13:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:14:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:15:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:16:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:17:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:18:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:19:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:20:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:21:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:22:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:23:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:24:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:25:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:26:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:27:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:28:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:29:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:30:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:31:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:32:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:33:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:34:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:35:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:36:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:37:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:38:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:39:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:40:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:41:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:42:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:43:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:44:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:45:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:46:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:47:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:48:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:49:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:50:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:51:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:52:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:53:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:54:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:55:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:56:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:57:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:58:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 20:59:29"}
+{"level":"error","message":"Error verifying token: jwt expired","timestamp":"2026-06-10 21:00:29"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-06-10 21:04:49"}
+{"level":"error","timestamp":"2026-06-10 21:04:49"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-06-10 21:05:18"}
+{"level":"error","timestamp":"2026-06-10 21:05:18"}
+{"level":"error","message":"[UserRelationController] Error getting friends: this.userRelationService.getFriendsForOther is not a function","timestamp":"2026-06-10 21:06:44"}
+{"level":"error","message":"[UserRelationController] Error getting friends: this.userRelationService.getFriendsForOther is not a function","timestamp":"2026-06-10 21:06:44"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-06-10 21:06:44"}
+{"level":"error","timestamp":"2026-06-10 21:06:44"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-06-10 21:07:26"}
+{"level":"error","timestamp":"2026-06-10 21:07:26"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-06-10 21:07:49"}
+{"level":"error","timestamp":"2026-06-10 21:07:49"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-06-10 21:08:22"}
+{"level":"error","timestamp":"2026-06-10 21:08:22"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-06-10 21:08:25"}
+{"level":"error","timestamp":"2026-06-10 21:08:25"}
+{"level":"error","message":"User with this email already exists","timestamp":"2026-06-10 21:09:22"}
+{"level":"error","timestamp":"2026-06-10 21:09:22"}

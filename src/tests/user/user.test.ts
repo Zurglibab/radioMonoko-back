@@ -330,7 +330,7 @@ describe('User Routes - Integration Tests', () => {
 
 
       const loginRes = await request(app).post('/user/login').send({ email: userData.email, password: userData.password });
-      expect(loginRes.status).toBe(401);
+      expect(loginRes.status).toBe(403);
     });
   });
 });

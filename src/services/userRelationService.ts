@@ -176,11 +176,8 @@ export class UserRelationService {
         if (userId === targetId) return false;
 
         const relation1 = await this.userRelationRepository.findRelation(userId, targetId);
-        if (relation1?.status === 'accepted') return true;
-
         const relation2 = await this.userRelationRepository.findRelation(targetId, userId);
-        if (relation2?.status === 'accepted') return true;
 
-        return false;
+        return relation1?.status === 'accepted' && relation2?.status === 'accepted';
     }
 }
