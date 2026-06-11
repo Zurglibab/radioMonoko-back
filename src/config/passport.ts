@@ -31,6 +31,7 @@ if (isGoogleOAuthConfigured) {
 
         const newUser = {
           id: uuidv4(),
+          username: profile.displayName || email.split('@')[0],
           email,
           password: ''
         };
