@@ -210,7 +210,7 @@ userRelationRouter.patch('/refuse/:id', authMiddleware, userRelationController.r
  *   post:
  *     tags:
  *       - UserRelations
- *     summary: Bloquer un utilisateur
+ *     summary: Route de toggle pour bloquer/débloquer un utilisateur
  *     security:
  *       - bearerAuth: []
  *     parameters:

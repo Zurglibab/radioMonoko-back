@@ -52,8 +52,8 @@ export class UserRelationService {
         await this.userRelationRepository.refuse(requesterId, userId);
     }
 
-    async block(blockerId: string, blockedId: string): Promise<void> {
-        logger.info(`[UserRelationService] User ${blockerId} wants to block ${blockedId}`);
+    async block(blockerId: string, blockedId: string): Promise<{ blocked: boolean }> {
+        logger.info(`[UserRelationService] User ${blockerId} wants to toggle block for ${blockedId}`);
         if (blockerId === blockedId) {
             throw new ApiError(400, 'You cannot block yourself');
         }
@@ -61,7 +61,17 @@ export class UserRelationService {
         if (!blockedUser) {
             throw new ApiError(404, 'User to block not found');
         }
+
+        const existingRelation = await this.userRelationRepository.findRelation(blockerId, blockedId);
+
+        if (existingRelation && existingRelation.status === 'blocked') {
+            await this.userRelationRepository.unfollow(blockerId, blockedId);
+            logger.info(`[UserRelationService] User ${blockerId} unblocked ${blockedId}`);
+            return { blocked: false };
+        }
         await this.userRelationRepository.block(blockerId, blockedId);
+        logger.info(`[UserRelationService] User ${blockerId} blocked ${blockedId}`);
+        return { blocked: true };
     }
 
     async getFriends(userId: string): Promise<any[]> {
