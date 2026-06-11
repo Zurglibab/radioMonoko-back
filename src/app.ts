@@ -51,8 +51,8 @@ export function createApp(): Express {
 
 
   const limiter = rateLimit({
-    windowMs: Number(process.env.RATE_LIMIT_WINDOW_MS) || 15 * 60 * 1000,
-    max: Number(process.env.RATE_LIMIT_MAX) || 200,
+    windowMs: Number(process.env.RATE_LIMIT_WINDOW_MS) || 5 * 60 * 1000,
+    max: Number(process.env.RATE_LIMIT_MAX) || 500,
     standardHeaders: true,
     legacyHeaders: false,
   });
