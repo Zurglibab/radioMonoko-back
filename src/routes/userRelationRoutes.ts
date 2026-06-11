@@ -246,6 +246,7 @@ userRelationRouter.post('/block/:id', authMiddleware, userRelationController.blo
  *         description: Non authentifié
  */
 userRelationRouter.get('/following', authMiddleware, userRelationController.getFollowing);
+
 /**
  * @openapi
  * /userRelation/is-friend/{id}:
@@ -271,5 +272,70 @@ userRelationRouter.get('/following', authMiddleware, userRelationController.getF
  *         description: Utilisateur non trouvé
  */
 userRelationRouter.get('/is-friend/:id', authMiddleware, userRelationController.checkIsFriend);
+
+/**
+ * @openapi
+ * /userRelation/blocked:
+ *   get:
+ *     tags:
+ *       - UserRelations
+ *     summary: Récupère la liste des utilisateurs que l'utilisateur connecté a bloqués
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Liste des utilisateurs bloqués récupérée avec succès
+ *       401:
+ *         description: Non authentifié
+ */
+userRelationRouter.get('/blocked', authMiddleware, userRelationController.getBlockedUsers);
+
+/**
+ * @openapi
+ * /userRelation/relation/as-follower/{id}:
+ *   get:
+ *     tags:
+ *       - UserRelations
+ *     summary: Récupère ma relation (en tant que follower) envers l'utilisateur ciblé
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: L'ID de l'utilisateur cible
+ *     responses:
+ *       200:
+ *         description: Relation récupérée
+ *       401:
+ *         description: Non authentifié
+ */
+userRelationRouter.get('/relation/as-follower/:id', authMiddleware, userRelationController.getRelationAsFollower);
+
+/**
+ * @openapi
+ * /userRelation/relation/as-followed/{id}:
+ *   get:
+ *     tags:
+ *       - UserRelations
+ *     summary: Récupère la relation d'un autre envers moi (en tant que followed)
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: L'ID de l'utilisateur qui est potentiellement follower
+ *     responses:
+ *       200:
+ *         description: Relation récupérée
+ *       401:
+ *         description: Non authentifié
+ */
+userRelationRouter.get('/relation/as-followed/:id', authMiddleware, userRelationController.getRelationAsFollowed);
 
 export default userRelationRouter;

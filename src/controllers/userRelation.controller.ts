@@ -159,4 +159,42 @@ export class UserRelationController {
             res.status(error.statusCode || 500).json({ message: error.message });
         }
     };
+
+    getBlockedUsers = async (req: Request, res: Response): Promise<void> => {
+        try {
+            const userId = req.user?.id;
+            logger.info(`[UserRelationController] Getting blocked users for ${userId}`);
+            const blocked = await this.userRelationService.getBlockedUsers(userId);
+            res.status(200).json(blocked);
+        } catch (error: any) {
+            logger.error(`[UserRelationController] Error getting blocked users: ${error.message}`);
+            res.status(error.statusCode || 500).json({ message: error.message });
+        }
+    };
+
+    getRelationAsFollower = async (req: Request, res: Response): Promise<void> => {
+        try {
+            const userId = req.user?.id;
+            const targetId = req.params.id as string;
+            logger.info(`[UserRelationController] Getting relation as follower from ${userId} to ${targetId}`);
+            const relation = await this.userRelationService.getRelationAsFollower(userId, targetId);
+            res.status(200).json(relation);
+        } catch (error: any) {
+            logger.error(`[UserRelationController] Error getting relation as follower: ${error.message}`);
+            res.status(error.statusCode || 500).json({ message: error.message });
+        }
+    };
+
+    getRelationAsFollowed = async (req: Request, res: Response): Promise<void> => {
+        try {
+            const userId = req.user?.id;
+            const otherId = req.params.id as string;
+            logger.info(`[UserRelationController] Getting relation as followed for ${userId} from ${otherId}`);
+            const relation = await this.userRelationService.getRelationAsFollowed(userId, otherId);
+            res.status(200).json(relation);
+        } catch (error: any) {
+            logger.error(`[UserRelationController] Error getting relation as followed: ${error.message}`);
+            res.status(error.statusCode || 500).json({ message: error.message });
+        }
+    };
 }

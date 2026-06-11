@@ -50,4 +50,12 @@ export class UserRelationRepository {
     async getFollowed(userId: string): Promise<UserRelation[]> {
         return this.userRelationBddRepository.getFollowed(userId);
     }
+
+    async getBlockedByUser(userId: string): Promise<UserRelation[]> {
+        return this.userRelationBddRepository.getBlockedByUser(userId);
+    }
+
+    async getRelationsWhereFollowed(userId: string): Promise<UserRelation[]> {
+        return this.userRelationBddRepository.getRelationsWhereFollowed(userId);
+    }
 }

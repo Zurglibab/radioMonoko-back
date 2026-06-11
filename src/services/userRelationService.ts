@@ -180,4 +180,27 @@ export class UserRelationService {
 
         return relation1?.status === 'accepted' && relation2?.status === 'accepted';
     }
+
+    async getBlockedUsers(userId: string): Promise<any[]> {
+        logger.info(`[UserRelationService] User ${userId} wants to see blocked users`);
+        const relations = await this.userRelationRepository.getBlockedByUser(userId);
+        if (relations.length === 0) return [];
+        const blockedIds = relations.map(r => r.followed_id);
+        const users = await this.userRepository.findByIds(blockedIds);
+        return users.map(u => ({ id: u.id, username: u.username }));
+    }
+
+    async getRelationAsFollower(userId: string, targetId: string): Promise<any> {
+        logger.info(`[UserRelationService] Getting relation of follower ${userId} towards ${targetId}`);
+        const relation = await this.userRelationRepository.findRelation(userId, targetId);
+        if (!relation) return { exists: false };
+        return { exists: true, status: relation.status };
+    }
+
+    async getRelationAsFollowed(userId: string, otherId: string): Promise<any> {
+        logger.info(`[UserRelationService] Getting relation where ${otherId} is follower towards ${userId}`);
+        const relation = await this.userRelationRepository.findRelation(otherId, userId);
+        if (!relation) return { exists: false };
+        return { exists: true, status: relation.status };
+    }
 }

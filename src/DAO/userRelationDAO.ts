@@ -95,4 +95,22 @@ export class UserRelationDAO {
         logger.info(`[UserRelationBddRepository] Finding relation from ${follow.follower_id} to ${follow.followed_id}`);
         return rows[0] || null;
     }
+
+    async getBlockedByUser(userId: string): Promise<UserRelation[]> {
+        const { rows } = await pool.query<UserRelation>(
+            "SELECT * FROM user_relations WHERE follower_id = $1 AND status = 'blocked'",
+            [userId]
+        );
+        logger.info(`[UserRelationBddRepository] Getting blocked users by ${userId}`);
+        return rows;
+    }
+
+    async getRelationsWhereFollowed(userId: string): Promise<UserRelation[]> {
+        const { rows } = await pool.query<UserRelation>(
+            'SELECT * FROM user_relations WHERE (followed_id = $1 )',
+            [userId]
+        );
+        logger.info(`[UserRelationBddRepository] Getting relations where user ${userId} is followed`);
+        return rows;
+    }
 }
