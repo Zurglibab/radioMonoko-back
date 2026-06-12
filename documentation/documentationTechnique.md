@@ -113,6 +113,8 @@ L'application suit un cycle de vie précis, garantissant que chaque composant jo
 5. **Transformations (Mappers & DTOs)** :
    - Avant d'être renvoyées au Controller, les données SQL brutes peuvent passer par des *Mappers* pour être formatées en *DTO (Data Transfer Objects)*. Cela permet de cacher des informations sensibles (comme le hash d'un mot de passe) avant l'envoi de la réponse JSON au client.
 
+Voici en détail l'ensemble des tables composants notre base de donées PostgreSQL :
+<img src="documentation/img/Radiomonoko-bdd.drawio.png" alt="Schéma relationnel de la base de donnée"/>
 > [!TIP]
 > En cas d'événements Temps Réel (WebSockets), les *Services* ou *Schedulers* émettent directement des messages vers la couche Socket (`SocketRegistry`), qui se charge de propager l'information aux clients connectés (ex: notifications instantanées).
 
