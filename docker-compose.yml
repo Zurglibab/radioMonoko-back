@@ -16,8 +16,6 @@ services:
     container_name: radio-monoko-redis
     command: ["redis-server", "--appendonly", "yes"]
     restart: unless-stopped
-    ports:
-      - "6379:6379"
     volumes:
       - redis-data:/data
     networks:
