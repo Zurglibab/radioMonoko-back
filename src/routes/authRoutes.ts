@@ -224,12 +224,12 @@ router.post('/google-mobile', async (req: Request, res: Response) => {
       return res.status(500).json({ success: false, error: 'Server misconfigured: JWT_SECRET missing' });
     }
     const expiresIn = (process.env.JWT_EXPIRES_IN || '7d') as jwt.SignOptions['expiresIn'];
-    const token = jwt.sign({ id: user.id, email: user.email, role :user.role, username: user.username}, secret, { expiresIn });
+    const token = jwt.sign({ id: user.id, email: user.email, role :user.role}, secret, { expiresIn });
 
     return res.status(200).json({
       success: true,
       token,
-      user: { id: user.id, email: user.email }
+      user: { id: user.id, email: user.email, username: user.username }
     });
   } catch (dbError: any) {
     console.error('[auth] Database operation failed during Google mobile login:', dbError);
